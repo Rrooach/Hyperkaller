@@ -76,6 +76,7 @@ func cat(fname string) {
 }
 
 func (proc *Proc) loop() {
+	cat("/root/err")
 	generatePeriod := 100
 	if proc.fuzzer.config.Flags&ipc.FlagSignal == 0 {
 		// If we don't have real coverage signal, generate programs more frequently
@@ -112,7 +113,6 @@ func (proc *Proc) loop() {
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
-		cat("/root/err")
 	}
 }
 
