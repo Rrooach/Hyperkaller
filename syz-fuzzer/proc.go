@@ -6,6 +6,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"math/rand"
 	"os"
 	"runtime/debug"
@@ -62,6 +63,17 @@ func newProc(fuzzer *Fuzzer, pid int) (*Proc, error) {
 	}
 	return proc, nil
 }
+func cat(fname string) {
+	fh, err := os.Open(fname)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = io.Copy(os.Stdout, fh)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 func (proc *Proc) loop() {
 	generatePeriod := 100
@@ -100,6 +112,7 @@ func (proc *Proc) loop() {
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
+		cat("/root/err")
 	}
 }
 
