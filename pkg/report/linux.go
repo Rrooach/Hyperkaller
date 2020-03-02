@@ -863,6 +863,18 @@ func warningStackFmt(skip ...string) *stackFmt {
 
 var linuxOopses = append([]*oops{
 	{
+		[]byte("==WARNING:"),
+		[]oopsFormat{
+			{
+				title:        compile("==([0-9]+)==WARNING: MemorySanitizer:"),
+				report:       compile("==([0-9]+)==WARNING: MemorySanitizer: use-of-uninitialized-value"),
+				fmt:          "MemorySanitizer: use-of-uninitialized-value",
+				noStackTrace: true,
+			},
+		},
+		[]*regexp.Regexp{},
+	},
+	{
 		[]byte("==ERROR:"),
 		[]oopsFormat{
 			{
@@ -871,11 +883,41 @@ var linuxOopses = append([]*oops{
 				fmt:          "AddressSanitizer: heap-use-after-free on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
 				noStackTrace: true,
 			},
-
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: stack-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
+				noStackTrace: true,
+			},
 			{
 				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
 				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: heap-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
 				fmt:          "AddressSanitizer: heap-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: global-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: global-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-use-after-return on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: stack-use-after-return on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-use-after-scope on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: stack-use-after-scope on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
+				noStackTrace: true,
+			},
+			//TOOD (sule) need to add env ASAN_OPTIONS=check_initialization_order=true, strict_init_order=true
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: initialization-order-fiasco on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: initialization-order-fiasco on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
 				noStackTrace: true,
 			},
 		},
@@ -1119,6 +1161,12 @@ var linuxOopses = append([]*oops{
 	{
 		[]byte("WARNING:"),
 		[]oopsFormat{
+			{
+				title:        compile("WARNING: ThreadSanitizer:"),
+				report:       compile("WARNING: ThreadSanitizer: data race"),
+				fmt:          "ThreadSanitizer: data race",
+				noStackTrace: true,
+			},
 			{
 				title: compile("WARNING: .*lib/debugobjects\\.c.* (?:debug_print|debug_check)"),
 				fmt:   "WARNING: ODEBUG bug in %[1]v",
