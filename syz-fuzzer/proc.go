@@ -113,6 +113,7 @@ func (proc *Proc) loop() {
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
+		// cat("/root/err")
 	}
 }
 
