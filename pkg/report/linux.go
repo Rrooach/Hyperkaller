@@ -863,6 +863,18 @@ func warningStackFmt(skip ...string) *stackFmt {
 
 var linuxOopses = append([]*oops{
 	{
+		[]byte("==ERROR:"),
+		[]oopsFormat{
+			{
+				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
+				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: heap-use-after-free on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
+				fmt:          "AddressSanitizer: heap-use-after-free on address %[2]v at pc %[3]v bp %[4]v",
+				noStackTrace: true,
+			},
+		},
+		[]*regexp.Regexp{},
+	},
+	{
 		[]byte("BUG:"),
 		[]oopsFormat{
 			{
