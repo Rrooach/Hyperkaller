@@ -16,7 +16,7 @@ import (
 	"sync/atomic"
 	"time"
 	"unsafe"
-
+	"github.com/google/syzkaller/pkg/log"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/osutil"
 	"github.com/google/syzkaller/pkg/signal"
@@ -250,11 +250,14 @@ var rateLimit = time.NewTicker(1 * time.Second)
 // err0: failed to start the process or bug in executor itself
 func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInfo, hanged bool, err0 error) {
 	// Copy-in serialized program.
+	log.Logf(0,"Rroooach: starting Env.Exec")
+	
 	progSize, err := p.SerializeForExec(env.in)
 	if err != nil {
 		err0 = fmt.Errorf("failed to serialize: %v", err)
 		return
 	}
+	log.Logf(0,"Rrooach: 260")
 	var progData []byte
 	if !env.config.UseShmem {
 		progData = env.in[:progSize]
@@ -279,17 +282,21 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 			return
 		}
 	}
+	log.Logf(0,"Rrooach: 284")
 	output, hanged, err0 = env.cmd.exec(opts, progData)
 	if err0 != nil {
 		env.cmd.close()
 		env.cmd = nil
 		return
 	}
-
+	log.Logf(0,"Rrooach: 292")
 	info, err0 = env.parseOutput(p)
-	if info != nil && env.config.Flags&FlagSignal == 0 {
+	log.Logf(0, "env.config.Flags = %v,  FlagSignal = %v", env.config.Flags, FlagSignal)
+	// if info != nil && env.config.Flags&FlagSignal == 0 {
+		log.Logf(0, "Rrooach: 294")
 		addFallbackSignal(p, info)
-	}
+	// }
+	log.Logf(0, "Rrooach: 297")
 	if !env.config.UseForkServer {
 		env.cmd.close()
 		env.cmd = nil
@@ -302,7 +309,9 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 // At least this gives us all combinations of syscall+errno.
 func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 	callInfos := make([]prog.CallInfo, len(info.Calls))
+	log.Logf(0, "Rrooach: inf311")
 	for i, inf := range info.Calls {
+		log.Logf(0, "Rrooach: inf313")
 		if inf.Flags&CallExecuted != 0 {
 			callInfos[i].Flags |= prog.CallExecuted
 		}
@@ -315,7 +324,9 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 		callInfos[i].Errno = inf.Errno
 	}
 	p.FallbackSignal(callInfos)
+	log.Logf(0, "Rrooach: inf326 ")
 	for i, inf := range callInfos {
+		log.Logf(0, "Rrooach: inf327 ")
 		info.Calls[i].Signal = inf.Signal
 	}
 }
@@ -323,6 +334,7 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 	out := env.out
 	ncmd, ok := readUint32(&out)
+	log.Logf(0, "ncmd = %v, ok = %v ", ncmd, ok )
 	if !ok {
 		return nil, fmt.Errorf("failed to read number of calls")
 	}
@@ -330,46 +342,58 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 	extraParts := make([]CallInfo, 0)
 	for i := uint32(0); i < ncmd; i++ {
 		if len(out) < int(unsafe.Sizeof(callReply{})) {
+			log.Logf(0, "Rrooach: ipc.go: 340")
 			return nil, fmt.Errorf("failed to read call %v reply", i)
 		}
 		reply := *(*callReply)(unsafe.Pointer(&out[0]))
 		out = out[unsafe.Sizeof(callReply{}):]
 		var inf *CallInfo
 		if reply.index != extraReplyIndex {
+			// log.Logf(0, "replay.index = %v, extraReplyIndex = %v", reply.index, extraReplyIndex)
 			if int(reply.index) >= len(info.Calls) {
+				log.Logf(0, "Rrooach: ipc.go: 346")
 				return nil, fmt.Errorf("bad call %v index %v/%v", i, reply.index, len(info.Calls))
 			}
 			if num := p.Calls[reply.index].Meta.ID; int(reply.num) != num {
+				log.Logf(0, "Rrooach: ipc.go: 350")
 				return nil, fmt.Errorf("wrong call %v num %v/%v", i, reply.num, num)
 			}
 			inf = &info.Calls[reply.index]
 			if inf.Flags != 0 || inf.Signal != nil {
+				log.Logf(0, "Rrooach: ipc.go: 355")
 				return nil, fmt.Errorf("duplicate reply for call %v/%v/%v", i, reply.index, reply.num)
 			}
+			log.Logf(0, "Rrooach: ipc.go: 361")
 			inf.Errno = int(reply.errno)
 			inf.Flags = CallFlags(reply.flags)
 		} else {
+			log.Logf(0, "Rrooach: ipc.go: 364")
 			extraParts = append(extraParts, CallInfo{})
 			inf = &extraParts[len(extraParts)-1]
 		}
 		if inf.Signal, ok = readUint32Array(&out, reply.signalSize); !ok {
+			log.Logf(0, "Rrooach: ipc.go: 362")
 			return nil, fmt.Errorf("call %v/%v/%v: signal overflow: %v/%v",
 				i, reply.index, reply.num, reply.signalSize, len(out))
 		}
 		if inf.Cover, ok = readUint32Array(&out, reply.coverSize); !ok {
+			log.Logf(0, "Rrooach: ipc.go: 367")
 			return nil, fmt.Errorf("call %v/%v/%v: cover overflow: %v/%v",
 				i, reply.index, reply.num, reply.coverSize, len(out))
 		}
 		comps, err := readComps(&out, reply.compsSize)
 		if err != nil {
+			log.Logf(0, "Rrooach: ipc.go: 373")
 			return nil, err
 		}
 		inf.Comps = comps
 	}
 	if len(extraParts) == 0 {
+		log.Logf(0, "Rrooach: ipc.go: 382")
 		return info, nil
 	}
 	info.Extra = convertExtra(extraParts)
+	log.Logf(0, "Rrooach: ipc.go: 365")
 	return info, nil
 }
 
@@ -720,16 +744,20 @@ func (c *command) exec(opts *ExecOpts, progData []byte) (output []byte, hanged b
 		faultNth:  uint64(opts.FaultNth),
 		progSize:  uint64(len(progData)),
 	}
+	
 	reqData := (*[unsafe.Sizeof(*req)]byte)(unsafe.Pointer(req))[:]
 	if _, err := c.outwp.Write(reqData); err != nil {
 		output = <-c.readDone
 		err0 = fmt.Errorf("executor %v: failed to write control pipe: %v", c.pid, err)
+		log.Logf(0, "Rrooach: ipc.go: 732")
 		return
 	}
+	
 	if progData != nil {
 		if _, err := c.outwp.Write(progData); err != nil {
 			output = <-c.readDone
 			err0 = fmt.Errorf("executor %v: failed to write control pipe: %v", c.pid, err)
+			log.Logf(0, "Rrooach: ipc.go: 739")
 			return
 		}
 	}
@@ -783,16 +811,20 @@ func (c *command) exec(opts *ExecOpts, progData []byte) (output []byte, hanged b
 	if exitStatus == 0 {
 		// Program was OK.
 		<-hang
+		log.Logf(0, "Rrooach: ipc.go: 794")
 		return
 	}
 	c.cmd.Process.Kill()
 	output = <-c.readDone
+	log.Logf(0, "Rrooach: ipc.go: 796")
 	if err := c.wait(); <-hang {
 		hanged = true
 		if err != nil {
+			log.Logf(0, "Rrooach: ipc.go: 803")
 			output = append(output, err.Error()...)
 			output = append(output, '\n')
 		}
+		log.Logf(0, "Rrooach: ipc.go: 806")
 		return
 	}
 	if exitStatus == -1 {
@@ -802,8 +834,10 @@ func (c *command) exec(opts *ExecOpts, progData []byte) (output []byte, hanged b
 	// Without fork server executor can legitimately exit (program contains exit_group),
 	// with fork server the top process can exit with statusFail if it wants special handling.
 	if exitStatus == statusFail {
+		log.Logf(0, "Rrooach: ipc.go: 816")
 		err0 = fmt.Errorf("executor %v: exit status %d\n%s", c.pid, exitStatus, output)
 	}
+	log.Logf(0, "Rrooach: ipc.go: 818")
 	return
 }
 

@@ -692,8 +692,8 @@ retry:
 		if (strncmp(syscalls[call_num].name, "syz_usb", strlen("syz_usb")) == 0)
 			prog_extra_cover_timeout = 500;
 		if (strncmp(syscalls[call_num].name, "syz_usb_connect", strlen("syz_usb_connect")) == 0) {
-			prog_extra_timeout = 2000;
-			call_extra_timeout = 2000;
+			prog_extra_timeout = 3000;
+			call_extra_timeout = 3000;
 		}
 		if (strncmp(syscalls[call_num].name, "syz_usb_control_io", strlen("syz_usb_control_io")) == 0)
 			call_extra_timeout = 300;
@@ -894,8 +894,20 @@ void handle_completion(thread_t* th)
 	}
 	th->executing = false;
 	running--;
-	if (running < 0)
+	if (running < 0) {
+		// This fires periodically for the past 2 years (see issue #502).
+		fprintf(stderr, "running=%d collide=%d completed=%d flag_threaded=%d flag_collide=%d current=%d\n",
+			running, collide, completed, flag_threaded, flag_collide, th->id);
+		for (int i = 0; i < kMaxThreads; i++) {
+			thread_t* th1 = &threads[i];
+			fprintf(stderr, "th #%2d: created=%d executing=%d colliding=%d"
+					" ready=%d done=%d call_index=%d res=%lld reserrno=%d\n",
+				i, th1->created, th1->executing, th1->colliding,
+				event_isset(&th1->ready), event_isset(&th1->done),
+				th1->call_index, (uint64)th1->res, th1->reserrno);
+		}
 		fail("running = %d", running);
+	}
 }
 
 void copyout_call_results(thread_t* th)
@@ -1404,6 +1416,10 @@ void setup_features(char** enable, int n)
 {
 	// This does any one-time setup for the requested features on the machine.
 	// Note: this can be called multiple times and must be idempotent.
+#if SYZ_HAVE_FEATURES
+	// Note: this is not executed in C reproducers.
+	setup_machine();
+#endif
 	for (int i = 0; i < n; i++) {
 		bool found = false;
 #if SYZ_HAVE_FEATURES

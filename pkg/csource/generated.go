@@ -35,8 +35,9 @@ NORETURN void doexit(int status)
 
 #if SYZ_EXECUTOR || SYZ_MULTI_PROC || SYZ_REPEAT && SYZ_CGROUPS ||         \
     SYZ_NET_DEVICES || __NR_syz_mount_image || __NR_syz_read_part_table || \
-    __NR_syz_usb_connect || (GOOS_freebsd || GOOS_openbsd || GOOS_netbsd) && SYZ_NET_INJECTION
-unsigned long long procid;
+    __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k ||                  \
+    (GOOS_freebsd || GOOS_openbsd || GOOS_netbsd) && SYZ_NET_INJECTION
+static unsigned long long procid;
 #endif
 
 #if !GOOS_fuchsia && !GOOS_windows
@@ -123,7 +124,7 @@ static void kill_and_wait(int pid, int* status)
 
 #if !GOOS_windows
 #if SYZ_EXECUTOR || SYZ_THREADED || SYZ_REPEAT && SYZ_EXECUTOR_USES_FORK_SERVER || \
-    __NR_syz_usb_connect
+    __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k
 static void sleep_ms(uint64 ms)
 {
 	usleep(ms * 1000);
@@ -1097,7 +1098,7 @@ static int event_timedwait(event_t* ev, uint64 timeout)
 		ts.tv_sec = remain / 1000;
 		ts.tv_nsec = (remain % 1000) * 1000 * 1000;
 		syscall(SYS_futex, &ev->state, FUTEX_WAIT | FUTEX_PRIVATE_FLAG, 0, &ts);
-		if (__atomic_load_n(&ev->state, __ATOMIC_RELAXED))
+		if (__atomic_load_n(&ev->state, __ATOMIC_ACQUIRE))
 			return 1;
 		now = current_time_ms();
 		if (now - start > timeout)
@@ -1108,7 +1109,8 @@ static int event_timedwait(event_t* ev, uint64 timeout)
 
 #if SYZ_EXECUTOR || SYZ_REPEAT || SYZ_NET_INJECTION || SYZ_FAULT || SYZ_SANDBOX_NONE || \
     SYZ_SANDBOX_SETUID || SYZ_SANDBOX_NAMESPACE || SYZ_SANDBOX_ANDROID ||               \
-    SYZ_FAULT || SYZ_LEAK || SYZ_BINFMT_MISC || (__NR_syz_usb_connect && USB_DEBUG)
+    SYZ_FAULT || SYZ_LEAK || SYZ_BINFMT_MISC ||                                         \
+    ((__NR_syz_usb_connect || __NR_syz_usb_connect_ath9k) && USB_DEBUG)
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
@@ -1900,8 +1902,10 @@ static void netlink_wireguard_setup(void)
 	int id, err;
 
 	sock = socket(AF_NETLINK, SOCK_RAW, NETLINK_GENERIC);
-	if (sock == -1)
-		fail("socket(AF_NETLINK) failed\n");
+	if (sock == -1) {
+		debug("socket(AF_NETLINK) failed: %s\n", strerror(errno));
+		return;
+	}
 
 	id = netlink_wireguard_id_get(&nlmsg, sock);
 	if (id == -1)
@@ -2403,11 +2407,11 @@ static long syz_extract_tcp_res(volatile long a0, volatile long a1, volatile lon
 }
 #endif
 
-#if SYZ_EXECUTOR || SYZ_CLOSE_FDS || __NR_syz_usb_connect
+#if SYZ_EXECUTOR || SYZ_CLOSE_FDS || __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k
 #define MAX_FDS 30
 #endif
 
-#if SYZ_EXECUTOR || __NR_syz_usb_connect
+#if SYZ_EXECUTOR || __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k
 #include <errno.h>
 #include <fcntl.h>
 #include <linux/usb/ch9.h>
@@ -2442,7 +2446,7 @@ struct usb_device_index {
 	int iface_cur;
 };
 
-static bool parse_usb_descriptor(char* buffer, size_t length, struct usb_device_index* index)
+static bool parse_usb_descriptor(const char* buffer, size_t length, struct usb_device_index* index)
 {
 	if (length < sizeof(*index->dev) + sizeof(*index->config))
 		return false;
@@ -2607,7 +2611,7 @@ struct usb_info {
 static struct usb_info usb_devices[MAX_USB_FDS];
 static int usb_devices_num;
 
-static struct usb_device_index* add_usb_index(int fd, char* dev, size_t dev_len)
+static struct usb_device_index* add_usb_index(int fd, const char* dev, size_t dev_len)
 {
 	int i = __atomic_fetch_add(&usb_devices_num, 1, __ATOMIC_RELAXED);
 	if (i >= MAX_USB_FDS)
@@ -3116,7 +3120,7 @@ static void analyze_control_request(int fd, struct usb_ctrlrequest* ctrl)
 
 #endif
 
-#define USB_MAX_PACKET_SIZE 1024
+#define USB_MAX_PACKET_SIZE 4096
 
 struct usb_raw_control_event {
 	struct usb_raw_event inner;
@@ -3153,8 +3157,8 @@ static const char default_lang_id[] = {
     0x09, 0x04
 };
 
-static bool lookup_connect_response(int fd, struct vusb_connect_descriptors* descs, struct usb_ctrlrequest* ctrl,
-				    char** response_data, uint32* response_length)
+static bool lookup_connect_response_in(int fd, const struct vusb_connect_descriptors* descs, const struct usb_ctrlrequest* ctrl,
+				       char** response_data, uint32* response_length)
 {
 	struct usb_device_index* index = lookup_usb_index(fd);
 	uint8 str_idx;
@@ -3214,30 +3218,83 @@ static bool lookup_connect_response(int fd, struct vusb_connect_descriptors* des
 				*response_length = descs->qual_len;
 				return true;
 			default:
-				fail("lookup_connect_response: no response");
-				return false;
+				break;
 			}
 			break;
 		default:
-			fail("lookup_connect_response: no response");
-			return false;
+			break;
 		}
 		break;
 	default:
-		fail("lookup_connect_response: no response");
-		return false;
+		break;
 	}
 
+	fail("lookup_connect_response_in: unknown request");
 	return false;
 }
 
-static volatile long syz_usb_connect(volatile long a0, volatile long a1, volatile long a2, volatile long a3)
+#if SYZ_EXECUTOR || __NR_syz_usb_connect
+static bool lookup_connect_response_out_generic(int fd, const struct vusb_connect_descriptors* descs,
+						const struct usb_ctrlrequest* ctrl, bool* done)
 {
-	uint64 speed = a0;
-	uint64 dev_len = a1;
-	char* dev = (char*)a2;
-	struct vusb_connect_descriptors* descs = (struct vusb_connect_descriptors*)a3;
+	switch (ctrl->bRequestType & USB_TYPE_MASK) {
+	case USB_TYPE_STANDARD:
+		switch (ctrl->bRequest) {
+		case USB_REQ_SET_CONFIGURATION:
+			*done = true;
+			return true;
+		default:
+			break;
+		}
+		break;
+	}
 
+	fail("lookup_connect_response_out: unknown request");
+	return false;
+}
+#endif
+
+#if SYZ_EXECUTOR || __NR_syz_usb_connect_ath9k
+#define ATH9K_FIRMWARE_DOWNLOAD 0x30
+#define ATH9K_FIRMWARE_DOWNLOAD_COMP 0x31
+
+static bool lookup_connect_response_out_ath9k(int fd, const struct vusb_connect_descriptors* descs,
+					      const struct usb_ctrlrequest* ctrl, bool* done)
+{
+	switch (ctrl->bRequestType & USB_TYPE_MASK) {
+	case USB_TYPE_STANDARD:
+		switch (ctrl->bRequest) {
+		case USB_REQ_SET_CONFIGURATION:
+			return true;
+		default:
+			break;
+		}
+		break;
+	case USB_TYPE_VENDOR:
+		switch (ctrl->bRequest) {
+		case ATH9K_FIRMWARE_DOWNLOAD:
+			return true;
+		case ATH9K_FIRMWARE_DOWNLOAD_COMP:
+			*done = true;
+			return true;
+		default:
+			break;
+		}
+		break;
+	}
+
+	fail("lookup_connect_response_out_ath9k: unknown request");
+	return false;
+}
+
+#endif
+
+typedef bool (*lookup_connect_response_t)(int fd, const struct vusb_connect_descriptors* descs,
+					  const struct usb_ctrlrequest* ctrl, bool* done);
+
+static volatile long syz_usb_connect_impl(uint64 speed, uint64 dev_len, const char* dev,
+					  const struct vusb_connect_descriptors* descs, lookup_connect_response_t lookup_connect_response_out)
+{
 	debug("syz_usb_connect: dev: %p\n", dev);
 	if (!dev) {
 		debug("syz_usb_connect: dev is null\n");
@@ -3306,26 +3363,27 @@ static volatile long syz_usb_connect(volatile long a0, volatile long a1, volatil
 		analyze_control_request(fd, &event.ctrl);
 #endif
 
-		bool response_found = false;
 		char* response_data = NULL;
 		uint32 response_length = 0;
 
 		if (event.ctrl.bRequestType & USB_DIR_IN) {
-			NONFAILING(response_found = lookup_connect_response(fd, descs, &event.ctrl, &response_data, &response_length));
+			bool response_found = false;
+			NONFAILING(response_found = lookup_connect_response_in(fd, descs, &event.ctrl, &response_data, &response_length));
 			if (!response_found) {
 				debug("syz_usb_connect: unknown control IN request\n");
 				return -1;
 			}
 		} else {
-			if ((event.ctrl.bRequestType & USB_TYPE_MASK) != USB_TYPE_STANDARD ||
-			    event.ctrl.bRequest != USB_REQ_SET_CONFIGURATION) {
-				fail("syz_usb_connect: unknown control OUT request");
+			if (!lookup_connect_response_out(fd, descs, &event.ctrl, &done)) {
+				debug("syz_usb_connect: unknown control OUT request\n");
 				return -1;
 			}
-			done = true;
+			response_data = NULL;
+			response_length = event.ctrl.wLength;
 		}
 
-		if (done) {
+		if ((event.ctrl.bRequestType & USB_TYPE_MASK) == USB_TYPE_STANDARD &&
+		    event.ctrl.bRequest == USB_REQ_SET_CONFIGURATION) {
 			rv = configure_device(fd);
 			if (rv < 0) {
 				debug("syz_usb_connect: configure_device failed with %d\n", rv);
@@ -3367,6 +3425,30 @@ static volatile long syz_usb_connect(volatile long a0, volatile long a1, volatil
 	return fd;
 }
 
+#if SYZ_EXECUTOR || __NR_syz_usb_connect
+static volatile long syz_usb_connect(volatile long a0, volatile long a1, volatile long a2, volatile long a3)
+{
+	uint64 speed = a0;
+	uint64 dev_len = a1;
+	const char* dev = (const char*)a2;
+	const struct vusb_connect_descriptors* descs = (const struct vusb_connect_descriptors*)a3;
+
+	return syz_usb_connect_impl(speed, dev_len, dev, descs, &lookup_connect_response_out_generic);
+}
+#endif
+
+#if SYZ_EXECUTOR || __NR_syz_usb_connect_ath9k
+static volatile long syz_usb_connect_ath9k(volatile long a0, volatile long a1, volatile long a2, volatile long a3)
+{
+	uint64 speed = a0;
+	uint64 dev_len = a1;
+	const char* dev = (const char*)a2;
+	const struct vusb_connect_descriptors* descs = (const struct vusb_connect_descriptors*)a3;
+
+	return syz_usb_connect_impl(speed, dev_len, dev, descs, &lookup_connect_response_out_ath9k);
+}
+#endif
+
 #if SYZ_EXECUTOR || __NR_syz_usb_control_io
 struct vusb_descriptor {
 	uint8 req_type;
@@ -3394,7 +3476,7 @@ struct vusb_responses {
 	struct vusb_response* resps[0];
 } __attribute__((packed));
 
-static bool lookup_control_response(struct vusb_descriptors* descs, struct vusb_responses* resps,
+static bool lookup_control_response(const struct vusb_descriptors* descs, const struct vusb_responses* resps,
 				    struct usb_ctrlrequest* ctrl, char** response_data, uint32* response_length)
 {
 	int descs_num = 0;
@@ -3461,8 +3543,8 @@ static bool lookup_control_response(struct vusb_descriptors* descs, struct vusb_
 static volatile long syz_usb_control_io(volatile long a0, volatile long a1, volatile long a2)
 {
 	int fd = a0;
-	struct vusb_descriptors* descs = (struct vusb_descriptors*)a1;
-	struct vusb_responses* resps = (struct vusb_responses*)a2;
+	const struct vusb_descriptors* descs = (const struct vusb_descriptors*)a1;
+	const struct vusb_responses* resps = (const struct vusb_responses*)a2;
 
 	struct usb_raw_control_event event;
 	event.inner.type = 0;
@@ -5539,7 +5621,7 @@ static void setup_cgroups_test()
 #endif
 
 #if SYZ_EXECUTOR || SYZ_SANDBOX_NAMESPACE
-void initialize_cgroups()
+static void initialize_cgroups()
 {
 #if SYZ_EXECUTOR
 	if (!flag_cgroups)
@@ -5654,8 +5736,10 @@ static void sandbox_common()
 	for (i = 0; i < sizeof(sysctls) / sizeof(sysctls[0]); i++)
 		write_file(sysctls[i].name, sysctls[i].value);
 }
+#endif
 
-int wait_for_loop(int pid)
+#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_SETUID || SYZ_SANDBOX_NAMESPACE
+static int wait_for_loop(int pid)
 {
 	if (pid < 0)
 		fail("sandbox fork failed");
@@ -5667,7 +5751,7 @@ int wait_for_loop(int pid)
 }
 #endif
 
-#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_NAMESPACE
+#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_NAMESPACE || SYZ_SANDBOX_ANDROID
 #include <linux/capability.h>
 
 static void drop_caps(void)
@@ -5693,6 +5777,9 @@ static void drop_caps(void)
 
 static int do_sandbox_none(void)
 {
+	if (unshare(CLONE_NEWPID)) {
+		debug("unshare(CLONE_NEWPID): %d\n", errno);
+	}
 	int pid = fork();
 	if (pid != 0)
 		return wait_for_loop(pid);
@@ -5870,6 +5957,544 @@ static int do_sandbox_namespace(void)
 #endif
 
 #if SYZ_EXECUTOR || SYZ_SANDBOX_ANDROID
+#if GOARCH_arm || GOARCH_arm64 || GOARCH_386 || GOARCH_amd64
+#include <assert.h>
+#include <errno.h>
+#include <linux/audit.h>
+#include <linux/filter.h>
+#include <linux/seccomp.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <sys/prctl.h>
+#include <sys/syscall.h>
+#if GOARCH_arm64
+#define PRIMARY_ARCH AUDIT_ARCH_AARCH64
+
+const struct sock_filter arm64_app_filter[] = {
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 0, 0, 54),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 160, 27, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 101, 13, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 52, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 41, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 19, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 18, 48, 47),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 39, 47, 46),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 43, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 42, 45, 44),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 51, 44, 43),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 90, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 59, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 58, 41, 40),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 89, 40, 39),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 100, 39, 38),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 147, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 113, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 107, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 104, 35, 34),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 112, 34, 33),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 117, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 116, 32, 31),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 142, 31, 30),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 153, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 150, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 149, 28, 27),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 151, 27, 26),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 159, 26, 25),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 240, 13, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 203, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 172, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 163, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 161, 21, 20),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 170, 20, 19),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 198, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 180, 18, 17),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 202, 17, 16),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 226, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 220, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 217, 14, 13),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 224, 13, 12),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 234, 12, 11),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 274, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 267, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 260, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 244, 8, 7),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 262, 7, 6),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 272, 6, 5),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 283, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 281, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 280, 3, 2),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 282, 2, 1),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 288, 1, 0),
+BPF_STMT(BPF_RET|BPF_K, SECCOMP_RET_ALLOW),
+};
+
+#define arm64_app_filter_size (sizeof(arm64_app_filter) / sizeof(struct sock_filter))
+
+static const struct sock_filter* primary_app_filter = arm64_app_filter;
+static const size_t primary_app_filter_size = arm64_app_filter_size;
+#define kFilterMaxSize (arm64_app_filter_size + 3 + 1 + 4 + 2)
+
+#elif GOARCH_arm
+#define PRIMARY_ARCH AUDIT_ARCH_ARM
+
+const struct sock_filter arm_app_filter[] = {
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 0, 0, 136),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 190, 67, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 85, 33, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 45, 17, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 26, 9, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 19, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 10, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 8, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 7, 128, 127),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 9, 127, 126),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 13, 126, 125),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 24, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 21, 124, 123),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 25, 123, 122),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 36, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 33, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 27, 120, 119),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 34, 119, 118),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 41, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 40, 117, 116),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 44, 116, 115),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 63, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 57, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 54, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 46, 112, 111),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 56, 111, 110),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 60, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 58, 109, 108),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 61, 108, 107),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 75, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 66, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 65, 105, 104),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 68, 104, 103),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 77, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 76, 102, 101),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 79, 101, 100),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 125, 17, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 114, 9, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 96, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 94, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 91, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 86, 95, 94),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 93, 94, 93),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 95, 93, 92),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 104, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 98, 91, 90),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 106, 90, 89),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 118, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 116, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 115, 87, 86),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 117, 86, 85),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 122, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 121, 84, 83),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 123, 83, 82),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 150, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 136, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 131, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 126, 79, 78),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 134, 78, 77),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 140, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 137, 76, 75),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 149, 75, 74),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 172, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 168, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 164, 72, 71),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 169, 71, 70),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 183, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 182, 69, 68),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 188, 68, 67),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 322, 33, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 256, 17, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 217, 9, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 207, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 205, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 199, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 198, 61, 60),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 203, 60, 59),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 206, 59, 58),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 211, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 210, 57, 56),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 212, 56, 55),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 224, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 219, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 218, 53, 52),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 222, 52, 51),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 250, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 249, 50, 49),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 254, 49, 48),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 286, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 270, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 263, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 262, 45, 44),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 269, 44, 43),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 280, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 271, 42, 41),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 285, 41, 40),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 292, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 290, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 289, 38, 37),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 291, 37, 36),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 316, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 298, 35, 34),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 319, 34, 33),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 387, 17, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 350, 9, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 345, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 340, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 327, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 326, 28, 27),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 338, 27, 26),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 344, 26, 25),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 348, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 347, 24, 23),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 349, 23, 22),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 373, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 369, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 367, 20, 19),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 370, 19, 18),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 380, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 378, 17, 16),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 386, 16, 15),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 417, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 397, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 389, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 388, 12, 11),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 394, 11, 10),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 403, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 398, 9, 8),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 415, 8, 7),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 983042, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 420, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 418, 5, 4),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 424, 4, 3),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 983045, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 983043, 2, 1),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 983046, 1, 0),
+BPF_STMT(BPF_RET|BPF_K, SECCOMP_RET_ALLOW),
+};
+
+#define arm_app_filter_size (sizeof(arm_app_filter) / sizeof(struct sock_filter))
+
+static const struct sock_filter* primary_app_filter = arm_app_filter;
+static const size_t primary_app_filter_size = arm_app_filter_size;
+#define kFilterMaxSize (arm_app_filter_size + 3 + 1 + 4 + 2)
+
+#elif GOARCH_amd64
+#define PRIMARY_ARCH AUDIT_ARCH_X86_64
+
+const struct sock_filter x86_64_app_filter[] = {
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 0, 0, 100),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 157, 49, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 95, 25, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 44, 13, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 32, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 8, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 5, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 4, 93, 92),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 6, 92, 91),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 24, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 21, 90, 89),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 29, 89, 88),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 38, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 35, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 33, 86, 85),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 37, 85, 84),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 43, 84, 83),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 89, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 72, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 58, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 57, 80, 79),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 64, 79, 78),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 82, 78, 77),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 93, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 91, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 90, 75, 74),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 92, 74, 73),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 94, 73, 72),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 120, 11, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 112, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 107, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 104, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 103, 68, 67),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 105, 67, 66),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 111, 66, 65),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 117, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 115, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 113, 63, 62),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 116, 62, 61),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 119, 61, 60),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 137, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 135, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 124, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 122, 57, 56),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 132, 56, 55),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 136, 55, 54),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 155, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 140, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 139, 52, 51),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 153, 51, 50),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 156, 50, 49),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 254, 25, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 217, 13, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 186, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 162, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 160, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 159, 44, 43),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 161, 43, 42),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 179, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 163, 41, 40),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 180, 40, 39),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 206, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 202, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 201, 37, 36),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 205, 36, 35),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 211, 35, 34),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 233, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 228, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 221, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 220, 31, 30),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 227, 30, 29),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 232, 29, 28),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 251, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 247, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 235, 26, 25),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 248, 25, 24),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 253, 24, 23),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 285, 11, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 275, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 262, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 257, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 256, 19, 18),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 261, 18, 17),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 274, 17, 16),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 283, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 280, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 279, 14, 13),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 282, 13, 12),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 284, 12, 11),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 314, 5, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 306, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 302, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 300, 8, 7),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 303, 7, 6),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 312, 6, 5),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 324, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 322, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 320, 3, 2),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 323, 2, 1),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 329, 1, 0),
+BPF_STMT(BPF_RET|BPF_K, SECCOMP_RET_ALLOW),
+};
+
+#define x86_64_app_filter_size (sizeof(x86_64_app_filter) / sizeof(struct sock_filter))
+
+static const struct sock_filter* primary_app_filter = x86_64_app_filter;
+static const size_t primary_app_filter_size = x86_64_app_filter_size;
+#define kFilterMaxSize (x86_64_app_filter_size + 3 + 1 + 4 + 2)
+
+#elif GOARCH_386
+#define PRIMARY_ARCH AUDIT_ARCH_I386
+
+const struct sock_filter x86_app_filter[] = {
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 0, 0, 120),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 140, 59, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 75, 29, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 41, 15, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 24, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 10, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 8, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 7, 113, 112),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 9, 112, 111),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 19, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 13, 110, 109),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 21, 109, 108),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 33, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 26, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 25, 106, 105),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 27, 105, 104),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 36, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 34, 103, 102),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 40, 102, 101),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 60, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 54, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 45, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 44, 98, 97),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 46, 97, 96),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 57, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 56, 95, 94),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 58, 94, 93),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 66, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 63, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 61, 91, 90),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 65, 90, 89),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 68, 89, 88),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 114, 15, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 94, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 85, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 77, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 76, 84, 83),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 79, 83, 82),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 90, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 86, 81, 80),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 93, 80, 79),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 102, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 96, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 95, 77, 76),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 98, 76, 75),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 104, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 103, 74, 73),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 106, 73, 72),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 125, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 118, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 116, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 115, 69, 68),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 117, 68, 67),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 122, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 121, 66, 65),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 123, 65, 64),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 136, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 131, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 126, 62, 61),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 134, 61, 60),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 137, 60, 59),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 265, 29, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 207, 15, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 183, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 168, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 150, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 149, 54, 53),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 164, 53, 52),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 172, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 169, 51, 50),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 182, 50, 49),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 199, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 190, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 188, 47, 46),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 198, 46, 45),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 205, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 203, 44, 43),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 206, 43, 42),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 245, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 218, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 211, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 210, 39, 38),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 212, 38, 37),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 224, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 222, 36, 35),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 244, 35, 34),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 254, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 252, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 250, 32, 31),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 253, 31, 30),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 264, 30, 29),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 322, 15, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 295, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 284, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 272, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 271, 25, 24),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 273, 24, 23),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 291, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 285, 22, 21),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 294, 21, 20),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 313, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 300, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 299, 18, 17),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 312, 17, 16),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 318, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 317, 15, 14),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 321, 14, 13),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 351, 7, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 344, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 340, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 337, 10, 9),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 341, 9, 8),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 346, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 345, 7, 6),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 349, 6, 5),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 375, 3, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 358, 1, 0),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 357, 3, 2),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 359, 2, 1),
+BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 380, 1, 0),
+BPF_STMT(BPF_RET|BPF_K, SECCOMP_RET_ALLOW),
+};
+
+#define x86_app_filter_size (sizeof(x86_app_filter) / sizeof(struct sock_filter))
+
+static const struct sock_filter* primary_app_filter = x86_app_filter;
+static const size_t primary_app_filter_size = x86_app_filter_size;
+#define kFilterMaxSize (x86_app_filter_size + 3 + 1 + 4 + 2)
+
+#else
+#error No architecture was defined!
+#endif
+
+#define syscall_nr (offsetof(struct seccomp_data, nr))
+#define arch_nr (offsetof(struct seccomp_data, arch))
+
+typedef struct Filter_t {
+	struct sock_filter data[kFilterMaxSize];
+	size_t count;
+} Filter;
+
+static void push_back(Filter* filter_array, struct sock_filter filter)
+{
+	if (filter_array->count == kFilterMaxSize)
+		fail("can't add another syscall to seccomp filter: count %zu", filter_array->count);
+	filter_array->data[filter_array->count++] = filter;
+}
+
+static void Disallow(Filter* f)
+{
+	struct sock_filter filter = BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_TRAP);
+	push_back(f, filter);
+}
+
+static void ExamineSyscall(Filter* f)
+{
+	struct sock_filter filter = BPF_STMT(BPF_LD | BPF_W | BPF_ABS, syscall_nr);
+	push_back(f, filter);
+}
+
+static void ValidateArchitecture(Filter* f)
+{
+	struct sock_filter filter1 = BPF_STMT(BPF_LD | BPF_W | BPF_ABS, arch_nr);
+	struct sock_filter filter2 = BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, PRIMARY_ARCH, 1, 0);
+	push_back(f, filter1);
+	push_back(f, filter2);
+	Disallow(f);
+}
+static void install_filter(const Filter* f)
+{
+	struct sock_fprog prog = {
+	    (unsigned short)f->count,
+	    (struct sock_filter*)&f->data[0],
+	};
+	if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) < 0) {
+		fail("Could not set seccomp filter of size %zu", f->count);
+	}
+}
+static void set_app_seccomp_filter()
+{
+	const struct sock_filter* p = primary_app_filter;
+	size_t p_size = primary_app_filter_size;
+
+	Filter f;
+	f.count = 0;
+	ValidateArchitecture(&f);
+	ExamineSyscall(&f);
+
+	for (size_t i = 0; i < p_size; ++i)
+		push_back(&f, p[i]);
+	Disallow(&f);
+	install_filter(&f);
+}
+
+#endif
 #include <fcntl.h>
 #include <grp.h>
 #include <sys/xattr.h>
@@ -5883,10 +6508,10 @@ static int do_sandbox_namespace(void)
 #define UNTRUSTED_APP_UID AID_APP + 999
 #define UNTRUSTED_APP_GID AID_APP + 999
 
-const char* SELINUX_CONTEXT_UNTRUSTED_APP = "u:r:untrusted_app:s0:c512,c768";
-const char* SELINUX_LABEL_APP_DATA_FILE = "u:object_r:app_data_file:s0:c512,c768";
-const char* SELINUX_CONTEXT_FILE = "/proc/thread-self/attr/current";
-const char* SELINUX_XATTR_NAME = "security.selinux";
+const char* const SELINUX_CONTEXT_UNTRUSTED_APP = "u:r:untrusted_app:s0:c512,c768";
+const char* const SELINUX_LABEL_APP_DATA_FILE = "u:object_r:app_data_file:s0:c512,c768";
+const char* const SELINUX_CONTEXT_FILE = "/proc/thread-self/attr/current";
+const char* const SELINUX_XATTR_NAME = "security.selinux";
 
 const gid_t UNTRUSTED_APP_GROUPS[] = {UNTRUSTED_APP_GID, AID_NET_BT_ADMIN, AID_NET_BT, AID_INET, AID_EVERYBODY};
 const size_t UNTRUSTED_APP_NUM_GROUPS = sizeof(UNTRUSTED_APP_GROUPS) / sizeof(UNTRUSTED_APP_GROUPS[0]);
@@ -5952,6 +6577,20 @@ static int do_sandbox_android(void)
 {
 	setup_common();
 	sandbox_common();
+	drop_caps();
+
+#if SYZ_EXECUTOR || SYZ_NET_DEVICES
+	initialize_netdevices_init();
+#endif
+#if SYZ_EXECUTOR || SYZ_DEVLINK_PCI
+	initialize_devlink_pci();
+#endif
+#if SYZ_EXECUTOR || SYZ_NET_INJECTION
+	initialize_tun();
+#endif
+#if SYZ_EXECUTOR || SYZ_NET_DEVICES
+	initialize_netdevices();
+#endif
 
 	if (chown(".", UNTRUSTED_APP_UID, UNTRUSTED_APP_UID) != 0)
 		fail("chmod failed");
@@ -5962,19 +6601,15 @@ static int do_sandbox_android(void)
 	if (setresgid(UNTRUSTED_APP_GID, UNTRUSTED_APP_GID, UNTRUSTED_APP_GID) != 0)
 		fail("setresgid failed");
 
+#if GOARCH_arm || GOARCH_arm64 || GOARCH_386 || GOARCH_amd64
+	set_app_seccomp_filter();
+#endif
+
 	if (setresuid(UNTRUSTED_APP_UID, UNTRUSTED_APP_UID, UNTRUSTED_APP_UID) != 0)
 		fail("setresuid failed");
 
 	syz_setfilecon(".", SELINUX_LABEL_APP_DATA_FILE);
 	syz_setcon(SELINUX_CONTEXT_UNTRUSTED_APP);
-
-#if SYZ_EXECUTOR || SYZ_NET_INJECTION
-	initialize_tun();
-#endif
-#if SYZ_EXECUTOR || SYZ_NET_DEVICES
-	initialize_netdevices_init();
-	initialize_netdevices();
-#endif
 
 	loop();
 	doexit(1);
@@ -5995,9 +6630,13 @@ static void remove_dir(const char* dir)
 	struct dirent* ep;
 	int iter = 0;
 retry:
-	while (umount2(dir, MNT_DETACH) == 0) {
-		debug("umount(%s)\n", dir);
+#if not SYZ_SANDBOX_ANDROID
+	if (!flag_sandbox_android) {
+		while (umount2(dir, MNT_DETACH) == 0) {
+			debug("umount(%s)\n", dir);
+		}
 	}
+#endif
 	dp = opendir(dir);
 	if (dp == NULL) {
 		if (errno == EMFILE) {
@@ -6010,9 +6649,13 @@ retry:
 			continue;
 		char filename[FILENAME_MAX];
 		snprintf(filename, sizeof(filename), "%s/%s", dir, ep->d_name);
-		while (umount2(filename, MNT_DETACH) == 0) {
-			debug("umount(%s)\n", filename);
+#if not SYZ_SANDBOX_ANDROID
+		if (!flag_sandbox_android) {
+			while (umount2(filename, MNT_DETACH) == 0) {
+				debug("umount(%s)\n", filename);
+			}
 		}
+#endif
 		struct stat st;
 		if (lstat(filename, &st))
 			exitf("lstat(%s) failed", filename);
@@ -6041,9 +6684,13 @@ retry:
 			}
 			if (errno != EBUSY || i > 100)
 				exitf("unlink(%s) failed", filename);
-			debug("umount(%s)\n", filename);
-			if (umount2(filename, MNT_DETACH))
-				exitf("umount(%s) failed", filename);
+#if not SYZ_SANDBOX_ANDROID
+			if (!flag_sandbox_android) {
+				debug("umount(%s)\n", filename);
+				if (umount2(filename, MNT_DETACH))
+					exitf("umount(%s) failed", filename);
+			}
+#endif
 		}
 	}
 	closedir(dp);
@@ -6068,9 +6715,13 @@ retry:
 				break;
 			}
 			if (errno == EBUSY) {
-				debug("umount(%s)\n", dir);
-				if (umount2(dir, MNT_DETACH))
-					exitf("umount(%s) failed", dir);
+#if not SYZ_SANDBOX_ANDROID
+				if (!flag_sandbox_android) {
+					debug("umount(%s)\n", dir);
+					if (umount2(dir, MNT_DETACH))
+						exitf("umount(%s) failed", dir);
+				}
+#endif
 				continue;
 			}
 			if (errno == ENOTEMPTY) {

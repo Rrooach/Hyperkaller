@@ -792,6 +792,7 @@ var linuxStackParams = &stackParams{
 		"kasprintf",
 		"kvasprintf",
 		"printk",
+		"va_format",
 		"dev_info",
 		"dev_notice",
 		"dev_warn",
@@ -863,67 +864,6 @@ func warningStackFmt(skip ...string) *stackFmt {
 
 var linuxOopses = append([]*oops{
 	{
-		[]byte("==WARNING:"),
-		[]oopsFormat{
-			{
-				title:        compile("==([0-9]+)==WARNING: MemorySanitizer:"),
-				report:       compile("==([0-9]+)==WARNING: MemorySanitizer: use-of-uninitialized-value"),
-				fmt:          "MemorySanitizer: use-of-uninitialized-value",
-				noStackTrace: true,
-			},
-		},
-		[]*regexp.Regexp{},
-	},
-	{
-		[]byte("==ERROR:"),
-		[]oopsFormat{
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: heap-use-after-free on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: heap-use-after-free on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: stack-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: heap-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: heap-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: global-buffer-overflow on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: global-buffer-overflow on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-use-after-return on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: stack-use-after-return on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: stack-use-after-scope on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: stack-use-after-scope on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-			//TOOD (sule) need to add env ASAN_OPTIONS=check_initialization_order=true, strict_init_order=true
-			{
-				title:        compile("==([0-9]+)==ERROR: AddressSanitizer:"),
-				report:       compile("==([0-9]+)==ERROR: AddressSanitizer: initialization-order-fiasco on address (0x[0-9a-f]+) at pc (0x[0-9a-f]+) bp (0x[0-9a-f]+) sp (0x[0-9a-f]+)"),
-				fmt:          "AddressSanitizer: initialization-order-fiasco on address %[2]v at pc %[3]v bp %[4]v sp %[5]v",
-				noStackTrace: true,
-			},
-		},
-		[]*regexp.Regexp{},
-	},
-	{
 		[]byte("BUG:"),
 		[]oopsFormat{
 			{
@@ -937,6 +877,7 @@ var linuxOopses = append([]*oops{
 						compile("Call Trace:"),
 						parseStackTrace,
 					},
+					skip: []string{"kfree"},
 				},
 			},
 			{
@@ -1161,12 +1102,6 @@ var linuxOopses = append([]*oops{
 	{
 		[]byte("WARNING:"),
 		[]oopsFormat{
-			{
-				title:        compile("WARNING: ThreadSanitizer:"),
-				report:       compile("WARNING: ThreadSanitizer: data race"),
-				fmt:          "ThreadSanitizer: data race",
-				noStackTrace: true,
-			},
 			{
 				title: compile("WARNING: .*lib/debugobjects\\.c.* (?:debug_print|debug_check)"),
 				fmt:   "WARNING: ODEBUG bug in %[1]v",
@@ -1408,13 +1343,6 @@ var linuxOopses = append([]*oops{
 		[]*regexp.Regexp{
 			compile("INFO: lockdep is turned off"),
 			compile("INFO: Stall ended before state dump start"),
-			// This is printed by nmi_check_duration(), the message simply states
-			// that an interrupt took too long. It happens a lot in qemu,
-			// and the messages are frequently corrupted (intermixed with other
-			// kernel output as they are printed from NMI) and are not matched
-			// against this suppression. There is a debug var that holds the current
-			// max duration, so potentially this can be fixed with:
-			// echo 10000000000 > /sys/kernel/debug/x86/nmi_longest_ns
 			compile("INFO: NMI handler"),
 			compile("INFO: recovery required on readonly filesystem"),
 			compile("(handler|interrupt).*took too long"),

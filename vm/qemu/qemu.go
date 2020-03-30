@@ -343,7 +343,7 @@ func (inst *instance) boot() error {
 		"-smp", strconv.Itoa(inst.cfg.CPU),
 		"-net", "nic" + inst.archConfig.NicModel,
 		"-net", fmt.Sprintf("user,host=%v,hostfwd=tcp::%v-:22", hostAddr, inst.port),
-		//"-display", "none",
+		"-display", "none",
 		"-serial", "stdio",
 		"-no-reboot",
 	}
@@ -383,10 +383,10 @@ func (inst *instance) boot() error {
 			)
 		}
 		cmdline = append(cmdline, inst.cfg.Cmdline)
-		//args = append(args,
-		//	"-kernel", inst.cfg.Kernel,
-		//	"-append", strings.Join(cmdline, " "),
-		//)
+		args = append(args,
+			"-kernel", inst.cfg.Kernel,
+			"-append", strings.Join(cmdline, " "),
+		)
 	}
 	if inst.debug {
 		log.Logf(0, "running command: %v %#v", inst.cfg.Qemu, args)

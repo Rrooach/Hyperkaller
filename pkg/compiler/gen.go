@@ -42,19 +42,62 @@ func (comp *compiler) genResource(n *ast.Resource) *prog.ResourceDesc {
 	return res
 }
 
-func (comp *compiler) genSyscalls() []*prog.Syscall {
-	var calls []*prog.Syscall
-	callArgs := make(map[string]int)
+func (comp *compiler) collectCallArgSizes() map[string][]uint64 {
+	argPos := make(map[string]ast.Pos)
+	callArgSizes := make(map[string][]uint64)
 	for _, decl := range comp.desc.Nodes {
-		if n, ok := decl.(*ast.Call); ok {
-			if callArgs[n.CallName] < len(n.Args) {
-				callArgs[n.CallName] = len(n.Args)
+		n, ok := decl.(*ast.Call)
+		if !ok {
+			continue
+		}
+		// Figure out number of arguments and their sizes for each syscall.
+		// For example, we may have:
+		// ioctl(fd fd, cmd int32, arg intptr)
+		// ioctl$FOO(fd fd, cmd const[FOO])
+		// Here we will figure out that ioctl$FOO have 3 args, even that
+		// only 2 are specified and that size of cmd is 4 even that
+		// normally we would assume it's 8 (intptr).
+		argSizes := callArgSizes[n.CallName]
+		for i, arg := range n.Args {
+			if len(argSizes) <= i {
+				argSizes = append(argSizes, comp.ptrSize)
+			}
+			desc, _, _ := comp.getArgsBase(arg.Type, arg.Name.Name, prog.DirIn, true)
+			typ := comp.genField(arg, prog.DirIn, comp.ptrSize)
+			// Ignore all types with base (const, flags). We don't have base in syscall args.
+			// Also ignore resources and pointers because fd can be 32-bits and pointer 64-bits,
+			// and then there is no way to fix this.
+			// The only relevant types left is plain int types.
+			if desc != typeInt {
+				continue
+			}
+			if !comp.target.Int64SyscallArgs && typ.Size() > comp.ptrSize {
+				comp.error(arg.Pos, "%v arg %v is larger than pointer size", n.Name.Name, arg.Name.Name)
+				continue
+			}
+			argID := fmt.Sprintf("%v|%v", n.CallName, i)
+			if _, ok := argPos[argID]; !ok {
+				argSizes[i] = typ.Size()
+				argPos[argID] = arg.Pos
+				continue
+			}
+			if argSizes[i] != typ.Size() {
+				comp.error(arg.Pos, "%v arg %v is redeclared with size %v, previously declared with size %v at %v",
+					n.Name.Name, arg.Name.Name, typ.Size(), argSizes[i], argPos[argID])
+				continue
 			}
 		}
+		callArgSizes[n.CallName] = argSizes
 	}
+	return callArgSizes
+}
+
+func (comp *compiler) genSyscalls() []*prog.Syscall {
+	callArgSizes := comp.collectCallArgSizes()
+	var calls []*prog.Syscall
 	for _, decl := range comp.desc.Nodes {
 		if n, ok := decl.(*ast.Call); ok && n.NR != ^uint64(0) {
-			calls = append(calls, comp.genSyscall(n, callArgs[n.CallName]))
+			calls = append(calls, comp.genSyscall(n, callArgSizes[n.CallName]))
 		}
 	}
 	sort.Slice(calls, func(i, j int) bool {
@@ -63,17 +106,17 @@ func (comp *compiler) genSyscalls() []*prog.Syscall {
 	return calls
 }
 
-func (comp *compiler) genSyscall(n *ast.Call, maxArgs int) *prog.Syscall {
+func (comp *compiler) genSyscall(n *ast.Call, argSizes []uint64) *prog.Syscall {
 	var ret prog.Type
 	if n.Ret != nil {
-		ret = comp.genType(n.Ret, "ret", prog.DirOut, true)
+		ret = comp.genType(n.Ret, "ret", prog.DirOut, comp.ptrSize)
 	}
 	return &prog.Syscall{
 		Name:        n.Name.Name,
 		CallName:    n.CallName,
 		NR:          n.NR,
-		MissingArgs: maxArgs - len(n.Args),
-		Args:        comp.genFieldArray(n.Args, prog.DirIn, true),
+		MissingArgs: len(argSizes) - len(n.Args),
+		Args:        comp.genFieldArray(n.Args, prog.DirIn, argSizes),
 		Ret:         ret,
 	}
 }
@@ -206,7 +249,7 @@ func (ctx *structGen) walkStruct(t *prog.StructType) {
 		}
 		if sizeAttr != sizeUnassigned {
 			if t.TypeSize > sizeAttr {
-				comp.error(structNode.Pos, "struct %v has size attribute %v"+
+				comp.error(structNode.Attrs[0].Pos, "struct %v has size attribute %v"+
 					" which is less than struct size %v",
 					structNode.Name.Name, sizeAttr, t.TypeSize)
 			}
@@ -227,10 +270,10 @@ func (ctx *structGen) walkUnion(t *prog.UnionType) {
 	varlen, sizeAttr := comp.parseUnionAttrs(structNode)
 	t.TypeSize = 0
 	if !varlen {
-		for _, fld := range t.Fields {
+		for i, fld := range t.Fields {
 			sz := fld.Size()
 			if sizeAttr != sizeUnassigned && sz > sizeAttr {
-				comp.error(structNode.Pos, "union %v has size attribute %v"+
+				comp.error(structNode.Fields[i].Pos, "union %v has size attribute %v"+
 					" which is less than field %v size %v",
 					structNode.Name.Name, sizeAttr, fld.Name(), sz)
 			}
@@ -251,7 +294,7 @@ func (comp *compiler) genStructDesc(res *prog.StructDesc, n *ast.Struct, dir pro
 	common.IsVarlen = varlen
 	*res = prog.StructDesc{
 		TypeCommon: common,
-		Fields:     comp.genFieldArray(n.Fields, dir, false),
+		Fields:     comp.genFieldArray(n.Fields, dir, make([]uint64, len(n.Fields))),
 	}
 }
 
@@ -447,22 +490,31 @@ func genPad(size uint64) prog.Type {
 	}
 }
 
-func (comp *compiler) genField(f *ast.Field, dir prog.Dir, isArg bool) prog.Type {
-	return comp.genType(f.Type, f.Name.Name, dir, isArg)
-}
-
-func (comp *compiler) genFieldArray(fields []*ast.Field, dir prog.Dir, isArg bool) []prog.Type {
+func (comp *compiler) genFieldArray(fields []*ast.Field, dir prog.Dir, argSizes []uint64) []prog.Type {
 	var res []prog.Type
-	for _, f := range fields {
-		res = append(res, comp.genField(f, dir, isArg))
+	for i, f := range fields {
+		res = append(res, comp.genField(f, dir, argSizes[i]))
 	}
 	return res
 }
 
-func (comp *compiler) genType(t *ast.Type, field string, dir prog.Dir, isArg bool) prog.Type {
-	desc, args, base := comp.getArgsBase(t, field, dir, isArg)
+func (comp *compiler) genField(f *ast.Field, dir prog.Dir, argSize uint64) prog.Type {
+	return comp.genType(f.Type, f.Name.Name, dir, argSize)
+}
+
+func (comp *compiler) genType(t *ast.Type, field string, dir prog.Dir, argSize uint64) prog.Type {
+	desc, args, base := comp.getArgsBase(t, field, dir, argSize != 0)
 	if desc.Gen == nil {
 		panic(fmt.Sprintf("no gen for %v %#v", field, t))
+	}
+	if argSize != 0 {
+		// Now that we know a more precise size, patch the type.
+		// This is somewhat hacky. Ideally we figure out the size earlier,
+		// store it somewhere and use during generation of the arg base type.
+		base.TypeSize = argSize
+		if desc.CheckConsts != nil {
+			desc.CheckConsts(comp, t, args, base)
+		}
 	}
 	base.IsVarlen = desc.Varlen != nil && desc.Varlen(comp, t, args)
 	return desc.Gen(comp, t, args, base)

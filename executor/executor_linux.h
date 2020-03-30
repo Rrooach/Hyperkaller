@@ -84,15 +84,21 @@ static intptr_t execute_syscall(const call_t* c, intptr_t a[kMaxArgs])
 
 static void cover_open(cover_t* cov, bool extra)
 {
-	int fd = open("/sys/kernel/debug/kcov", O_RDWR);
+	int fd = open("/dev/cov", O_RDWR);
 	if (fd == -1)
-		fail("open of /sys/kernel/debug/kcov failed");
+	{
+		FILE* tmpfs = fopen("/dev/cov", "a+");
+		fclose(tmpfs);
+		// fail("open of /dev/cov failed");
+	}
+	fd = open("/dev/cov", O_RDWR);
 	if (dup2(fd, cov->fd) < 0)
-		fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
+		fail("filed to dup2(%d, %d) cover fd", fd, cov->fd); 
 	close(fd);
-	const int kcov_init_trace = is_kernel_64_bit ? KCOV_INIT_TRACE64 : KCOV_INIT_TRACE32;
+	// const int kcov_init_trace = is_kernel_64_bit ? KCOV_INIT_TRACE64 : KCOV_INIT_TRACE32;
 	const int cover_size = extra ? kExtraCoverSize : kCoverSize;
-	if (ioctl(cov->fd, kcov_init_trace, cover_size))
+	// if (ioctl(cov->fd, kcov_init_trace, cover_size))
+	if (system("/root/tm/cov"))
 		fail("cover init trace write failed");
 	size_t mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
 	cov->data = (char*)mmap(NULL, mmap_alloc_size,
@@ -113,16 +119,18 @@ static void cover_unprotect(cover_t* cov)
 template <typename kernel_u64_t>
 static void enable_remote_cover(cover_t* cov, unsigned long ioctl_cmd, unsigned int kcov_mode)
 {
-	kcov_remote_arg<kernel_u64_t, 1> arg = {
-	    .trace_mode = kcov_mode,
-	};
+	// kcov_remote_arg<kernel_u64_t, 1> arg = {
+	//     .trace_mode = kcov_mode,
+	// };
 	// Coverage buffer size of background threads.
-	arg.area_size = kExtraCoverSize;
-	arg.num_handles = 1;
-	arg.handles[0].v = kcov_remote_handle(KCOV_SUBSYSTEM_USB, procid + 1);
-	arg.common_handle.v = kcov_remote_handle(KCOV_SUBSYSTEM_COMMON, procid + 1);
-	if (ioctl(cov->fd, ioctl_cmd, &arg))
+	// arg.area_size = kExtraCoverSize;
+	// arg.num_handles = 1;
+	// arg.handles[0].v = kcov_remote_handle(KCOV_SUBSYSTEM_USB, procid + 1);
+	// arg.common_handle.v = kcov_remote_handle(KCOV_SUBSYSTEM_COMMON, procid + 1);
+	if (system("/root/tm/cov"))
 		exitf("remote cover enable write trace failed");
+	// if (ioctl(cov->fd, ioctl_cmd, &arg))
+	// 	exitf("remote cover enable write trace failed");
 }
 
 static void cover_enable(cover_t* cov, bool collect_comps, bool extra)
@@ -132,8 +140,10 @@ static void cover_enable(cover_t* cov, bool collect_comps, bool extra)
 	// but in practice ioctl fails with assorted errors (9, 14, 25),
 	// so we use exitf.
 	if (!extra) {
-		if (ioctl(cov->fd, KCOV_ENABLE, kcov_mode))
+		if (system("/root/tm/cov"))
 			exitf("cover enable write trace failed, mode=%d", kcov_mode);
+		// if (ioctl(cov->fd, KCOV_ENABLE, kcov_mode))
+		// 	exitf("cover enable write trace failed, mode=%d", kcov_mode);
 		current_cover = cov;
 		return;
 	}
@@ -225,3 +235,15 @@ static feature_t features[] = {
     {"binfmt_misc", setup_binfmt_misc},
     {"kcsan", setup_kcsan},
 };
+
+static void setup_machine()
+{
+	// nmi_check_duration() prints "INFO: NMI handler took too long" on slow debug kernels.
+	// It happens a lot in qemu, and the messages are frequently corrupted
+	// (intermixed with other kernel output as they are printed from NMI)
+	// and are not matched against the suppression in pkg/report.
+	// This write prevents these messages from being printed.
+	// Note: this is not executed in C reproducers.
+	if (!write_file("/sys/kernel/debug/x86/nmi_longest_ns", "10000000000"))
+		printf("write to /sys/kernel/debug/x86/nmi_longest_ns failed: %s\n", strerror(errno));
+}

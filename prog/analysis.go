@@ -9,7 +9,8 @@
 package prog
 
 import (
-	"fmt"
+	"fmt"  
+	"github.com/google/syzkaller/pkg/log"
 )
 
 type state struct {
@@ -198,6 +199,8 @@ func (p *Prog) FallbackSignal(info []CallInfo) {
 	for i, c := range p.Calls {
 		inf := &info[i]
 		if inf.Flags&CallExecuted == 0 {
+			log.Logf(0,"12312321")
+			// fmt.Println( "inf.Flags = %v CallExecuted = %v", inf.Flags, CallExecuted )
 			continue
 		}
 		id := c.Meta.ID
@@ -205,6 +208,8 @@ func (p *Prog) FallbackSignal(info []CallInfo) {
 		if inf.Flags&CallFinished != 0 && inf.Flags&CallBlocked != 0 {
 			typ = fallbackSignalErrnoBlocked
 		}
+		log.Logf(0,"aaaaaaaaaaaaaaaaaaaasdasdasd")
+		// fmt.Println("inf.Signal = %v       encodeFallbackSignal(typ, id, inf.Errno) = %v", inf.Signal, encodeFallbackSignal(typ, id, inf.Errno))
 		inf.Signal = append(inf.Signal, encodeFallbackSignal(typ, id, inf.Errno))
 		// seccomp filter can produce arbitrary errno values for subsequent syscalls.
 		// Don't trust anything afterwards. prctl can setup seccomp too.

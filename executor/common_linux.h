@@ -61,7 +61,7 @@ static int event_timedwait(event_t* ev, uint64 timeout)
 		ts.tv_sec = remain / 1000;
 		ts.tv_nsec = (remain % 1000) * 1000 * 1000;
 		syscall(SYS_futex, &ev->state, FUTEX_WAIT | FUTEX_PRIVATE_FLAG, 0, &ts);
-		if (__atomic_load_n(&ev->state, __ATOMIC_RELAXED))
+		if (__atomic_load_n(&ev->state, __ATOMIC_ACQUIRE))
 			return 1;
 		now = current_time_ms();
 		if (now - start > timeout)
@@ -72,7 +72,8 @@ static int event_timedwait(event_t* ev, uint64 timeout)
 
 #if SYZ_EXECUTOR || SYZ_REPEAT || SYZ_NET_INJECTION || SYZ_FAULT || SYZ_SANDBOX_NONE || \
     SYZ_SANDBOX_SETUID || SYZ_SANDBOX_NAMESPACE || SYZ_SANDBOX_ANDROID ||               \
-    SYZ_FAULT || SYZ_LEAK || SYZ_BINFMT_MISC || (__NR_syz_usb_connect && USB_DEBUG)
+    SYZ_FAULT || SYZ_LEAK || SYZ_BINFMT_MISC ||                                         \
+    ((__NR_syz_usb_connect || __NR_syz_usb_connect_ath9k) && USB_DEBUG)
 #include <errno.h>
 #include <fcntl.h>
 #include <stdarg.h>
@@ -881,8 +882,10 @@ static void netlink_wireguard_setup(void)
 	int id, err;
 
 	sock = socket(AF_NETLINK, SOCK_RAW, NETLINK_GENERIC);
-	if (sock == -1)
-		fail("socket(AF_NETLINK) failed\n");
+	if (sock == -1) {
+		debug("socket(AF_NETLINK) failed: %s\n", strerror(errno));
+		return;
+	}
 
 	id = netlink_wireguard_id_get(&nlmsg, sock);
 	if (id == -1)
@@ -1441,11 +1444,11 @@ static long syz_extract_tcp_res(volatile long a0, volatile long a1, volatile lon
 }
 #endif
 
-#if SYZ_EXECUTOR || SYZ_CLOSE_FDS || __NR_syz_usb_connect
+#if SYZ_EXECUTOR || SYZ_CLOSE_FDS || __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k
 #define MAX_FDS 30
 #endif
 
-#if SYZ_EXECUTOR || __NR_syz_usb_connect
+#if SYZ_EXECUTOR || __NR_syz_usb_connect || __NR_syz_usb_connect_ath9k
 #include <errno.h>
 #include <fcntl.h>
 #include <linux/usb/ch9.h>
@@ -2483,7 +2486,7 @@ static void setup_cgroups_test()
 #endif
 
 #if SYZ_EXECUTOR || SYZ_SANDBOX_NAMESPACE
-void initialize_cgroups()
+static void initialize_cgroups()
 {
 #if SYZ_EXECUTOR
 	if (!flag_cgroups)
@@ -2605,8 +2608,10 @@ static void sandbox_common()
 	for (i = 0; i < sizeof(sysctls) / sizeof(sysctls[0]); i++)
 		write_file(sysctls[i].name, sysctls[i].value);
 }
+#endif
 
-int wait_for_loop(int pid)
+#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_SETUID || SYZ_SANDBOX_NAMESPACE
+static int wait_for_loop(int pid)
 {
 	if (pid < 0)
 		fail("sandbox fork failed");
@@ -2618,7 +2623,7 @@ int wait_for_loop(int pid)
 }
 #endif
 
-#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_NAMESPACE
+#if SYZ_EXECUTOR || SYZ_SANDBOX_NONE || SYZ_SANDBOX_NAMESPACE || SYZ_SANDBOX_ANDROID
 #include <linux/capability.h>
 
 static void drop_caps(void)
@@ -2661,9 +2666,9 @@ static int do_sandbox_none(void)
 	// and they are usually run under non-root.
 	// Also since debug is stripped by pkg/csource, we need to do {}
 	// even though we generally don't do {} around single statements.
-	//if (unshare(CLONE_NEWPID)) {
-	//		debug("unshare(CLONE_NEWPID): %d\n", errno);
-	//}
+	if (unshare(CLONE_NEWPID)) {
+		debug("unshare(CLONE_NEWPID): %d\n", errno);
+	}
 	int pid = fork();
 	if (pid != 0)
 		return wait_for_loop(pid);
@@ -2855,6 +2860,20 @@ static int do_sandbox_namespace(void)
 #endif
 
 #if SYZ_EXECUTOR || SYZ_SANDBOX_ANDROID
+// seccomp only supported for Arm, Arm64, X86, and X86_64 archs
+#if GOARCH_arm || GOARCH_arm64 || GOARCH_386 || GOARCH_amd64
+#include <assert.h>
+#include <errno.h>
+#include <linux/audit.h>
+#include <linux/filter.h>
+#include <linux/seccomp.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <sys/prctl.h>
+#include <sys/syscall.h>
+
+#include "android/android_seccomp.h"
+#endif
 #include <fcntl.h> // open(2)
 #include <grp.h> // setgroups
 #include <sys/xattr.h> // setxattr, getxattr
@@ -2868,10 +2887,10 @@ static int do_sandbox_namespace(void)
 #define UNTRUSTED_APP_UID AID_APP + 999
 #define UNTRUSTED_APP_GID AID_APP + 999
 
-const char* SELINUX_CONTEXT_UNTRUSTED_APP = "u:r:untrusted_app:s0:c512,c768";
-const char* SELINUX_LABEL_APP_DATA_FILE = "u:object_r:app_data_file:s0:c512,c768";
-const char* SELINUX_CONTEXT_FILE = "/proc/thread-self/attr/current";
-const char* SELINUX_XATTR_NAME = "security.selinux";
+const char* const SELINUX_CONTEXT_UNTRUSTED_APP = "u:r:untrusted_app:s0:c512,c768";
+const char* const SELINUX_LABEL_APP_DATA_FILE = "u:object_r:app_data_file:s0:c512,c768";
+const char* const SELINUX_CONTEXT_FILE = "/proc/thread-self/attr/current";
+const char* const SELINUX_XATTR_NAME = "security.selinux";
 
 const gid_t UNTRUSTED_APP_GROUPS[] = {UNTRUSTED_APP_GID, AID_NET_BT_ADMIN, AID_NET_BT, AID_INET, AID_EVERYBODY};
 const size_t UNTRUSTED_APP_NUM_GROUPS = sizeof(UNTRUSTED_APP_GROUPS) / sizeof(UNTRUSTED_APP_GROUPS[0]);
@@ -2967,6 +2986,24 @@ static int do_sandbox_android(void)
 {
 	setup_common();
 	sandbox_common();
+	drop_caps();
+
+#if SYZ_EXECUTOR || SYZ_NET_DEVICES
+	initialize_netdevices_init();
+#endif
+#if SYZ_EXECUTOR || SYZ_DEVLINK_PCI
+	initialize_devlink_pci();
+#endif
+#if SYZ_EXECUTOR || SYZ_NET_INJECTION
+	initialize_tun();
+#endif
+#if SYZ_EXECUTOR || SYZ_NET_DEVICES
+	// TODO(dvyukov): unshare net namespace.
+	// Currently all netdev setup happens in init namespace.
+	// It will lead to some mess, all test process will use the same devices
+	// and try to reinitialize them as other test processes use them.
+	initialize_netdevices();
+#endif
 
 	if (chown(".", UNTRUSTED_APP_UID, UNTRUSTED_APP_UID) != 0)
 		fail("chmod failed");
@@ -2977,20 +3014,18 @@ static int do_sandbox_android(void)
 	if (setresgid(UNTRUSTED_APP_GID, UNTRUSTED_APP_GID, UNTRUSTED_APP_GID) != 0)
 		fail("setresgid failed");
 
+#if GOARCH_arm || GOARCH_arm64 || GOARCH_386 || GOARCH_amd64
+	// Will fail() if anything fails.
+	// Must be called when the new process still has CAP_SYS_ADMIN, in this case,
+	// before changing uid from 0, which clears capabilities.
+	set_app_seccomp_filter();
+#endif
+
 	if (setresuid(UNTRUSTED_APP_UID, UNTRUSTED_APP_UID, UNTRUSTED_APP_UID) != 0)
 		fail("setresuid failed");
 
 	syz_setfilecon(".", SELINUX_LABEL_APP_DATA_FILE);
 	syz_setcon(SELINUX_CONTEXT_UNTRUSTED_APP);
-
-#if SYZ_EXECUTOR || SYZ_NET_INJECTION
-	initialize_tun();
-#endif
-#if SYZ_EXECUTOR || SYZ_NET_DEVICES
-	// Note: sandbox_android does not unshare net namespace.
-	initialize_netdevices_init();
-	initialize_netdevices();
-#endif
 
 	loop();
 	doexit(1);
@@ -3017,9 +3052,13 @@ static void remove_dir(const char* dir)
 	struct dirent* ep;
 	int iter = 0;
 retry:
-	while (umount2(dir, MNT_DETACH) == 0) {
-		debug("umount(%s)\n", dir);
+#if not SYZ_SANDBOX_ANDROID
+	if (!flag_sandbox_android) {
+		while (umount2(dir, MNT_DETACH) == 0) {
+			debug("umount(%s)\n", dir);
+		}
 	}
+#endif
 	dp = opendir(dir);
 	if (dp == NULL) {
 		if (errno == EMFILE) {
@@ -3037,9 +3076,13 @@ retry:
 		snprintf(filename, sizeof(filename), "%s/%s", dir, ep->d_name);
 		// If it's 9p mount with broken transport, lstat will fail.
 		// So try to umount first.
-		while (umount2(filename, MNT_DETACH) == 0) {
-			debug("umount(%s)\n", filename);
+#if not SYZ_SANDBOX_ANDROID
+		if (!flag_sandbox_android) {
+			while (umount2(filename, MNT_DETACH) == 0) {
+				debug("umount(%s)\n", filename);
+			}
 		}
+#endif
 		struct stat st;
 		if (lstat(filename, &st))
 			exitf("lstat(%s) failed", filename);
@@ -3069,9 +3112,13 @@ retry:
 			}
 			if (errno != EBUSY || i > 100)
 				exitf("unlink(%s) failed", filename);
-			debug("umount(%s)\n", filename);
-			if (umount2(filename, MNT_DETACH))
-				exitf("umount(%s) failed", filename);
+#if not SYZ_SANDBOX_ANDROID
+			if (!flag_sandbox_android) {
+				debug("umount(%s)\n", filename);
+				if (umount2(filename, MNT_DETACH))
+					exitf("umount(%s) failed", filename);
+			}
+#endif
 		}
 	}
 	closedir(dp);
@@ -3097,9 +3144,13 @@ retry:
 				break;
 			}
 			if (errno == EBUSY) {
-				debug("umount(%s)\n", dir);
-				if (umount2(dir, MNT_DETACH))
-					exitf("umount(%s) failed", dir);
+#if not SYZ_SANDBOX_ANDROID
+				if (!flag_sandbox_android) {
+					debug("umount(%s)\n", dir);
+					if (umount2(dir, MNT_DETACH))
+						exitf("umount(%s) failed", dir);
+				}
+#endif
 				continue;
 			}
 			if (errno == ENOTEMPTY) {

@@ -6,7 +6,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io"
 	"math/rand"
 	"os"
 	"runtime/debug"
@@ -21,10 +20,6 @@ import (
 	"github.com/google/syzkaller/pkg/rpctype"
 	"github.com/google/syzkaller/pkg/signal"
 	"github.com/google/syzkaller/prog"
-)
-
-const (
-	programLength = 30
 )
 
 // Proc represents a single fuzzing process (executor).
@@ -63,20 +58,8 @@ func newProc(fuzzer *Fuzzer, pid int) (*Proc, error) {
 	}
 	return proc, nil
 }
-func cat(fname string) {
-	fh, err := os.Open(fname)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = io.Copy(os.Stdout, fh)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
 
 func (proc *Proc) loop() {
-	cat("/root/err")
 	generatePeriod := 100
 	if proc.fuzzer.config.Flags&ipc.FlagSignal == 0 {
 		// If we don't have real coverage signal, generate programs more frequently
@@ -103,17 +86,16 @@ func (proc *Proc) loop() {
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) == 0 || i%generatePeriod == 0 {
 			// Generate a new prog.
-			p := proc.fuzzer.target.Generate(proc.rnd, programLength, ct)
+			p := proc.fuzzer.target.Generate(proc.rnd, prog.RecommendedCalls, ct)
 			log.Logf(1, "#%v: generated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatGenerate)
 		} else {
 			// Mutate an existing prog.
 			p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
-			p.Mutate(proc.rnd, programLength, ct, fuzzerSnapshot.corpus)
+			p.Mutate(proc.rnd, prog.RecommendedCalls, ct, fuzzerSnapshot.corpus)
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
-		// cat("/root/err")
 	}
 }
 
@@ -228,7 +210,7 @@ func (proc *Proc) smashInput(item *WorkSmash) {
 	fuzzerSnapshot := proc.fuzzer.snapshot()
 	for i := 0; i < 100; i++ {
 		p := item.p.Clone()
-		p.Mutate(proc.rnd, programLength, proc.fuzzer.choiceTable, fuzzerSnapshot.corpus)
+		p.Mutate(proc.rnd, prog.RecommendedCalls, proc.fuzzer.choiceTable, fuzzerSnapshot.corpus)
 		log.Logf(1, "#%v: smash mutated", proc.pid)
 		proc.execute(proc.execOpts, p, ProgNormal, StatSmash)
 	}

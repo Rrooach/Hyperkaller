@@ -169,7 +169,7 @@ kill $(cat vm.pid)
 
 ## syzkaller
 
-Build syzkaller as described [here](/docs/contributing.md). Then
+Build syzkaller as described [here](/docs/contributing.md#go). Then
 create a manager config like the following, replacing the environment
 variables `$GOPATH`, `$KERNEL` and `$IMAGE` with their actual values.
 
