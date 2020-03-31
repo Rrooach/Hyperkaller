@@ -13,7 +13,9 @@ import (
 	"sync/atomic"
 	"syscall"
 	"time"
+	"os/exec"
 
+	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
 	"github.com/google/syzkaller/pkg/ipc"
@@ -75,8 +77,17 @@ func cat(fname string) {
 	}
 }
 
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
+
+var report_flag=0;
+
 func (proc *Proc) loop() {
-	cat("/root/err")
 	generatePeriod := 100
 	if proc.fuzzer.config.Flags&ipc.FlagSignal == 0 {
 		// If we don't have real coverage signal, generate programs more frequently
@@ -84,6 +95,32 @@ func (proc *Proc) loop() {
 		generatePeriod = 2
 	}
 	for i := 0; ; i++ {
+    /*********************************************/
+    //modifyed by sule
+		faultfuzzer.Get_cover()
+        if report_flag==1{
+            err_info := ecmd("~/error_report")
+            fmt.Printf("%v",err_info)
+        }
+        if report_flag==0 {
+            report_flag=1
+        }
+        ecmd("~/trigger")
+    /*********************************************/
+        fv:=faultfuzzer.Set_fault()
+
+
+        fuzzerSnapshot := proc.fuzzer.snapshot()
+		if len(fuzzerSnapshot.corpus) != 0 {
+            if fv==0 {
+                p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
+                log.Logf(1, "#%v: keep for fault", proc.pid)
+                proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
+                continue;
+            }
+        }
+
+
 		item := proc.fuzzer.workQueue.dequeue()
 		if item != nil {
 			switch item := item.(type) {
@@ -100,7 +137,6 @@ func (proc *Proc) loop() {
 		}
 
 		ct := proc.fuzzer.choiceTable
-		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) == 0 || i%generatePeriod == 0 {
 			// Generate a new prog.
 			p := proc.fuzzer.target.Generate(proc.rnd, programLength, ct)
@@ -113,7 +149,6 @@ func (proc *Proc) loop() {
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
-		// cat("/root/err")
 	}
 }
 
