@@ -231,23 +231,28 @@ func (mgr *Manager) httpCover(w http.ResponseWriter, r *http.Request) {
 func (mgr *Manager) httpCoverCover(w http.ResponseWriter, r *http.Request) {
 	var progs []cover.Prog
 	if sig := r.FormValue("input"); sig != "" {
+		log.Logf(0, "Rrooach: html.go: 234")
 		inp := mgr.corpus[sig]
 		progs = append(progs, cover.Prog{
 			Data: string(inp.Prog),
 			PCs:  coverToPCs(inp.Cover, mgr.cfg.TargetVMArch),
 		})
 	} else {
+		log.Logf(0, "Rrooach: html.go: 241")
 		call := r.FormValue("call")
 		for _, inp := range mgr.corpus {
 			if call != "" && call != inp.Call {
+				log.Logf(0, "Rrooach: html.go: 245")
 				continue
 			}
+			log.Logf(0, "Rrooach: html.go: 248 inp.Prog = %v, inp.Cover = %v, mgr.cfg.TargetVMArch =%v", string(inp.Prog), inp.Cover, mgr.cfg.TargetVMArch)
 			progs = append(progs, cover.Prog{
 				Data: string(inp.Prog),
 				PCs:  coverToPCs(inp.Cover, mgr.cfg.TargetVMArch),
 			})
 		}
 	}
+	log.Logf(0, "Rrooach: html.go: 251")
 	if err := reportGenerator.Do(w, progs); err != nil {
 		http.Error(w, fmt.Sprintf("failed to generate coverage profile: %v", err), http.StatusInternalServerError)
 		return

@@ -204,7 +204,8 @@ func (proc *Proc) smashInput(item *WorkSmash) {
 	if proc.fuzzer.faultInjectionEnabled && item.call != -1 {
 		proc.failCall(item.p, item.call)
 	}
-	if proc.fuzzer.comparisonTracingEnabled && item.call != -1 {
+	// if proc.fuzzer.comparisonTracingEnabled && item.call != -1 {
+	if true && item.call != -1 {
 		proc.executeHintSeed(item.p, item.call)
 	}
 	fuzzerSnapshot := proc.fuzzer.snapshot()

@@ -1,0 +1,29 @@
+include <uapi/asm/ioctl.h>
+include <uapi/linux/fcntl.h>
+include <uapi/linux/time.h>
+include <uapi/sound/asound.h>
+#include <sys/ioctl.h>  
+#include <linux/types.h>
+#include <fcntl.h>  
+#include <string.h>
+#include <xenctrl.h>
+#include <xen/sys/privcmd.h>
+
+ioctl_privcmd_hypercall {
+	op          int64 
+	arg         array[int64]
+	retval      int64
+}
+
+my_hypercall {
+    __HYPERVISOR_hypercall_type int32
+    info hypercall_info
+}
+
+hypercall_info {
+	arg1 int32
+	arg2 int32
+	arg3 int32
+	arg4 int32
+	arg5 int32
+} 

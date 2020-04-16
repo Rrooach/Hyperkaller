@@ -16,7 +16,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
+	"github.com/google/syzkaller/pkg/log"
 	"github.com/google/syzkaller/pkg/osutil"
 	"github.com/google/syzkaller/pkg/symbolizer"
 )
@@ -87,14 +87,18 @@ func (rg *ReportGenerator) Do(w io.Writer, progs []Prog) error {
 	coveredPCs := make(map[uint64]bool)
 	symbols := make(map[uint64]bool)
 	files := make(map[string]*file)
+	log.Logf(0, "Rrooach: report:90 prog's len = %v", len(progs))
 	for progIdx, prog := range progs {
+		log.Logf(0, "Rrooach: report:92 len =  %v", len(prog.PCs))
 		for _, pc := range prog.PCs {
 			symbols[rg.findSymbol(pc)] = true
 			frames, ok := rg.pcs[pc]
 			if !ok {
+				log.Logf(0, "Rrooach: report: 95")
 				continue
 			}
 			coveredPCs[pc] = true
+			log.Logf(0, "report: 99")
 			for _, frame := range frames {
 				f := getFile(files, frame.File)
 				ln := f.lines[frame.Line]

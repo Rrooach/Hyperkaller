@@ -182,7 +182,7 @@ expand:
 extract: bin/syz-extract
 ifeq ($(TARGETOS),fuchsia)
 	$(MAKE) generate_fidl TARGETARCH=amd64
-	$(MAKE) generate_fidl TARGETARCH=arm64
+#	$(MAKE) generate_fidl TARGETARCH=arm64
 else
 endif
 	bin/syz-extract -build -os=$(TARGETOS) -sourcedir=$(SOURCEDIR) $(FILES)
@@ -264,8 +264,8 @@ arch_linux_386_target:
 arch_linux_arm64_target:
 	env TARGETOS=linux TARGETARCH=arm64 $(MAKE) target
 
-arch_linux_arm_target:
-	env TARGETOS=linux TARGETARCH=arm $(MAKE) target
+#arch_linux_arm_target:
+#	env TARGETOS=linux TARGETARCH=arm $(MAKE) target
 
 arch_linux_mips64le_target:
 	env TARGETOS=linux TARGETARCH=mips64le $(MAKE) target
