@@ -114,8 +114,6 @@ func (proc *Proc) loop() {
         log.Logf(0, "setting fault")
 		fv := faultfuzzer.Set_fault()
 
-        //for test porpuse
-        ecmd("~/test -12")
 
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
