@@ -9,11 +9,11 @@ import (
 	"io"
 	"math/rand"
 	"os"
+	"os/exec"
 	"runtime/debug"
 	"sync/atomic"
 	"syscall"
 	"time"
-	"os/exec"
 
 	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
@@ -85,7 +85,7 @@ func ecmd(cmd string) string {
 	return string(out)
 }
 
-var report_flag=0;
+var report_flag = 0
 
 func (proc *Proc) loop() {
 	generatePeriod := 100
@@ -95,32 +95,39 @@ func (proc *Proc) loop() {
 		generatePeriod = 2
 	}
 	for i := 0; ; i++ {
-    /*********************************************/
-    //modifyed by sule
+		/*********************************************/
+		//modifyed by sule
+        log.Logf(0, "--------------------")
+        log.Logf(0, "getting cover")
 		faultfuzzer.Get_cover()
-        if report_flag==1{
-            err_info := ecmd("~/error_report")
-            fmt.Printf("%v",err_info)
-        }
-        if report_flag==0 {
-            report_flag=1
-        }
-        ecmd("~/trigger")
-    /*********************************************/
-        fv:=faultfuzzer.Set_fault()
+		if report_flag == 1 {
+            log.Logf(0, "--------------------")
+            log.Logf(0, "get report")
+			err_info := ecmd("~/error_report")
+			fmt.Printf("%v", err_info)
+		}
+		if report_flag == 0 {
+			report_flag = 1
+		}
+		ecmd("~/trigger")
+        log.Logf(0, "--------------------")
+        log.Logf(0, "setting fault")
+		fv := faultfuzzer.Set_fault()
 
+        //for test porpuse
+        ecmd("~/test -12")
 
-        fuzzerSnapshot := proc.fuzzer.snapshot()
+		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
-            if fv==0 {
-                p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
-                log.Logf(1, "#%v: keep for fault", proc.pid)
-                proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
-                continue;
-            }
-        }
+			if fv == 0 {
+				p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
+				log.Logf(1, "#%v: keep for fault", proc.pid)
+				proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
+				continue
+			}
+		}
 
-
+		/*********************************************/
 		item := proc.fuzzer.workQueue.dequeue()
 		if item != nil {
 			switch item := item.(type) {
