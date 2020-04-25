@@ -250,7 +250,7 @@ var rateLimit = time.NewTicker(1 * time.Second)
 // err0: failed to start the process or bug in executor itself
 func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInfo, hanged bool, err0 error) {
 	// Copy-in serialized program.
-	log.Logf(0, "Rroooach: starting Env.Exec")
+	log.Logf(0, "Rrooach: starting Env.Exec")
 	progSize, err := p.SerializeForExec(env.in)
 	if err != nil {
 		err0 = fmt.Errorf("failed to serialize: %v", err)
@@ -324,6 +324,7 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 
 func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 	out := env.out
+	log.Logf(0, "Rrooach ipc.go 327 out = %#xv", out)
 	ncmd, ok := readUint32(&out)
 	if !ok {
 		return nil, fmt.Errorf("failed to read number of calls")
@@ -332,7 +333,7 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 	extraParts := make([]CallInfo, 0)
 	for i := uint32(0); i < ncmd; i++ {
 		if len(out) < int(unsafe.Sizeof(callReply{})) {
-			log.Logf(0, "Rrooach: ipc.go: 340")
+			log.Logf(3	, "Rrooach: ipc.go: 340")
 			return nil, fmt.Errorf("failed to read call %v reply", i)
 		}
 		reply := *(*callReply)(unsafe.Pointer(&out[0]))
@@ -359,6 +360,7 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 			return nil, fmt.Errorf("call %v/%v/%v: signal overflow: %v/%v",
 				i, reply.index, reply.num, reply.signalSize, len(out))
 		}
+
 		if inf.Cover, ok = readUint32Array(&out, reply.coverSize); !ok {
 			return nil, fmt.Errorf("call %v/%v/%v: cover overflow: %v/%v",
 				i, reply.index, reply.num, reply.coverSize, len(out))

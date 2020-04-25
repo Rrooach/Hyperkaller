@@ -244,7 +244,7 @@ func (mgr *Manager) httpCoverCover(w http.ResponseWriter, r *http.Request) {
 				log.Logf(0, "Rrooach, httpCourps: html:244")
 				continue
 			}
-			log.Logf(0, "Rrooach, httpCovers: html:193 cover = %v", inp.Cover)
+			// log.Logf(0, "Rrooach, httpCovers: html:193 cover = %v", inp.Cover)
 			progs = append(progs, cover.Prog{
 				Data: string(inp.Prog),
 				PCs:  coverToPCs(inp.Cover, mgr.cfg.TargetVMArch),

@@ -1051,6 +1051,8 @@ func (mgr *Manager) newInput(inp rpctype.RPCInput, sign signal.Signal) bool {
 		var cov cover.Cover
 		cov.Merge(old.Cover)
 		cov.Merge(inp.Cover)
+		log.Logf(0, "Rrooach: manager.go :1054")
+		log.Logf(0, "Rrooach: manager.go : new.cov = %v, old.cov = %v", inp.Cover, old.Cover)
 		old.Cover = cov.Serialize()
 		mgr.corpus[sig] = old
 	} else {

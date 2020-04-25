@@ -20,6 +20,10 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"github.com/google/syzkaller/pkg/cover"
+	"github.com/google/syzkaller/pkg/log"
+	"github.com/google/syzkaller/pkg/osutil"
+	"github.com/google/syzkaller/sys/targets"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -27,10 +31,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-
-	"github.com/google/syzkaller/pkg/cover"
-	"github.com/google/syzkaller/pkg/osutil"
-	"github.com/google/syzkaller/sys/targets"
 )
 
 func main() {
@@ -65,6 +65,7 @@ func main() {
 	if err != nil {
 		failf("%v", err)
 	}
+	log.Logf(0, "Rrooach: syz-cover,")
 	kernelObj := filepath.Join(*flagKernelObj, target.KernelObject)
 	rg, err := cover.MakeReportGenerator(kernelObj, *flagKernelSrc, *flagKernelBuildSrc, *flagArch)
 	if err != nil {

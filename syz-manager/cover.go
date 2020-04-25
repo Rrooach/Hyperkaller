@@ -8,9 +8,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/google/syzkaller/pkg/cover"
-	"github.com/google/syzkaller/pkg/log"
 	"github.com/google/syzkaller/pkg/osutil"
-	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -25,25 +23,24 @@ var (
 )
 
 func initCover(kernelObj, kernelObjName, kernelSrc, kernelBuildSrc, arch, OS string) error {
-	initCoverOnce.Do(func() {
-		if kernelObj == "" {
-			initCoverError = fmt.Errorf("kernel_obj is not specified")
-			return
-		}
-		log.Logf(0, "Rrooach: cover 33	")
-		vmlinux := filepath.Join(kernelObj, kernelObjName)
-		reportGenerator, initCoverError = cover.MakeReportGenerator(vmlinux, kernelSrc, kernelBuildSrc, arch)
-		if initCoverError != nil {
-			return
-		}
-		initCoverVMOffset, initCoverError = getVMOffset(vmlinux, OS)
-	})
+	// initCoverOnce.Do(func() {
+	// 	if kernelObj == "" {
+	// 		initCoverError = fmt.Errorf("kernel_obj is not specified")
+	// 		return
+	// 	}
+	// 	log.Logf(0, "Rrooach: cover 33	")
+	// 	vmlinux := filepath.Join(kernelObj, kernelObjName)
+	// 	reportGenerator, initCoverError = cover.MakeReportGenerator(vmlinux, kernelSrc, kernelBuildSrc, arch)
+	// 	if initCoverError != nil {
+	// 		return
+	// 	}
+	// 	initCoverVMOffset, initCoverError = getVMOffset(vmlinux, OS)
+	// })
 	return initCoverError
 }
 
 func coverToPCs(cov []uint32, arch string) []uint64 {
 	pcs := make([]uint64, 0, len(cov))
-	// log.Logf(0, "Rrooach: cover:45 cov = %v", len(cov))
 	for _, pc := range cov {
 		fullPC := cover.RestorePC(pc, initCoverVMOffset)
 		prevPC := cover.PreviousInstructionPC(arch, fullPC)
@@ -51,7 +48,6 @@ func coverToPCs(cov []uint32, arch string) []uint64 {
 	}
 	return pcs
 }
-
 func getVMOffset(vmlinux, OS string) (uint32, error) {
 	if OS == "freebsd" {
 		return 0xffffffff, nil

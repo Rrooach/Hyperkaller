@@ -395,17 +395,14 @@ int main(int argc, char** argv)
 			threads[i].cov.fd = kCoverFd + i;
 			cover_open(&threads[i].cov, false);
 			cover_protect(&threads[i].cov);
-			if (!system("/root/tm/cov_reset"))
-				fail("cover reset failed");
 		}
 		cover_open(&extra_cov, true);
 		cover_protect(&extra_cov);
 		if (flag_extra_coverage) {
+			printf("Rrooach: executor:402\n\n");
 			// Don't enable comps because we don't use them in the fuzzer yet.
 			cover_enable(&extra_cov, false, true);
 		}
-		if (!system("/root/tm/cov_reset"))
-			fail("cover reset failed");
 	}
 
 	int status = 0;

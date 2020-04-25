@@ -51,7 +51,7 @@ static intptr_t execute_syscall(const call_t* c, intptr_t a[kMaxArgs])
 
 static void cover_open(cover_t* cov, bool extra)
 {
-	int fd = open("/dev/kcov", O_RDWR);
+	int fd = open("/dev/cov", O_RDWR);
 	if (fd == -1)
 		fail("open of /dev/kcov failed");
 	if (dup2(fd, cov->fd) < 0)

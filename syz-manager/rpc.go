@@ -232,6 +232,8 @@ func (serv *RPCServer) NewInput(a *rpctype.NewInputArgs, r *int) error {
 	if !genuine && !rotated {
 		return nil
 	}
+
+	log.Logf(0, "Rrooach: rpc.go 235  a.RPCInput.Cover = %v", a.RPCInput.Cover)
 	if !serv.mgr.newInput(a.RPCInput, inputSignal) {
 		return nil
 	}
@@ -239,6 +241,7 @@ func (serv *RPCServer) NewInput(a *rpctype.NewInputArgs, r *int) error {
 	if f.rotatedSignal != nil {
 		f.rotatedSignal.Merge(inputSignal)
 	}
+	log.Logf(0, "Rrooach: rpc.go 242")
 	serv.corpusCover.Merge(a.Cover)
 	serv.stats.corpusCover.set(len(serv.corpusCover))
 	serv.stats.newInputs.inc()
