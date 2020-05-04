@@ -10,10 +10,10 @@
 #include <sys/prctl.h>
 #include <sys/syscall.h>
 #include <unistd.h>
-
+int cover_size;
 const unsigned long KCOV_TRACE_PC = 0;
-const unsigned long KCOV_TRACE_CMP = 1;
-
+const unsigned long KCOV_TRACE_CMP = 1; 
+size_t mmap_alloc_size = 30000;
 template <typename kernel_u64_t, int N>
 struct kcov_remote_arg {
 	unsigned trace_mode;
@@ -83,27 +83,33 @@ static intptr_t execute_syscall(const call_t* c, intptr_t a[kMaxArgs])
 }
 
 static void cover_open(cover_t* cov, bool extra)
-{
+{ 
 	int fd = open("/dev/cov", O_RDWR);
 	if (fd == -1) {
 		FILE* tmpfs = fopen("/dev/cov", "a+");
 		fclose(tmpfs);
 	}
-	fd = open("/dev/cov", O_RDWR);
+	fd = open("/dev/cov", O_RDWR); 
 	if (dup2(fd, cov->fd) < 0)
 		fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
 	close(fd);
-	// const int kcov_init_trace = is_kernel_64_bit ? KCOV_INIT_TRACE64 : KCOV_INIT_TRACE32;
-	const int cover_size = extra ? kExtraCoverSize : kCoverSize;
+	cover_size = extra ? kExtraCoverSize : kCoverSize;	
+	if (system("/root/cov"))
 	// if (ioctl(cov->fd, kcov_init_trace, cover_size))
-	if (system("/root/tm/cov"))
 		fail("cover init trace write failed");
-	size_t mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
-	cov->data = (char*)mmap(NULL, mmap_alloc_size,
-				PROT_READ | PROT_WRITE, MAP_SHARED, cov->fd, 0);
+	debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
+	mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
+	cov->data = (char*)mmap(NULL, (mmap_alloc_size),
+				PROT_READ | PROT_WRITE, MAP_SHARED, cov->fd, 0);  
+	// memset(cover, '0', mmap_alloc_size);			
 	if (cov->data == MAP_FAILED)
 		fail("cover mmap failed");
 	cov->data_end = cov->data + mmap_alloc_size;
+	debug("Rrooach: executor_linux 107 size = %d   data = %s   \n", cov->size, cov->data);
+	//size = %d   
+	//		data = %s     data_end = %s\n", 
+	//		cov->size, cov->data, cov->data_end);
+
 }
 
 static void cover_protect(cover_t* cov)
@@ -125,7 +131,7 @@ static void enable_remote_cover(cover_t* cov, unsigned long ioctl_cmd, unsigned 
 	// arg.num_handles = 1;
 	// arg.handles[0].v = kcov_remote_handle(KCOV_SUBSYSTEM_USB, procid + 1);
 	// arg.common_handle.v = kcov_remote_handle(KCOV_SUBSYSTEM_COMMON, procid + 1);
-	if (system("/root/tm/cov"))
+	if (system("/root/cov"))
 		exitf("remote cover enable write trace failed");
 	// if (ioctl(cov->fd, ioctl_cmd, &arg))
 	// 	exitf("remote cover enable write trace failed");
@@ -139,7 +145,7 @@ static void cover_enable(cover_t* cov, bool collect_comps, bool extra)
 	// so we use exitf.
 	if (!extra) {
 		// if (ioctl(cov->fd, KCOV_ENABLE, kcov_mode))
-		if (system("/root/tm/cov"))
+		if (system("/root/cov"))
 			exitf("cover enable write trace failed, mode=%d", kcov_mode);
 		current_cover = cov;
 		return;
@@ -160,13 +166,26 @@ static void cover_reset(cover_t* cov)
 			fail("cover_reset: current_cover == 0");
 		cov = current_cover;
 	}
-	*(uint64*)cov->data = 0;
+	*(uint64*)cov->data = 0; 
 }
 
 static void cover_collect(cover_t* cov)
 {
-	// Note: this assumes little-endian kernel.
-	cov->size = *(uint32*)cov->data;
+	// int idx = 0;
+	// // Note: this assumes little-endian kernel.
+	// for (int i = 0; ;i++)
+	// {
+	// 	if (cov->data[i] == '\0')
+	// 		break;
+	// 	if (cov->data[i] == '1' || cov->data[i] == '0')
+	// 		{ 
+	// 			idx++;
+	// 		}
+			
+	// }	
+
+	cov->size = 30000;		
+	debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
 static bool cover_check(uint32 pc)
@@ -174,15 +193,15 @@ static bool cover_check(uint32 pc)
 	return true;
 }
 
-static bool cover_check(uint64 pc)
-{
-#if defined(__i386__) || defined(__x86_64__)
-	// Text/modules range for x86_64.
-	return pc >= 0xffffffff80000000ull && pc < 0xffffffffff000000ull;
-#else
-	return true;
-#endif
-}
+// static bool cover_check(uint64 pc)
+// {
+// #if defined(__i386__) || defined(__x86_64__)
+// 	// Text/modules range for x86_64.
+// 	return pc >= 0xffffffff80000000ull && pc < 0xffffffffff000000ull;
+// #else
+// 	return true;
+// #endif
+// }
 
 static bool detect_kernel_bitness()
 {

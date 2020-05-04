@@ -240,6 +240,7 @@ func (mgr *Manager) httpCoverCover(w http.ResponseWriter, r *http.Request) {
 	} else {
 		call := r.FormValue("call")
 		for _, inp := range mgr.corpus {
+			// log.Logf(0, "Rrooach manager243 inp = %+v", inp)
 			if call != "" && call != inp.Call {
 				log.Logf(0, "Rrooach, httpCourps: html:244")
 				continue
@@ -249,6 +250,7 @@ func (mgr *Manager) httpCoverCover(w http.ResponseWriter, r *http.Request) {
 				Data: string(inp.Prog),
 				PCs:  coverToPCs(inp.Cover, mgr.cfg.TargetVMArch),
 			})
+			// log.Logf(0, "Rrooach, httpCovers: html:193 cover = %v", progs)
 		}
 	}
 	if err := reportGenerator.Do(w, progs); err != nil {

@@ -241,7 +241,7 @@ func (serv *RPCServer) NewInput(a *rpctype.NewInputArgs, r *int) error {
 	if f.rotatedSignal != nil {
 		f.rotatedSignal.Merge(inputSignal)
 	}
-	log.Logf(0, "Rrooach: rpc.go 242")
+	log.Logf(0, "Rrooach: rpc.go 242 a.Cover = %v", a.Cover)
 	serv.corpusCover.Merge(a.Cover)
 	serv.stats.corpusCover.set(len(serv.corpusCover))
 	serv.stats.newInputs.inc()

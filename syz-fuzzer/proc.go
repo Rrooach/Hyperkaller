@@ -161,7 +161,7 @@ func (proc *Proc) triageInput(item *WorkTriage) {
 
 	data := item.p.Serialize()
 	sig := hash.Hash(data)
-	log.Logf(0, "Rrooach: proc.go 164")
+	// log.Logf(0, "Rrooach: proc.go 164")
 	log.Logf(2, "added new input for %v to corpus:\n%s", logCallName, data)
 	proc.fuzzer.sendInputToManager(rpctype.RPCInput{
 		Call:   callName,
@@ -197,7 +197,7 @@ func getSignalAndCover(p *prog.Prog, info *ipc.ProgInfo, call int) (signal.Signa
 	if call != -1 {
 		inf = &info.Calls[call]
 	}
-	log.Logf(0, "Rrooach: proc 200 inf.Cover = %v", inf.Cover)
+	// log.Logf(0, "Rrooach: proc 200 inf = %+v", inf)
 	return signal.FromRaw(inf.Signal, signalPrio(p, inf, call)), inf.Cover
 }
 

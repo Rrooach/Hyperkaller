@@ -1039,6 +1039,7 @@ func (mgr *Manager) machineChecked(a *rpctype.CheckArgs) {
 
 func (mgr *Manager) newInput(inp rpctype.RPCInput, sign signal.Signal) bool {
 	mgr.mu.Lock()
+	log.Logf(0, "Rrooach: manager1042")
 	defer mgr.mu.Unlock()
 	if mgr.saturatedCalls[inp.Call] {
 		return false
@@ -1056,6 +1057,8 @@ func (mgr *Manager) newInput(inp rpctype.RPCInput, sign signal.Signal) bool {
 		old.Cover = cov.Serialize()
 		mgr.corpus[sig] = old
 	} else {
+		log.Logf(0, "Rrooach: manager1060")
+		log.Logf(0, "Rrooach: manager.corpus = %+v", mgr.corpus[sig])
 		mgr.corpus[sig] = inp
 		mgr.corpusDB.Save(sig, inp.Prog, 0)
 		if err := mgr.corpusDB.Flush(); err != nil {

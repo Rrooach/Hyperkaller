@@ -217,8 +217,8 @@ func MakeEnv(config *Config, pid int) (*Env, error) {
 	return env, nil
 }
 
-func (env *Env) Close() error {
-	if env.cmd != nil {
+func (env *Env) Close() error { 
+	if	 env.cmd != nil {
 		env.cmd.close()
 	}
 	if env.linkedBin != "" {
@@ -227,7 +227,7 @@ func (env *Env) Close() error {
 	var err1, err2 error
 	if env.inFile != nil {
 		err1 = osutil.CloseMemMappedFile(env.inFile, env.in)
-	}
+	}   
 	if env.outFile != nil {
 		err2 = osutil.CloseMemMappedFile(env.outFile, env.out)
 	}
@@ -250,7 +250,7 @@ var rateLimit = time.NewTicker(1 * time.Second)
 // err0: failed to start the process or bug in executor itself
 func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInfo, hanged bool, err0 error) {
 	// Copy-in serialized program.
-	log.Logf(0, "Rrooach: starting Env.Exec")
+	// log.Logf(0, "Rrooach: starting Env.Exec")
 	progSize, err := p.SerializeForExec(env.in)
 	if err != nil {
 		err0 = fmt.Errorf("failed to serialize: %v", err)
@@ -266,7 +266,7 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 		env.out[i] = 0
 	}
 
-	atomic.AddUint64(&env.StatExecs, 1)
+	atomic.AddUint64(&env.StatExecs, 1) 
 	if env.cmd == nil {
 		if p.Target.OS != "test" && targets.Get(p.Target.OS, p.Target.Arch).HostFuzzer {
 			// The executor is actually ssh,
@@ -276,17 +276,19 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 		tmpDirPath := "./"
 		atomic.AddUint64(&env.StatRestarts, 1)
 		env.cmd, err0 = makeCommand(env.pid, env.bin, env.config, env.inFile, env.outFile, env.out, tmpDirPath)
+ 
 		if err0 != nil {
 			return
 		}
 	}
+	// log.Logf(0, "Rrooach: ipc 285 outFile = %v", env.outFile)
 	output, hanged, err0 = env.cmd.exec(opts, progData)
 	if err0 != nil {
 		env.cmd.close()
 		env.cmd = nil
 		return
-	}
-	log.Logf(0, "Rrooach: 289")
+	}	
+	// log.Logf(0, "Rrooach: 289")
 	info, err0 = env.parseOutput(p)
 	log.Logf(0, "env.config.Flags = %v,  FlagSignal = %v", env.config.Flags, FlagSignal)
 	// if info != nil && env.config.Flags&FlagSignal == 0 {
@@ -322,9 +324,8 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 	}
 }
 
-func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
-	out := env.out
-	log.Logf(0, "Rrooach ipc.go 327 out = %#xv", out)
+func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) { 
+	out := env.out 
 	ncmd, ok := readUint32(&out)
 	if !ok {
 		return nil, fmt.Errorf("failed to read number of calls")
@@ -332,12 +333,14 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 	info := &ProgInfo{Calls: make([]CallInfo, len(p.Calls))}
 	extraParts := make([]CallInfo, 0)
 	for i := uint32(0); i < ncmd; i++ {
+		// log.Logf(0, "Rrooach ipc338")
 		if len(out) < int(unsafe.Sizeof(callReply{})) {
-			log.Logf(3	, "Rrooach: ipc.go: 340")
+			// log.Logf(0	, "Rrooach: ipc.go: 340")
 			return nil, fmt.Errorf("failed to read call %v reply", i)
 		}
 		reply := *(*callReply)(unsafe.Pointer(&out[0]))
 		out = out[unsafe.Sizeof(callReply{}):]
+		// log.Logf(0, "Rrooach ipc345 reply = %+v", reply) 
 		var inf *CallInfo
 		if reply.index != extraReplyIndex {
 			if int(reply.index) >= len(info.Calls) {
@@ -365,6 +368,8 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 			return nil, fmt.Errorf("call %v/%v/%v: cover overflow: %v/%v",
 				i, reply.index, reply.num, reply.coverSize, len(out))
 		}
+		// log.Logf(0, "Rrooach ipc.go 367 Signal = %v", inf.Signal)
+		// log.Logf(0, "Rrooach ipc.go 368 Cover = %v", inf.Cover)
 		comps, err := readComps(&out, reply.compsSize)
 		if err != nil {
 			return nil, err
@@ -589,6 +594,7 @@ func makeCommand(pid int, bin []string, config *Config, inFile, outFile *os.File
 	cmd := osutil.Command(bin[0], bin[1:]...)
 	if inFile != nil && outFile != nil {
 		cmd.ExtraFiles = []*os.File{inFile, outFile}
+		
 	}
 	cmd.Env = []string{}
 	cmd.Dir = dir
@@ -775,8 +781,10 @@ func (c *command) exec(opts *ExecOpts, progData []byte) (output []byte, hanged b
 		if _, err := io.ReadFull(c.inrp, callReplyData); err != nil {
 			break
 		}
+		// log.Logf(0, "Rrooach: ipc.go 783")
 		if callReply.signalSize != 0 || callReply.coverSize != 0 || callReply.compsSize != 0 {
 			// This is unsupported yet.
+			// log.Logf(0, "Rrooach: ipc.go 786  c.pid = %v", c.pid)
 			fmt.Fprintf(os.Stderr, "executor %v: got call reply with coverage\n", c.pid)
 			os.Exit(1)
 		}

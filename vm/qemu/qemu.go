@@ -87,7 +87,7 @@ type archConfig struct {
 var archConfigs = map[string]*archConfig{
 	"linux/amd64": {
 		Qemu:      "qemu-system-x86_64",
-		QemuArgs:  "-enable-kvm -cpu host,migratable=off",
+		QemuArgs:  "-enable-kvm",
 		TargetDir: "/",
 		// e1000e fails on recent Debian distros with:
 		// Initialization of device e1000e failed: failed to find romfile "efi-e1000e.rom
@@ -166,7 +166,7 @@ var archConfigs = map[string]*archConfig{
 	},
 	"fuchsia/amd64": {
 		Qemu:      "qemu-system-x86_64",
-		QemuArgs:  "-enable-kvm -machine q35 -cpu host,migratable=off",
+		QemuArgs:  "-enable-kvm -machine q35  ",
 		TargetDir: "/tmp",
 		NicModel:  ",model=e1000",
 		CmdLine: []string{
@@ -176,7 +176,7 @@ var archConfigs = map[string]*archConfig{
 	},
 	"akaros/amd64": {
 		Qemu:      "qemu-system-x86_64",
-		QemuArgs:  "-enable-kvm -cpu host,migratable=off",
+		QemuArgs:  "-enable-kvm ",
 		TargetDir: "/",
 		NicModel:  ",model=e1000",
 	},

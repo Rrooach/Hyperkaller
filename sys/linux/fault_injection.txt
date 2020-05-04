@@ -3,7 +3,7 @@ include <linux/ioctl.h>
 define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; u64 retvl;})
 define IOCTL_PRIVCMD_HYPERCALL0	_IOC(0, 'P', 0, PRIVCMD_HYPERCALL_SIZE)
 
-open$IOCTL_PRIVCMD_HYPERCALL_FINJ(file ptr[in, string["/proc/xen/privcmd"]]) fd
+open$IOCTL_PRIVCMD_HYPERCALL_FINJ(file pt	r[in, string["/proc/xen/privcmd"]]) fd
 
 ioctl$my_hypercall_fs1(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall_fs1])
 

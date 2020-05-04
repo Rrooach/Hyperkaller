@@ -88,13 +88,17 @@ func (rg *ReportGenerator) Do(w io.Writer, progs []Prog) error {
 	coveredPCs := make(map[uint64]bool)
 	symbols := make(map[uint64]bool)
 	files := make(map[string]*file)
+	log.Logf(0, "Rrooach report91 lenarray = %v", len(progs))
 	for progIdx, prog := range progs {
+		log.Logf(0, "Rrooach lenaaa = %v", prog.PCs)
 		for _, pc := range prog.PCs {
 			symbols[rg.findSymbol(pc)] = true
 			frames, ok := rg.pcs[pc]
 			if !ok {
+				log.Logf(0, "Rrooach: report98")
 				continue
 			}
+			log.Logf(0, "Rrooach report98")
 			coveredPCs[pc] = true
 			for _, frame := range frames {
 				f := getFile(files, frame.File)
@@ -111,6 +115,7 @@ func (rg *ReportGenerator) Do(w io.Writer, progs []Prog) error {
 			}
 		}
 	}
+	log.Logf(0, "Rrooach report115")
 	if len(coveredPCs) == 0 {
 		return fmt.Errorf("no coverage data available")
 	}

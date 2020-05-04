@@ -746,8 +746,11 @@ retry:
 				fail("using non-main thread in non-thread mode");
 			event_reset(&th->ready);
 			execute_call(th);
+			debug("RRooach:749");
 			event_set(&th->done);
+			debug("RRooach:751");
 			handle_completion(th);
+			debug("RRooach:753");
 		}
 	}
 
@@ -848,14 +851,16 @@ void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover
 	// Currently it is code edges computed as xor of two subsequent basic block PCs.
 	cover_data_t* cover_data = ((cover_data_t*)cov->data) + 1;
 	uint32 nsig = 0;
-	cover_data_t prev = 0;
+	uint32 prev = 0;
 	for (uint32 i = 0; i < cov->size; i++) {
-		cover_data_t pc = cover_data[i];
+		if (cover_data[i] != '1')
+			continue;
+		uint32 pc = i;
 		if (!cover_check(pc)) {
-			debug("got bad pc: 0x%llx\n", (uint64)pc);
+			debug("got bad pc: 0x%x\n", (uint32)pc);
 			doexit(0);
 		}
-		cover_data_t sig = pc ^ prev;
+		uint32 sig = pc ^ prev;
 		prev = hash(pc);
 		if (dedup(sig))
 			continue;
@@ -1059,10 +1064,11 @@ void* worker_thread(void* arg)
 	if (flag_coverage)
 		cover_enable(&th->cov, flag_comparisons, false);
 	for (;;) {
-		event_wait(&th->ready);
-		event_reset(&th->ready);
+		event_wait(&th->ready); 
+		event_reset(&th->ready); 
 		execute_call(th);
 		event_set(&th->done);
+		debug("1073\n\n\n");
 	}
 	return 0;
 }
@@ -1095,7 +1101,7 @@ void execute_call(thread_t* th)
 		th->reserrno = EINVAL; // our syz syscalls may misbehave
 	if (flag_coverage) {
 		cover_collect(&th->cov);
-		if (th->cov.size >= kCoverSize)
+		if (th->cov.size > 300000)
 			fail("#%d: too much cover %u", th->id, th->cov.size);
 	}
 	th->fault_injected = false;
