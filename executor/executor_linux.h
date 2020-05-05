@@ -89,10 +89,14 @@ static void cover_open(cover_t* cov, bool extra)
 		FILE* tmpfs = fopen("/dev/cov", "a+");
 		fclose(tmpfs);
 	}
-	fd = open("/dev/cov", O_RDWR); 
+	fd = open("/dev/cov", O_RDWR);
+	// fstat(fd, &fileStat);
+	//int file_size = (int)fileStat.st_size;
+    
 	if (dup2(fd, cov->fd) < 0)
 		fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
 	close(fd);
+	// const int kcov_init_trace = .  is_kernel_64_bit ? KCOV_INIT_TRACE64 : KCOV_INIT_TRACE32;
 	cover_size = extra ? kExtraCoverSize : kCoverSize;	
 	if (system("/root/cov"))
 	// if (ioctl(cov->fd, kcov_init_trace, cover_size))
@@ -100,8 +104,8 @@ static void cover_open(cover_t* cov, bool extra)
 	debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
 	mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
 	cov->data = (char*)mmap(NULL, (mmap_alloc_size),
-				PROT_READ | PROT_WRITE, MAP_SHARED, cov->fd, 0);  
-	// memset(cover, '0', mmap_alloc_size);			
+				PROT_READ | PROT_WRITE, MAP_SHARED, cov->fd, 0);    
+				
 	if (cov->data == MAP_FAILED)
 		fail("cover mmap failed");
 	cov->data_end = cov->data + mmap_alloc_size;
@@ -171,20 +175,20 @@ static void cover_reset(cover_t* cov)
 
 static void cover_collect(cover_t* cov)
 {
-	// int idx = 0;
-	// // Note: this assumes little-endian kernel.
-	// for (int i = 0; ;i++)
-	// {
-	// 	if (cov->data[i] == '\0')
-	// 		break;
-	// 	if (cov->data[i] == '1' || cov->data[i] == '0')
-	// 		{ 
-	// 			idx++;
-	// 		}
+	int idx = 0;
+	// Note: this assumes little-endian kernel.
+	for (int i = 0; i < 60000;i++)
+	{
+		if (cov->data[i] == EOF)
+			break;
+		if (cov->data[i] == '1' || cov->data[i] == '0')
+			{ 
+				idx++;
+			}
 			
-	// }	
-
-	cov->size = 30000;		
+	}	
+	debug ("Rrooachlinux190   %d\n\n\n", idx);	
+	cov->size = idx;		
 	debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 

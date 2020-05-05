@@ -572,6 +572,12 @@ void reply_execute(int status)
 // execute_one executes program stored in input_data.
 void execute_one()
 {
+	if (system("/root/reset"))
+		exitf("reset coverage failed");
+	debug("Rrooach exe577reset\n");
+	if (system("/root/cov"))
+		exitf("set coverage failed");
+	debug("Rrooach exe580set\n");
 	// Duplicate global collide variable on stack.
 	// Fuzzer once come up with ioctl(fd, FIONREAD, 0x920000),
 	// where 0x920000 was exactly collide address, so every iteration reset collide to 0.
@@ -853,7 +859,9 @@ void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover
 	uint32 nsig = 0;
 	uint32 prev = 0;
 	for (uint32 i = 0; i < cov->size; i++) {
-		if (cover_data[i] != '1')
+		if (cov->data[i] == EOF)
+			break;
+		if (cov->data[i] != '1')
 			continue;
 		uint32 pc = i;
 		if (!cover_check(pc)) {
@@ -1064,11 +1072,10 @@ void* worker_thread(void* arg)
 	if (flag_coverage)
 		cover_enable(&th->cov, flag_comparisons, false);
 	for (;;) {
-		event_wait(&th->ready); 
-		event_reset(&th->ready); 
+		event_wait(&th->ready);
+		event_reset(&th->ready);
 		execute_call(th);
 		event_set(&th->done);
-		debug("1073\n\n\n");
 	}
 	return 0;
 }
@@ -1101,7 +1108,7 @@ void execute_call(thread_t* th)
 		th->reserrno = EINVAL; // our syz syscalls may misbehave
 	if (flag_coverage) {
 		cover_collect(&th->cov);
-		if (th->cov.size > 300000)
+		if (th->cov.size > 3000000)
 			fail("#%d: too much cover %u", th->id, th->cov.size);
 	}
 	th->fault_injected = false;
