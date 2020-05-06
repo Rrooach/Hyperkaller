@@ -174,21 +174,8 @@ static void cover_reset(cover_t* cov)
 }
 
 static void cover_collect(cover_t* cov)
-{
-	int idx = 0;
-	// Note: this assumes little-endian kernel.
-	for (int i = 0; i < 60000;i++)
-	{
-		if (cov->data[i] == EOF)
-			break;
-		if (cov->data[i] == '1' || cov->data[i] == '0')
-			{ 
-				idx++;
-			}
-			
-	}	
-	debug ("Rrooachlinux190   %d\n\n\n", idx);	
-	cov->size = idx;		
+{  
+	cov->size = 10000;		
 	debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 

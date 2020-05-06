@@ -37,7 +37,9 @@
 #endif
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-
+#define BITS_PER_WORD 32
+#define MASK 0x1f
+#define SHIFT 5 
 // uint64 is impossible to printf without using the clumsy and verbose "%" PRId64.
 // So we define and use uint64. Note: pkg/csource does s/uint64/uint64/.
 // Also define uint32/16/8 for consistency.
@@ -855,15 +857,15 @@ void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover
 {
 	// Write out feedback signals.
 	// Currently it is code edges computed as xor of two subsequent basic block PCs.
-	cover_data_t* cover_data = ((cover_data_t*)cov->data) + 1;
+	cover_data_t* cover_data = ((cover_data_t*)cov->data);
 	uint32 nsig = 0;
 	uint32 prev = 0;
 	for (uint32 i = 0; i < cov->size; i++) {
-		if (cov->data[i] == EOF)
-			break;
-		if (cov->data[i] != '1')
+		uint32 pc;
+		if (cover_data[i >> SHIFT] & (1 << (i & MASK)))
+			pc = i;
+		else
 			continue;
-		uint32 pc = i;
 		if (!cover_check(pc)) {
 			debug("got bad pc: 0x%x\n", (uint32)pc);
 			doexit(0);
