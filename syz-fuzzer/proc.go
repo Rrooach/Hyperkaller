@@ -6,13 +6,16 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"math/rand"
 	"os"
+	"os/exec"
 	"runtime/debug"
 	"sync/atomic"
 	"syscall"
 	"time"
 
+	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
 	"github.com/google/syzkaller/pkg/ipc"
@@ -20,6 +23,10 @@ import (
 	"github.com/google/syzkaller/pkg/rpctype"
 	"github.com/google/syzkaller/pkg/signal"
 	"github.com/google/syzkaller/prog"
+)
+
+const (
+	programLength = 30
 )
 
 // Proc represents a single fuzzing process (executor).
@@ -58,6 +65,27 @@ func newProc(fuzzer *Fuzzer, pid int) (*Proc, error) {
 	}
 	return proc, nil
 }
+func cat(fname string) {
+	fh, err := os.Open(fname)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = io.Copy(os.Stdout, fh)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
+
+var report_flag = 0
 
 func (proc *Proc) loop() {
 	generatePeriod := 100
@@ -67,6 +95,37 @@ func (proc *Proc) loop() {
 		generatePeriod = 2
 	}
 	for i := 0; ; i++ {
+		/*********************************************/
+		//modifyed by sule
+        log.Logf(0, "--------------------")
+        log.Logf(0, "getting cover")
+		faultfuzzer.Get_cover()
+		if report_flag == 1 {
+            log.Logf(0, "--------------------")
+            log.Logf(0, "get report")
+			err_info := ecmd("~/error_report")
+			fmt.Printf("%v", err_info)
+		}
+		if report_flag == 0 {
+			report_flag = 1
+		}
+		ecmd("~/trigger")
+        log.Logf(0, "--------------------")
+        log.Logf(0, "setting fault")
+		fv := faultfuzzer.Set_fault()
+
+
+		fuzzerSnapshot := proc.fuzzer.snapshot()
+		if len(fuzzerSnapshot.corpus) != 0 {
+			if fv == 0 {
+				p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
+				log.Logf(1, "#%v: keep for fault", proc.pid)
+				proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
+				continue
+			}
+		}
+
+		/*********************************************/
 		item := proc.fuzzer.workQueue.dequeue()
 		if item != nil {
 			switch item := item.(type) {
@@ -83,16 +142,15 @@ func (proc *Proc) loop() {
 		}
 
 		ct := proc.fuzzer.choiceTable
-		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) == 0 || i%generatePeriod == 0 {
 			// Generate a new prog.
-			p := proc.fuzzer.target.Generate(proc.rnd, prog.RecommendedCalls, ct)
+			p := proc.fuzzer.target.Generate(proc.rnd, programLength, ct)
 			log.Logf(1, "#%v: generated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatGenerate)
 		} else {
 			// Mutate an existing prog.
 			p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
-			p.Mutate(proc.rnd, prog.RecommendedCalls, ct, fuzzerSnapshot.corpus)
+			p.Mutate(proc.rnd, programLength, ct, fuzzerSnapshot.corpus)
 			log.Logf(1, "#%v: mutated", proc.pid)
 			proc.execute(proc.execOpts, p, ProgNormal, StatFuzz)
 		}
@@ -161,7 +219,7 @@ func (proc *Proc) triageInput(item *WorkTriage) {
 
 	data := item.p.Serialize()
 	sig := hash.Hash(data)
-	// log.Logf(0, "Rrooach: proc.go 164")
+
 	log.Logf(2, "added new input for %v to corpus:\n%s", logCallName, data)
 	proc.fuzzer.sendInputToManager(rpctype.RPCInput{
 		Call:   callName,
@@ -197,7 +255,6 @@ func getSignalAndCover(p *prog.Prog, info *ipc.ProgInfo, call int) (signal.Signa
 	if call != -1 {
 		inf = &info.Calls[call]
 	}
-	// log.Logf(0, "Rrooach: proc 200 inf = %+v", inf)
 	return signal.FromRaw(inf.Signal, signalPrio(p, inf, call)), inf.Cover
 }
 
@@ -205,14 +262,13 @@ func (proc *Proc) smashInput(item *WorkSmash) {
 	if proc.fuzzer.faultInjectionEnabled && item.call != -1 {
 		proc.failCall(item.p, item.call)
 	}
-	// if proc.fuzzer.comparisonTracingEnabled && item.call != -1 {
-	if true && item.call != -1 {
+	if proc.fuzzer.comparisonTracingEnabled && item.call != -1 {
 		proc.executeHintSeed(item.p, item.call)
 	}
 	fuzzerSnapshot := proc.fuzzer.snapshot()
 	for i := 0; i < 100; i++ {
 		p := item.p.Clone()
-		p.Mutate(proc.rnd, prog.RecommendedCalls, proc.fuzzer.choiceTable, fuzzerSnapshot.corpus)
+		p.Mutate(proc.rnd, programLength, proc.fuzzer.choiceTable, fuzzerSnapshot.corpus)
 		log.Logf(1, "#%v: smash mutated", proc.pid)
 		proc.execute(proc.execOpts, p, ProgNormal, StatSmash)
 	}
