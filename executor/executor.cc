@@ -424,7 +424,9 @@ int main(int argc, char** argv)
 #endif
 	else
 		fail("unknown sandbox type");
-
+// if (system(ecmd("~/error_report")))
+// 	debug("failed run error_report\n");
+// debug("runing error_report success\n\n");
 #if SYZ_EXECUTOR_USES_FORK_SERVER
 	fprintf(stderr, "loop exited with status %d\n", status);
 	// Other statuses happen when fuzzer processes manages to kill loop, e.g. with:
@@ -859,7 +861,7 @@ void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover
 	// Currently it is code edges computed as xor of two subsequent basic block PCs.
 	cover_data_t* cover_data = ((cover_data_t*)cov->data);
 	uint32 nsig = 0;
-	uint32 prev = 0;
+	uint32 prev = 0; 
 	for (uint32 i = 0; i < cov->size; i++) {
 		uint32 pc;
 		if (cover_data[i >> SHIFT] & (1 << (i & MASK)))
