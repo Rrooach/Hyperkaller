@@ -574,8 +574,8 @@ void reply_execute(int status)
 // execute_one executes program stored in input_data.
 void execute_one()
 {
-	// if (system("/root/reset"))
-	// 	exitf("reset coverage failed");
+	if (system("/root/reset"))
+		exitf("reset coverage failed");
 	debug("Rrooach exe577reset\n");
 	if (system("/root/cov"))
 		exitf("set coverage failed");
