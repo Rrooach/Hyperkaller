@@ -39,7 +39,7 @@
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #define BITS_PER_WORD 32
 #define MASK 0x1f
-#define SHIFT 5 
+#define SHIFT 5
 // uint64 is impossible to printf without using the clumsy and verbose "%" PRId64.
 // So we define and use uint64. Note: pkg/csource does s/uint64/uint64/.
 // Also define uint32/16/8 for consistency.
@@ -574,8 +574,8 @@ void reply_execute(int status)
 // execute_one executes program stored in input_data.
 void execute_one()
 {
-	if (system("/root/reset"))
-		exitf("reset coverage failed");
+	// if (system("/root/reset"))
+	// 	exitf("reset coverage failed");
 	debug("Rrooach exe577reset\n");
 	if (system("/root/cov"))
 		exitf("set coverage failed");

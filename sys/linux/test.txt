@@ -1,6 +1,6 @@
 include <linux/fcntl.h>
 include <linux/ioctl.h>
-define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; u64 retvl;})
+define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; })
 define IOCTL_PRIVCMD_HYPERCALL0	_IOC(0, 'P', 0, PRIVCMD_HYPERCALL_SIZE)
 #define IOCTL_PRIVCMD_HYPERCALL _IOWR('E', 0, struct {u64 op; u64 arg[5]; u64 retvl;}) 
 

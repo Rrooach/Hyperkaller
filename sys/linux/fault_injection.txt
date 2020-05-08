@@ -1,19 +1,19 @@
 include <linux/fcntl.h>
 include <linux/ioctl.h>
-define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; u64 retvl;})
-define IOCTL_PRIVCMD_HYPERCALL0	_IOC(0, 'P', 0, PRIVCMD_HYPERCALL_SIZE)
+define IOCTL_PRIVCMD_HYPERCALL11000	0x305000
+resource fdr[int32]: -1
 
-open$IOCTL_PRIVCMD_HYPERCALL_FINJ(file pt	r[in, string["/proc/xen/privcmd"]]) fd
+open$IOCTL_PRIVCMD_HYPERCALL_FINJ(file ptr[in, string["/proc/xen/privcmd"]]) fdr
 
-ioctl$my_hypercall_fs1(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall_fs1])
+ioctl$my_hypercall_fs1(fd fdr, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall_fs1])
 
-ioctl$my_hypercall_fs2(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall_fs2])
+ioctl$my_hypercall_fs2(fd fdr, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall_fs2])
 
-ioctl$my_hypercall_get_trace(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall_get_trace])
+ioctl$my_hypercall_get_trace(fd fdr, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall_get_trace])
 
-ioctl$my_hypercall_get_site(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall_get_site])
+ioctl$my_hypercall_get_site(fd fdr, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall_get_site])
 
-close$IOCTL_PRIVCMD_HYPERCALL_FINJ(fd fd)
+close$IOCTL_PRIVCMD_HYPERCALL_FINJ(fd fdr)
 
 my_hypercall_fs1 {
 	__HYPERVISOR_hypercall_type	const[42, int64]

@@ -97,12 +97,12 @@ func (proc *Proc) loop() {
 	for i := 0; ; i++ {
 		/*********************************************/
 		//modifyed by sule
-        log.Logf(0, "--------------------")
-        log.Logf(0, "getting cover")
+		log.Logf(0, "--------------------")
+		log.Logf(0, "getting cover")
 		faultfuzzer.Get_cover()
 		if report_flag == 1 {
-            log.Logf(0, "--------------------")
-            log.Logf(0, "get report")
+			log.Logf(0, "--------------------")
+			log.Logf(0, "get report")
 			err_info := ecmd("~/error_report")
 			fmt.Printf("%v", err_info)
 		}
@@ -110,10 +110,9 @@ func (proc *Proc) loop() {
 			report_flag = 1
 		}
 		ecmd("~/trigger")
-        log.Logf(0, "--------------------")
-        log.Logf(0, "setting fault")
+		log.Logf(0, "--------------------")
+		log.Logf(0, "setting fault")
 		fv := faultfuzzer.Set_fault()
-
 
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {

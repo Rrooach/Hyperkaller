@@ -38,11 +38,11 @@ func Get_cover() {
 	_ = err
 	exists := history[cov]
 	if !exists {
-        queue = append(queue, cov)
-        history[cov] = true
-        log.Logf(0, "--------------------------")
-        log.Logf(0, "old cov: %v",current)
-        log.Logf(0, "new cov: %v",cov)
+		queue = append(queue, cov)
+		history[cov] = true
+		log.Logf(0, "--------------------------")
+		log.Logf(0, "old cov: %v", current)
+		log.Logf(0, "new cov: %v", cov)
 	}
 	if num_bits(cov) > num_bits(current) {
 		mutate()
@@ -52,8 +52,8 @@ func Get_cover() {
 func Set_fault() int {
 	var fault int64
 	if len(queue) == 0 {
-        log.Logf(0, "--------------------------")
-        log.Logf(0, "queue is empty")
+		log.Logf(0, "--------------------------")
+		log.Logf(0, "queue is empty")
 		queue = append(queue, 0)
 		return 1
 	}

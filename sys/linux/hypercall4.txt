@@ -1,23 +1,22 @@
 include <linux/fcntl.h>
 include <linux/ioctl.h>
-define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; u64 retvl;})
+define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5];})
 define IOCTL_PRIVCMD_HYPERCALL0	_IOC(0, 'P', 0, PRIVCMD_HYPERCALL_SIZE)
 #define IOCTL_PRIVCMD_HYPERCALL _IOWR('E', 0, struct {u64 op; u64 arg[5]; u64 retvl;}) 
 
 open$IOCTL_PRIVCMD_HYPERCALL40(dev ptr[in, string["/proc/xen/privcmd"]]) fd
 
-
-ioctl$IOCTL_PRIVCMD_HYPERCALL40(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall40])
-ioctl$IOCTL_PRIVCMD_HYPERCALL41(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall41])
-ioctl$IOCTL_PRIVCMD_HYPERCALL42(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall42])
-ioctl$IOCTL_PRIVCMD_HYPERCALL43(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall43])
-ioctl$IOCTL_PRIVCMD_HYPERCALL44(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall40])
-ioctl$IOCTL_PRIVCMD_HYPERCALL45(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall41])
-ioctl$IOCTL_PRIVCMD_HYPERCALL46(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall42])
-ioctl$IOCTL_PRIVCMD_HYPERCALL47(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall43])
-ioctl$IOCTL_PRIVCMD_HYPERCALL48(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall40])
-ioctl$IOCTL_PRIVCMD_HYPERCALL49(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall41])
-ioctl$IOCTL_PRIVCMD_HYPERCALL410(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall42])
+ioctl$IOCTL_PRIVCMD_HYPERCALL40(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall40])
+ioctl$IOCTL_PRIVCMD_HYPERCALL41(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall41])
+ioctl$IOCTL_PRIVCMD_HYPERCALL42(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall42])
+ioctl$IOCTL_PRIVCMD_HYPERCALL43(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall43])
+ioctl$IOCTL_PRIVCMD_HYPERCALL44(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall44])
+ioctl$IOCTL_PRIVCMD_HYPERCALL45(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall45])
+ioctl$IOCTL_PRIVCMD_HYPERCALL46(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall46])
+ioctl$IOCTL_PRIVCMD_HYPERCALL47(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall47])
+ioctl$IOCTL_PRIVCMD_HYPERCALL48(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall48])
+ioctl$IOCTL_PRIVCMD_HYPERCALL49(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall49])
+ioctl$IOCTL_PRIVCMD_HYPERCALL410(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall410])
 
 close$IOCTL_PRIVCMD_HYPERCALL40(fd fd)
 
@@ -119,4 +118,3 @@ my_hypercall410 {
 	arg4				int64
 	arg5				int64
 }
-

@@ -217,8 +217,8 @@ func MakeEnv(config *Config, pid int) (*Env, error) {
 	return env, nil
 }
 
-func (env *Env) Close() error { 
-	if	 env.cmd != nil {
+func (env *Env) Close() error {
+	if env.cmd != nil {
 		env.cmd.close()
 	}
 	if env.linkedBin != "" {
@@ -227,7 +227,7 @@ func (env *Env) Close() error {
 	var err1, err2 error
 	if env.inFile != nil {
 		err1 = osutil.CloseMemMappedFile(env.inFile, env.in)
-	}   
+	}
 	if env.outFile != nil {
 		err2 = osutil.CloseMemMappedFile(env.outFile, env.out)
 	}
@@ -266,7 +266,7 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 		env.out[i] = 0
 	}
 
-	atomic.AddUint64(&env.StatExecs, 1) 
+	atomic.AddUint64(&env.StatExecs, 1)
 	if env.cmd == nil {
 		if p.Target.OS != "test" && targets.Get(p.Target.OS, p.Target.Arch).HostFuzzer {
 			// The executor is actually ssh,
@@ -276,7 +276,7 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 		tmpDirPath := "./"
 		atomic.AddUint64(&env.StatRestarts, 1)
 		env.cmd, err0 = makeCommand(env.pid, env.bin, env.config, env.inFile, env.outFile, env.out, tmpDirPath)
- 
+
 		if err0 != nil {
 			return
 		}
@@ -287,7 +287,7 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 		env.cmd.close()
 		env.cmd = nil
 		return
-	}	
+	}
 	// log.Logf(0, "Rrooach: 289")
 	info, err0 = env.parseOutput(p)
 	log.Logf(0, "env.config.Flags = %v,  FlagSignal = %v", env.config.Flags, FlagSignal)
@@ -324,8 +324,8 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 	}
 }
 
-func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) { 
-	out := env.out 
+func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
+	out := env.out
 	ncmd, ok := readUint32(&out)
 	if !ok {
 		return nil, fmt.Errorf("failed to read number of calls")
@@ -340,7 +340,7 @@ func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {
 		}
 		reply := *(*callReply)(unsafe.Pointer(&out[0]))
 		out = out[unsafe.Sizeof(callReply{}):]
-		// log.Logf(0, "Rrooach ipc345 reply = %+v", reply) 
+		// log.Logf(0, "Rrooach ipc345 reply = %+v", reply)
 		var inf *CallInfo
 		if reply.index != extraReplyIndex {
 			if int(reply.index) >= len(info.Calls) {
@@ -594,7 +594,7 @@ func makeCommand(pid int, bin []string, config *Config, inFile, outFile *os.File
 	cmd := osutil.Command(bin[0], bin[1:]...)
 	if inFile != nil && outFile != nil {
 		cmd.ExtraFiles = []*os.File{inFile, outFile}
-		
+
 	}
 	cmd.Env = []string{}
 	cmd.Dir = dir

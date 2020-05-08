@@ -416,7 +416,7 @@ var (
 		"-O2",
 		"-pthread",
 		"-Wall",
-		"-Werror",
+		// "-Werror",
 		"-Wparentheses",
 		"-Wunused-const-variable",
 		"-Wframe-larger-than=16384",
