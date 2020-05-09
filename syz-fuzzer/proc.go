@@ -114,7 +114,6 @@ func (proc *Proc) loop() {
         log.Logf(0, "setting fault")
 		fv := faultfuzzer.Set_fault()
 
-
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
 			if fv == 0 {
