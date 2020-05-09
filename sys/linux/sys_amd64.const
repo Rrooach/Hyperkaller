@@ -45,7 +45,7 @@ CLONE_NEWIPC = 134217728
 CLONE_NEWNET = 1073741824
 CLONE_NEWNS = 131072
 CLONE_NEWPID = 536870912
-CLONE_NEWTIME = 128
+# CLONE_NEWTIME is not set
 CLONE_NEWUSER = 268435456
 CLONE_NEWUTS = 67108864
 CLONE_PARENT = 32768
@@ -662,7 +662,7 @@ __NR_open_by_handle_at = 304
 __NR_openat = 257
 __NR_pause = 34
 __NR_personality = 135
-__NR_pidfd_getfd = 438
+# __NR_pidfd_getfd is not set
 __NR_pidfd_open = 434
 __NR_pidfd_send_signal = 424
 __NR_pipe = 22

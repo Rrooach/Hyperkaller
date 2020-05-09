@@ -37,7 +37,7 @@ func Get_cover() {
 	cov, err := strconv.ParseInt(res, 10, 64)
 	_ = err
 	exists := history[cov]
-	if !exists && (cov!=0) {
+	if !exists && (cov != 0) {
 		queue = append(queue, cov)
 		history[cov] = true
 		log.Logf(0, "--------------------------")
@@ -57,22 +57,22 @@ func Set_fault() int {
 		queue = append(queue, 0)
 		return 1
 	}
-    for true{
-        if(len(queue)==0){
-           queue = append(queue, 0)
-           return 1
-        }
-        fault = queue[0]
-        if fault == 0{
-            queue = queue[1:]
-            continue
-        }
-        queue = queue[1:]
-        current = fault
-        ecmd("~/set_fault " + strconv.FormatInt(int64(fault), 10))
-        log.Logf(0, "--------------------------")
-        log.Logf(0, "set fault to %v", fault)
-        break
-    }
+	for true {
+		if len(queue) == 0 {
+			queue = append(queue, 0)
+			return 1
+		}
+		fault = queue[0]
+		if fault == 0 {
+			queue = queue[1:]
+			continue
+		}
+		queue = queue[1:]
+		current = fault
+		ecmd("~/set_fault " + strconv.FormatInt(int64(fault), 10))
+		log.Logf(0, "--------------------------")
+		log.Logf(0, "set fault to %v", fault)
+		break
+	}
 	return 0
 }

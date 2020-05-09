@@ -1,20 +1,20 @@
 include <linux/fcntl.h>
 include <linux/ioctl.h>
-define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; u64 retvl;})
+define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; })
 define IOCTL_PRIVCMD_HYPERCALL0	_IOC(0, 'P', 0, PRIVCMD_HYPERCALL_SIZE)
 #define IOCTL_PRIVCMD_HYPERCALL _IOWR('E', 0, struct {u64 op; u64 arg[5]; u64 retvl;}) 
 
-open$IOCTL_PRIVCMD_HYPERCALL5(file ptr[in, string["/proc/xen/privcmd"]]) fd
+open$IOCTL_PRIVCMD_HYPERCALL25(file ptr[in, string["/proc/xen/privcmd"]]) fd
 
-ioctl$IOCTL_PRIVCMD_HYPERCALL20(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall20])
-ioctl$IOCTL_PRIVCMD_HYPERCALL21(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall21])
-ioctl$IOCTL_PRIVCMD_HYPERCALL22(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall20])
-ioctl$IOCTL_PRIVCMD_HYPERCALL23(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall21])
-ioctl$IOCTL_PRIVCMD_HYPERCALL24(fd fd, cmd const[IOCTL_PRIVCMD_HYPERCALL0], hypercall ptr[in, my_hypercall20])
+ioctl$IOCTL_PRIVCMD_HYPERCALL220(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall220])
+ioctl$IOCTL_PRIVCMD_HYPERCALL221(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall221])
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall222])
+ioctl$IOCTL_PRIVCMD_HYPERCALL223(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall223])
+ioctl$IOCTL_PRIVCMD_HYPERCALL224(fd fd, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall224])
 
-close$IOCTL_PRIVCMD_HYPERCALL5(fd fd)
+close$IOCTL_PRIVCMD_HYPERCALL25(fd fd)
 
-my_hypercall20 {
+my_hypercall220 {
 	__HYPERVISOR_hypercall_type	int32[0:55]
 	arg1				int64
 	arg2				int64
@@ -23,7 +23,7 @@ my_hypercall20 {
 	arg5				int64
 }
 
-my_hypercall21 {
+my_hypercall221 {
 	__HYPERVISOR_hypercall_type	int32[0:55]
 	arg1				int64
 	arg2				int64
@@ -32,7 +32,7 @@ my_hypercall21 {
 	arg5				int64
 }
 
-my_hypercall22 {
+my_hypercall222 {
 	__HYPERVISOR_hypercall_type	int32[0:55]
 	arg1				int64
 	arg2				int64
@@ -41,8 +41,7 @@ my_hypercall22 {
 	arg5				int64
 }
 
-
-my_hypercall23 {
+my_hypercall223 {
 	__HYPERVISOR_hypercall_type	int32[0:55]
 	arg1				int64
 	arg2				int64
@@ -51,7 +50,7 @@ my_hypercall23 {
 	arg5				int64
 }
 
-my_hypercall24 {
+my_hypercall224 {
 	__HYPERVISOR_hypercall_type	int32[0:55]
 	arg1				int64
 	arg2				int64
@@ -59,4 +58,3 @@ my_hypercall24 {
 	arg4				int64
 	arg5				int64
 }
-
