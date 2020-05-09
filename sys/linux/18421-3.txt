@@ -1,6 +1,5 @@
 include <linux/fcntl.h>
 include <linux/ioctl.h>
-
 define IOCTL_PRIVCMD_HYPERCALL11000	0x305000
 
 open$IOCTL_PRIVCMD_HYPERCALL18421_3(file ptr[in, string["/proc/xen/privcmd"]]) fd
