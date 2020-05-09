@@ -392,6 +392,8 @@ int main(int argc, char** argv)
 #else
 	receive_execute();
 #endif
+
+
 	if (flag_coverage) {
 		for (int i = 0; i < kMaxThreads; i++) {
 			threads[i].cov.fd = kCoverFd + i;
@@ -813,6 +815,7 @@ retry:
 		collide = colliding = true;
 		goto retry;
 	}
+
 }
 
 thread_t* schedule_call(int call_index, int call_num, bool colliding, uint64 copyout_index, uint64 num_args, uint64* args, uint64* pos)
@@ -1106,6 +1109,8 @@ void execute_call(thread_t* th)
 	errno = 0;
 	th->res = execute_syscall(call, th->args);
 	th->reserrno = errno;
+
+
 	if (th->res == -1 && th->reserrno == 0)
 		th->reserrno = EINVAL; // our syz syscalls may misbehave
 	if (flag_coverage) {

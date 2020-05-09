@@ -343,8 +343,6 @@ func (inst *instance) boot() error {
 		"-smp", strconv.Itoa(inst.cfg.CPU),
 		"-net", "nic" + inst.archConfig.NicModel,
 		"-net", fmt.Sprintf("user,host=%v,hostfwd=tcp::%v-:22", hostAddr, inst.port),
-		"-display", "none",
-		"-serial", "stdio",
 		"-no-reboot",
 	}
 	args = append(args, splitArgs(inst.cfg.QemuArgs, filepath.Join(inst.workdir, "template"))...)
