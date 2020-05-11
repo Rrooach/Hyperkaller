@@ -169,7 +169,7 @@ static void cover_reset(cover_t *cov) {
 }
 
 static void cover_collect(cover_t *cov) {
-  cov->size = 150000;
+  cov->size = 4686;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
