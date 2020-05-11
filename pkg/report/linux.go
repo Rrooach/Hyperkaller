@@ -876,13 +876,13 @@ var linuxOopses = append([]*oops{
 				fmt:          "XenSanitizer: stack overflow on address %[1]v",
 				noStackTrace: true,
 			},
-			{
+            {
 				title:        compile("====ERROR: XenSanitizer:"),
 				report:       compile("====ERROR: XenSanitizer: global variable overflow on address (0x[0-9a-f]+)"),
 				fmt:          "XenSanitizer: global variable overflow on address %[1]v",
 				noStackTrace: true,
 			},
-			{
+            {
 				title:        compile("====ERROR: XenSanitizer:"),
 				report:       compile("====ERROR: XenSanitizer: use after free on address (0x[0-9a-f]+)"),
 				fmt:          "XenSanitizer: use after free on address %[1]v",

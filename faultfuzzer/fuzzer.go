@@ -9,6 +9,7 @@ import (
 var queue = make([]int64, 0)
 var history = make(map[int64]bool)
 var current int64
+var maxfault = 0x3fffffff
 
 func ecmd(cmd string) string {
 	out, err := exec.Command("bash", "-c", cmd).Output()
@@ -54,25 +55,17 @@ func Set_fault() int {
 	if len(queue) == 0 {
 		log.Logf(0, "--------------------------")
 		log.Logf(0, "queue is empty")
-		queue = append(queue, 0)
+        fault = 0
+        ecmd("~/set_fault " + strconv.FormatInt(fault, 10))
+        log.Logf(0, "--------------------------")
+        log.Logf(0, "set fault to %v", fault)
 		return 1
 	}
-	for true {
-		if len(queue) == 0 {
-			queue = append(queue, 0)
-			return 1
-		}
-		fault = queue[0]
-		if fault == 0 {
-			queue = queue[1:]
-			continue
-		}
-		queue = queue[1:]
-		current = fault
-		ecmd("~/set_fault " + strconv.FormatInt(int64(fault), 10))
-		log.Logf(0, "--------------------------")
-		log.Logf(0, "set fault to %v", fault)
-		break
-	}
+    fault = queue[0]
+    queue = queue[1:]
+    current = fault
+    ecmd("~/set_fault " + strconv.FormatInt(int64(fault), 10))
+    log.Logf(0, "--------------------------")
+    log.Logf(0, "set fault to %v", fault)
 	return 0
 }
