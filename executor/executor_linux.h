@@ -105,8 +105,7 @@ static void cover_open(cover_t *cov, bool extra) {
   debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
   mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
   cov->data = (char *)mmap(NULL, (mmap_alloc_size), PROT_READ | PROT_WRITE,
-                           MAP_SHARED, cov->fd, 0);
-
+                           MAP_SHARED, cov->fd, 0); 
   if (cov->data == MAP_FAILED)
     fail("cover mmap failed");
   cov->data_end = cov->data + mmap_alloc_size;
@@ -170,7 +169,7 @@ static void cover_reset(cover_t *cov) {
 }
 
 static void cover_collect(cover_t *cov) {
-  cov->size = 10000;
+  cov->size = 150000;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 

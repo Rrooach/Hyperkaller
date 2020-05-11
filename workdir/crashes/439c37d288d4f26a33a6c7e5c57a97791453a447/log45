@@ -1,0 +1,1744 @@
+OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017
+debug1: Reading configuration data /dev/null
+debug1: Connecting to localhost [127.0.0.1] port 29602.
+debug1: fd 3 clearing O_NONBLOCK
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/p2/key type 0
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/p2/key-cert type -1
+debug1: Local version string SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+debug1: Remote protocol version 2.0, remote software version OpenSSH_7.9p1 Debian-10+deb10u2
+debug1: match: OpenSSH_7.9p1 Debian-10+deb10u2 pat OpenSSH* compat 0x04000000
+debug1: Authenticating to localhost:29602 as 'root'
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: algorithm: curve25519-sha256
+debug1: kex: host key algorithm: ecdsa-sha2-nistp256
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ecdsa-sha2-nistp256 SHA256:4/tWNp5otCN3Z8Xa0hYVLJjk+v55FwwYCFcUvt73Uug
+debug1: checking without port identifier
+Warning: Permanently added '[localhost]:29602' (ECDSA) to the list of known hosts.
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering public key: RSA SHA256:CYnBEFcxsXRB+Lqq3RxKWrmSrcNoJTi0nhG3g2GVQxY /root/p2/key
+debug1: Server accepts key: pkalg rsa-sha2-512 blen 279
+debug1: Authentication succeeded (publickey).
+Authenticated to localhost ([127.0.0.1]:29602).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: pledge: network
+debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply 0
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Sending command: cd / && /syz-fuzzer -executor=/syz-executor -name=vm-0 -arch=amd64 -manager=10.0.2.10:44223 -sandbox=none -procs=1 -cover=true -debug=true -test=false -vv=100
+2020/05/11 04:42:55 fuzzer started
+2020/05/11 04:42:56 dialing manager at 10.0.2.10:44223
+2020/05/11 04:42:56 syscalls: 1811
+2020/05/11 04:42:56 code coverage: enabled
+2020/05/11 04:42:56 comparison tracing: enabled
+2020/05/11 04:42:56 extra coverage: enabled
+2020/05/11 04:42:56 setuid sandbox: enabled
+2020/05/11 04:42:56 namespace sandbox: /proc/self/ns/user does not exist
+2020/05/11 04:42:56 Android sandbox: enabled
+2020/05/11 04:42:56 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2020/05/11 04:42:56 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2020/05/11 04:42:56 net packet injection: /dev/net/tun does not exist
+2020/05/11 04:42:56 net device setup: enabled
+2020/05/11 04:42:56 concurrency sanitizer: /sys/kernel/debug/kcsan does not exist
+2020/05/11 04:42:56 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/11 04:42:56 USB emulation: /dev/raw-gadget does not exist
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=257
+2020/05/11 04:42:56 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:42:57 --------------------
+2020/05/11 04:42:57 getting cover
+2020/05/11 04:42:57 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:42:57 --------------------
+2020/05/11 04:42:57 setting fault
+2020/05/11 04:42:57 --------------------------
+2020/05/11 04:42:57 queue is empty
+2020/05/11 04:42:57 #0: generated
+04:42:57 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+Rrooach executor_linux cov->fd = 232
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 233
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 234
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 235
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 236
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 237
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 238
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 239
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 240
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 241
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 242
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 243
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 244
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 245
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 246
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 247
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 0
+Rrooach: executor_linux 107 size = 0   data =    
+spawned loop pid 734
+mount(fusectl) failed: 2
+write(/syzcgroup/unified/cgroup.subtree_control) failed: 22
+mount(cgroup cpu) failed: 22
+mount(cgroup net) failed: 22
+netlink: add addr 172.30.0.1 dev nr0: No such device
+netlink: device nr0 up master (null): No such device
+netlink: add addr 172.30.1.1 dev rose0: No such device
+netlink: device rose0 up master (null): No such device
+netlink: adding device ip6gretap0 type ip6gretap: Operation not supported
+netlink: adding device bridge0 type bridge: Operation not supported
+netlink: adding device vcan0 type vcan: Operation not supported
+netlink: adding device bond0 type bond: Operation not supported
+netlink: adding device team0 type team: Operation not supported
+netlink: adding device dummy0 type dummy: Operation not supported
+netlink: adding device nlmon0 type nlmon: Operation not supported
+netlink: adding device caif0 type caif: Operation not supported
+netlink: adding device batadv0 type batadv: Operation not supported
+netlink: adding device vxcan1 type vxcan: Operation not supported
+netlink: adding device netdevsim0 type netdevsim: Operation not supported
+netlink: adding device (null) type veth: Operation not supported
+netlink: adding device xfrm0 type xfrm: Operation not supported
+netlink: adding device wg0 type wireguard: Operation not supported
+netlink: adding device wg1 type wireguard: Operation not supported
+netlink: adding device wg2 type wireguard: Operation not supported
+netlink: adding device bridge_slave_0 type veth peer veth0_to_bridge: Operation not supported
+netlink: adding device bridge_slave_1 type veth peer veth1_to_bridge: Operation not supported
+netlink: device bridge_slave_0 up master bridge0: No such device
+netlink: device bridge_slave_1 up master bridge0: No such device
+netlink: adding device bond_slave_0 type veth peer veth0_to_bond: Operation not supported
+netlink: adding device bond_slave_1 type veth peer veth1_to_bond: Operation not supported
+netlink: device bond_slave_0 up master bond0: No such device
+netlink: device bond_slave_1 up master bond0: No such device
+netlink: adding device team_slave_0 type veth peer veth0_to_team: Operation not supported
+netlink: adding device team_slave_1 type veth peer veth1_to_team: Operation not supported
+netlink: device team_slave_0 up master team0: No such device
+netlink: device team_slave_1 up master team0: No such device
+netlink: adding device batadv_slave_0 type veth peer veth0_to_batadv: Operation not supported
+netlink: adding device batadv_slave_1 type veth peer veth1_to_batadv: Operation not supported
+netlink: device batadv_slave_0 up master batadv0: No such device
+netlink: device batadv_slave_1 up master batadv0: No such device
+netlink: device bridge_slave_0 up master (null): No such device
+netlink: device bridge_slave_1 up master (null): No such device
+netlink: adding device hsr_slave_0 type veth peer veth0_to_hsr: Operation not supported
+netlink: adding device hsr_slave_1 type veth peer veth1_to_hsr: Operation not supported
+netlink: adding device hsr0 type hsr slave1 hsr_slave_0 slave2 hsr_slave_1: Operation not supported
+netlink: device hsr_slave_0 up master (null): No such device
+netlink: device hsr_slave_1 up master (null): No such device
+netlink: adding device veth0_virt_wifi type veth peer veth1_virt_wifi: Operation not supported
+netlink: adding device virt_wifi0 type virt_wifi link veth1_virt_wifi: Operation not supported
+netlink: adding device veth0_vlan type veth peer veth1_vlan: Operation not supported
+netlink: add vlan0 type vlan link veth0_vlan id 0: Operation not supported
+netlink: add vlan1 type vlan link veth0_vlan id 1: Operation not supported
+netlink: add macvlan0 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add macvlan1 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add ipvlan0 type ipvlan link veth0_vlan mode 0: Operation not supported
+netlink: add ipvlan1 type ipvlan link veth0_vlan mode 2: Operation not supported
+netlink: adding device veth0_macvtap type veth peer veth1_macvtap: Operation not supported
+netlink: adding device macvtap0 type macvtap link veth0_macvtap: Operation not supported
+netlink: adding device macsec0 type macsec link veth1_macvtap: Operation not supported
+netlink: add geneve0 type geneve vni 0: Operation not supported
+netlink: add geneve1 type geneve vni 1: Operation not supported
+netlink: failed to get wireguard family id: No such file or directory
+netlink: add addr 172.20.20.10 dev lo: Success
+netlink: add addr fe80::0a dev lo: Success
+netlink: device lo up master (null): Success
+netlink: add addr 172.20.20.11 dev sit0: Success
+netlink: add addr fe80::0b dev sit0: Success
+netlink: device sit0 up master (null): Success
+netlink: add addr 172.20.20.12 dev bridge0: No such device
+netlink: add addr fe80::0c dev bridge0: No such device
+netlink: device bridge0 up master (null): No such device
+netlink: add addr 172.20.20.13 dev vcan0: No such device
+netlink: device vcan0 up master (null): No such device
+netlink: add addr 172.20.20.14 dev tunl0: No such device
+netlink: add addr fe80::0e dev tunl0: No such device
+netlink: device tunl0 up master (null): No such device
+netlink: add addr 172.20.20.15 dev gre0: No such device
+netlink: add addr fe80::0f dev gre0: No such device
+netlink: device gre0 up master (null): No such device
+netlink: add addr 172.20.20.16 dev gretap0: No such device
+netlink: add addr fe80::10 dev gretap0: No such device
+netlink: device gretap0 up master (null): No such device
+netlink: add addr 172.20.20.17 dev ip_vti0: No such device
+netlink: add addr fe80::11 dev ip_vti0: No such device
+netlink: device ip_vti0 up master (null): No such device
+netlink: add addr 172.20.20.18 dev ip6_vti0: No such device
+netlink: add addr fe80::12 dev ip6_vti0: No such device
+netlink: device ip6_vti0 up master (null): No such device
+netlink: add addr 172.20.20.19 dev ip6tnl0: No such device
+netlink: add addr fe80::13 dev ip6tnl0: No such device
+netlink: device ip6tnl0 up master (null): No such device
+netlink: add addr 172.20.20.20 dev ip6gre0: No such device
+netlink: add addr fe80::14 dev ip6gre0: No such device
+netlink: device ip6gre0 up master (null): No such device
+netlink: add addr 172.20.20.21 dev ip6gretap0: No such device
+netlink: add addr fe80::15 dev ip6gretap0: No such device
+netlink: device ip6gretap0 up master (null): No such device
+netlink: add addr 172.20.20.22 dev erspan0: No such device
+netlink: add addr fe80::16 dev erspan0: No such device
+netlink: device erspan0 up master (null): No such device
+netlink: add addr 172.20.20.23 dev bond0: No such device
+netlink: add addr fe80::17 dev bond0: No such device
+netlink: device bond0 up master (null): No such device
+netlink: add addr 172.20.20.24 dev veth0: No such device
+netlink: add addr fe80::18 dev veth0: No such device
+netlink: device veth0 up master (null): No such device
+netlink: add addr 172.20.20.25 dev veth1: No such device
+netlink: add addr fe80::19 dev veth1: No such device
+netlink: device veth1 up master (null): No such device
+netlink: add addr 172.20.20.26 dev team0: No such device
+netlink: add addr fe80::1a dev team0: No such device
+netlink: device team0 up master (null): No such device
+netlink: add addr 172.20.20.27 dev veth0_to_bridge: No such device
+netlink: add addr fe80::1b dev veth0_to_bridge: No such device
+netlink: device veth0_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.28 dev veth1_to_bridge: No such device
+netlink: add addr fe80::1c dev veth1_to_bridge: No such device
+netlink: device veth1_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.29 dev veth0_to_bond: No such device
+netlink: add addr fe80::1d dev veth0_to_bond: No such device
+netlink: device veth0_to_bond up master (null): No such device
+netlink: add addr 172.20.20.30 dev veth1_to_bond: No such device
+netlink: add addr fe80::1e dev veth1_to_bond: No such device
+netlink: device veth1_to_bond up master (null): No such device
+netlink: add addr 172.20.20.31 dev veth0_to_team: No such device
+netlink: add addr fe80::1f dev veth0_to_team: No such device
+netlink: device veth0_to_team up master (null): No such device
+netlink: add addr 172.20.20.32 dev veth1_to_team: No such device
+netlink: add addr fe80::20 dev veth1_to_team: No such device
+netlink: device veth1_to_team up master (null): No such device
+netlink: add addr 172.20.20.33 dev veth0_to_hsr: No such device
+netlink: add addr fe80::21 dev veth0_to_hsr: No such device
+netlink: device veth0_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.34 dev veth1_to_hsr: No such device
+netlink: add addr fe80::22 dev veth1_to_hsr: No such device
+netlink: device veth1_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.35 dev hsr0: No such device
+netlink: add addr fe80::23 dev hsr0: No such device
+netlink: device hsr0 up master (null): No such device
+netlink: add addr 172.20.20.36 dev dummy0: No such device
+netlink: add addr fe80::24 dev dummy0: No such device
+netlink: device dummy0 up master (null): No such device
+netlink: add addr 172.20.20.37 dev nlmon0: No such device
+netlink: add addr fe80::25 dev nlmon0: No such device
+netlink: device nlmon0 up master (null): No such device
+netlink: add addr 172.20.20.38 dev vxcan0: No such device
+netlink: device vxcan0 up master (null): No such device
+netlink: add addr 172.20.20.39 dev vxcan1: No such device
+netlink: device vxcan1 up master (null): No such device
+netlink: add addr 172.20.20.40 dev caif0: No such device
+netlink: add addr fe80::28 dev caif0: No such device
+netlink: device caif0 up master (null): No such device
+netlink: add addr 172.20.20.41 dev batadv0: No such device
+netlink: add addr fe80::29 dev batadv0: No such device
+netlink: device batadv0 up master (null): No such device
+netlink: add addr 172.20.20.42 dev netdevsim0: No such device
+netlink: add addr fe80::2a dev netdevsim0: No such device
+netlink: device netdevsim0 up master (null): No such device
+netlink: add addr 172.20.20.43 dev xfrm0: No such device
+netlink: add addr fe80::2b dev xfrm0: No such device
+netlink: device xfrm0 up master (null): No such device
+netlink: add addr 172.20.20.44 dev veth0_virt_wifi: No such device
+netlink: add addr fe80::2c dev veth0_virt_wifi: No such device
+netlink: device veth0_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.45 dev veth1_virt_wifi: No such device
+netlink: add addr fe80::2d dev veth1_virt_wifi: No such device
+netlink: device veth1_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.46 dev virt_wifi0: No such device
+netlink: add addr fe80::2e dev virt_wifi0: No such device
+netlink: device virt_wifi0 up master (null): No such device
+netlink: add addr 172.20.20.47 dev veth0_vlan: No such device
+netlink: add addr fe80::2f dev veth0_vlan: No such device
+netlink: device veth0_vlan up master (null): No such device
+netlink: add addr 172.20.20.48 dev veth1_vlan: No such device
+netlink: add addr fe80::30 dev veth1_vlan: No such device
+netlink: device veth1_vlan up master (null): No such device
+netlink: add addr 172.20.20.49 dev vlan0: No such device
+netlink: add addr fe80::31 dev vlan0: No such device
+netlink: device vlan0 up master (null): No such device
+netlink: add addr 172.20.20.50 dev vlan1: No such device
+netlink: add addr fe80::32 dev vlan1: No such device
+netlink: device vlan1 up master (null): No such device
+netlink: add addr 172.20.20.51 dev macvlan0: No such device
+netlink: add addr fe80::33 dev macvlan0: No such device
+netlink: device macvlan0 up master (null): No such device
+netlink: add addr 172.20.20.52 dev macvlan1: No such device
+netlink: add addr fe80::34 dev macvlan1: No such device
+netlink: device macvlan1 up master (null): No such device
+netlink: add addr 172.20.20.53 dev ipvlan0: No such device
+netlink: add addr fe80::35 dev ipvlan0: No such device
+netlink: device ipvlan0 up master (null): No such device
+netlink: add addr 172.20.20.54 dev ipvlan1: No such device
+netlink: add addr fe80::36 dev ipvlan1: No such device
+netlink: device ipvlan1 up master (null): No such device
+netlink: add addr 172.20.20.55 dev veth0_macvtap: No such device
+netlink: add addr fe80::37 dev veth0_macvtap: No such device
+netlink: device veth0_macvtap up master (null): No such device
+netlink: add addr 172.20.20.56 dev veth1_macvtap: No such device
+netlink: add addr fe80::38 dev veth1_macvtap: No such device
+netlink: device veth1_macvtap up master (null): No such device
+netlink: add addr 172.20.20.57 dev macvtap0: No such device
+netlink: add addr fe80::39 dev macvtap0: No such device
+netlink: device macvtap0 up master (null): No such device
+netlink: add addr 172.20.20.58 dev macsec0: No such device
+netlink: add addr fe80::3a dev macsec0: No such device
+netlink: device macsec0 up master (null): No such device
+netlink: add addr 172.20.20.59 dev veth0_to_batadv: No such device
+netlink: add addr fe80::3b dev veth0_to_batadv: No such device
+netlink: device veth0_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.60 dev veth1_to_batadv: No such device
+netlink: add addr fe80::3c dev veth1_to_batadv: No such device
+netlink: device veth1_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.61 dev batadv_slave_0: No such device
+netlink: add addr fe80::3d dev batadv_slave_0: No such device
+netlink: device batadv_slave_0 up master (null): No such device
+netlink: add addr 172.20.20.62 dev batadv_slave_1: No such device
+netlink: add addr fe80::3e dev batadv_slave_1: No such device
+netlink: device batadv_slave_1 up master (null): No such device
+netlink: add addr 172.20.20.63 dev geneve0: No such device
+netlink: add addr fe80::3f dev geneve0: No such device
+netlink: device geneve0 up master (null): No such device
+netlink: add addr 172.20.20.64 dev geneve1: No such device
+netlink: add addr fe80::40 dev geneve1: No such device
+netlink: device geneve1 up master (null): No such device
+netlink: add addr 172.20.20.65 dev wg0: No such device
+netlink: add addr fe80::41 dev wg0: No such device
+netlink: device wg0 up master (null): No such device
+netlink: add addr 172.20.20.66 dev wg1: No such device
+netlink: add addr fe80::42 dev wg1: No such device
+netlink: device wg1 up master (null): No such device
+netlink: add addr 172.20.20.67 dev wg2: No such device
+netlink: add addr fe80::43 dev wg2: No such device
+netlink: device wg2 up master (null): No such device
+iptable checkpoint filter/2: checkpoint entries=4 hooks=e size=632
+iptable checkpoint nat/2: checkpoint entries=5 hooks=1b size=784
+iptable checkpoint mangle/2: checkpoint entries=6 hooks=1f size=936
+iptable checkpoint filter/10: checkpoint entries=4 hooks=e size=856
+iptable checkpoint mangle/10: checkpoint entries=6 hooks=1f size=1272
+[3642ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 2
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3688ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3694ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3694ms] -> times(0x20000040)
+Rrooach executor_linux175 size = 10000
+#0 [3694ms] <- times=0x19992c2c errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] -> accept$inet6(0xffffffffffffffff, 0x0, 0x20000080)
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] <- accept$inet6=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] -> ioctl$sock_netdev_private(0xffffffffffffffff, 0x89f6, 0x200000c0)
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] <- ioctl$sock_netdev_private=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] -> getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, 0x200001c0, 0x200002c0)
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] <- getsockopt$inet_IP_XFRM_POLICY=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] -> ioctl$ifreq_SIOCGIFINDEX_wireguard(0xffffffffffffffff, 0x8933, 0x20000300)
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] <- ioctl$ifreq_SIOCGIFINDEX_wireguard=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] -> open$IOCTL_PRIVCMD_HYPERCALL25(0x20000340)
+Rrooach executor_linux175 size = 10000
+#0 [3695ms] <- open$IOCTL_PRIVCMD_HYPERCALL25=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> ioctl$sock_SIOCOUTQNSD(0x13, 0x894b, 0x20000380)
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] <- ioctl$sock_SIOCOUTQNSD=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> openat$hwrng(0xffffffffffffff9c, 0x200003c0, 0x80000, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] <- openat$hwrng=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> ioctl$SG_GET_RESERVED_SIZE(0x14, 0x2272, 0x20000400)
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] <- ioctl$SG_GET_RESERVED_SIZE=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> openat$hwrng(0xffffffffffffff9c, 0x20000440, 0x80000, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] <- openat$hwrng=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> ioctl$sock_SIOCGIFCONF(0x15, 0x8912, 0x200004c0)
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] <- ioctl$sock_SIOCGIFCONF=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3696ms] -> mq_open(0x20000500, 0x3ef550cf9d608ca6, 0x30, 0x20000540)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- mq_open=0xffffffffffffffff errno=13 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> flock(0xffffffffffffffff, 0x9)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- flock=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL36(0xffffffffffffffff, 0x305000, 0x20000580)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL36=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> fcntl$F_GET_FILE_RW_HINT(0x15, 0x40d, 0x200005c0)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- fcntl$F_GET_FILE_RW_HINT=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> open$IOCTL_PRIVCMD_HYPERCALL184211(0x20000600)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- open$IOCTL_PRIVCMD_HYPERCALL184211=0x16 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> ioctl$LOOP_SET_DIRECT_IO(0x16, 0x4c08, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- ioctl$LOOP_SET_DIRECT_IO=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> ioctl$TIOCGPTPEER(0x15, 0x5441, 0x380)
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] <- ioctl$TIOCGPTPEER=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3697ms] -> close$IOCTL_PRIVCMD_HYPERCALL18421_2(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- close$IOCTL_PRIVCMD_HYPERCALL18421_2=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, 0x20000640)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- seccomp$SECCOMP_GET_NOTIF_SIZES=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> ioctl$TIOCSLCKTRMIOS(0xffffffffffffffff, 0x5457, 0x20000680)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- ioctl$TIOCSLCKTRMIOS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> sendmsg$IPSET_CMD_DEL(0x13, 0x20000800, 0x40)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- sendmsg$IPSET_CMD_DEL=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, 0x20000840)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- seccomp$SECCOMP_GET_ACTION_AVAIL=0xffffffffffffffff errno=95 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> open$IOCTL_PRIVCMD_HYPERCALL173501111(0x20000880)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- open$IOCTL_PRIVCMD_HYPERCALL173501111=0x17 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] -> read$eventfd(0x17, 0x200008c0, 0x8)
+Rrooach executor_linux175 size = 10000
+#0 [3698ms] <- read$eventfd=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] -> clock_getres(0x5, 0x20000900)
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] <- clock_getres=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] -> openat$vcsu(0xffffffffffffff9c, 0x20000940, 0x10042, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] <- openat$vcsu=0xffffffffffffffff errno=20 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL117410(0xffffffffffffffff, 0x305000, 0x20000980)
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL117410=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x20000a00)
+Rrooach executor_linux175 size = 10000
+#0 [3699ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+Rrooach executor_linux175 size = 10000
+enabling collider
+#0 [3699ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3707ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+#0 [3708ms] -> times(0x20000040)
+Rrooach executor_linux175 size = 10000
+#0 [3708ms] <- times=0x19992c2d errno=0 cover=10000 
+#1 [3722ms] -> accept$inet6(0xffffffffffffffff, 0x0, 0x20000080)
+Rrooach executor_linux175 size = 10000
+#1 [3723ms] <- accept$inet6=0xffffffffffffffff errno=9 cover=10000 
+#0 [3723ms] -> ioctl$sock_netdev_private(0xffffffffffffffff, 0x89f6, 0x200000c0)
+Rrooach executor_linux175 size = 10000
+#0 [3723ms] <- ioctl$sock_netdev_private=0xffffffffffffffff errno=9 cover=10000 
+#1 [3723ms] -> getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, 0x200001c0, 0x200002c0)
+Rrooach executor_linux175 size = 10000
+#1 [3723ms] <- getsockopt$inet_IP_XFRM_POLICY=0xffffffffffffffff errno=9 cover=10000 
+#0 [3723ms] -> ioctl$ifreq_SIOCGIFINDEX_wireguard(0xffffffffffffffff, 0x8933, 0x20000300)
+Rrooach executor_linux175 size = 10000
+#0 [3723ms] <- ioctl$ifreq_SIOCGIFINDEX_wireguard=0xffffffffffffffff errno=9 cover=10000 
+#1 [3724ms] -> open$IOCTL_PRIVCMD_HYPERCALL25(0x20000340)
+Rrooach executor_linux175 size = 10000
+#1 [3724ms] <- open$IOCTL_PRIVCMD_HYPERCALL25=0x3 errno=0 cover=10000 
+#0 [3724ms] -> ioctl$sock_SIOCOUTQNSD(0x3, 0x894b, 0x20000380)
+Rrooach executor_linux175 size = 10000
+#0 [3724ms] <- ioctl$sock_SIOCOUTQNSD=0xffffffffffffffff errno=25 cover=10000 
+#1 [3724ms] -> openat$hwrng(0xffffffffffffff9c, 0x200003c0, 0x80000, 0x0)
+Rrooach executor_linux175 size = 10000
+#1 [3724ms] <- openat$hwrng=0x4 errno=0 cover=10000 
+#0 [3724ms] -> ioctl$SG_GET_RESERVED_SIZE(0x4, 0x2272, 0x20000400)
+Rrooach executor_linux175 size = 10000
+#0 [3725ms] <- ioctl$SG_GET_RESERVED_SIZE=0xffffffffffffffff errno=25 cover=10000 
+#1 [3725ms] -> openat$hwrng(0xffffffffffffff9c, 0x20000440, 0x80000, 0x0)
+Rrooach executor_linux175 size = 10000
+#1 [3725ms] <- openat$hwrng=0x5 errno=0 cover=10000 
+#0 [3725ms] -> ioctl$sock_SIOCGIFCONF(0x5, 0x8912, 0x200004c0)
+Rrooach executor_linux175 size = 10000
+#0 [3725ms] <- ioctl$sock_SIOCGIFCONF=0xffffffffffffffff errno=25 cover=10000 
+#1 [3725ms] -> mq_open(0x20000500, 0x3ef550cf9d608ca6, 0x30, 0x20000540)
+Rrooach executor_linux175 size = 10000
+#1 [3725ms] <- mq_open=0xffffffffffffffff errno=13 cover=10000 
+#0 [3726ms] -> flock(0xffffffffffffffff, 0x9)
+Rrooach executor_linux175 size = 10000
+#0 [3726ms] <- flock=0xffffffffffffffff errno=9 cover=10000 
+#1 [3726ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL36(0xffffffffffffffff, 0x305000, 0x20000580)
+Rrooach executor_linux175 size = 10000
+#1 [3726ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL36=0xffffffffffffffff errno=9 cover=10000 
+#0 [3726ms] -> fcntl$F_GET_FILE_RW_HINT(0x5, 0x40d, 0x200005c0)
+Rrooach executor_linux175 size = 10000
+#0 [3726ms] <- fcntl$F_GET_FILE_RW_HINT=0x0 errno=0 cover=10000 
+#1 [3726ms] -> open$IOCTL_PRIVCMD_HYPERCALL184211(0x20000600)
+Rrooach executor_linux175 size = 10000
+#1 [3726ms] <- open$IOCTL_PRIVCMD_HYPERCALL184211=0x6 errno=0 cover=10000 
+#0 [3727ms] -> ioctl$LOOP_SET_DIRECT_IO(0x6, 0x4c08, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3727ms] <- ioctl$LOOP_SET_DIRECT_IO=0xffffffffffffffff errno=25 cover=10000 
+#1 [3727ms] -> ioctl$TIOCGPTPEER(0x5, 0x5441, 0x380)
+Rrooach executor_linux175 size = 10000
+#1 [3727ms] <- ioctl$TIOCGPTPEER=0xffffffffffffffff errno=25 cover=10000 
+#0 [3727ms] -> close$IOCTL_PRIVCMD_HYPERCALL18421_2(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3727ms] <- close$IOCTL_PRIVCMD_HYPERCALL18421_2=0xffffffffffffffff errno=9 cover=10000 
+#1 [3727ms] -> seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, 0x20000640)
+Rrooach executor_linux175 size = 10000
+#1 [3728ms] <- seccomp$SECCOMP_GET_NOTIF_SIZES=0x0 errno=0 cover=10000 
+#0 [3728ms] -> ioctl$TIOCSLCKTRMIOS(0xffffffffffffffff, 0x5457, 0x20000680)
+Rrooach executor_linux175 size = 10000
+#0 [3728ms] <- ioctl$TIOCSLCKTRMIOS=0xffffffffffffffff errno=9 cover=10000 
+#1 [3728ms] -> sendmsg$IPSET_CMD_DEL(0x3, 0x20000800, 0x40)
+Rrooach executor_linux175 size = 10000
+#1 [3728ms] <- sendmsg$IPSET_CMD_DEL=0xffffffffffffffff errno=88 cover=10000 
+#1 [3728ms] -> open$IOCTL_PRIVCMD_HYPERCALL173501111(0x20000880)
+#0 [3728ms] -> seccomp$SECCOMP_GET_ACTION_AVAIL(Rrooach executor_linux175 size = 10000
+#1 [3728ms] <- open$IOCTL_PRIVCMD_HYPERCALL173501111=0x7 errno=0 cover=10000 
+0x2, 0x0, 0x20000840)
+Rrooach executor_linux175 size = 10000
+#0 [3728ms] <- seccomp$SECCOMP_GET_ACTION_AVAIL=0xffffffffffffffff errno=95 cover=10000 
+#0 [3728ms] -> read$eventfd(0x7, 0x200008c0, 0x8)
+Rrooach executor_linux175 size = 10000
+#0 [3728ms] <- read$eventfd=0xffffffffffffffff errno=22 cover=10000 
+#1 [3728ms] -> clock_getres(0x5, 0x20000900)
+Rrooach executor_linux175 size = 10000
+#1 [3728ms] <- clock_getres=0x0 errno=0 cover=10000 
+#0 [3729ms] -> openat$vcsu(0xffffffffffffff9c, 0x20000940, 0x10042, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3729ms] <- openat$vcsu=0xffffffffffffffff errno=20 cover=10000 
+#1 [3729ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL117410(0xffffffffffffffff, 0x305000, 0x20000980)
+Rrooach executor_linux175 size = 10000
+#1 [3729ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL117410=0xffffffffffffffff errno=9 cover=10000 
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 getting cover
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 get report
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 setting fault
+2020/05/11 04:43:01 #0: triaging type=0
+2020/05/11 04:43:01 triaging input for call #18 ioctl$TIOCGPTPEER (new signal=1)
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[3767ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 13
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3811ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3818ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[3821ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 21
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3867ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3875ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[3878ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 29
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3922ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3929ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 getting cover
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 get report
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 setting fault
+2020/05/11 04:43:01 #0: triaging type=0
+2020/05/11 04:43:01 triaging input for call #17 ioctl$LOOP_SET_DIRECT_IO (new signal=1)
+[3963ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 37
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4006ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4013ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[4015ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 45
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4059ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4065ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[4069ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 53
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4111ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4118ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 getting cover
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 get report
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 --------------------
+2020/05/11 04:43:01 setting fault
+2020/05/11 04:43:01 #0: triaging type=0
+2020/05/11 04:43:01 triaging input for call #15 fcntl$F_GET_FILE_RW_HINT (new signal=2)
+[4159ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 61
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4201ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4208ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[4211ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 69
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4255ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4261ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:01 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:01 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:01 result hanged=false: 
+[4264ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 77
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4305ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4312ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 getting cover
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 get report
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 setting fault
+2020/05/11 04:43:02 #0: triaging type=0
+2020/05/11 04:43:02 triaging input for call #14 ioctl$IOCTL_PRIVCMD_HYPERCALL36 (new signal=1)
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4344ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 85
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4389ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4396ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4398ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+spawned worker pid 93
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4442ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4449ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4452ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 101
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4494ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4502ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 getting cover
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 get report
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 setting fault
+2020/05/11 04:43:02 #0: triaging type=0
+2020/05/11 04:43:02 triaging input for call #3 ioctl$sock_netdev_private (new signal=1)
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4540ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 109
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4584ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4592ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+[4594ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 117
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4639ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4647ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4650ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 125
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4693ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4700ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 getting cover
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 get report
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 setting fault
+2020/05/11 04:43:02 #0: triaging type=0
+2020/05/11 04:43:02 triaging input for call #1 times (new signal=1)
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4733ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 133
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4777ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4784ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4786ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 141
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4829ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4836ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+[4839ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 149
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4884ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4891ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 getting cover
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 get report
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 setting fault
+2020/05/11 04:43:02 #0: triaging type=0
+2020/05/11 04:43:02 triaging input for call #0 syz_genetlink_get_family_id$gtp (new signal=1)
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[4926ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 157
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4971ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [4980ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+[4984ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 165
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5027ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [5034ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+04:43:02 executing program 0:
+syz_genetlink_get_family_id$gtp(&(0x7f0000000000)='gtp\x00')
+times(&(0x7f0000000040))
+r0 = accept$inet6(0xffffffffffffffff, 0x0, &(0x7f0000000080))
+ioctl$sock_netdev_private(r0, 0x89f6, &(0x7f00000000c0)="095fb71743b39da06c39da2de9682a0ef1fb900e7c95bab6480b4cab1fe7489ad115e280a32132f618e3c14339e574f6203e65d726fc4c9d88a6059c51d16816fa4288622178a87842420fba62ce506f612665f35dbe36644273105b94b08ccc5ace473814e78022ed1e91650450252d9adf0368dd4b8933abb39ef7302a58b73f0359722e1c325badc3da4773323afba5559b449fb49d37d2716cb8fc702b22263f377ca2b7d3d19d158e5b72b06c6f4f627430d762ec115f0ea261f893090c52b8b9e654")
+getsockopt$inet_IP_XFRM_POLICY(0xffffffffffffffff, 0x0, 0x11, &(0x7f00000001c0)={{{@in=@broadcast, @in6=@private0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r1=>0x0}}, {{@in6=@mcast1}, 0x0, @in=@initdev}}, &(0x7f00000002c0)=0xe8)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r0, 0x8933, &(0x7f0000000300)={'wg1\x00', r1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL25(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$sock_SIOCOUTQNSD(r2, 0x894b, &(0x7f0000000380))
+r3 = openat$hwrng(0xffffffffffffff9c, &(0x7f00000003c0)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$SG_GET_RESERVED_SIZE(r3, 0x2272, &(0x7f0000000400))
+r4 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000000440)='/dev/hwrng\x00', 0x80000, 0x0)
+ioctl$sock_SIOCGIFCONF(r4, 0x8912, &(0x7f00000004c0)=@req={0x28, &(0x7f0000000480)={'veth1_macvtap\x00', @ifru_hwaddr=@remote}})
+r5 = mq_open(&(0x7f0000000500)='locpuset#/\x00', 0x3ef550cf9d608ca6, 0x30, &(0x7f0000000540)={0x4, 0xa8, 0x4, 0x7})
+flock(r5, 0x9)
+ioctl$IOCTL_PRIVCMD_HYPERCALL36(r0, 0x305000, &(0x7f0000000580)={0x2b, 0x100, 0x9, 0x8, 0x7fd4, 0x6})
+fcntl$F_GET_FILE_RW_HINT(r4, 0x40d, &(0x7f00000005c0))
+r6 = open$IOCTL_PRIVCMD_HYPERCALL184211(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$LOOP_SET_DIRECT_IO(r6, 0x4c08, 0x0)
+r7 = ioctl$TIOCGPTPEER(r4, 0x5441, 0x380)
+close$IOCTL_PRIVCMD_HYPERCALL18421_2(r7)
+seccomp$SECCOMP_GET_NOTIF_SIZES(0x3, 0x0, &(0x7f0000000640))
+ioctl$TIOCSLCKTRMIOS(r7, 0x5457, &(0x7f0000000680))
+sendmsg$IPSET_CMD_DEL(r2, &(0x7f0000000800)={&(0x7f00000006c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f00000007c0)={&(0x7f0000000700)={0x88, 0xa, 0x6, 0x201, 0x0, 0x0, {0x7, 0x0, 0x4}, [@IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x81}, @IPSET_ATTR_PROTOCOL={0x5}, @IPSET_ATTR_SETNAME={0x9, 0x2, 'syz0\x00'}, @IPSET_ATTR_LINENO={0x8, 0x9, 0x1, 0x0, 0x1}, @IPSET_ATTR_ADT={0x50, 0x8, 0x0, 0x1, [{0x18, 0x7, 0x0, 0x1, @IPSET_ATTR_IFACE={0x14, 0x17, 'veth0_macvtap\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_MARKMASK={0x8, 0xb, 0x1, 0x0, 0x1}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_CADT_FLAGS={0x8, 0x8, 0x1, 0x0, 0x41}}, {0x10, 0x7, 0x0, 0x1, @IPSET_ATTR_NAME={0x9, 0x12, 'syz0\x00'}}, {0xc, 0x7, 0x0, 0x1, @IPSET_ATTR_PORT_TO={0x6, 0x5, 0x1, 0x0, 0x4e24}}]}]}, 0x88}, 0x1, 0x0, 0x0, 0x80}, 0x40)
+seccomp$SECCOMP_GET_ACTION_AVAIL(0x2, 0x0, &(0x7f0000000840)=0x10000)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000880)='/proc/xen/privcmd\x00')
+read$eventfd(r8, &(0x7f00000008c0), 0x8)
+clock_getres(0x5, &(0x7f0000000900))
+r9 = openat$vcsu(0xffffffffffffff9c, &(0x7f0000000940)='/dev/vcsu\x00', 0x10042, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117410(r9, 0x305000, &(0x7f0000000980)={0xe, 0x0, 0x7fffffff, 0x4, 0x5cb, 0x1})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000a00)={0x28, 0x4, 0x10000, 0x2, 0x0, 0x8})
+
+[5037ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 173
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5081ms] -> syz_genetlink_get_family_id$gtp(0x20000000)
+syz_genetlink_get_family_id(gtp)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [5088ms] <- syz_genetlink_get_family_id$gtp=0xffffffffffffffff errno=22 cover=10000 
+SIGSEGV on 0x7f0078ad7878, exiting
+2020/05/11 04:43:02 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:02 result hanged=false: 
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 getting cover
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 get report
+04:43:02 executing program 0:
+r0 = add_key$user(&(0x7f0000000000)='user\x00', &(0x7f0000000040)={'syz', 0x3}, &(0x7f0000000080)="ec12bd475a40fd5487205088e9cccd0edb8222b4a5ec125789a9ec8376b248d484cf48ab49c0800a53267de3229639", 0x2f, 0xfffffffffffffffe)
+keyctl$invalidate(0x15, r0)
+r1 = openat$procfs(0xffffffffffffff9c, &(0x7f00000000c0)='/proc/asound/seq/timer\x00', 0x0, 0x0)
+ioctl$KDENABIO(r1, 0x4b36)
+munlock(&(0x7f0000ffb000/0x4000)=nil, 0x4000)
+r2 = open$IOCTL_PRIVCMD_HYPERCALL18421_4(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+symlinkat(&(0x7f0000000100)='./file0\x00', r2, &(0x7f0000000180)='./file0\x00')
+uname(&(0x7f00000001c0)=""/4096)
+shmget$private(0x0, 0x3000, 0x2, &(0x7f0000ffb000/0x3000)=nil)
+r3 = open$my_hypercall18425(&(0x7f00000011c0)='/proc/xen/privcmd\x00')
+ioctl$BLKROGET(r2, 0x125e, &(0x7f0000001200))
+pipe2(&(0x7f0000001240)={<r4=>0xffffffffffffffff}, 0x80000)
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001280)={{{@in6=@private2, @in, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, <r5=>0x0}}, {{@in=@empty}, 0x0, @in=@multicast1}}, &(0x7f0000001380)=0xe8)
+setuid(r5)
+ioctl$SG_GET_ACCESS_COUNT(0xffffffffffffffff, 0x2289, &(0x7f00000013c0))
+setsockopt$EBT_SO_SET_ENTRIES(r1, 0x0, 0x80, &(0x7f00000018c0)=@nat={'nat\x00', 0x19, 0x4, 0x470, [0x20001440, 0x0, 0x0, 0x20001586, 0x200015b6], 0x0, &(0x7f0000001400), &(0x7f0000001440)=[{0x0, '\x00', 0x0, 0xfffffffffffffffc, 0x1, [{0x11, 0x0, 0x8864, 'tunl0\x00', 'vlan0\x00', 'netpci0\x00', 'veth0_to_batadv\x00', @random="aba9c8104099", [0xff, 0xff, 0x0, 0x0, 0x0, 0xff], @multicast, [0x80, 0xff, 0xff, 0xff, 0xff], 0xde, 0xde, 0x116, [@statistic={{'statistic\x00', 0x0, 0x18}, {{0x0, 0x1, 0x3, 0x4, 0x3, {0x10001}}}}, @vlan={{'vlan\x00', 0x0, 0x8}, {{0x0, 0x1, 0xc4145087a56d211e, 0x4}}}], [], @arpreply={'arpreply\x00', 0x10, {{@broadcast, 0xfffffffffffffffe}}}}]}, {0x0, '\x00', 0x1, 0xfffffffffffffffe}, {0x0, '\x00', 0x1, 0xffffffffffffffff, 0x2, [{0x5, 0x8, 0x88f5, 'veth1_to_team\x00', 'vcan0\x00', 'veth0_to_bond\x00', 'netdevsim0\x00', @empty, [], @broadcast, [0x0, 0xff, 0xff], 0x6e, 0xa6, 0xde, [], [@arpreply={'arpreply\x00', 0x10, {{@dev={[], 0x39}, 0xffffffffffffffff}}}], @snat={'snat\x00', 0x10, {{@dev={[], 0x3d}, 0x10}}}}, {0x5, 0x2, 0x22f0, 'veth0_to_bridge\x00', 'bond_slave_0\x00', 'team_slave_0\x00', 'bond0\x00', @local, [0x0, 0x0, 0xff, 0x101, 0x0, 0xff], @multicast, [], 0x6e, 0x6e, 0xa6, [], [], @snat={'snat\x00', 0x10, {{@broadcast, 0x10}}}}]}, {0x0, '\x00', 0x3, 0xfffffffffffffffe, 0x1, [{0x18, 0x24, 0x6003, 'wg1\x00', 'wg1\x00', 'vxcan1\x00', 'team_slave_1\x00', @broadcast, [0x0, 0x0, 0x0, 0xff, 0xff, 0xff], @empty, [0x0, 0xff, 0x78cef6874bad0ad2, 0x0, 0xff, 0xff], 0xde, 0xde, 0x116, [@rateest={{'rateest\x00', 0x0, 0x48}, {{'sit0\x00', 'veth1_macvtap\x00', 0x20, 0x3, 0x81, 0x800, 0x3, 0xff, {0x9}, {0x4}}}}], [], @snat={'snat\x00', 0x10, {{@dev={[], 0x24}, 0xfffffffffffffffc}}}}]}]}, 0x4e8)
+sendmsg$IPCTNL_MSG_CT_GET_STATS(r2, &(0x7f0000001a00)={&(0x7f0000001940)={0x10, 0x0, 0x0, 0x8000}, 0xc, &(0x7f00000019c0)={&(0x7f0000001980)={0x14, 0x5, 0x1, 0x0, 0x0, 0x0, {0x3, 0x0, 0x3}, ["", ""]}, 0x14}, 0x1, 0x0, 0x0, 0x40}, 0x8000)
+r6 = openat(0xffffffffffffffff, &(0x7f0000001a40)='./file0\x00', 0x80082, 0x30)
+setsockopt$inet_tcp_TCP_REPAIR_OPTIONS(r6, 0x6, 0x16, &(0x7f0000001a80)=[@mss={0x2, 0x5}, @timestamp, @sack_perm, @mss={0x2, 0xfffffff8}, @window={0x3, 0x5, 0xc2}, @window={0x3, 0x5, 0x2}, @window={0x3, 0xfffb, 0x6}], 0x7)
+ioctl$PIO_FONTRESET(r3, 0x4b6d, 0x0)
+ioctl$EVIOCGSW(r2, 0x8040451b, &(0x7f0000001ac0)=""/64)
+ioctl$GIO_SCRNMAP(r4, 0x4b40, &(0x7f0000001b00)=""/130)
+openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000001bc0)='/dev/vga_arbiter\x00', 0x200000, 0x0)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000001c00)='/proc/xen/privcmd\x00')
+r8 = syz_genetlink_get_family_id$fou(&(0x7f0000001c80)='fou\x00')
+sendmsg$FOU_CMD_GET(r7, &(0x7f0000001d80)={&(0x7f0000001c40)={0x10, 0x0, 0x0, 0x400}, 0xc, &(0x7f0000001d40)={&(0x7f0000001cc0)={0x44, r8, 0x10, 0x70bd2c, 0x25dfdbfc, {}, [@FOU_ATTR_TYPE={0x5, 0x4, 0x3}, @FOU_ATTR_TYPE={0x5, 0x4, 0x3}, @FOU_ATTR_AF={0x5, 0x2, 0xa}, @FOU_ATTR_PORT={0x6, 0x1, 0x4e21}, @FOU_ATTR_PORT={0x6, 0x1, 0x4e20}, @FOU_ATTR_TYPE={0x5, 0x4, 0x3}]}, 0x44}, 0x1, 0x0, 0x0, 0x20000000}, 0x1)
+setxattr$security_capability(&(0x7f0000001dc0)='./file0\x00', &(0x7f0000001e00)='security.capability\x00', &(0x7f0000001e40)=@v2={0x2000000, [{0x10001, 0x4}, {0x3, 0x163}]}, 0x14, 0x0)
+r9 = open$IOCTL_PRIVCMD_HYPERCALL_FINJ(&(0x7f0000001e80)='/proc/xen/privcmd\x00')
+ioctl$my_hypercall_get_site(r9, 0x305000, &(0x7f0000001ec0)={0x2c, 0xfffffffffffffff9, 0x6, 0x1, 0x7, 0x4})
+ioctl$ifreq_SIOCGIFINDEX_wireguard(0xffffffffffffffff, 0x8933, &(0x7f0000002100)={'wg2\x00'})
+
+2020/05/11 04:43:02 --------------------
+2020/05/11 04:43:02 setting fault
+2020/05/11 04:43:02 #0: generated
+[5127ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 181
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5170ms] -> add_key$user(0x20000000, 0x20000040, 0x20000080, 0x2f, 0xfffffffffffffffe)
+Rrooach executor_linux175 size = 10000
+#0 [5170ms] <- add_key$user=0x2a5d563c errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] -> keyctl$invalidate(0x15, 0x2a5d563c)
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] <- keyctl$invalidate=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] -> openat$procfs(0xffffffffffffff9c, 0x200000c0, 0x0, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] <- openat$procfs=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] -> ioctl$KDENABIO(0x13, 0x4b36)
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] <- ioctl$KDENABIO=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] -> munlock(0x20ffb000, 0x4000)
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] <- munlock=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] -> open$IOCTL_PRIVCMD_HYPERCALL18421_4(0x20000140)
+Rrooach executor_linux175 size = 10000
+#0 [5171ms] <- open$IOCTL_PRIVCMD_HYPERCALL18421_4=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> symlinkat(0x20000100, 0x14, 0x20000180)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- symlinkat=0xffffffffffffffff errno=20 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> uname(0x200001c0)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- uname=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> shmget$private(0x0, 0x3000, 0x2, 0x20ffb000)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- shmget$private=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> open$my_hypercall18425(0x200011c0)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- open$my_hypercall18425=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> ioctl$BLKROGET(0x14, 0x125e, 0x20001200)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- ioctl$BLKROGET=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] -> pipe2(0x20001240, 0x80000)
+Rrooach executor_linux175 size = 10000
+#0 [5172ms] <- pipe2=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, 0x20001280, 0x20001380)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- getsockopt$inet_IP_IPSEC_POLICY=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> setuid(0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- setuid=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> ioctl$SG_GET_ACCESS_COUNT(0xffffffffffffffff, 0x2289, 0x200013c0)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- ioctl$SG_GET_ACCESS_COUNT=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> setsockopt$EBT_SO_SET_ENTRIES(0x13, 0x0, 0x80, 0x200018c0, 0x4e8)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- setsockopt$EBT_SO_SET_ENTRIES=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> sendmsg$IPCTNL_MSG_CT_GET_STATS(0x14, 0x20001a00, 0x8000)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- sendmsg$IPCTNL_MSG_CT_GET_STATS=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] -> openat(0xffffffffffffffff, 0x20001a40, 0x80082, 0x30)
+Rrooach executor_linux175 size = 10000
+#0 [5173ms] <- openat=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> setsockopt$inet_tcp_TCP_REPAIR_OPTIONS(0xffffffffffffffff, 0x6, 0x16, 0x20001a80, 0x7)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- setsockopt$inet_tcp_TCP_REPAIR_OPTIONS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> ioctl$PIO_FONTRESET(0x15, 0x4b6d, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- ioctl$PIO_FONTRESET=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> ioctl$EVIOCGSW(0x14, 0x8040451b, 0x20001ac0)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- ioctl$EVIOCGSW=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> ioctl$GIO_SCRNMAP(0x16, 0x4b40, 0x20001b00)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- ioctl$GIO_SCRNMAP=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> openat$vga_arbiter(0xffffffffffffff9c, 0x20001bc0, 0x200000, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- openat$vga_arbiter=0x18 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> open$IOCTL_PRIVCMD_HYPERCALL11740_20(0x20001c00)
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] <- open$IOCTL_PRIVCMD_HYPERCALL11740_20=0x19 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5174ms] -> syz_genetlink_get_family_id$fou(0x20001c80)
+syz_genetlink_get_family_id(fou)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [5182ms] <- syz_genetlink_get_family_id$fou=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5182ms] -> sendmsg$FOU_CMD_GET(0x19, 0x20001d80, 0x1)
+Rrooach executor_linux175 size = 10000
+#0 [5182ms] <- sendmsg$FOU_CMD_GET=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5183ms] -> setxattr$security_capability(0x20001dc0, 0x20001e00, 0x20001e40, 0x14, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5183ms] <- setxattr$security_capability=0xffffffffffffffff errno=2 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5183ms] -> open$IOCTL_PRIVCMD_HYPERCALL_FINJ(0x20001e80)
+Rrooach executor_linux175 size = 10000
+#0 [5183ms] <- open$IOCTL_PRIVCMD_HYPERCALL_FINJ=0x1a errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5183ms] -> ioctl$my_hypercall_get_site(0x1a, 0x305000, 0x20001ec0)
+debug1: channel 0: free: client-session, nchannels 1
+debug1: fd 0 clearing O_NONBLOCK
+debug1: fd 1 clearing O_NONBLOCK
+Connection to localhost closed by remote host.
+Transferred: sent 2840, received 145556 bytes, in 12.5 seconds
+Bytes per second: sent 227.7, received 11670.3
+debug1: Exit status -1

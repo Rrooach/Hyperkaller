@@ -1,0 +1,437 @@
+OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017
+debug1: Reading configuration data /dev/null
+debug1: Connecting to localhost [127.0.0.1] port 47762.
+debug1: fd 3 clearing O_NONBLOCK
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/p2/key type 0
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/p2/key-cert type -1
+debug1: Local version string SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+debug1: Remote protocol version 2.0, remote software version OpenSSH_7.9p1 Debian-10+deb10u2
+debug1: match: OpenSSH_7.9p1 Debian-10+deb10u2 pat OpenSSH* compat 0x04000000
+debug1: Authenticating to localhost:47762 as 'root'
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: algorithm: curve25519-sha256
+debug1: kex: host key algorithm: ecdsa-sha2-nistp256
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ecdsa-sha2-nistp256 SHA256:4/tWNp5otCN3Z8Xa0hYVLJjk+v55FwwYCFcUvt73Uug
+debug1: checking without port identifier
+Warning: Permanently added '[localhost]:47762' (ECDSA) to the list of known hosts.
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering public key: RSA SHA256:CYnBEFcxsXRB+Lqq3RxKWrmSrcNoJTi0nhG3g2GVQxY /root/p2/key
+debug1: Server accepts key: pkalg rsa-sha2-512 blen 279
+debug1: Authentication succeeded (publickey).
+Authenticated to localhost ([127.0.0.1]:47762).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: pledge: network
+debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply 0
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Sending command: cd / && /syz-fuzzer -executor=/syz-executor -name=vm-0 -arch=amd64 -manager=10.0.2.10:43265 -sandbox=none -procs=1 -cover=true -debug=true -test=false -vv=100
+2020/05/11 04:22:23 fuzzer started
+2020/05/11 04:22:24 dialing manager at 10.0.2.10:43265
+2020/05/11 04:22:24 syscalls: 1811
+2020/05/11 04:22:24 code coverage: enabled
+2020/05/11 04:22:24 comparison tracing: enabled
+2020/05/11 04:22:24 extra coverage: enabled
+2020/05/11 04:22:24 setuid sandbox: enabled
+2020/05/11 04:22:24 namespace sandbox: /proc/self/ns/user does not exist
+2020/05/11 04:22:24 Android sandbox: enabled
+2020/05/11 04:22:24 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2020/05/11 04:22:24 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2020/05/11 04:22:24 net packet injection: /dev/net/tun does not exist
+2020/05/11 04:22:24 net device setup: enabled
+2020/05/11 04:22:24 concurrency sanitizer: /sys/kernel/debug/kcsan does not exist
+2020/05/11 04:22:24 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/11 04:22:24 USB emulation: /dev/raw-gadget does not exist
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=229
+2020/05/11 04:22:24 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:22:25 --------------------
+2020/05/11 04:22:25 getting cover
+2020/05/11 04:22:25 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:22:25 --------------------
+2020/05/11 04:22:25 setting fault
+2020/05/11 04:22:25 --------------------------
+2020/05/11 04:22:25 queue is empty
+2020/05/11 04:22:25 #0: generated
+04:22:25 executing program 0:
+r0 = openat$zero(0xffffffffffffff9c, &(0x7f0000000000)='/dev/zero\x00', 0x181003, 0x0)
+r1 = accept4$unix(0xffffffffffffffff, &(0x7f0000000040)=@abs, &(0x7f00000000c0)=0x6e, 0x800)
+ioctl$IOCTL_PRIVCMD_HYPERCALL17346_11(r1, 0x305000, &(0x7f0000000100)={0xa, 0x3, 0xc33, 0xfb, 0x2, 0x1})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL117410(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$TCSETSF(r2, 0x5404, &(0x7f0000000180)={0x5, 0x0, 0x5, 0x1, 0x8, "0e99673bfd68b00458fa115410c2632a182b89"})
+close$IOCTL_PRIVCMD_HYPERCALL173501(0xffffffffffffffff)
+sendmsg$IPSET_CMD_TYPE(0xffffffffffffffff, &(0x7f0000000280)={&(0x7f00000001c0)={0x10, 0x0, 0x0, 0x800000}, 0xc, &(0x7f0000000240)={&(0x7f0000000200)={0x1c, 0xd, 0x6, 0x101, 0x0, 0x0, {0xa, 0x0, 0x8}, [@IPSET_ATTR_PROTOCOL={0x5}]}, 0x1c}, 0x1, 0x0, 0x0, 0x4000}, 0x4)
+sendmmsg$sock(r1, &(0x7f0000003480)=[{{0x0, 0x0, &(0x7f0000000400)=[{&(0x7f00000002c0)="947dc0627a1938ecd144fdc1797159be7721febe7ea9bd52455a55afce3cd703fbcf94d1d380a96a8d515f6c333153bb391edcaf913c4a1b11f49277c60533dd3511057ac740cb0542cb7005cf25ce40d11cc55162a2ebc58b8f23f6b0cc4b4a82366979916fa66eb00625b7f87e675ab7be5b873887aca4d0ca75f04500172095357cc7323ce1a656896b71f50765808b15306e539fdad7a12399699965a0d443a99f6d78aff383b1c01260a24501eb65628d5b379a01ec50365e0eda1edfce134378f655b7ce855b11373727b85b1d6647cfbfd85832529fffaad4fee99143bca5a3", 0xe3}, {&(0x7f00000003c0)="59117a9032258350f7088f6dc8c3e7144d459bba3681d1e8ec3222aa895ac16ffd8c9ece7d", 0x25}], 0x2, &(0x7f0000000440)}}, {{&(0x7f0000000480)=@vsock={0x28, 0x0, 0xffffffff, @local}, 0x80, &(0x7f00000006c0)=[{&(0x7f0000000500)="af0c7ab134583b3842c03ba366a475a45c3413acb4f9bedb874d3768486b21415426c6683b57f04559b5c0858c47df9b7bf7caeed119c8b14a9cdd7b2f119bd773f40c0ff015f00f811e136e69678aae45b1270596ace527133a9c0130671525545b1df4a7e45ad5a792d466f232ba4917dcbe3cdfdf8d560629252d1a6a8cd07a115f3ab18f98e56beb29324fa09db2504f144f26516c", 0x97}, {&(0x7f00000005c0)="ff885c107bd530e18acfc08194cf3b8b87f526893cebbc468b5b350a041f22ebdc9619e8a24db23862f192230a146619384a497e9318e534513a4796c8429539438eb697d16d6b14d15e211f18441b3924ea9ad2afe255d2c30d4e02f896ceca82f4d1138d991aedc138e0ba9aea796a098791206727f0a590b3c0eb4f86f55784d3d9d2ab46b77eb9c405dd2ea0b8386ceb281ce90c4c121c3c860427d97ce79855034da95ab4b4e39b33ceda4123a45b559d2ed019813047526a46c4be4b58220f3dfe385e2eee", 0xc8}], 0x2, &(0x7f0000000700)=[@timestamping={{0x14, 0x1, 0x25, 0xcbda}}, @txtime={{0x18, 0x1, 0x3d, 0x1}}, @txtime={{0x18, 0x1, 0x3d, 0x9}}, @timestamping={{0x14, 0x1, 0x25, 0x1448}}, @txtime={{0x18, 0x1, 0x3d, 0xcb0e}}, @txtime={{0x18, 0x1, 0x3d, 0x3ff}}, @txtime={{0x18, 0x1, 0x3d, 0x1}}, @timestamping={{0x14, 0x1, 0x25, 0x4}}], 0xc0}}, {{&(0x7f00000007c0)=@un=@file={0x0, './file0\x00'}, 0x80, &(0x7f0000001a00)=[{&(0x7f0000000840)="b898b35cdc865a993671d9d053ac1c2aa3516f279dede1e5a17bfa27886b68ab4a57f5ed8d1004142c8da37a07ee7cf3e8ec0bc8d8b702fb59f76a879725a8f044f309086d01", 0x46}, {&(0x7f00000008c0)="2ef263fa07382d13c8049924581e1f85391f4f2ae7e83ba0d266f24c4060378b8f99d40badc62c34163f4c4ab70a43f210d3d7ec5f1440a196935a04c4547e3c5f0089a56a8e95b276ab7b499eba0a04a8682d84343a2ebb475b99f68ec2f10681efb52c2ee6ce0ec57f26fce17baba57e067f86fb88b3b2a29593429ad0ae15d1a06691ce3f42414e6ccd2807b287d97fb5d69b60fc515892297853d1b319d0012ff959509908e5b730e38075c700bae40667c525a012f3665fe04afc54713c731b9eaa94531e5cddec0e7ad12e3ff30b196ca5ba9e4fe4ed684ce5dacdc172f882234db586d2381bd1074cc8c193ac12f88fa3393d1c909b3d5bdd28de5367e82333871f82b96c1924eb923cc1a3294f6a7deaf02ec16afe854b257f8e2824a55c0a2bc001d1dded859f553ed28441a0f6b30d56f745c04dfb749d85fea10c34a60d1a7b15ac120f02a72b63e57496817a3aad9005604595cb7e3f57edbd039a7632af78054dbc5561495a2e6f7d8cf1fb59bfb3c0073635b625b7afa167fb2c735d045ad55b5ff859134c06a0aeddb58ad9d27cf75b2b4d9a7ee9658eb7aeb3fc9c6ef1634afbb247dd5bef0481f41225d455afedc7d8fe39602bd2df0dc4792f5f89d5639e4b52954efcfe534a8a55cc819480b56036033f8b85a9ba689b13e6f4dcaf3295fc66764b2ee5e21ca6cf73578d43fe668f278e37de38929618f5c5afc54fa2f536bebe3318a27e2a5ccbf6b7563e663a511f750072edd5f715031fbd2a061ad213da26233906652fa41ecde476946c4b28d2db13af5952ff11e51bfda18949e031cc16d42ba080589876bc3d32c36c59a01c186fa94ef865a389e47541e6be1929492fefd65d7773f623e9a01a98b4a5202348ae89bb66fa0c25c5070785e0f51d768200dcc1f39477ce0360bc189a77f1f2525ed8a185dd0edd3e30436012aad1d7c9e41da46f925f16e180d0a91f1f92574b3d6b1ee10a03e3c751023b7efc8d58253542a77e858bcbf8b65b11881540e0e5d7e9cdad681c2bbb5d50d3c2f6aea2d16893373093e850ea8155d8018b2726dfca1ce1feb21ed6c9cda7274ce31dbf0b0fada5384c7a1f5c8bd46561965c969f08306c13ba9e776aa04caa5dc3183e2eefd1a02dc8032e6fc478c856ffbf7c260bfe06c8d72727421a9afc66a567fad928dc70edff110a74be37dfa6da7b6e27f3fc0af3e741bca9445db47cd872c407abab6af122b40d07ce6570a82817af95546f65869b18532e15611b699193a6c29eec5b3fa89b02d8d25dfecba04219ea2085db63ffc91ddb1ddcd2c5ad87f49a7ec2bd161c5e8818ecc049c1583f9d55083b0a61732cd64991f8d5f6dc75f4a0a66cdb9b6dfcfe3d8705c243b431437ddce5e40e79b1ff29fc11316ce80e9af431de897b8a1da7048eda482eee444921bbcd21efdf47e4ec5872b923fc3d6e033aba2163f2c543aa1e7c95ee24e2561f36e28cb3fdc6aa7fe6603804ace8f2e49b0783b79e0f6af9fe21010a94c758c9b3998b09c8dce9234b73aa5d526636c854f1e0236ea79b7ecf5e9862f5cdf632b7606e0606f5d7b93a0dd9d5dc9939a240967a344fb337730083c4eecdf8e8c5799881620626d3cb31d58042bb033ed2ce5bd4942bb9e638a4a9ce6792646eb971f83f5b518db6007a5ba6dffc6c59ee15c00533fc76855b0ee0482b65c99f6343ccbb23b9a542fe59d27e62eaa26e8d2c65b27e589616776329ad7a16ffbda22961d2d5a892c105450de6b8602ab4435a9ed8788648b560e615aca85eda61f9ccd3646689685cd747efedf200c60d2d3e5f3db34ef62865bd0292d8b55489ac6f599b2c66d68d95ac5afb917b7d078c62de60123fc8be60daf8e94d458dcecacd69b4ebd3c9cbc84ad2e4f8b93798c05debc91ff218c66b7824753585784501e535f0934244706926f7aa7c80b4d805df5d98bb802552628ea06f7031723842d2acaa35d2c71dd8c0aae087070b26d7971ac5496534969743f92b8002382949d0d523acbc52fb00d2a11073ce8d3e9695e2e53f6d5b0274375902815a6b944dea20b3ed74b91fcab8c25d209e2ad04a0eaebeddd7c7ad1164ca7aa77a9a37c3fd91ec4d97abc42bd87f933f0dbcc15c8f85a07b71ab6b946244d887fa7a14d4c93502d841a324d33cb8da592f5274dfbb8ae981c51280499891b045319e1b156849c1b0e0243fba5e92f86f4da9f42f184af408286513149b6f9dafc3bffbe47146ecdac43ff2bb720b65d15ce08100a957e53e097acd59a39200d33c0258538e7edaa867d7051fde31477273f47c7fbb0699e25886ee8fe6bbe5cf5ed7d40fe76c1196812aa438c2c6a41c582457d449566448443dc11bf9c1b5754f5fd5da7022238e264f57e20bee577ee638007d3bb1f8925358d1cb5e6a040640c4bff6f704e8eb3444143c82112ede1a940ed4e3655403a0ab2d204d7cb12b1886ef4ae39010c404ab92dee7e40c36aab86c061ed22618077de369d5a7e725a37c763354cfe0f20827abe6f00923d5f454682a94ce69ff4ec7ff32b485e44022cfb6b8ac76ada3270811da1b17f49be7a02c487b1bc81a47f69ca3e30b0d0f6e0b4c1d90eb209d9be96b58228127fed9770355834abf722279a0d8d01eb4c3acbdd94dd30dbe6ea665521549918501994a2f97b3cb32299e903cc221710afdc6fca0ecd95733ffb9e51b9beae14d614c666337ed477e505f408b7f30ac14e9a927ee243dfd42371110060beedeb96eace72032c63a4216a6edbbd0068024ddf72b39e5b32b443ad6c4c1f7c209e685bb19ca9e5490c0691186a6a3dcf281605152d6e1818d9a27cabe84edca2d04b9373e5e8664a9d976f99b42d6d812640e6ed3023ddb427ee36a027db60be51ab5b2e2130c15390e4d4d0a9ce23ff28b7d4188a1534a47bcddb86e91b8f511a5836bf31ac5666a54856ad41975a496bf6e351f6329da68685fc60b227522774a1acc3067dba231669148077ece9dfb082278ee4bcc8b85220116464cdc91ab77e316209d95d7bc8f838126afeba7f9d7b7a0b56098e1757c134ede4a9a541ae058a6ba2bb936ce5f5b65ccfab60b87901020474bd57dda21439051fbfe8b957d70c92a27987c223c4bb2df6aa99defb1f670053baeb1a1e3a9edab0d99024ef297d173abf5ec4c0d9dc0c554a7b2a8d8455c8f29b10b65264194b5bf696a800ed984a8272037e5d6df658bda7daf7fa253180c19cfa9883700c6517d4ec530914b476f513deed4d4d23b3bcedc200feb5b7a72d90a10fe25439262471ff36ed1a5124f5c85b89f4b5c89e58ede35a63cbd095a3efe55772f5930fdb2005ab0cc6927a22582fc018070dcaa75f71c099dee974263bcab83236fb9f3ed6ed7c0d0fc77e118df9af48471c91579006175ec9ab3ccd94a0b8560b68b9200ca029b95bf57ccfddbb3a98fc30aea812ea562294e64f2d8bca5576bfb45d0251c3733856a87249dce1f3d4c43bc3029cc1c3f592a2ea378faa53a91e2b105f4b33a23f04a41a09def7ae4ca813a296e2f0b0c4bb8947260844c1f4cc782dc613e88ff0925abc0c717f889b685822035ef167e6ab70173cd641e791de7ef6b97c85c69ee4f3b393fdf09ec9edeee812284cee90d887680550469330eab97fc3291e50794a67545112d9ad06736ca3805231174cf22f8e931dd1353c7151b0dd3590c395f73fc68e1a2a72fee29f473d48b13bebf3b3d2ae000c57ae4eb725a6080dc37bf4fd0aa4e79f6bad0707a55d62d60623e12841934632757d23de05bcd6e1107f9578ecd923fb5600aca8aa508a561c20acbdebbf6d7441c0955cf2c5fa4a5ef7cf57fccce7bed0ce8b302c39ec2184056fe58d3f02954423e638a090dbb789423704bcc3850b735bd120960f09bad12da90ffa1387e64f7f7186084c4c349eb64f273bf2c9652ac7bb1937d936dc519102a6df69544f11acd47d77e1ec08594ef34e2280b49865ac5d0c75a1535b70d5f5f5477e8f180ed968c8afb1b24d2c181dffc2176415077d0cf70eba4e539be4cf1369ef61c93c112fcec89a26fa41f4e54cb1f0a68c3e9322ca1f58b82d9af8d788016388b2bdf2fb57b71c199bba40a06aa8f68ced5994d1f2641368190c8933ac2aab45f771bfd62d2c174ca9c31085062e19eed0372b45c226f3a02154ec502b2cccbe7b7e4b93bc83da662552d2c316d043ef2d8c48ce5ff45237cad43dd1338e38879fe107ba2a7f0317683e83ccde071b38b1ed9b4087903096f31642fd63d241644d517eb49a50a2bf33642d1315dfc7dec28f4bb0103e1b36925733ac9e54b7bd1edbda7c082b99acba04b83984e0bc5b5823e5e8977004a3affdfbe1ed75b22b184173d77d5bb0d5058a857a0fff26663d54b6ed0b6f82a26301e7915525ca6c3619c3e53acd2292de543e3f8b2fdb6efa64a46941d2178b8ee0fd74fc7998328e2e0d1229838bde7ebc7ffc9b1bff54278cabd1d369df59082c82c8087ff93d102e445e41c59d21c88246f087fd3d74f2fdf52c79bd8e5863f6b54003a93bfb240ca88cf69f5c8463c75c1c26b936f7316a50eadae9cc8b92114696a5c4d05036dbdafff4060c500b36d92aebe865c7e33cf81f5f77d1e92d9c1fbc1e615d4dbe2f116946346721b762abbbda3cf64cba4e0e275efaeaf8cb6410db0ed53d4c109314a8a2e62855959a268b995b3c669ddd671aa84207cb20bf64adc6b3e3519f8c0a1e99285bcc3cf224f09ea10abd9e6422a46d7c657bb62323957423870cb5acd64cf557abb74129510edd57ef2f870dc4ed1d13f3fef46f56e51ef4842a70973911d133be1fe4cdd43ba78d3e30a82a8b0987dad6d74f54b2654409ab0762f0e56481952c1c85104a829a2fd41e448d3b3b6cfc13f0cdbd516a6a775ef6b1042dc3e503e4889a58ebf202044fb829b73f729c4f577a2f6caee41d8a31f9a52455a891e6f35835e2b1a14f9c41cda9dbaddd64077e155c946a7555872e6d39a313254b76c48bbc3e2125da28502d74d964d38039d49886a3c2c6e8a6fb61bb05d1baab2951004bae2737bb42b46ad8695174acf52df339c37b6a19c1d2dc5795978189bb597ff9b48c32b4d1fca53f2acc81aed9cf4ed27fef98c2d015481f1d28bd05002ba8efd33649654bf2599bf15cf67b008e4e0e74c5ef538514fe0b6179dd08b6b0adf3aca8ebc5cb4fdc4e568fd091e5e76e1dd0afc1b159a856722c01f86548afdc61c4ceb2646a6fd86c19edf0c404379f2e6ca19fa8548c1a38186266088f9ee244fbfcec8a35d6496b657d6f95fc9f636997cde87b9a46cde636d95906281dd6369f593a001cde597641063912613ffb84c8baca1148d961fbee29efa3013936a7a384f262830c215b3ecf8cd2c9cf2872618e34cf0623743a2d665b62ecce486fd2bfe9802f9e2ccc1be0ac9467a4f3219234ccfc9b92fb36b369557aa955292a02fe67428f89c6194fb4e7096ba4771c19609aa4022faac4409402b615fb86b17e3bc9c5c91cdf861d3477a7e008f70cf0be451ea29812ecb09a0fdca36613e835006f3a9ffba2db727c221f1081e16d685a6fafb91cef58587518f8edb2145042c14e72bc1746ca94d06f64cab4660f855a42e5fb7715753256d3487fbb88b88f7b7ef787840317fcf58f7a0c7e8351abd10be10e6056e094875e93441c74314dd36565b9caeef861405123dd0f6d2ae9049d33ab14314a6ba587de4e8db51bcf4b44e9f5572def272986ebb701f6f4090dff79c189cd3578f2b490b75", 0x1000}, {&(0x7f00000018c0)="e6380390ece4d3b69aff29aca66eda50eb6dd63b2194", 0x16}, {&(0x7f0000001900)="4829397cfead5d34384594e693cd6d480dd5ce8beb1cd948843fe70e", 0x1c}, {&(0x7f0000001940)="c64f06ddde750b53d3f3ac2f43f94842914244c9abe722a74451460c12ad7e557d7dfa108f0549524287987d30d707c4e253704fa96afd7539f1a211d6c434862f405ed78808b95e9ab0f319c5e5c1a14ea13e2c83c84944fdb941e88042663e351d57f9073944945cecf8ed8450316d228c1e3d6bdc9fd7e6ecf040c859f7491ca0e463aba723ffa97a6d720eaaead60651", 0x92}], 0x5}}, {{&(0x7f0000001a80)=@nfc_llcp={0x27, 0x1, 0x0, 0x1, 0x9, 0x7, "c15ddbc21bd6ef3a9660f8f36519d22167aa956f2e0f58825401ae522a2e888a1302acbf15f46ef2a7fdca48414c2a62ab8909d8d0e38b6fa421b9f84676ad", 0x22}, 0x80, &(0x7f0000001ec0)=[{&(0x7f0000001b00)="433ee962f66555296fac6fa9", 0xc}, {&(0x7f0000001b40)="8b947ca2d0669c23361fe40e67869c1ea7487010ad31e54ea6dc5340eedf6e3d6046c4", 0x23}, {&(0x7f0000001b80)="1e6d9e125051ace4423e593afe06a23c0b2d5cad199bad385930d5a0d6181ff9c9506744f01513722acae27a029de4eedf2c009a15d3b678a43985b09c578978084f78add7216fb21c3b0e2057559faa5fefdeda96f0fbf6101f0b3e91ec81c17ea8a5a376ff410330712796e06f69f126d162f8240d654dad1eb69ce705e49c8f69c2c81547ec8f8b2a20ba4f9579e863b9d3c568b2d79278c3bd1172e950e0af2d3ecd68685a70b89aa018bdccda46c19c4c4ac98e56ed515c475f6733a25bb7", 0xc1}, {&(0x7f0000001c80)}, {&(0x7f0000001cc0)="355fb39ef39157198af140ed5775a24509f8c4497bffae09d136f534200cc50c7c7c0f4ed5a0f2c9687c825c3ab0d0f33b3c361ed1f5177f8782d1bb7c1875d524f28a85898040730d1f53a5e4a637e579528b4b2f098af1bf1553b19b942868e4ca207fdb7db58d2a4d9d441474340f5bb4bb0c2643ae850796237e47a6288035ce21b780c02c5cd2ca4bd7102b08f87676fe8e7f7000bf9d2099e180ec6cb5307d405f691519f53b1f185999bc3ce402a57e1366c36337b235238aa4e1a450cb8be23c0d96ee3e2830ec56bbb599971dfdaeb73ef8bb7118c04aa6c406310ccedb9563a2741d90", 0xe8}, {&(0x7f0000001dc0)="a8ac4077134547beec346069ee7f95d295983baa92279df7f6a1fca3c9b57a511eaa31fd58ede8e57b37b4ee32dba6c72f27eed69b386e11976ae3a94378ff454eb7750d735fa7aa98d9e8a39e887e70f14ee2ae9b3b7c8860", 0x59}, {&(0x7f0000001e40)="205758665c2b20392ecd6a6837f4c7ba75be462829f2b7d03c37295fce89186b8056143ec25e0b3e4ce80856b4fc7e4d1c294e83bc2822dbbaac795c047d37f0df6a553c00d2889507ee722f687bf520ed7a40695d2762d7ec3ab4cf398c85133ccaca7c46fb1c9aa40e6052e036823413be8b875c4aaed0ae0ecd87f816", 0x7e}], 0x7, &(0x7f0000001f40)=[@txtime={{0x18, 0x1, 0x3d, 0xe66f}}, @txtime={{0x18, 0x1, 0x3d, 0xdc3e}}, @mark={{0x14, 0x1, 0x24, 0x2}}, @timestamping={{0x14, 0x1, 0x25, 0x6c7}}, @timestamping={{0x14, 0x1, 0x25, 0x4385}}, @mark={{0x14, 0x1, 0x24, 0x1}}, @timestamping={{0x14}}, @timestamping={{0x14, 0x1, 0x25, 0x4}}], 0xc0}}, {{&(0x7f0000002000)=@tipc=@id={0x1e, 0x3, 0x1, {0x4e21, 0x3}}, 0x80, &(0x7f0000003140)=[{&(0x7f0000002080)="1d8ce41808a0cacd2dd796957a8d97dac56813fc2c220953338af3a63e13b720cf7e2bf947c356a5c3e95f25cabbbadd389bed97c3e8c8b320dad8c0721d224c096f8e81085cc94ce04567fe34809e94fcd934fb72dacd38213db74c495fce2317bbc8f8562b54ee47b698acaabe6df91516f7e2982ef994b678623b11b818485db9f979f7b9e8bc682e0dcee64e035f48513fc500fe421677d2521d7b18db23857e6f2fe02e5eeb0f5f605bd09cd07ebe2c63cad9ae3cc489afe83b5d7d64c8f9cceb15bc915305c1f231934fb9c535d59bc3b3e78a3f0e5334856be91f10a96a32a45d4d51e80e8331ff26761fb85b908420c2cad51830db7b8f38db9cab5ef66c832282612acce509704575f8cfcd893b8992cf4798863f4697e03b3f93c9e69443a860ce9727e4a76a4c4eeb532e3314c5eae67c23bf93427e31ba63f665706038e48e64e46c7dd65429de1c4e20a4f75874fd4011b87ebceb2f2e5c6e752f35484692ddbd777b9a3dfd9b00d4dc96766373912f14f78cd034099df9a01b945193804318ac78b50ed0c8983cd952762b2362b1ec80a332277435f7d805d49b7f7b9e948a17ae97cde791e0d9231a706e86c6e3ddadac0738ade418f8beac386aa6c0cf56e52ca4f304243b3005f9cfe73f1b7d388673f23c329bf0771c9c22105093ec7410524b1dfe02b1e53caa4d7993f73d83d31c2242bd8783c0ce890a9f51a8bbe0d8c181f25ac5f67b14437bea7195b55ac549332d8118dfa2d5f41a3d939561deda30eb104f360577f496f003822a7b545c8d07f2c4f0486d97d4a977cb343fb320ed19a89376fc7409975db0a68c786c0ac6abd6f59243120d6bac890f6014c80d3f8f155166bcc63634dd423174689c30f1016f407c105220a45ac270aa36e7d5d7e1ecf5fec558d6d9b682e956680ccccc528dce42e5bb88e3c205ad2cbf7a3860e89a25a8b6956c02aed07bee7961c239eb4e1a30f0affc3bd53967ddf238cbf462a0e558a385f2d4c3304d3eeec9eb9ca4062f16dd547863b3c96137d466f5efa1ff0a19eaf4d664ed61d651912e8a87259d3b7a1a8d09c129bda874269c6fe27b829e8d23543f8cb56e6a2a56f7a462706a2db8435b440d1067002d27095f863b65c0d1d2a4d8ab90ddf07a20a0ec2d64717b395515205ec99560cf7b6363e0bf06193a0f01c92758c93a950958e3fb68a8e16e13a7d3ff03e1d328eda339f0cf1b1c6b8b13e097a6361bdfa7ad4e4c8527f58ca5508f1dc821eb9142ffc414986bbb8f67638054b81fac57275aa66819601eb061bbbe473aef6777ba4d7849a2a7b7ad5f34db2dda1a79aa6dd033b71cd4c95405250a9c37f6160ecb37d83dd4284cb530c58b93b238adf80d063058c597aa835243a0872556b090569a41a0aa75cfc852b6a7ef8ed72c1223540a2816163501f1efc872e469ff6adba9dd22550c2e1c533ea87930b0848c51d348771b2967b686e10078f75b2e39813c234856758e69e9485414f54f827d66ad7d52c26e01b048ee41fabbe170dcef30f3384b63732d1e91c06ed85c8d9e534e8085237c8d9dfbdd8ad4c7a972f576e21965eec36ed8ea28ea4eea74768983b3ec6d1d5034fb0d6007fad43acc7cbd82dd3a5dd55dfa039ae680214b4b66e69f8dcc075d5c04fcfe382acc8354ec0a4747bf11acd71a256b531bf8e07bdfe4c51324209739fac06da088b6e97b8e737b0fc3cc6d3a861a3b5ae8de696b7fabfb28daac14a45c085169e65523e3e3dfe2dd1245bb956fdb291d57090fac189c2366932e79b8b583da9a69f43b04eb8d5bb5f2c23cbfec975ef27743605779cb9de2c871703d1ecb50797db3978d76c41dc8aa1800820a3c79b6c3a844991d026dd8c84f858b6bbd61ab08dd578657e45b9c1f52cd87eba41f532f5b9132020b7ab818d587dd8ebb2753ea2c80d1b33ac331fc08c10ab0f13a6a3f4231d4c8ec1a448acf1b7cb1332e35fbb6eaa29d92e33a28d2dd2207a0e50b98d7c5b5ec1daab042abd90eb31024f8b015821bc7ca4a7f4cd221976b05c62690f406195d44ed42b068f31beac2f86a56fccb0969831db6e2403d02c40ea10447bfd2c9233cc1c895eac2fae0d7a9592309cafbad7f7010c14668a40cc089a52106017b0a3e854bf772636bf72b9a70574770866765156c093ae52717e95e0874846ee671bcc012d2c68c90c412a2fa2a6e596e22b0a4dbb6f1bd256ee457e32cb6608f9b7df4768e41c284d44edd00dc1958d4f0b8430d823e1e4dde2265503adf0a69a9abee83b33588ce78db6d9138985bfb0eabe89c0d2504a330cc63a1839ab00c2387833a4c2570789192f2b2619b716a560410639a005d8565fa88422b4a3968084b0f36fd96d38d6af6e1e0c77a48a1a41d10e2fba51e072c45d092d00ca2206e164acfa3c960be9249909aed3a66fb8f3f5e533073d7cb0612ac4754cb73558d1c6f8ad33375391025159bd9818b4e86a619fb266a48bcfd7abe297a6e5530e24d0c3c171ea26da00af8b371a55aed855185455ca4497d91627fb56838c3506a2d78398da074e0e78589e7be5efffd59edcc83df400112aa006c8ad994d9d91a1ed87f88cb951a2ebf4d3d384f9a446e7d5a06bb49d7325ffd6b3509ebc67071131fd73bfcf6d3d1b8bccf4576e3f6f70561e146eff57565d7cde5d498efd4c7ac8eb10d7d63236f8145e1541b2826d040502e524da77ab40a48b65aa5348f6dc3ddd9b21f8bc943c7a6902083d1904c64e82e89ca1dbe328949113b59ad4aad1ed529b88382acc25499bbbe51de565b314847d864d410afccb4d0dd1f0f2fe7aa83e9224cf088fe3448a8fe3f6e10e77056975db0557cd9f631ae739e37776c30565ba70078fbcd22736e3ffc891dfb2ccd590e38b60e73673189a777bfb732739436ae4fbf333f8acdd5b234412cd388e35a7acaa338ee8889d0a6902723391bb6616ea13ae2e9545a8f94a38f87588a2e9ac5f070a2dab7656e433acaa482f4c852791eb5cf5ef96ec37c79722dd58680281221230ebc2fc13153b45c55b2b71833a8d27fb98707d2f8532e0712856c8745a2cba3d107c6647297b4aac3a3c5b6de6f15d27cc9910b25d0b27a2447b1d06017d16d69eba817e06f2aec7b3c3be89b6411989699a01b82a99754bbf696bbe34ebc26b37926f51d556f5d01ddde6c956c48dc66a3a27f166b4e8a6534f80d1ee980d15582867774f237a7775bf7a7532e313ec072bbd6f828bb40dc957c135201c607a5419eb4447be21df73346fc70236ef7495803011fc40e734ff791c6c5a9851bc546ecd222a12589ce484313b68eef03b35d0424635231dfadc95316dcccb65d385da77dd5fde9d472d465c646b9675d11add36ad7149d2750f6083a25f6c29c4632ddafd6fb3fc9dd5b4dc00dc986020b934617808f53b2b6427e3bf773aae429baf392ab8c2d0721305eeb0f1138e5d19154049dc231f91941fecc71274748317a35c714109622ec3766880c5c0ea43e22a8775d565321e3809d1c2e8a5986fe6d6785ef1a996c1c678448c861b1df9534bf074a387d952e422d0cbee314c29171ec58d9bc9fddf72811d1c03e7549141c291697f7c3c8f3db4426301d4bf07149bccc1251d506eefa6aa5cbd58373caf9da597396593879297c8dd4d4f87fa6160cd3de3ed33d5af97b7ae9119a0e19fa8e94d0610f36713f9fda7067e36bdda98fb3970189a94bde1fafbedc44b22b5ad115bdd28606d09ea1bfd57f6f76d178de5d124fd4555ac48b3ee975b6f6dbd1ffb3620a3c6c9c653ea83ad86cbff0941d17bd11b676ebd1f9e0a999ae8cce7d1483264f1cb460ab5ff8b00081dac088f7c347d78dd67b0e09514690dc17a62be8f8438d83c4f773b78e9b2e801c616ee3d9ca12b3a8d49b98d1c40109130e063f5fd91d22abf189eecaea930583e65c99319ffee24139f4f80b7cd4b5918c237c11288b36c425a8f971e891abde35bc340986c2e33e042fc4df8b42b6e18911643e76a9a691fc84b54ef488fb37ecf0eef7aee2f35b16579511f91cb15e224895223e2dc839715307996469e2ef909f7102870808869269e6f209a2a6a3de998087db5342653ec8f272b084e4e9f4c90f16919fef7e3a169b11e24476b9ced479fe2120c2234ceb8b50e86e907c3cc8a3215587940bb5df79f53629dc201df5b98069eef064403fe8d5ac60f7e6ea76fbe98010248e89c672a5b2185e928893f3ced8e5ffddcd84482f47092c234984dbbff38357601f4533c55822308cb0a88564691ec469eb52d790456ee633cd0198ebec062543dc4f74fedc2379d7143b6036f3d0f8fb8238c16a33c41ce70bc1ea9122beae23fc8b3106cef636ea01de349260dae3c7bfa24bf26ae4c8b44ff19654590f15c3f981cd7eafa567916babf7382f2c78229d436454f40edf42d00fa16edede0bbf618224c7d7d9b3f60cbab609f94bd1fc62d68f1610549217ed9b6592d9b15a3060a86ebe4734f7aee3ce2282acead868a8b6a36fe6dbc31dcfdaa8583cf55d1d1cc7667461827ca977ca5d748364be054a54bae95d1a95b9caaca85182f3983c435feea6b2f0132241bb8cb9bb0716f42d2b854724228e2f0a66f0051eac3b59a258c231a4feff07f448383dc92feff4c55eed6d9dc4e12020cdbf43752094b03be4338029f3fbb4b1e284bf3b08bb86ef3b4725fe5dfe395f0bfea80d80a7730a8c8907fa0fdbc313f4b92d1ea583a696b41acc344e139859e5b8ffa41482b763587310f474f8d7ba8f516f717bbb064ce84cb712b4294eee05dc9737126eb217964fe028a99f6b654c20c9fa15a330685bf40d5983b8e8b341c43dcbdd89d52b26b61b59c6361c2851d9dc3c7f4356b516f66246436be39fd1c6d065a045eec03ec79d8b9739e66564fde786052ecf702360cade44720d49e8cde47d8beb506f3047c38b03be73524a3383a4c459d60435d29f2a96da08eb50d21d59ab86510ac93c688b9bdb5c0484641226e0cf87442da8aaa0347b3cd0986a8dc55e3ba4d43e54249779e4ff16d94e28326685d4ef23badfe120dae62aaccb05cf6097444c62e1fa3e5df086cd53dad78d0c5e74f752bbd11026332447eeb3adb17605a3ebc97972ee65dbc340df49211d697e6e0a3ae9b87fdaa7c6d8537b3d7697bf9756c1e628db8b8b3d8a4e3bd068300ef0ead90082a54590ab2d4fde4388a8389fbc9961c2048f6db9c7e7d32417afa4497777192000217b860dbfa533ec51433cd88295a608aed5d78e970af6fddec2e2322492bcac6bd90af507d3dcc591c58f5194eb38a3913b7fc700f2c62f4e874d27ff4758181d1bab0eb8dc0d35fef5b97f72f319d32145bdd70dd37e0731132e07ae3823434fb8aa37acdda10783fdeb4faba2092d1cdef2072d0dedf1846485f98f28b13e2c33aeabbe2ad11bcaa2c834dec96cd0f5421ba2b765870de654c56fd1aa061ccc8cfbecbd59f883c86600cdba845fcf102e286d7f2c7cdda06bcb02d9371737d085fb91ff22be42b119b9533dbb12ac7b8e58a85d12b646311dafd39ee7e586d9c5eb4989f649500fa3187c74e0fb928008a49fe67dfce80c4ece53d76696101728c79e7fe678399a6607a1eb880d94f8f835155e2f17afa7589024243aa85b31fdc3dc6b2e42086c90da788205bb664bd63e5716d0cdf268c12deb45a144bb5b7aeec08b3dbda3b923b374dd1aa01f4f3943fde894198d7855aad076d53a5c3e05e48f9dde391e4d1fd46ccf4bc4ba7d351e0f359363a635", 0x1000}, {&(0x7f0000003080)}, {&(0x7f00000030c0)="4d9f2a27dbd4118a79ddd4d3b64052b4b5fda085f8df42cf9575a0a7fe067df302abfe2d6c74d4be3293375f8eac3a36a1f729908051d07fd95250aa2e756525934a4cfec0d70df2db18453f0a56fdce911bcf9bd5e0285424c78609dc0d1d9d338661b9057463e216de756911b4982543765f923f24608455af849b6b3845f1", 0x80}], 0x3, &(0x7f0000003180)=[@txtime={{0x18, 0x1, 0x3d, 0xf44000000}}, @txtime={{0x18, 0x1, 0x3d, 0xf0dd}}, @timestamping={{0x14, 0x1, 0x25, 0x101}}, @mark={{0x14, 0x1, 0x24, 0x4}}, @txtime={{0x18}}, @txtime={{0x18, 0x1, 0x3d, 0x4}}, @timestamping={{0x14, 0x1, 0x25, 0x80000001}}, @txtime={{0x18, 0x1, 0x3d, 0x4}}, @timestamping={{0x14, 0x1, 0x25, 0x8001}}, @mark={{0x14, 0x1, 0x24, 0x7ff}}], 0xf0}}, {{&(0x7f0000003280)=@sco, 0x80, &(0x7f00000033c0)=[{&(0x7f0000003300)="d4291541d694b0556c48029b2a8dfe1ac29ad54703a31c806ad0b52d2c651cdde83215947b9a93dc17e13052f8ff8bf72f94872b25e21259f56cc5a403fae81912881ff128cd9b41d9002bfcd2fe996bd2d0a8ae3ed5ec77ce8a2e201af22050154869d53b3ff2dcf046c23e0dc7cf7e8559a2613d5df3d703d73e9f55d07f9241713d542ccec5fe763f9d3fce32073cfbc4ca7b5a00b1441fc790bae8a67aed9276a20370", 0xa5}], 0x1, &(0x7f0000003400)=[@timestamping={{0x14, 0x1, 0x25, 0x582}}, @txtime={{0x18, 0x1, 0x3d, 0x6}}, @txtime={{0x18}}, @timestamping={{0x14, 0x1, 0x25, 0x636d}}], 0x60}}], 0x6, 0x890)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f0000003600)='/proc/xen/privcmd\x00')
+ioctl$KDFONTOP_SET_DEF(r0, 0x4b72, &(0x7f0000003a40)={0x2, 0x0, 0x14, 0x4, 0x65, &(0x7f0000003640)="8ca5162fd9f09474982b0a9b97ea0b324165c4f95c552de218bdfcf0b4c0bd0ceaefd350a486b29b9212bbd0eaa633bbcb28c360d952670d780fe5f5f2ffa9dd9c48a8bba9d4febbf14306d3de41f5af04c2b799b0eaa53fa3758c77df7d658a3ffafdb39fdaec9fb8ba0c14a697d3ee79f02335ff96ef2d7c8f1a2cf8721979102a101a2f0d598b8afbbb77b196d0c19a0d56454e4fcb51cd326c9918293e583edc4b12538021e7bd3a9b4ac25a9cd047b9bf6e8fc1669a7d9991a30e77452a2f04ffca329175f15bac1b60f29d2018f6369e66dec7bb152b604e4fafeaddb1aa88151dc307119e769cf51dbd4c911dccaa3c044d69cc9ad1d6e33099dc937d5ec14c362fc6e55d34494e8b11de718db73b2ab29a113585975ecf5a2ee97e39a53014ff92299f82dd049865969c61c1eea1f84492302aba83ced28d597b42d96a3a6772b2e59f7c415e7e6d080a3b3f50b3a4246f22d9a8bce93b0a61139a4f252fca3560fdf24a13cc8ace4e732dbaf788fd98de2dd80661528f541849b353594aa5516265b3cd15afa5afa79306f590f15a62132e9950bb1e83e79c93a82ab606d3fa484838e46356515dc1e5c47f323f0747e451198db98de24a889847139fd2e8e08981e1b6afc50266df4e69211a75c63dd8f961f377b54e7c9d5091f81cce753dbcae464d569d9da27c7dafdc27e92654ecf60f4e993a667177befdd53c933af6edf4e4ba2d4778e7a104d90445c9653171ea819a4f04bc9adcaafb55db72ec7c088aa94b87e74ce22bedb9ef0984e9c613610e20a85eec05ce5f444476e91354f38fcd7a3cf9623abdf5c226b037587ac0ead6726b3b31387d116bc8e566e27e14039771d3c684d2f46c46dcb4ea29268a8edf0b0810bd3e8f0b8017aacad8a21f91c96a191d227afa4b057f7c1dab7fa4c9732bdcfba597ae5070a33d38ad033711ea8b94c1f261289242adec6da083e5ed87db59f0cd31da2770037a2ff3a721d0f1d147c6a189e15b87c104c307e77678ae5e46caf1fad9f8c77a4b2a90f64b3185ebef322cff136e112b057214c38d88001480c336b6cbbad6eeb873fc79d50edecd88358529cb138f458ffc02c9b8538e6153beeb875ee62e0809449498c3e7dbdd466a64ae38fcc3f28b79d9ca43c39fd4abd537fbcc099f64771ea2adce25ff84bc9d7baa515f7d10efb2ee61bebf299f502029fc17517321e7fc6d8741a5480abcb9c74316ee9f22040f187c904a882ecfa321b2bb72a6eb0cc9eabb502910bd10a07553dbf1cc6fb9a20f6bd24a4b4c38ebab7cf53d246fbae4905d654445b58a5b68ada1ea90c056e25c1c2611b9a674cfcb5375c3e268dcb7a20080d7389ba8e4be1ba508e2688c78c7d1d5f9d75224d71abad395afe10caa14694d2a46c40deb79988de0ed586ba68da325e582400a7219c992bb98c7"})
+ioctl$TIOCSERGETLSR(r3, 0x5459, &(0x7f0000003a80))
+ioctl$IOCTL_PRIVCMD_HYPERCALL1842111(r3, 0x305000, &(0x7f0000003ac0)={0x4, 0x3, 0x2, 0x3, 0x82df, 0x3})
+fstat(r0, &(0x7f0000003b00)={0x0, 0x0, 0x0, 0x0, 0x0, <r4=>0x0})
+setgid(r4)
+r5 = syz_open_dev$vcsn(&(0x7f0000003b80)='/dev/vcs#\x00', 0xbf, 0x480)
+ioctl$TIOCL_PASTESEL(r5, 0x541c, &(0x7f0000003bc0))
+r6 = msgget$private(0x0, 0x110)
+msgctl$MSG_STAT(r6, 0xb, &(0x7f0000003c00)=""/122)
+close$IOCTL_PRIVCMD_HYPERCALL30(0xffffffffffffffff)
+open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000003c80)='/proc/xen/privcmd\x00')
+r7 = open$IOCTL_PRIVCMD_HYPERCALL184191(&(0x7f0000004300)='/proc/xen/privcmd\x00')
+setsockopt$inet6_int(r7, 0x29, 0x12, &(0x7f0000004340)=0x7, 0x4)
+r8 = openat$hwrng(0xffffffffffffff9c, &(0x7f0000004380)='/dev/hwrng\x00', 0x40000, 0x0)
+accept4$inet6(r8, &(0x7f00000043c0)={0xa, 0x0, 0x0, @local}, &(0x7f0000004400)=0x1c, 0x800)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_22(r3, 0x305000, &(0x7f0000004440)={0x0, 0x32c, 0x7, 0x1, 0xffffffffffffffff, 0x7})
+r9 = open$IOCTL_PRIVCMD_HYPERCALL1735011(&(0x7f0000004480)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL173441(r9)
+r10 = inotify_init1(0x80800)
+ioctl$EXT4_IOC_GROUP_EXTEND(r10, 0x40086607, &(0x7f00000044c0)=0x9)
+ioctl$VT_WAITACTIVE(0xffffffffffffffff, 0x5607)
+
+Rrooach executor_linux cov->fd = 232
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 233
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 234
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 235
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 236
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 237
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 238
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 239
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 240
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 241
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 242
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 243
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 244
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 245
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 246
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 247
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 0
+Rrooach: executor_linux 107 size = 0   data =    
+spawned loop pid 736
+mount(fusectl) failed: 2
+write(/syzcgroup/unified/cgroup.subtree_control) failed: 22
+mount(cgroup cpu) failed: 22
+mount(cgroup net) failed: 22
+netlink: add addr 172.30.0.1 dev nr0: No such device
+netlink: device nr0 up master (null): No such device
+netlink: add addr 172.30.1.1 dev rose0: No such device
+netlink: device rose0 up master (null): No such device
+netlink: adding device ip6gretap0 type ip6gretap: Operation not supported
+netlink: adding device bridge0 type bridge: Operation not supported
+netlink: adding device vcan0 type vcan: Operation not supported
+netlink: adding device bond0 type bond: Operation not supported
+netlink: adding device team0 type team: Operation not supported
+netlink: adding device dummy0 type dummy: Operation not supported
+netlink: adding device nlmon0 type nlmon: Operation not supported
+netlink: adding device caif0 type caif: Operation not supported
+netlink: adding device batadv0 type batadv: Operation not supported
+netlink: adding device vxcan1 type vxcan: Operation not supported
+netlink: adding device netdevsim0 type netdevsim: Operation not supported
+netlink: adding device (null) type veth: Operation not supported
+netlink: adding device xfrm0 type xfrm: Operation not supported
+netlink: adding device wg0 type wireguard: Operation not supported
+netlink: adding device wg1 type wireguard: Operation not supported
+netlink: adding device wg2 type wireguard: Operation not supported
+netlink: adding device bridge_slave_0 type veth peer veth0_to_bridge: Operation not supported
+netlink: adding device bridge_slave_1 type veth peer veth1_to_bridge: Operation not supported
+netlink: device bridge_slave_0 up master bridge0: No such device
+netlink: device bridge_slave_1 up master bridge0: No such device
+netlink: adding device bond_slave_0 type veth peer veth0_to_bond: Operation not supported
+netlink: adding device bond_slave_1 type veth peer veth1_to_bond: Operation not supported
+netlink: device bond_slave_0 up master bond0: No such device
+netlink: device bond_slave_1 up master bond0: No such device
+netlink: adding device team_slave_0 type veth peer veth0_to_team: Operation not supported
+netlink: adding device team_slave_1 type veth peer veth1_to_team: Operation not supported
+netlink: device team_slave_0 up master team0: No such device
+netlink: device team_slave_1 up master team0: No such device
+netlink: adding device batadv_slave_0 type veth peer veth0_to_batadv: Operation not supported
+netlink: adding device batadv_slave_1 type veth peer veth1_to_batadv: Operation not supported
+netlink: device batadv_slave_0 up master batadv0: No such device
+netlink: device batadv_slave_1 up master batadv0: No such device
+netlink: device bridge_slave_0 up master (null): No such device
+netlink: device bridge_slave_1 up master (null): No such device
+netlink: adding device hsr_slave_0 type veth peer veth0_to_hsr: Operation not supported
+netlink: adding device hsr_slave_1 type veth peer veth1_to_hsr: Operation not supported
+netlink: adding device hsr0 type hsr slave1 hsr_slave_0 slave2 hsr_slave_1: Operation not supported
+netlink: device hsr_slave_0 up master (null): No such device
+netlink: device hsr_slave_1 up master (null): No such device
+netlink: adding device veth0_virt_wifi type veth peer veth1_virt_wifi: Operation not supported
+netlink: adding device virt_wifi0 type virt_wifi link veth1_virt_wifi: Operation not supported
+netlink: adding device veth0_vlan type veth peer veth1_vlan: Operation not supported
+netlink: add vlan0 type vlan link veth0_vlan id 0: Operation not supported
+netlink: add vlan1 type vlan link veth0_vlan id 1: Operation not supported
+netlink: add macvlan0 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add macvlan1 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add ipvlan0 type ipvlan link veth0_vlan mode 0: Operation not supported
+netlink: add ipvlan1 type ipvlan link veth0_vlan mode 2: Operation not supported
+netlink: adding device veth0_macvtap type veth peer veth1_macvtap: Operation not supported
+netlink: adding device macvtap0 type macvtap link veth0_macvtap: Operation not supported
+netlink: adding device macsec0 type macsec link veth1_macvtap: Operation not supported
+netlink: add geneve0 type geneve vni 0: Operation not supported
+netlink: add geneve1 type geneve vni 1: Operation not supported
+netlink: failed to get wireguard family id: No such file or directory
+netlink: add addr 172.20.20.10 dev lo: Success
+netlink: add addr fe80::0a dev lo: Success
+netlink: device lo up master (null): Success
+netlink: add addr 172.20.20.11 dev sit0: Success
+netlink: add addr fe80::0b dev sit0: Success
+netlink: device sit0 up master (null): Success
+netlink: add addr 172.20.20.12 dev bridge0: No such device
+netlink: add addr fe80::0c dev bridge0: No such device
+netlink: device bridge0 up master (null): No such device
+netlink: add addr 172.20.20.13 dev vcan0: No such device
+netlink: device vcan0 up master (null): No such device
+netlink: add addr 172.20.20.14 dev tunl0: No such device
+netlink: add addr fe80::0e dev tunl0: No such device
+netlink: device tunl0 up master (null): No such device
+netlink: add addr 172.20.20.15 dev gre0: No such device
+netlink: add addr fe80::0f dev gre0: No such device
+netlink: device gre0 up master (null): No such device
+netlink: add addr 172.20.20.16 dev gretap0: No such device
+netlink: add addr fe80::10 dev gretap0: No such device
+netlink: device gretap0 up master (null): No such device
+netlink: add addr 172.20.20.17 dev ip_vti0: No such device
+netlink: add addr fe80::11 dev ip_vti0: No such device
+netlink: device ip_vti0 up master (null): No such device
+netlink: add addr 172.20.20.18 dev ip6_vti0: No such device
+netlink: add addr fe80::12 dev ip6_vti0: No such device
+netlink: device ip6_vti0 up master (null): No such device
+netlink: add addr 172.20.20.19 dev ip6tnl0: No such device
+netlink: add addr fe80::13 dev ip6tnl0: No such device
+netlink: device ip6tnl0 up master (null): No such device
+netlink: add addr 172.20.20.20 dev ip6gre0: No such device
+netlink: add addr fe80::14 dev ip6gre0: No such device
+netlink: device ip6gre0 up master (null): No such device
+netlink: add addr 172.20.20.21 dev ip6gretap0: No such device
+netlink: add addr fe80::15 dev ip6gretap0: No such device
+netlink: device ip6gretap0 up master (null): No such device
+netlink: add addr 172.20.20.22 dev erspan0: No such device
+netlink: add addr fe80::16 dev erspan0: No such device
+netlink: device erspan0 up master (null): No such device
+netlink: add addr 172.20.20.23 dev bond0: No such device
+netlink: add addr fe80::17 dev bond0: No such device
+netlink: device bond0 up master (null): No such device
+netlink: add addr 172.20.20.24 dev veth0: No such device
+netlink: add addr fe80::18 dev veth0: No such device
+netlink: device veth0 up master (null): No such device
+netlink: add addr 172.20.20.25 dev veth1: No such device
+netlink: add addr fe80::19 dev veth1: No such device
+netlink: device veth1 up master (null): No such device
+netlink: add addr 172.20.20.26 dev team0: No such device
+netlink: add addr fe80::1a dev team0: No such device
+netlink: device team0 up master (null): No such device
+netlink: add addr 172.20.20.27 dev veth0_to_bridge: No such device
+netlink: add addr fe80::1b dev veth0_to_bridge: No such device
+netlink: device veth0_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.28 dev veth1_to_bridge: No such device
+netlink: add addr fe80::1c dev veth1_to_bridge: No such device
+netlink: device veth1_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.29 dev veth0_to_bond: No such device
+netlink: add addr fe80::1d dev veth0_to_bond: No such device
+netlink: device veth0_to_bond up master (null): No such device
+netlink: add addr 172.20.20.30 dev veth1_to_bond: No such device
+netlink: add addr fe80::1e dev veth1_to_bond: No such device
+netlink: device veth1_to_bond up master (null): No such device
+netlink: add addr 172.20.20.31 dev veth0_to_team: No such device
+netlink: add addr fe80::1f dev veth0_to_team: No such device
+netlink: device veth0_to_team up master (null): No such device
+netlink: add addr 172.20.20.32 dev veth1_to_team: No such device
+netlink: add addr fe80::20 dev veth1_to_team: No such device
+netlink: device veth1_to_team up master (null): No such device
+netlink: add addr 172.20.20.33 dev veth0_to_hsr: No such device
+netlink: add addr fe80::21 dev veth0_to_hsr: No such device
+netlink: device veth0_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.34 dev veth1_to_hsr: No such device
+netlink: add addr fe80::22 dev veth1_to_hsr: No such device
+netlink: device veth1_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.35 dev hsr0: No such device
+netlink: add addr fe80::23 dev hsr0: No such device
+netlink: device hsr0 up master (null): No such device
+netlink: add addr 172.20.20.36 dev dummy0: No such device
+netlink: add addr fe80::24 dev dummy0: No such device
+netlink: device dummy0 up master (null): No such device
+netlink: add addr 172.20.20.37 dev nlmon0: No such device
+netlink: add addr fe80::25 dev nlmon0: No such device
+netlink: device nlmon0 up master (null): No such device
+netlink: add addr 172.20.20.38 dev vxcan0: No such device
+netlink: device vxcan0 up master (null): No such device
+netlink: add addr 172.20.20.39 dev vxcan1: No such device
+netlink: device vxcan1 up master (null): No such device
+netlink: add addr 172.20.20.40 dev caif0: No such device
+netlink: add addr fe80::28 dev caif0: No such device
+netlink: device caif0 up master (null): No such device
+netlink: add addr 172.20.20.41 dev batadv0: No such device
+netlink: add addr fe80::29 dev batadv0: No such device
+netlink: device batadv0 up master (null): No such device
+netlink: add addr 172.20.20.42 dev netdevsim0: No such device
+netlink: add addr fe80::2a dev netdevsim0: No such device
+netlink: device netdevsim0 up master (null): No such device
+netlink: add addr 172.20.20.43 dev xfrm0: No such device
+netlink: add addr fe80::2b dev xfrm0: No such device
+netlink: device xfrm0 up master (null): No such device
+netlink: add addr 172.20.20.44 dev veth0_virt_wifi: No such device
+netlink: add addr fe80::2c dev veth0_virt_wifi: No such device
+netlink: device veth0_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.45 dev veth1_virt_wifi: No such device
+netlink: add addr fe80::2d dev veth1_virt_wifi: No such device
+netlink: device veth1_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.46 dev virt_wifi0: No such device
+netlink: add addr fe80::2e dev virt_wifi0: No such device
+netlink: device virt_wifi0 up master (null): No such device
+netlink: add addr 172.20.20.47 dev veth0_vlan: No such device
+netlink: add addr fe80::2f dev veth0_vlan: No such device
+netlink: device veth0_vlan up master (null): No such device
+netlink: add addr 172.20.20.48 dev veth1_vlan: No such device
+netlink: add addr fe80::30 dev veth1_vlan: No such device
+netlink: device veth1_vlan up master (null): No such device
+netlink: add addr 172.20.20.49 dev vlan0: No such device
+netlink: add addr fe80::31 dev vlan0: No such device
+netlink: device vlan0 up master (null): No such device
+netlink: add addr 172.20.20.50 dev vlan1: No such device
+netlink: add addr fe80::32 dev vlan1: No such device
+netlink: device vlan1 up master (null): No such device
+netlink: add addr 172.20.20.51 dev macvlan0: No such device
+netlink: add addr fe80::33 dev macvlan0: No such device
+netlink: device macvlan0 up master (null): No such device
+netlink: add addr 172.20.20.52 dev macvlan1: No such device
+netlink: add addr fe80::34 dev macvlan1: No such device
+netlink: device macvlan1 up master (null): No such device
+netlink: add addr 172.20.20.53 dev ipvlan0: No such device
+netlink: add addr fe80::35 dev ipvlan0: No such device
+netlink: device ipvlan0 up master (null): No such device
+netlink: add addr 172.20.20.54 dev ipvlan1: No such device
+netlink: add addr fe80::36 dev ipvlan1: No such device
+netlink: device ipvlan1 up master (null): No such device
+netlink: add addr 172.20.20.55 dev veth0_macvtap: No such device
+netlink: add addr fe80::37 dev veth0_macvtap: No such device
+netlink: device veth0_macvtap up master (null): No such device
+netlink: add addr 172.20.20.56 dev veth1_macvtap: No such device
+netlink: add addr fe80::38 dev veth1_macvtap: No such device
+netlink: device veth1_macvtap up master (null): No such device
+netlink: add addr 172.20.20.57 dev macvtap0: No such device
+netlink: add addr fe80::39 dev macvtap0: No such device
+netlink: device macvtap0 up master (null): No such device
+netlink: add addr 172.20.20.58 dev macsec0: No such device
+netlink: add addr fe80::3a dev macsec0: No such device
+netlink: device macsec0 up master (null): No such device
+netlink: add addr 172.20.20.59 dev veth0_to_batadv: No such device
+netlink: add addr fe80::3b dev veth0_to_batadv: No such device
+netlink: device veth0_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.60 dev veth1_to_batadv: No such device
+netlink: add addr fe80::3c dev veth1_to_batadv: No such device
+netlink: device veth1_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.61 dev batadv_slave_0: No such device
+netlink: add addr fe80::3d dev batadv_slave_0: No such device
+netlink: device batadv_slave_0 up master (null): No such device
+netlink: add addr 172.20.20.62 dev batadv_slave_1: No such device
+netlink: add addr fe80::3e dev batadv_slave_1: No such device
+netlink: device batadv_slave_1 up master (null): No such device
+netlink: add addr 172.20.20.63 dev geneve0: No such device
+netlink: add addr fe80::3f dev geneve0: No such device
+netlink: device geneve0 up master (null): No such device
+netlink: add addr 172.20.20.64 dev geneve1: No such device
+netlink: add addr fe80::40 dev geneve1: No such device
+netlink: device geneve1 up master (null): No such device
+netlink: add addr 172.20.20.65 dev wg0: No such device
+netlink: add addr fe80::41 dev wg0: No such device
+netlink: device wg0 up master (null): No such device
+netlink: add addr 172.20.20.66 dev wg1: No such device
+netlink: add addr fe80::42 dev wg1: No such device
+netlink: device wg1 up master (null): No such device
+netlink: add addr 172.20.20.67 dev wg2: No such device
+netlink: add addr fe80::43 dev wg2: No such device
+netlink: device wg2 up master (null): No such device
+iptable checkpoint filter/2: checkpoint entries=4 hooks=e size=632
+iptable checkpoint nat/2: checkpoint entries=5 hooks=1b size=784
+iptable checkpoint mangle/2: checkpoint entries=6 hooks=1f size=936
+iptable checkpoint filter/10: checkpoint entries=4 hooks=e size=856
+iptable checkpoint mangle/10: checkpoint entries=6 hooks=1f size=1272
+[3698ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 2
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3742ms] -> openat$zero(0xffffffffffffff9c, 0x20000000, 0x181003, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- openat$zero=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> accept4$unix(0xffffffffffffffff, 0x20000040, 0x200000c0, 0x800)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- accept4$unix=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL17346_11(0xffffffffffffffff, 0x305000, 0x20000100)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL17346_11=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] -> open$IOCTL_PRIVCMD_HYPERCALL117410(0x20000140)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- open$IOCTL_PRIVCMD_HYPERCALL117410=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] -> ioctl$TCSETSF(0x14, 0x5404, 0x20000180)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- ioctl$TCSETSF=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] -> close$IOCTL_PRIVCMD_HYPERCALL173501(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3745ms] <- close$IOCTL_PRIVCMD_HYPERCALL173501=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3745ms] -> sendmsg$IPSET_CMD_TYPE(0xffffffffffffffff, 0x20000280, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3745ms] <- sendmsg$IPSET_CMD_TYPE=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3745ms] -> sendmmsg$sock(0xffffffffffffffff, 0x20003480, 0x6, 0x890)
+Rrooach executor_linux175 size = 10000
+#0 [3745ms] <- sendmmsg$sock=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] -> open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x20003600)
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] <- open$IOCTL_PRIVCMD_HYPERCALL18421_5=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] -> ioctl$KDFONTOP_SET_DEF(0x13, 0x4b72, 0x20003a40)
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] <- ioctl$KDFONTOP_SET_DEF=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] -> ioctl$TIOCSERGETLSR(0x15, 0x5459, 0x20003a80)
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] <- ioctl$TIOCSERGETLSR=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3746ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL1842111(0x15, 0x305000, 0x20003ac0)
+debug1: channel 0: free: client-session, nchannels 1
+debug1: fd 0 clearing O_NONBLOCK
+debug1: fd 1 clearing O_NONBLOCK
+Connection to localhost closed by remote host.
+Transferred: sent 2820, received 56852 bytes, in 11.1 seconds
+Bytes per second: sent 253.6, received 5112.1
+debug1: Exit status -1

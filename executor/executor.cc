@@ -875,7 +875,7 @@ void write_coverage_signal(cover_t *cov, uint32 *signal_count_pos,
   // Write out feedback signals.
   // Currently it is code edges computed as xor of two subsequent basic block
   // PCs.
-  cover_data_t *cover_data = ((cover_data_t *)cov->data);
+  long long int* cover_data = ((long long int *)cov->data);
   uint32 nsig = 0;
   uint32 prev = 0;
   for (uint32 i = 0; i < cov->size; i++) {
@@ -903,7 +903,7 @@ void write_coverage_signal(cover_t *cov, uint32 *signal_count_pos,
   // Write out real coverage (basic block PCs).
   uint32 cover_size = cov->size;
   if (flag_dedup_cover) {
-    cover_data_t *end = cover_data + cover_size;
+    long long int *end = cover_data + cover_size;
     cover_unprotect(cov);
     std::sort(cover_data, end);
     cover_size = std::unique(cover_data, end) - cover_data;

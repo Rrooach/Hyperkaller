@@ -1,0 +1,1756 @@
+OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017
+debug1: Reading configuration data /dev/null
+debug1: Connecting to localhost [127.0.0.1] port 24561.
+debug1: fd 3 clearing O_NONBLOCK
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/p2/key type 0
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/p2/key-cert type -1
+debug1: Local version string SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+debug1: Remote protocol version 2.0, remote software version OpenSSH_7.9p1 Debian-10+deb10u2
+debug1: match: OpenSSH_7.9p1 Debian-10+deb10u2 pat OpenSSH* compat 0x04000000
+debug1: Authenticating to localhost:24561 as 'root'
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: algorithm: curve25519-sha256
+debug1: kex: host key algorithm: ecdsa-sha2-nistp256
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ecdsa-sha2-nistp256 SHA256:4/tWNp5otCN3Z8Xa0hYVLJjk+v55FwwYCFcUvt73Uug
+debug1: checking without port identifier
+Warning: Permanently added '[localhost]:24561' (ECDSA) to the list of known hosts.
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering public key: RSA SHA256:CYnBEFcxsXRB+Lqq3RxKWrmSrcNoJTi0nhG3g2GVQxY /root/p2/key
+debug1: Server accepts key: pkalg rsa-sha2-512 blen 279
+debug1: Authentication succeeded (publickey).
+Authenticated to localhost ([127.0.0.1]:24561).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: pledge: network
+debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply 0
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Sending command: cd / && /syz-fuzzer -executor=/syz-executor -name=vm-0 -arch=amd64 -manager=10.0.2.10:44223 -sandbox=none -procs=1 -cover=true -debug=true -test=false -vv=100
+2020/05/11 04:43:44 fuzzer started
+2020/05/11 04:43:45 dialing manager at 10.0.2.10:44223
+2020/05/11 04:43:45 syscalls: 1811
+2020/05/11 04:43:45 code coverage: enabled
+2020/05/11 04:43:45 comparison tracing: enabled
+2020/05/11 04:43:45 extra coverage: enabled
+2020/05/11 04:43:45 setuid sandbox: enabled
+2020/05/11 04:43:45 namespace sandbox: /proc/self/ns/user does not exist
+2020/05/11 04:43:45 Android sandbox: enabled
+2020/05/11 04:43:45 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2020/05/11 04:43:45 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2020/05/11 04:43:45 net packet injection: /dev/net/tun does not exist
+2020/05/11 04:43:45 net device setup: enabled
+2020/05/11 04:43:45 concurrency sanitizer: /sys/kernel/debug/kcsan does not exist
+2020/05/11 04:43:45 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/11 04:43:45 USB emulation: /dev/raw-gadget does not exist
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=257
+2020/05/11 04:43:45 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:43:46 --------------------
+2020/05/11 04:43:46 getting cover
+2020/05/11 04:43:46 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:43:46 --------------------
+2020/05/11 04:43:46 setting fault
+2020/05/11 04:43:46 --------------------------
+2020/05/11 04:43:46 queue is empty
+2020/05/11 04:43:46 #0: generated
+04:43:46 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+Rrooach executor_linux cov->fd = 232
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 233
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 234
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 235
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 236
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 237
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 238
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 239
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 240
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 241
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 242
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 243
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 244
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 245
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 246
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 247
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 0
+Rrooach: executor_linux 107 size = 0   data =    
+spawned loop pid 734
+mount(fusectl) failed: 2
+write(/syzcgroup/unified/cgroup.subtree_control) failed: 22
+mount(cgroup cpu) failed: 22
+mount(cgroup net) failed: 22
+netlink: add addr 172.30.0.1 dev nr0: No such device
+netlink: device nr0 up master (null): No such device
+netlink: add addr 172.30.1.1 dev rose0: No such device
+netlink: device rose0 up master (null): No such device
+netlink: adding device ip6gretap0 type ip6gretap: Operation not supported
+netlink: adding device bridge0 type bridge: Operation not supported
+netlink: adding device vcan0 type vcan: Operation not supported
+netlink: adding device bond0 type bond: Operation not supported
+netlink: adding device team0 type team: Operation not supported
+netlink: adding device dummy0 type dummy: Operation not supported
+netlink: adding device nlmon0 type nlmon: Operation not supported
+netlink: adding device caif0 type caif: Operation not supported
+netlink: adding device batadv0 type batadv: Operation not supported
+netlink: adding device vxcan1 type vxcan: Operation not supported
+netlink: adding device netdevsim0 type netdevsim: Operation not supported
+netlink: adding device (null) type veth: Operation not supported
+netlink: adding device xfrm0 type xfrm: Operation not supported
+netlink: adding device wg0 type wireguard: Operation not supported
+netlink: adding device wg1 type wireguard: Operation not supported
+netlink: adding device wg2 type wireguard: Operation not supported
+netlink: adding device bridge_slave_0 type veth peer veth0_to_bridge: Operation not supported
+netlink: adding device bridge_slave_1 type veth peer veth1_to_bridge: Operation not supported
+netlink: device bridge_slave_0 up master bridge0: No such device
+netlink: device bridge_slave_1 up master bridge0: No such device
+netlink: adding device bond_slave_0 type veth peer veth0_to_bond: Operation not supported
+netlink: adding device bond_slave_1 type veth peer veth1_to_bond: Operation not supported
+netlink: device bond_slave_0 up master bond0: No such device
+netlink: device bond_slave_1 up master bond0: No such device
+netlink: adding device team_slave_0 type veth peer veth0_to_team: Operation not supported
+netlink: adding device team_slave_1 type veth peer veth1_to_team: Operation not supported
+netlink: device team_slave_0 up master team0: No such device
+netlink: device team_slave_1 up master team0: No such device
+netlink: adding device batadv_slave_0 type veth peer veth0_to_batadv: Operation not supported
+netlink: adding device batadv_slave_1 type veth peer veth1_to_batadv: Operation not supported
+netlink: device batadv_slave_0 up master batadv0: No such device
+netlink: device batadv_slave_1 up master batadv0: No such device
+netlink: device bridge_slave_0 up master (null): No such device
+netlink: device bridge_slave_1 up master (null): No such device
+netlink: adding device hsr_slave_0 type veth peer veth0_to_hsr: Operation not supported
+netlink: adding device hsr_slave_1 type veth peer veth1_to_hsr: Operation not supported
+netlink: adding device hsr0 type hsr slave1 hsr_slave_0 slave2 hsr_slave_1: Operation not supported
+netlink: device hsr_slave_0 up master (null): No such device
+netlink: device hsr_slave_1 up master (null): No such device
+netlink: adding device veth0_virt_wifi type veth peer veth1_virt_wifi: Operation not supported
+netlink: adding device virt_wifi0 type virt_wifi link veth1_virt_wifi: Operation not supported
+netlink: adding device veth0_vlan type veth peer veth1_vlan: Operation not supported
+netlink: add vlan0 type vlan link veth0_vlan id 0: Operation not supported
+netlink: add vlan1 type vlan link veth0_vlan id 1: Operation not supported
+netlink: add macvlan0 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add macvlan1 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add ipvlan0 type ipvlan link veth0_vlan mode 0: Operation not supported
+netlink: add ipvlan1 type ipvlan link veth0_vlan mode 2: Operation not supported
+netlink: adding device veth0_macvtap type veth peer veth1_macvtap: Operation not supported
+netlink: adding device macvtap0 type macvtap link veth0_macvtap: Operation not supported
+netlink: adding device macsec0 type macsec link veth1_macvtap: Operation not supported
+netlink: add geneve0 type geneve vni 0: Operation not supported
+netlink: add geneve1 type geneve vni 1: Operation not supported
+netlink: failed to get wireguard family id: No such file or directory
+netlink: add addr 172.20.20.10 dev lo: Success
+netlink: add addr fe80::0a dev lo: Success
+netlink: device lo up master (null): Success
+netlink: add addr 172.20.20.11 dev sit0: Success
+netlink: add addr fe80::0b dev sit0: Success
+netlink: device sit0 up master (null): Success
+netlink: add addr 172.20.20.12 dev bridge0: No such device
+netlink: add addr fe80::0c dev bridge0: No such device
+netlink: device bridge0 up master (null): No such device
+netlink: add addr 172.20.20.13 dev vcan0: No such device
+netlink: device vcan0 up master (null): No such device
+netlink: add addr 172.20.20.14 dev tunl0: No such device
+netlink: add addr fe80::0e dev tunl0: No such device
+netlink: device tunl0 up master (null): No such device
+netlink: add addr 172.20.20.15 dev gre0: No such device
+netlink: add addr fe80::0f dev gre0: No such device
+netlink: device gre0 up master (null): No such device
+netlink: add addr 172.20.20.16 dev gretap0: No such device
+netlink: add addr fe80::10 dev gretap0: No such device
+netlink: device gretap0 up master (null): No such device
+netlink: add addr 172.20.20.17 dev ip_vti0: No such device
+netlink: add addr fe80::11 dev ip_vti0: No such device
+netlink: device ip_vti0 up master (null): No such device
+netlink: add addr 172.20.20.18 dev ip6_vti0: No such device
+netlink: add addr fe80::12 dev ip6_vti0: No such device
+netlink: device ip6_vti0 up master (null): No such device
+netlink: add addr 172.20.20.19 dev ip6tnl0: No such device
+netlink: add addr fe80::13 dev ip6tnl0: No such device
+netlink: device ip6tnl0 up master (null): No such device
+netlink: add addr 172.20.20.20 dev ip6gre0: No such device
+netlink: add addr fe80::14 dev ip6gre0: No such device
+netlink: device ip6gre0 up master (null): No such device
+netlink: add addr 172.20.20.21 dev ip6gretap0: No such device
+netlink: add addr fe80::15 dev ip6gretap0: No such device
+netlink: device ip6gretap0 up master (null): No such device
+netlink: add addr 172.20.20.22 dev erspan0: No such device
+netlink: add addr fe80::16 dev erspan0: No such device
+netlink: device erspan0 up master (null): No such device
+netlink: add addr 172.20.20.23 dev bond0: No such device
+netlink: add addr fe80::17 dev bond0: No such device
+netlink: device bond0 up master (null): No such device
+netlink: add addr 172.20.20.24 dev veth0: No such device
+netlink: add addr fe80::18 dev veth0: No such device
+netlink: device veth0 up master (null): No such device
+netlink: add addr 172.20.20.25 dev veth1: No such device
+netlink: add addr fe80::19 dev veth1: No such device
+netlink: device veth1 up master (null): No such device
+netlink: add addr 172.20.20.26 dev team0: No such device
+netlink: add addr fe80::1a dev team0: No such device
+netlink: device team0 up master (null): No such device
+netlink: add addr 172.20.20.27 dev veth0_to_bridge: No such device
+netlink: add addr fe80::1b dev veth0_to_bridge: No such device
+netlink: device veth0_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.28 dev veth1_to_bridge: No such device
+netlink: add addr fe80::1c dev veth1_to_bridge: No such device
+netlink: device veth1_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.29 dev veth0_to_bond: No such device
+netlink: add addr fe80::1d dev veth0_to_bond: No such device
+netlink: device veth0_to_bond up master (null): No such device
+netlink: add addr 172.20.20.30 dev veth1_to_bond: No such device
+netlink: add addr fe80::1e dev veth1_to_bond: No such device
+netlink: device veth1_to_bond up master (null): No such device
+netlink: add addr 172.20.20.31 dev veth0_to_team: No such device
+netlink: add addr fe80::1f dev veth0_to_team: No such device
+netlink: device veth0_to_team up master (null): No such device
+netlink: add addr 172.20.20.32 dev veth1_to_team: No such device
+netlink: add addr fe80::20 dev veth1_to_team: No such device
+netlink: device veth1_to_team up master (null): No such device
+netlink: add addr 172.20.20.33 dev veth0_to_hsr: No such device
+netlink: add addr fe80::21 dev veth0_to_hsr: No such device
+netlink: device veth0_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.34 dev veth1_to_hsr: No such device
+netlink: add addr fe80::22 dev veth1_to_hsr: No such device
+netlink: device veth1_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.35 dev hsr0: No such device
+netlink: add addr fe80::23 dev hsr0: No such device
+netlink: device hsr0 up master (null): No such device
+netlink: add addr 172.20.20.36 dev dummy0: No such device
+netlink: add addr fe80::24 dev dummy0: No such device
+netlink: device dummy0 up master (null): No such device
+netlink: add addr 172.20.20.37 dev nlmon0: No such device
+netlink: add addr fe80::25 dev nlmon0: No such device
+netlink: device nlmon0 up master (null): No such device
+netlink: add addr 172.20.20.38 dev vxcan0: No such device
+netlink: device vxcan0 up master (null): No such device
+netlink: add addr 172.20.20.39 dev vxcan1: No such device
+netlink: device vxcan1 up master (null): No such device
+netlink: add addr 172.20.20.40 dev caif0: No such device
+netlink: add addr fe80::28 dev caif0: No such device
+netlink: device caif0 up master (null): No such device
+netlink: add addr 172.20.20.41 dev batadv0: No such device
+netlink: add addr fe80::29 dev batadv0: No such device
+netlink: device batadv0 up master (null): No such device
+netlink: add addr 172.20.20.42 dev netdevsim0: No such device
+netlink: add addr fe80::2a dev netdevsim0: No such device
+netlink: device netdevsim0 up master (null): No such device
+netlink: add addr 172.20.20.43 dev xfrm0: No such device
+netlink: add addr fe80::2b dev xfrm0: No such device
+netlink: device xfrm0 up master (null): No such device
+netlink: add addr 172.20.20.44 dev veth0_virt_wifi: No such device
+netlink: add addr fe80::2c dev veth0_virt_wifi: No such device
+netlink: device veth0_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.45 dev veth1_virt_wifi: No such device
+netlink: add addr fe80::2d dev veth1_virt_wifi: No such device
+netlink: device veth1_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.46 dev virt_wifi0: No such device
+netlink: add addr fe80::2e dev virt_wifi0: No such device
+netlink: device virt_wifi0 up master (null): No such device
+netlink: add addr 172.20.20.47 dev veth0_vlan: No such device
+netlink: add addr fe80::2f dev veth0_vlan: No such device
+netlink: device veth0_vlan up master (null): No such device
+netlink: add addr 172.20.20.48 dev veth1_vlan: No such device
+netlink: add addr fe80::30 dev veth1_vlan: No such device
+netlink: device veth1_vlan up master (null): No such device
+netlink: add addr 172.20.20.49 dev vlan0: No such device
+netlink: add addr fe80::31 dev vlan0: No such device
+netlink: device vlan0 up master (null): No such device
+netlink: add addr 172.20.20.50 dev vlan1: No such device
+netlink: add addr fe80::32 dev vlan1: No such device
+netlink: device vlan1 up master (null): No such device
+netlink: add addr 172.20.20.51 dev macvlan0: No such device
+netlink: add addr fe80::33 dev macvlan0: No such device
+netlink: device macvlan0 up master (null): No such device
+netlink: add addr 172.20.20.52 dev macvlan1: No such device
+netlink: add addr fe80::34 dev macvlan1: No such device
+netlink: device macvlan1 up master (null): No such device
+netlink: add addr 172.20.20.53 dev ipvlan0: No such device
+netlink: add addr fe80::35 dev ipvlan0: No such device
+netlink: device ipvlan0 up master (null): No such device
+netlink: add addr 172.20.20.54 dev ipvlan1: No such device
+netlink: add addr fe80::36 dev ipvlan1: No such device
+netlink: device ipvlan1 up master (null): No such device
+netlink: add addr 172.20.20.55 dev veth0_macvtap: No such device
+netlink: add addr fe80::37 dev veth0_macvtap: No such device
+netlink: device veth0_macvtap up master (null): No such device
+netlink: add addr 172.20.20.56 dev veth1_macvtap: No such device
+netlink: add addr fe80::38 dev veth1_macvtap: No such device
+netlink: device veth1_macvtap up master (null): No such device
+netlink: add addr 172.20.20.57 dev macvtap0: No such device
+netlink: add addr fe80::39 dev macvtap0: No such device
+netlink: device macvtap0 up master (null): No such device
+netlink: add addr 172.20.20.58 dev macsec0: No such device
+netlink: add addr fe80::3a dev macsec0: No such device
+netlink: device macsec0 up master (null): No such device
+netlink: add addr 172.20.20.59 dev veth0_to_batadv: No such device
+netlink: add addr fe80::3b dev veth0_to_batadv: No such device
+netlink: device veth0_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.60 dev veth1_to_batadv: No such device
+netlink: add addr fe80::3c dev veth1_to_batadv: No such device
+netlink: device veth1_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.61 dev batadv_slave_0: No such device
+netlink: add addr fe80::3d dev batadv_slave_0: No such device
+netlink: device batadv_slave_0 up master (null): No such device
+netlink: add addr 172.20.20.62 dev batadv_slave_1: No such device
+netlink: add addr fe80::3e dev batadv_slave_1: No such device
+netlink: device batadv_slave_1 up master (null): No such device
+netlink: add addr 172.20.20.63 dev geneve0: No such device
+netlink: add addr fe80::3f dev geneve0: No such device
+netlink: device geneve0 up master (null): No such device
+netlink: add addr 172.20.20.64 dev geneve1: No such device
+netlink: add addr fe80::40 dev geneve1: No such device
+netlink: device geneve1 up master (null): No such device
+netlink: add addr 172.20.20.65 dev wg0: No such device
+netlink: add addr fe80::41 dev wg0: No such device
+netlink: device wg0 up master (null): No such device
+netlink: add addr 172.20.20.66 dev wg1: No such device
+netlink: add addr fe80::42 dev wg1: No such device
+netlink: device wg1 up master (null): No such device
+netlink: add addr 172.20.20.67 dev wg2: No such device
+netlink: add addr fe80::43 dev wg2: No such device
+netlink: device wg2 up master (null): No such device
+iptable checkpoint filter/2: checkpoint entries=4 hooks=e size=632
+iptable checkpoint nat/2: checkpoint entries=5 hooks=1b size=784
+iptable checkpoint mangle/2: checkpoint entries=6 hooks=1f size=936
+iptable checkpoint filter/10: checkpoint entries=4 hooks=e size=856
+iptable checkpoint mangle/10: checkpoint entries=6 hooks=1f size=1272
+[3689ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 2
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3735ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3735ms] <- openat$nvram=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3736ms] -> getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, 0x200000c0, 0x20000100)
+Rrooach executor_linux175 size = 10000
+#0 [3736ms] <- getsockopt$inet_pktinfo=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3736ms] -> setsockopt$inet_IP_IPSEC_POLICY(0x13, 0x0, 0x10, 0x20000140, 0xe8)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- setsockopt$inet_IP_IPSEC_POLICY=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] -> ioctl$TIOCSSERIAL(0x13, 0x541e, 0x20000300)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- ioctl$TIOCSSERIAL=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] -> clock_gettime(0x0, 0x200003c0)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- clock_gettime=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3738ms] -> futimesat(0x13, 0x20000380, 0x20000400)
+Rrooach executor_linux175 size = 10000
+#0 [3738ms] <- futimesat=0xffffffffffffffff errno=20 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3738ms] -> open$IOCTL_PRIVCMD_HYPERCALL18421_3(0x20000440)
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] <- open$IOCTL_PRIVCMD_HYPERCALL18421_3=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] -> ioctl$TCSETS(0x14, 0x5402, 0x20000480)
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] <- ioctl$TCSETS=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] -> writev(0x14, 0x20000880, 0x6)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- writev=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] -> syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- syz_open_dev$char_usb=0xffffffffffffffff errno=2 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] -> ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- ioctl$KIOCSOUND=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] -> stat(0x20000900, 0x20000940)
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] <- stat=0xffffffffffffffff errno=2 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] -> syz_genetlink_get_family_id$devlink(0x200009c0)
+syz_genetlink_get_family_id(devlink)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3749ms] <- syz_genetlink_get_family_id$devlink=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3749ms] -> bind$unix(0xffffffffffffffff, 0x20000a00, 0x6e)
+Rrooach executor_linux175 size = 10000
+#0 [3750ms] <- bind$unix=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3750ms] -> ioctl$KDDELIO(0x14, 0x4b35, 0x8000)
+Rrooach executor_linux175 size = 10000
+#0 [3750ms] <- ioctl$KDDELIO=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3750ms] -> ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, 0x20000a80)
+Rrooach executor_linux175 size = 10000
+#0 [3750ms] <- ioctl$TIOCGISO7816=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3751ms] -> open$IOCTL_PRIVCMD_HYPERCALL17343(0x20000ac0)
+Rrooach executor_linux175 size = 10000
+#0 [3751ms] <- open$IOCTL_PRIVCMD_HYPERCALL17343=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3751ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL173503(0x15, 0x305000, 0x20000b00)
+Rrooach executor_linux175 size = 10000
+#0 [3751ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL173503=0xffffffffffffffff errno=14 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] -> pipe(0x20000b40)
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] <- pipe=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] -> clone3(0x20000d80, 0x50)
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] <- clone3=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] -> fcntl$setown(0x16, 0x8, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3752ms] <- fcntl$setown=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3753ms] -> fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, 0x20000e00, 0x20000e40, 0x16, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3753ms] <- fsetxattr$trusted_overlay_nlink=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3753ms] -> ioctl$void(0x16, 0x5450)
+Rrooach executor_linux175 size = 10000
+#0 [3753ms] <- ioctl$void=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3754ms] -> fsconfig$FSCONFIG_SET_PATH(0x16, 0x3, 0x20000e80, 0x20000ec0, 0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3754ms] <- fsconfig$FSCONFIG_SET_PATH=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3754ms] -> open$IOCTL_PRIVCMD_HYPERCALL17350111(0x20000f00)
+Rrooach executor_linux175 size = 10000
+#0 [3754ms] <- open$IOCTL_PRIVCMD_HYPERCALL17350111=0x18 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3755ms] -> syz_genetlink_get_family_id$batadv(0x20000f80)
+syz_genetlink_get_family_id(batadv)
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#0 [3761ms] <- syz_genetlink_get_family_id$batadv=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3761ms] -> sendmsg$BATADV_CMD_GET_VLAN(0x18, 0x20001080, 0x20000020)
+Rrooach executor_linux175 size = 10000
+#0 [3762ms] <- sendmsg$BATADV_CMD_GET_VLAN=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3762ms] -> set_tid_address(0x200010c0)
+Rrooach executor_linux175 size = 10000
+#0 [3762ms] <- set_tid_address=0x7 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3762ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, 0x20001100)
+Rrooach executor_linux175 size = 10000
+#0 [3762ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL222=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3763ms] -> getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, 0x20001180, 0x20001280)
+Rrooach executor_linux175 size = 10000
+#0 [3763ms] <- getsockopt$inet_IP_IPSEC_POLICY=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+Rrooach executor_linux175 size = 10000
+enabling collider
+#0 [3763ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3763ms] <- openat$nvram=0x3 errno=0 cover=10000 
+#0 [3764ms] -> getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, 0x200000c0, 0x20000100)
+Rrooach executor_linux175 size = 10000
+#0 [3764ms] <- getsockopt$inet_pktinfo=0xffffffffffffffff errno=9 cover=10000 
+#1 [3778ms] -> setsockopt$inet_IP_IPSEC_POLICY(0x3, 0x0, 0x10, 0x20000140, 0xe8)
+Rrooach executor_linux175 size = 10000
+#1 [3778ms] <- setsockopt$inet_IP_IPSEC_POLICY=0xffffffffffffffff errno=88 cover=10000 
+#0 [3779ms] -> ioctl$TIOCSSERIAL(0x3, 0x541e, #1 [3779ms] -> clock_gettime(0x0, 0x200003c0)
+Rrooach executor_linux175 size = 10000
+#1 [3779ms] <- clock_gettime=0x0 errno=0 cover=10000 
+0x20000300)
+Rrooach executor_linux175 size = 10000
+#0 [3779ms] <- ioctl$TIOCSSERIAL=0xffffffffffffffff errno=25 cover=10000 
+#1 [3779ms] -> open$IOCTL_PRIVCMD_HYPERCALL18421_3(#0 [3779ms] -> futimesat(0x3, 0x20000380, 0x20000400)
+0x20000440)
+Rrooach executor_linux175 size = 10000
+#1 [3779ms] <- open$IOCTL_PRIVCMD_HYPERCALL18421_3=0x4 errno=0 cover=10000 
+#1 [3780ms] -> ioctl$TCSETS(0x4, 0x5402, 0x20000480)
+Rrooach executor_linux175 size = 10000
+Rrooach executor_linux175 size = 10000
+#0 [3780ms] <- futimesat=0xffffffffffffffff errno=20 cover=10000 #1 [3780ms] <- ioctl$TCSETS=0xffffffffffffffff errno=25 cover=10000 
+
+#2 [3794ms] -> writev(0x4, 0x20000880, 0x6)
+Rrooach executor_linux175 size = 10000
+#2 [3794ms] <- writev=0xffffffffffffffff errno=9 cover=10000 
+#1 [3795ms] -> ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+Rrooach executor_linux175 size = 10000
+#1 [3795ms] <- ioctl$KIOCSOUND=0xffffffffffffffff errno=9 cover=10000 
+#0 [3795ms] -> syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+Rrooach executor_linux175 size = 10000
+#0 [3795ms] <- syz_open_dev$char_usb=0xffffffffffffffff errno=2 cover=10000 
+#1 [3795ms] -> syz_genetlink_get_family_id$devlink(0x200009c0)
+syz_genetlink_get_family_id(devlink)
+#0 [3795ms] -> stat(0x20000900, 0x20000940)
+Rrooach executor_linux175 size = 10000
+#0 [3795ms] <- stat=0xffffffffffffffff errno=2 cover=10000 
+syz_genetlink_get_family_id: wrong reply type: 2
+Rrooach executor_linux175 size = 10000
+#1 [3803ms] <- syz_genetlink_get_family_id$devlink=0xffffffffffffffff errno=22 cover=10000 
+#0 [3803ms] -> bind$unix(0xffffffffffffffff, 0x20000a00, 0x6e)
+Rrooach executor_linux175 size = 10000
+#0 [3803ms] <- bind$unix=0xffffffffffffffff errno=9 cover=10000 
+#1 [3803ms] -> ioctl$KDDELIO(0x4, 0x4b35, 0x8000)
+Rrooach executor_linux175 size = 10000
+#1 [3803ms] <- ioctl$KDDELIO=0xffffffffffffffff errno=25 cover=10000 
+#0 [3803ms] -> ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, 0x20000a80)
+Rrooach executor_linux175 size = 10000
+#0 [3803ms] <- ioctl$TIOCGISO7816=0xffffffffffffffff errno=9 cover=10000 
+#1 [3803ms] -> open$IOCTL_PRIVCMD_HYPERCALL17343(0x20000ac0)
+Rrooach executor_linux175 size = 10000
+#1 [3803ms] <- open$IOCTL_PRIVCMD_HYPERCALL17343=0x5 errno=0 cover=10000 
+#0 [3803ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL173503(0x5, 0x305000, 0x20000b00)
+Rrooach executor_linux175 size = 10000
+#0 [3803ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL173503=0xffffffffffffffff errno=14 cover=10000 
+#1 [3803ms] -> pipe(0x20000b40)
+Rrooach executor_linux175 size = 10000
+#1 [3803ms] <- pipe=0x0 errno=0 cover=10000 
+#0 [3804ms] -> clone3(0x20000d80, 0x50)
+Rrooach executor_linux175 size = 10000
+#0 [3804ms] <- clone3=0xffffffffffffffff errno=22 cover=10000 
+#1 [3804ms] -> fcntl$setown(0x6, 0x8, 0x0)
+Rrooach executor_linux175 size = 10000
+#1 [3804ms] <- fcntl$setown=0x0 errno=0 cover=10000 
+#0 [3804ms] -> fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, 0x20000e00, 0x20000e40, 0x16, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3804ms] <- fsetxattr$trusted_overlay_nlink=0xffffffffffffffff errno=9 cover=10000 
+#1 [3804ms] -> ioctl$void(0x6, 0x5450)
+Rrooach executor_linux175 size = 10000
+#1 [3804ms] <- ioctl$void=0x0 errno=0 cover=10000 
+#0 [3804ms] -> fsconfig$FSCONFIG_SET_PATH(0x6, 0x3, 0x20000e80, 0x20000ec0, 0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3804ms] <- fsconfig$FSCONFIG_SET_PATH=0xffffffffffffffff errno=22 cover=10000 
+#1 [3804ms] -> open$IOCTL_PRIVCMD_HYPERCALL17350111(0x20000f00)
+Rrooach executor_linux175 size = 10000
+#1 [3804ms] <- open$IOCTL_PRIVCMD_HYPERCALL17350111=0x8 errno=0 cover=10000 
+#1 [3804ms] -> sendmsg$BATADV_CMD_GET_VLAN(0x8, 0x20001080, 0x20000020)
+Rrooach executor_linux175 size = 10000
+#1 [3804ms] <- sendmsg$BATADV_CMD_GET_VLAN=0xffffffffffffffff errno=88 cover=10000 
+#0 [3804ms] -> syz_genetlink_get_family_id$batadv(#2 [3804ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL222(#1 [3804ms] -> set_tid_address(0x200010c0)
+Rrooach executor_linux175 size = 10000
+#1 [3805ms] <- set_tid_address=0xa errno=0 cover=10000 
+0xffffffffffffffff, 0x305000, 0x200011000x20000f80)
+syz_genetlink_get_family_id(batadv)
+)
+Rrooach executor_linux175 size = 10000
+#2 [3805ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL222=0xffffffffffffffff errno=9 cover=10000 
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 getting cover
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 get report
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 setting fault
+2020/05/11 04:43:50 #0: triaging type=0
+2020/05/11 04:43:50 triaging input for call #27 set_tid_address (new signal=1)
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[3851ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 16
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3894ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3894ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[3897ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 24
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3941ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3941ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[3943ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 32
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3990ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3990ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 getting cover
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 get report
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 setting fault
+2020/05/11 04:43:50 #0: triaging type=0
+2020/05/11 04:43:50 triaging input for call #26 sendmsg$BATADV_CMD_GET_VLAN (new signal=1)
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4026ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 40
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4069ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4069ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4072ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+spawned worker pid 48
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4118ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4118ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:50 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+[4121ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 56
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4166ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4166ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:50 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:50 result hanged=false: 
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 getting cover
+2020/05/11 04:43:50 --------------------
+2020/05/11 04:43:50 get report
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #22 ioctl$void (new signal=2)
+[4209ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 64
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4251ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4252ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4255ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 72
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4299ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4300ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4304ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 80
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4347ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4347ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 getting cover
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 get report
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #20 fcntl$setown (new signal=2)
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4392ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 88
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4437ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4437ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4440ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+spawned worker pid 96
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4482ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4482ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4485ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 104
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4528ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4528ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 getting cover
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 get report
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #13 bind$unix (new signal=1)
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4562ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 112
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4609ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4609ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+[4612ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 120
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4653ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4654ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4656ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 128
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4700ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4700ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 getting cover
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 get report
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #10 ioctl$KIOCSOUND (new signal=1)
+[4736ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 136
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4778ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4778ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4780ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 144
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4822ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4823ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4825ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 152
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4867ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4867ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 getting cover
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 get report
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4903ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #3 ioctl$TIOCSSERIAL (new signal=1)
+spawned worker pid 160
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4948ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4948ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+iptable filter/10: resetting
+iptable mangle/10: resetting
+[4950ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 168
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4994ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4994ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[4997ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 176
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5042ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5042ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 getting cover
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 get report
+2020/05/11 04:43:51 --------------------
+2020/05/11 04:43:51 setting fault
+2020/05/11 04:43:51 #0: triaging type=0
+2020/05/11 04:43:51 triaging input for call #0 openat$nvram (new signal=2)
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[5076ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 184
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5118ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5119ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+[5121ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 192
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5163ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5163ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:51 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:51 result hanged=false: 
+04:43:51 executing program 0:
+r0 = openat$nvram(0xffffffffffffff9c, &(0x7f0000000000)='/dev/nvram\x00', 0x101002, 0x0)
+getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, &(0x7f00000000c0)={<r1=>0x0, @initdev, @private}, &(0x7f0000000100)=0xc)
+setsockopt$inet_IP_IPSEC_POLICY(r0, 0x0, 0x10, &(0x7f0000000140)={{{@in6=@empty, @in6=@ipv4={[], [], @dev={0xac, 0x14, 0x14, 0x27}}, 0x4e22, 0x0, 0x4e21, 0xf5ed, 0xa, 0x0, 0x40, 0xbd, r1, 0xee01}, {0x7, 0x6, 0xd9, 0x1, 0x2, 0xfffffffffffffffc, 0xbd, 0x9}, {0xc4a1, 0x8, 0x7}, 0x80, 0x6e6bbb, 0x2, 0x0, 0x2}, {{@in=@local, 0x4d5, 0xff}, 0xa, @in=@multicast2, 0x3501, 0x2, 0x3, 0x0, 0x8, 0x7, 0x8001}}, 0xe8)
+ioctl$TIOCSSERIAL(r0, 0x541e, &(0x7f0000000300)={0x2, 0x80000001, 0xad70, 0x9724, 0x81ae, 0x6, 0x1, 0x4, 0xcd, 0x40, 0x2, 0x3ff, 0x200, 0xed34, &(0x7f0000000240)=""/150, 0x2, 0x29bd, 0x7})
+clock_gettime(0x0, &(0x7f00000003c0)={<r2=>0x0, <r3=>0x0})
+futimesat(r0, &(0x7f0000000380)='./file0\x00', &(0x7f0000000400)={{r2, r3/1000+10000}, {0x0, 0x2710}})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL18421_3(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+ioctl$TCSETS(r4, 0x5402, &(0x7f0000000480)={0x7, 0x2, 0x80000001, 0x8, 0x14, "0625d12be8e45477322188122b64d0982f0cf2"})
+writev(r4, &(0x7f0000000880)=[{&(0x7f00000004c0)="ec4c57c15fdb1548f37959ccc545aa133b59ee4f95740f52e46d3721705159e7b34b21d85600b6b040a9415f324d94e792d3e8a8022d9c20c4495b83f6dead91fb10c21712f313e2d01846313763a281b1bf32dde5f30a00734779b9b4e2979dbf03b0d616737421727ba3f85a63f8dfa62745e4a22218b4676352e87d19068ef3e1d58ef6187c8f40d503d87d987f2aee269eaa8769a0d77bb0a96e1d5e16a0020f5a7cff2ba224aeb14501e718c5e1a152259da1e60b919ebfbaea1580b9a91e697e3e3b3659b8f268222497", 0xcd}, {&(0x7f00000005c0)="03", 0x1}, {&(0x7f0000000600)="a3e989d7a354993e4bc1022a2c34b5953840d0c8d9a6e0891e5e4c4df8c39cca052eaadf90898b1678877cfebe8373f203c5edd11dff5bcacf4235e205713ac2162d8e951ffa8cd673af46585004393827a75f92f4ffc5874e3c175e36233195e10e59fd316004716321a95a77620a9190ab80f87ca7651513b67a9489740b431dcae35f7979", 0x86}, {&(0x7f00000006c0)="bcad8c021edd767c9c357b2d24475328dc11f7a3ca70776c17898cb15510cdfcebb418536a9f431b3e5eb095aabe55c19ef0f8bafe9e5e65c8e5ea7cf8f50beab1bcf3f11dbf4e3b579bf32e956828bd3e93dbbe4265c08e33eea685c432ec1fa45dcc462c11c2107cb2e295dade20289e46fe65c4b4af3f85f99a1e3275d440f2bfbc39e624e7fe99b95c2c4537c8f703cb8ad629c79c7923ba66d70707fe71463977036829a77a3fbe885401903362fe7cb3ed540dea85521c64cd6758", 0xbe}, {&(0x7f0000000780)="831ebb72e630d2c197dce077627eb37265687911653c411c01a9f0bdfb870b1b5dbc645cf45d7ec663d02f52e8169dc7f142898355fffc95c8d86f8a3bc3775f8366e0e1356b1e3313d7d8d345259a68d0e9e6f06e72ea8bee1a", 0x5a}, {&(0x7f0000000800)="b8a482c3c542c5a2c67823c8ca35f3b5421b90d246eb3b13a170b85f22faf02eb5346f30ec087c16b15278aab503c3292d6f8c336eb223fba54146580f3aa84f1d0b55db53df", 0x46}], 0x6)
+syz_open_dev$char_usb(0xc, 0xb4, 0x5)
+ioctl$KIOCSOUND(0xffffffffffffffff, 0x4b2f, 0x0)
+stat(&(0x7f0000000900)='./file0\x00', &(0x7f0000000940))
+syz_genetlink_get_family_id$devlink(&(0x7f00000009c0)='devlink\x00')
+bind$unix(0xffffffffffffffff, &(0x7f0000000a00)=@abs={0x1, 0x0, 0x4e23}, 0x6e)
+ioctl$KDDELIO(r4, 0x4b35, 0x8000)
+ioctl$TIOCGISO7816(0xffffffffffffffff, 0x80285442, &(0x7f0000000a80))
+r5 = open$IOCTL_PRIVCMD_HYPERCALL17343(&(0x7f0000000ac0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL173503(r5, 0x305000, &(0x7f0000000b00)={0x10, 0x7f5a, 0x3f, 0x9, 0x6, 0xe086})
+pipe(&(0x7f0000000b40)={<r6=>0xffffffffffffffff})
+clone3(&(0x7f0000000d80)={0xc2002200, &(0x7f0000000b80), &(0x7f0000000bc0)=<r7=>0x0, &(0x7f0000000c00), {0x22}, &(0x7f0000000c40)=""/152, 0x98, &(0x7f0000000d00)=""/50, &(0x7f0000000d40)}, 0x50)
+fcntl$setown(r6, 0x8, r7)
+fsetxattr$trusted_overlay_nlink(0xffffffffffffffff, &(0x7f0000000e00)='trusted.overlay.nlink\x00', &(0x7f0000000e40)={'L+', 0xffffffff}, 0x16, 0x0)
+ioctl$void(r6, 0x5450)
+fsconfig$FSCONFIG_SET_PATH(r6, 0x3, &(0x7f0000000e80)='eth0lo\x00', &(0x7f0000000ec0)='./file0\x00', 0xffffffffffffffff)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL17350111(&(0x7f0000000f00)='/proc/xen/privcmd\x00')
+r9 = syz_genetlink_get_family_id$batadv(&(0x7f0000000f80)='batadv\x00')
+sendmsg$BATADV_CMD_GET_VLAN(r8, &(0x7f0000001080)={&(0x7f0000000f40)={0x10, 0x0, 0x0, 0x8000000}, 0xc, &(0x7f0000001040)={&(0x7f0000000fc0)={0x4c, r9, 0x200, 0x70bd2b, 0x25dfdbfe, {}, [@BATADV_ATTR_NETWORK_CODING_ENABLED={0x5}, @BATADV_ATTR_GW_SEL_CLASS={0x8, 0x34, 0x3}, @BATADV_ATTR_ORIG_INTERVAL={0x8, 0x39, 0x9}, @BATADV_ATTR_FRAGMENTATION_ENABLED={0x5}, @BATADV_ATTR_GW_MODE={0x5, 0x33, 0x1}, @BATADV_ATTR_BRIDGE_LOOP_AVOIDANCE_ENABLED={0x5}, @BATADV_ATTR_GW_BANDWIDTH_DOWN={0x8, 0x31, 0x3f}]}, 0x4c}, 0x1, 0x0, 0x0, 0x20000001}, 0x20000020)
+set_tid_address(&(0x7f00000010c0))
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(0xffffffffffffffff, 0x305000, &(0x7f0000001100)={0x22, 0x8, 0x0, 0x2, 0x5, 0x10000})
+getsockopt$inet_IP_IPSEC_POLICY(0xffffffffffffffff, 0x0, 0x10, &(0x7f0000001180)={{{@in6=@remote}}, {{@in=@local}, 0x0, @in6=@remote}}, &(0x7f0000001280)=0xe8)
+
+[5166ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 200
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5211ms] -> openat$nvram(0xffffffffffffff9c, 0x20000000, 0x101002, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5211ms] <- openat$nvram=0x13 errno=0 cover=10000 
+SIGSEGV on 0x7fb334fe2878, exiting
+2020/05/11 04:43:52 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:43:52 result hanged=false: 
+2020/05/11 04:43:52 --------------------
+2020/05/11 04:43:52 getting cover
+2020/05/11 04:43:52 --------------------
+2020/05/11 04:43:52 get report
+2020/05/11 04:43:52 --------------------
+2020/05/11 04:43:52 setting fault
+2020/05/11 04:43:52 #0: generated
+04:43:52 executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL117410(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+setsockopt$inet_tcp_TLS_TX(r0, 0x6, 0x1, &(0x7f0000000040)=@ccm_128={{0x303}, "52784556dcd2d94a", "4c125002e0550674ccfff5c93916c920", "7ea1ef15", "7fde678e0db0f874"}, 0x28)
+r1 = syz_open_dev$sg(&(0x7f0000000080)='/dev/sg#\x00', 0x7d8, 0x3f1000)
+ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS(r1, 0xc080661a, &(0x7f00000000c0)={{0x1, 0x0, @reserved="71f32b1630644e2feb301d62a9545d929b81d7976631c74767125bfbcc481993"}})
+ptrace$peekuser(0x3, 0xffffffffffffffff, 0x3)
+r2 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000140)='/dev/vga_arbiter\x00', 0x2c2901, 0x0)
+setsockopt$IPT_SO_SET_ADD_COUNTERS(r2, 0x0, 0x41, &(0x7f0000000180)={'raw\x00', 0x2, [{}, {}]}, 0x48)
+sendto$inet(r0, &(0x7f0000000200)="959507c69b33be6aba55d9dba5622c933c0aa090d9ec46e5ef88fa9795c37336270ba7fa09e291a1e606b5ea1e981c07dbb6f11b23", 0x35, 0x2000c010, &(0x7f0000000240)={0x2, 0x4e24, @multicast2}, 0x10)
+ioctl$IOCTL_PRIVCMD_HYPERCALL1735024(r0, 0x305000, &(0x7f0000000280)={0x3, 0x7fff, 0xfff, 0x18000000000000, 0x8})
+ioctl$TIOCMIWAIT(r2, 0x545c, 0x0)
+r3 = openat$zero(0xffffffffffffff9c, &(0x7f00000002c0)='/dev/zero\x00', 0x60000, 0x0)
+ioctl$ifreq_SIOCGIFINDEX_wireguard(r2, 0x8933, &(0x7f0000001300)={'wg0\x00', <r4=>0x0})
+recvfrom$packet(r3, &(0x7f0000000300)=""/4096, 0x1000, 0x40010002, &(0x7f0000001340)={0x11, 0x1c, r4, 0x1, 0x7e, 0x6, @local}, 0x14)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL0(&(0x7f0000001380)='/proc/xen/privcmd\x00')
+readv(r5, &(0x7f00000014c0)=[{&(0x7f00000013c0)=""/225, 0xe1}], 0x1)
+io_setup(0x1, &(0x7f0000001500)=<r6=>0x0)
+io_destroy(r6)
+ioctl$TCSETA(r3, 0x5406, &(0x7f0000001540)={0x9, 0x5, 0x8, 0x4, 0x17, "884e7742da59400e"})
+r7 = open$IOCTL_PRIVCMD_HYPERCALL19578_21(&(0x7f0000001580)='/proc/xen/privcmd\x00')
+dup2(r1, r7)
+inotify_init()
+r8 = syz_open_procfs(0x0, &(0x7f00000015c0)='net/tcp6\x00')
+sendmsg$NFT_MSG_GETGEN(r8, &(0x7f00000016c0)={&(0x7f0000001600)={0x10, 0x0, 0x0, 0x400000}, 0xc, &(0x7f0000001680)={&(0x7f0000001640)={0x14, 0x10, 0xa, 0x3, 0x0, 0x0, {0x0, 0x0, 0x8}, ["", ""]}, 0x14}, 0x1, 0x0, 0x0, 0xc4}, 0x0)
+r9 = open$IOCTL_PRIVCMD_HYPERCALL18421(&(0x7f0000001700)='/proc/xen/privcmd\x00')
+getsockopt$inet_IP_IPSEC_POLICY(r9, 0x0, 0x10, &(0x7f0000001740)={{{@in6=@mcast1, @in=@dev}}, {{@in=@initdev}, 0x0, @in=@initdev}}, &(0x7f0000001840)=0xe8)
+ioctl$KDDISABIO(r0, 0x4b37)
+ioctl$IOCTL_PRIVCMD_HYPERCALL117400(r2, 0x305000, &(0x7f0000001880)={0x4, 0xfffffffffffffffa, 0x7ff, 0x9, 0x4, 0x7})
+write$sndseq(0xffffffffffffffff, &(0x7f00000018c0)=[{0x5, 0xe8, 0x6, 0x5, @time={0xfffffe00, 0x1}, {0x80, 0x4}, {0x4, 0x2}, @note={0x0, 0x3, 0x9c, 0x3f, 0x8}}, {0x5, 0x8, 0x6, 0x7, @tick=0xffff, {0x7f, 0x1}, {0x5, 0x6}, @addr={0x4, 0x63}}, {0x4, 0x4, 0x20, 0x1f, @tick=0xfff, {0x40, 0x5}, {0x9, 0xff}, @note={0xff, 0x7, 0xa5, 0x5, 0x4}}], 0x54)
+r10 = socket$inet6_tcp(0xa, 0x1, 0x0)
+ioctl$FS_IOC_SETFLAGS(r10, 0x40086602, &(0x7f0000001940)=0x8)
+
+[5248ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 208
+Rrooach exe577reset
+Rrooach exe580set
+#0 [5290ms] -> open$IOCTL_PRIVCMD_HYPERCALL117410(0x20000000)
+Rrooach executor_linux175 size = 10000
+#0 [5290ms] <- open$IOCTL_PRIVCMD_HYPERCALL117410=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5291ms] -> setsockopt$inet_tcp_TLS_TX(0x13, 0x6, 0x1, 0x20000040, 0x28)
+Rrooach executor_linux175 size = 10000
+#0 [5291ms] <- setsockopt$inet_tcp_TLS_TX=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5292ms] -> syz_open_dev$sg(0x20000080, 0x7d8, 0x3f1000)
+Rrooach executor_linux175 size = 10000
+#0 [5292ms] <- syz_open_dev$sg=0xffffffffffffffff errno=2 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5292ms] -> ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS(0xffffffffffffffff, 0xc080661a, 0x200000c0)
+Rrooach executor_linux175 size = 10000
+#0 [5293ms] <- ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5293ms] -> ptrace$peekuser(0x3, 0xffffffffffffffff, 0x3)
+Rrooach executor_linux175 size = 10000
+#0 [5293ms] <- ptrace$peekuser=0xffffffffffffffff errno=3 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5294ms] -> openat$vga_arbiter(0xffffffffffffff9c, 0x20000140, 0x2c2901, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [5294ms] <- openat$vga_arbiter=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5294ms] -> setsockopt$IPT_SO_SET_ADD_COUNTERS(0x14, 0x0, 0x41, 0x20000180, 0x48)
+Rrooach executor_linux175 size = 10000
+#0 [5294ms] <- setsockopt$IPT_SO_SET_ADD_COUNTERS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5295ms] -> sendto$inet(0x13, 0x20000200, 0x35, 0x2000c010, 0x20000240, 0x10)
+Rrooach executor_linux175 size = 10000
+#0 [5295ms] <- sendto$inet=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [5295ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL1735024(0x13, 0x305000debug1: channel 0: free: client-session, nchannels 1
+debug1: fd 0 clearing O_NONBLOCK
+debug1: fd 1 clearing O_NONBLOCK
+Connection to localhost closed by remote host.
+Transferred: sent 2840, received 190048 bytes, in 12.6 seconds
+Bytes per second: sent 225.7, received 15101.4
+debug1: Exit status -1

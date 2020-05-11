@@ -1,0 +1,852 @@
+OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017
+debug1: Reading configuration data /dev/null
+debug1: Connecting to localhost [127.0.0.1] port 29602.
+debug1: fd 3 clearing O_NONBLOCK
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/p2/key type 0
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/p2/key-cert type -1
+debug1: Local version string SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+debug1: Remote protocol version 2.0, remote software version OpenSSH_7.9p1 Debian-10+deb10u2
+debug1: match: OpenSSH_7.9p1 Debian-10+deb10u2 pat OpenSSH* compat 0x04000000
+debug1: Authenticating to localhost:29602 as 'root'
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: algorithm: curve25519-sha256
+debug1: kex: host key algorithm: ecdsa-sha2-nistp256
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ecdsa-sha2-nistp256 SHA256:4/tWNp5otCN3Z8Xa0hYVLJjk+v55FwwYCFcUvt73Uug
+debug1: checking without port identifier
+Warning: Permanently added '[localhost]:29602' (ECDSA) to the list of known hosts.
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering public key: RSA SHA256:CYnBEFcxsXRB+Lqq3RxKWrmSrcNoJTi0nhG3g2GVQxY /root/p2/key
+debug1: Server accepts key: pkalg rsa-sha2-512 blen 279
+debug1: Authentication succeeded (publickey).
+Authenticated to localhost ([127.0.0.1]:29602).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: pledge: network
+debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply 0
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Sending command: cd / && /syz-fuzzer -executor=/syz-executor -name=vm-0 -arch=amd64 -manager=10.0.2.10:43265 -sandbox=none -procs=1 -cover=true -debug=true -test=false -vv=100
+2020/05/11 04:10:20 fuzzer started
+2020/05/11 04:10:21 dialing manager at 10.0.2.10:43265
+2020/05/11 04:10:21 syscalls: 1811
+2020/05/11 04:10:21 code coverage: enabled
+2020/05/11 04:10:21 comparison tracing: enabled
+2020/05/11 04:10:21 extra coverage: enabled
+2020/05/11 04:10:21 setuid sandbox: enabled
+2020/05/11 04:10:21 namespace sandbox: /proc/self/ns/user does not exist
+2020/05/11 04:10:21 Android sandbox: enabled
+2020/05/11 04:10:21 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2020/05/11 04:10:21 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2020/05/11 04:10:21 net packet injection: /dev/net/tun does not exist
+2020/05/11 04:10:21 net device setup: enabled
+2020/05/11 04:10:21 concurrency sanitizer: /sys/kernel/debug/kcsan does not exist
+2020/05/11 04:10:21 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/11 04:10:21 USB emulation: /dev/raw-gadget does not exist
+2020/05/11 04:10:21 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:10:21 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:10:21 poll: candidates=0 inputs=0 signal=500
+2020/05/11 04:10:21 poll: candidates=0 inputs=0 signal=479
+2020/05/11 04:10:21 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:10:22 --------------------
+2020/05/11 04:10:22 getting cover
+2020/05/11 04:10:22 poll: candidates=0 inputs=0 signal=0
+2020/05/11 04:10:22 --------------------
+2020/05/11 04:10:22 setting fault
+2020/05/11 04:10:22 --------------------------
+2020/05/11 04:10:22 queue is empty
+2020/05/11 04:10:22 #0: generated
+04:10:22 executing program 0:
+setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, &(0x7f0000000000)=0x4, 0x4)
+close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+prctl$PR_SET_DUMPABLE(0x4, 0x3)
+r0 = shmget(0x3, 0x3000, 0x4, &(0x7f0000ffb000/0x3000)=nil)
+shmctl$SHM_LOCK(r0, 0xb)
+r1 = socket$inet6_udplite(0xa, 0x2, 0x88)
+getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, &(0x7f0000000040)={@rand_addr, <r2=>0x0}, &(0x7f0000000080)=0x14)
+ioctl$ifreq_SIOCGIFINDEX_batadv_hard(r1, 0x8933, &(0x7f00000000c0)={'batadv_slave_1\x00', r2})
+r3 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+ioctl$EXT4_IOC_SETFLAGS(r3, 0x40086602, &(0x7f0000000100)=0x20014150)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$SNDRV_TIMER_IOCTL_STATUS64(r4, 0x80605414, &(0x7f0000000180))
+r5 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000240)='nl80211\x00')
+sendmsg$NL80211_CMD_START_SCHED_SCAN(r4, &(0x7f0000000340)={&(0x7f0000000200)={0x10, 0x0, 0x0, 0x80}, 0xc, &(0x7f0000000300)={&(0x7f0000000280)={0x74, r5, 0x400, 0x70bd2a, 0x25dfdbfb, {}, [@NL80211_ATTR_WDEV={0xc, 0x99, {0x7f, 0x2}}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x8, 0x1}}, @NL80211_ATTR_SCHED_SCAN_MULTI={0x4}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x7, 0x5}}, @NL80211_ATTR_BSSID={0xa, 0xf5, @broadcast}, @NL80211_ATTR_SCAN_FREQUENCIES={0x34, 0x2c, 0x0, 0x1, [{0x8, 0x0, 0x33e95533}, {0x8, 0x0, 0xffff686f}, {0x8, 0x0, 0xb2c}, {0x8, 0x0, 0x101}, {0x8, 0x0, 0x200}, {0x8, 0x0, 0x2}]}]}, 0x74}, 0x1, 0x0, 0x0, 0x20040804}, 0x4)
+r6 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x5040, 0x0)
+write$P9_RXATTRWALK(r6, &(0x7f00000003c0)={0xf, 0x1f, 0x1, 0x3}, 0xf)
+r7 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000400)='/dev/vga_arbiter\x00', 0x1, 0x0)
+ioctl$EVIOCGRAB(r7, 0x40044590, &(0x7f0000000440)=0x8)
+ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(r6, 0xc0406619, &(0x7f0000000480)={{0x2, 0x0, @descriptor="3165185d19de81e8"}})
+r8 = socket$nl_route(0x10, 0x3, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL47(r8, 0x305000, &(0x7f00000004c0)={0x22, 0x4, 0x1, 0x100000000, 0x1, 0x8})
+ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(r7, 0x408c5333, &(0x7f0000000500)={0xa9, 0x8, 0x0, 'queue0\x00', 0x7})
+r9 = semget$private(0x0, 0x2, 0x0)
+semctl$IPC_RMID(r9, 0x0, 0x0)
+ioctl$EVIOCGSND(r4, 0x8040451a, &(0x7f00000005c0)=""/93)
+sendmsg$OSF_MSG_ADD(r6, &(0x7f0000000e00)={&(0x7f0000000640)={0x10, 0x0, 0x0, 0x8}, 0xc, &(0x7f0000000dc0)={&(0x7f0000000680)={0x710, 0x0, 0x5, 0x201, 0x0, 0x0, {0x5, 0x0, 0x9}, [{{0x254, 0x1, {{0x2, 0x2}, 0x4, 0x1, 0x6, 0x2, 0x2, 'syz0\x00', "0885763322781f53a1ab781eac10c5b4d00912830d5e441dad93a4b827eaf260", "50df2d6d930c9ee0b6c162df2fe9e86bdf32ef36c1d2a6fc1f213e121946bef2", [{0x1, 0x1, {0x3, 0x5}}, {0x0, 0x1, {0x0, 0x2}}, {0x4, 0xa1, {0x1, 0x5}}, {0x9, 0x4, {0x2, 0x1}}, {0x401, 0xfe59, {0x3, 0x41}}, {0x1, 0x6, {0x3, 0x5}}, {0x4, 0xab, {0x3}}, {0x0, 0x401, {0x0, 0x3}}, {0x3, 0x325, {0x2}}, {0x5, 0xc8, {0x2, 0x800}}, {0x5, 0x0, {0x0, 0xfffff000}}, {0x2, 0xfffa, {0x3, 0x1ff0}}, {0x9, 0xc7, {0x2, 0xc456}}, {0x5, 0xffff, {0x2, 0xffffff80}}, {0xfff7, 0x2, {0x1, 0x401}}, {0x2, 0x5, {0x2, 0x1f}}, {0x9, 0x1000, {0x0, 0x7fff}}, {0x7, 0x6, {0x3, 0xd5}}, {0x9, 0x4b36, {0x3, 0x1f}}, {0x7, 0x0, {0x2, 0x8}}, {0x0, 0xe56c, {0x2, 0x5}}, {0xff, 0x401, {0x0, 0x3}}, {0x7fff, 0x5, {0x2, 0x1}}, {0x9, 0xffff, {0x1, 0x1}}, {0x1, 0x2, {0x0, 0x3}}, {0xffff, 0x101, {0x0, 0xfffffff8}}, {0x5, 0x80, {0x3, 0x9}}, {0x2000, 0x9, {0x2, 0x40}}, {0x9, 0x9e41, {0x0, 0x20}}, {0x3f49, 0x9, {0x2, 0x28}}, {0x3, 0xff, {0x3, 0x4}}, {0x1, 0x4, {0x1, 0x200}}, {0x1, 0x6, {0x0, 0x5}}, {0x8, 0x1000}, {0x9, 0x0, {0x0, 0x80}}, {0x7ff, 0xffff, {0x1}}, {0xfffb, 0x5, {0x0, 0x6}}, {0xa9bb, 0x29, {0x2, 0x200}}, {0xd00, 0x8000, {0x4, 0x5}}, {0x2, 0x100, {0x1, 0x20}}]}}}, {{0x254, 0x1, {{0x2, 0x4}, 0x0, 0x0, 0x5, 0x7ff, 0x1c, 'syz0\x00', "31e97ba35ae466bf85a1078ba5a3137024e7848b0cb215b4745a3cd48f6c5d15", "61e387ec55388ce1b07b94ccf437e25fae176d7143b36fe71ce2e08d46aa3986", [{0x1, 0x96, {0x1, 0x10000}}, {0x5, 0x13, {0x0, 0xffffffff}}, {0x2, 0x9, {0x0, 0x9}}, {0x6, 0x1, {0x2, 0x2}}, {0x7, 0x8, {0x2, 0x8}}, {0x8, 0x1, {0x0, 0xaf8}}, {0x3, 0x3ff, {0x1, 0x9}}, {0x6, 0x20, {0x2, 0x4}}, {0x115f, 0xff80, {0x3, 0x400}}, {0x1, 0x4, {0x1, 0x9}}, {0x1, 0x7, {0x3, 0x6}}, {0x1f, 0x9586, {0x3, 0x2}}, {0x5, 0x2}, {0x8965, 0x200, {0x0, 0x1}}, {0xd400, 0x754e, {0x0, 0xffffffff}}, {0x101, 0x9, {0x3, 0x7ff}}, {0xb06, 0x0, {0x3, 0x8001}}, {0xac, 0x9, {0x0, 0xdb6}}, {0x9, 0x9, {0x0, 0x7}}, {0x40, 0x7, {0x2, 0x3}}, {0x1f, 0x9, {0x1, 0xffffffdc}}, {0x5, 0xaa79, {0x0, 0x6}}, {0x3, 0x6, {0x0, 0x6}}, {0x4, 0x0, {0x3, 0xc0000}}, {0x3, 0x7ff, {0x0, 0x9}}, {0x1, 0x2021, {0x2, 0x9}}, {0x4, 0x7, {0x3, 0x3}}, {0x40, 0x2, {0x0, 0x5}}, {0x5, 0x2, {0x2, 0x3}}, {0xffff, 0x0, {0x1, 0x9}}, {0x200, 0x400, {0x3, 0xfffffffe}}, {0x891, 0x1, {0x2, 0xff}}, {0x100, 0x8, {0x1, 0x1}}, {0x8, 0x101, {0x3, 0x71}}, {0xfff7, 0x301, {0x3, 0x487}}, {0x4c83, 0x1f, {0x0, 0x3f}}, {0x8, 0xed, {0x0, 0x200}}, {0x2, 0x5, {0x2, 0x3}}, {0x1000, 0x1ff, {0x3}}, {0x9, 0x200, {0x0, 0x8608}}]}}}, {{0x254, 0x1, {{0x1, 0x1}, 0xff, 0x3, 0x7, 0x7f, 0x27, 'syz0\x00', "1e1febf7f4dc979cbcc2b1c3b01cc504fb6990b901560080c09997944b938177", "22bc4103b74309772701f3598b73e1c35906fb5c2eddec12306de4a5c3ffaab3", [{0x83c7, 0x3, {0x0, 0xfffffff8}}, {0x7, 0xa8b7, {0x2, 0x3}}, {0xe4, 0x3, {0x3, 0x4}}, {0x6, 0xdf0, {0x2, 0x1ff}}, {0x5, 0x0, {0x1, 0x100}}, {0xfffa, 0x3, {0x2, 0xff}}, {0x9, 0x8000, {0x3, 0x10000}}, {0xffff, 0x4b03, {0x0, 0xe0000}}, {0xff7f, 0x35, {0x2, 0x10001}}, {0x1, 0x2, {0x3, 0x8}}, {0x2, 0x3ff, {0x2, 0x101}}, {0x6, 0x7, {0x2, 0x8000}}, {0x0, 0x1, {0x2, 0x6}}, {0x1, 0x5a4d, {0x2, 0x3b5}}, {0x2, 0x4, {0x3, 0x9}}, {0x1, 0x401, {0x2, 0x2020}}, {0x104, 0x401, {0x1}}, {0x71, 0x7f, {0x3, 0x3}}, {0x6, 0x5e1, {0x1, 0x8}}, {0x8, 0xd0, {0x1, 0xbb8}}, {0x3ff, 0x58, {0x3, 0x3f}}, {0x2, 0x4110, {0x1}}, {0x6, 0x200, {0x3, 0x1}}, {0x4, 0x6, {0x3, 0x8}}, {0x3ff, 0x20, {0x3, 0x9c4}}, {0x1e, 0x4, {0x1, 0xffff}}, {0xeff, 0x3, {0x3, 0x8}}, {0x4, 0xb, {0x0, 0x80000001}}, {0xff, 0x200, {0x2, 0x40}}, {0xc8, 0x7, {0x3, 0x1}}, {0x0, 0x3, {0x5, 0x6}}, {0x20, 0x4, {0x1, 0x9}}, {0x3, 0x1ff, {0x3, 0x1}}, {0x750, 0x1ff, {0x3, 0x7}}, {0x6, 0x7, {0x1, 0x7f}}, {0x1, 0x1f, {0x2, 0x7}}, {0x2, 0x200, {0x2, 0x4}}, {0x8, 0x20, {0x2, 0xffffffff}}, {0x3, 0x3, {0x2, 0x7}}, {0x7e00, 0x8001, {0x3, 0x5}}]}}}]}, 0x710}, 0x1, 0x0, 0x0, 0x4000895}, 0x4000880)
+ioctl$int_out(0xffffffffffffffff, 0x2, &(0x7f0000000e40))
+r10 = open$IOCTL_PRIVCMD_HYPERCALL184191(&(0x7f0000000e80)='/proc/xen/privcmd\x00')
+ioctl$SG_GET_REQUEST_TABLE(r10, 0x2286, &(0x7f0000000ec0))
+sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, &(0x7f0000001600)={&(0x7f0000001540)={0x10, 0x0, 0x0, 0x10000}, 0xc, &(0x7f00000015c0)={&(0x7f0000001580)={0x30, 0x0, 0xb, 0x3, 0x0, 0x0, {0xa, 0x0, 0x2}, [@NFTA_COMPAT_NAME={0xb, 0x1, 'queue0\x00'}, @NFTA_COMPAT_TYPE={0x8}, @NFTA_COMPAT_REV={0x8, 0x2, 0x1, 0x0, 0x4}]}, 0x30}, 0x1, 0x0, 0x0, 0x20020000}, 0x4040)
+
+Rrooach executor_linux cov->fd = 232
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 233
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 234
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 235
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 236
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 237
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 238
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 239
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 240
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 241
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 242
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 243
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 244
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 245
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 246
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 247
+Rrooach: executor_linux 107 size = 0   data =    
+Rrooach executor_linux cov->fd = 0
+Rrooach: executor_linux 107 size = 0   data =    
+spawned loop pid 736
+mount(fusectl) failed: 2
+write(/syzcgroup/unified/cgroup.subtree_control) failed: 22
+mount(cgroup cpu) failed: 22
+mount(cgroup net) failed: 22
+netlink: add addr 172.30.0.1 dev nr0: No such device
+netlink: device nr0 up master (null): No such device
+netlink: add addr 172.30.1.1 dev rose0: No such device
+netlink: device rose0 up master (null): No such device
+netlink: adding device ip6gretap0 type ip6gretap: Operation not supported
+netlink: adding device bridge0 type bridge: Operation not supported
+netlink: adding device vcan0 type vcan: Operation not supported
+netlink: adding device bond0 type bond: Operation not supported
+netlink: adding device team0 type team: Operation not supported
+netlink: adding device dummy0 type dummy: Operation not supported
+netlink: adding device nlmon0 type nlmon: Operation not supported
+netlink: adding device caif0 type caif: Operation not supported
+netlink: adding device batadv0 type batadv: Operation not supported
+netlink: adding device vxcan1 type vxcan: Operation not supported
+netlink: adding device netdevsim0 type netdevsim: Operation not supported
+netlink: adding device (null) type veth: Operation not supported
+netlink: adding device xfrm0 type xfrm: Operation not supported
+netlink: adding device wg0 type wireguard: Operation not supported
+netlink: adding device wg1 type wireguard: Operation not supported
+netlink: adding device wg2 type wireguard: Operation not supported
+netlink: adding device bridge_slave_0 type veth peer veth0_to_bridge: Operation not supported
+netlink: adding device bridge_slave_1 type veth peer veth1_to_bridge: Operation not supported
+netlink: device bridge_slave_0 up master bridge0: No such device
+netlink: device bridge_slave_1 up master bridge0: No such device
+netlink: adding device bond_slave_0 type veth peer veth0_to_bond: Operation not supported
+netlink: adding device bond_slave_1 type veth peer veth1_to_bond: Operation not supported
+netlink: device bond_slave_0 up master bond0: No such device
+netlink: device bond_slave_1 up master bond0: No such device
+netlink: adding device team_slave_0 type veth peer veth0_to_team: Operation not supported
+netlink: adding device team_slave_1 type veth peer veth1_to_team: Operation not supported
+netlink: device team_slave_0 up master team0: No such device
+netlink: device team_slave_1 up master team0: No such device
+netlink: adding device batadv_slave_0 type veth peer veth0_to_batadv: Operation not supported
+netlink: adding device batadv_slave_1 type veth peer veth1_to_batadv: Operation not supported
+netlink: device batadv_slave_0 up master batadv0: No such device
+netlink: device batadv_slave_1 up master batadv0: No such device
+netlink: device bridge_slave_0 up master (null): No such device
+netlink: device bridge_slave_1 up master (null): No such device
+netlink: adding device hsr_slave_0 type veth peer veth0_to_hsr: Operation not supported
+netlink: adding device hsr_slave_1 type veth peer veth1_to_hsr: Operation not supported
+netlink: adding device hsr0 type hsr slave1 hsr_slave_0 slave2 hsr_slave_1: Operation not supported
+netlink: device hsr_slave_0 up master (null): No such device
+netlink: device hsr_slave_1 up master (null): No such device
+netlink: adding device veth0_virt_wifi type veth peer veth1_virt_wifi: Operation not supported
+netlink: adding device virt_wifi0 type virt_wifi link veth1_virt_wifi: Operation not supported
+netlink: adding device veth0_vlan type veth peer veth1_vlan: Operation not supported
+netlink: add vlan0 type vlan link veth0_vlan id 0: Operation not supported
+netlink: add vlan1 type vlan link veth0_vlan id 1: Operation not supported
+netlink: add macvlan0 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add macvlan1 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add ipvlan0 type ipvlan link veth0_vlan mode 0: Operation not supported
+netlink: add ipvlan1 type ipvlan link veth0_vlan mode 2: Operation not supported
+netlink: adding device veth0_macvtap type veth peer veth1_macvtap: Operation not supported
+netlink: adding device macvtap0 type macvtap link veth0_macvtap: Operation not supported
+netlink: adding device macsec0 type macsec link veth1_macvtap: Operation not supported
+netlink: add geneve0 type geneve vni 0: Operation not supported
+netlink: add geneve1 type geneve vni 1: Operation not supported
+netlink: failed to get wireguard family id: No such file or directory
+netlink: add addr 172.20.20.10 dev lo: Success
+netlink: add addr fe80::0a dev lo: Success
+netlink: device lo up master (null): Success
+netlink: add addr 172.20.20.11 dev sit0: Success
+netlink: add addr fe80::0b dev sit0: Success
+netlink: device sit0 up master (null): Success
+netlink: add addr 172.20.20.12 dev bridge0: No such device
+netlink: add addr fe80::0c dev bridge0: No such device
+netlink: device bridge0 up master (null): No such device
+netlink: add addr 172.20.20.13 dev vcan0: No such device
+netlink: device vcan0 up master (null): No such device
+netlink: add addr 172.20.20.14 dev tunl0: No such device
+netlink: add addr fe80::0e dev tunl0: No such device
+netlink: device tunl0 up master (null): No such device
+netlink: add addr 172.20.20.15 dev gre0: No such device
+netlink: add addr fe80::0f dev gre0: No such device
+netlink: device gre0 up master (null): No such device
+netlink: add addr 172.20.20.16 dev gretap0: No such device
+netlink: add addr fe80::10 dev gretap0: No such device
+netlink: device gretap0 up master (null): No such device
+netlink: add addr 172.20.20.17 dev ip_vti0: No such device
+netlink: add addr fe80::11 dev ip_vti0: No such device
+netlink: device ip_vti0 up master (null): No such device
+netlink: add addr 172.20.20.18 dev ip6_vti0: No such device
+netlink: add addr fe80::12 dev ip6_vti0: No such device
+netlink: device ip6_vti0 up master (null): No such device
+netlink: add addr 172.20.20.19 dev ip6tnl0: No such device
+netlink: add addr fe80::13 dev ip6tnl0: No such device
+netlink: device ip6tnl0 up master (null): No such device
+netlink: add addr 172.20.20.20 dev ip6gre0: No such device
+netlink: add addr fe80::14 dev ip6gre0: No such device
+netlink: device ip6gre0 up master (null): No such device
+netlink: add addr 172.20.20.21 dev ip6gretap0: No such device
+netlink: add addr fe80::15 dev ip6gretap0: No such device
+netlink: device ip6gretap0 up master (null): No such device
+netlink: add addr 172.20.20.22 dev erspan0: No such device
+netlink: add addr fe80::16 dev erspan0: No such device
+netlink: device erspan0 up master (null): No such device
+netlink: add addr 172.20.20.23 dev bond0: No such device
+netlink: add addr fe80::17 dev bond0: No such device
+netlink: device bond0 up master (null): No such device
+netlink: add addr 172.20.20.24 dev veth0: No such device
+netlink: add addr fe80::18 dev veth0: No such device
+netlink: device veth0 up master (null): No such device
+netlink: add addr 172.20.20.25 dev veth1: No such device
+netlink: add addr fe80::19 dev veth1: No such device
+netlink: device veth1 up master (null): No such device
+netlink: add addr 172.20.20.26 dev team0: No such device
+netlink: add addr fe80::1a dev team0: No such device
+netlink: device team0 up master (null): No such device
+netlink: add addr 172.20.20.27 dev veth0_to_bridge: No such device
+netlink: add addr fe80::1b dev veth0_to_bridge: No such device
+netlink: device veth0_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.28 dev veth1_to_bridge: No such device
+netlink: add addr fe80::1c dev veth1_to_bridge: No such device
+netlink: device veth1_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.29 dev veth0_to_bond: No such device
+netlink: add addr fe80::1d dev veth0_to_bond: No such device
+netlink: device veth0_to_bond up master (null): No such device
+netlink: add addr 172.20.20.30 dev veth1_to_bond: No such device
+netlink: add addr fe80::1e dev veth1_to_bond: No such device
+netlink: device veth1_to_bond up master (null): No such device
+netlink: add addr 172.20.20.31 dev veth0_to_team: No such device
+netlink: add addr fe80::1f dev veth0_to_team: No such device
+netlink: device veth0_to_team up master (null): No such device
+netlink: add addr 172.20.20.32 dev veth1_to_team: No such device
+netlink: add addr fe80::20 dev veth1_to_team: No such device
+netlink: device veth1_to_team up master (null): No such device
+netlink: add addr 172.20.20.33 dev veth0_to_hsr: No such device
+netlink: add addr fe80::21 dev veth0_to_hsr: No such device
+netlink: device veth0_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.34 dev veth1_to_hsr: No such device
+netlink: add addr fe80::22 dev veth1_to_hsr: No such device
+netlink: device veth1_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.35 dev hsr0: No such device
+netlink: add addr fe80::23 dev hsr0: No such device
+netlink: device hsr0 up master (null): No such device
+netlink: add addr 172.20.20.36 dev dummy0: No such device
+netlink: add addr fe80::24 dev dummy0: No such device
+netlink: device dummy0 up master (null): No such device
+netlink: add addr 172.20.20.37 dev nlmon0: No such device
+netlink: add addr fe80::25 dev nlmon0: No such device
+netlink: device nlmon0 up master (null): No such device
+netlink: add addr 172.20.20.38 dev vxcan0: No such device
+netlink: device vxcan0 up master (null): No such device
+netlink: add addr 172.20.20.39 dev vxcan1: No such device
+netlink: device vxcan1 up master (null): No such device
+netlink: add addr 172.20.20.40 dev caif0: No such device
+netlink: add addr fe80::28 dev caif0: No such device
+netlink: device caif0 up master (null): No such device
+netlink: add addr 172.20.20.41 dev batadv0: No such device
+netlink: add addr fe80::29 dev batadv0: No such device
+netlink: device batadv0 up master (null): No such device
+netlink: add addr 172.20.20.42 dev netdevsim0: No such device
+netlink: add addr fe80::2a dev netdevsim0: No such device
+netlink: device netdevsim0 up master (null): No such device
+netlink: add addr 172.20.20.43 dev xfrm0: No such device
+netlink: add addr fe80::2b dev xfrm0: No such device
+netlink: device xfrm0 up master (null): No such device
+netlink: add addr 172.20.20.44 dev veth0_virt_wifi: No such device
+netlink: add addr fe80::2c dev veth0_virt_wifi: No such device
+netlink: device veth0_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.45 dev veth1_virt_wifi: No such device
+netlink: add addr fe80::2d dev veth1_virt_wifi: No such device
+netlink: device veth1_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.46 dev virt_wifi0: No such device
+netlink: add addr fe80::2e dev virt_wifi0: No such device
+netlink: device virt_wifi0 up master (null): No such device
+netlink: add addr 172.20.20.47 dev veth0_vlan: No such device
+netlink: add addr fe80::2f dev veth0_vlan: No such device
+netlink: device veth0_vlan up master (null): No such device
+netlink: add addr 172.20.20.48 dev veth1_vlan: No such device
+netlink: add addr fe80::30 dev veth1_vlan: No such device
+netlink: device veth1_vlan up master (null): No such device
+netlink: add addr 172.20.20.49 dev vlan0: No such device
+netlink: add addr fe80::31 dev vlan0: No such device
+netlink: device vlan0 up master (null): No such device
+netlink: add addr 172.20.20.50 dev vlan1: No such device
+netlink: add addr fe80::32 dev vlan1: No such device
+netlink: device vlan1 up master (null): No such device
+netlink: add addr 172.20.20.51 dev macvlan0: No such device
+netlink: add addr fe80::33 dev macvlan0: No such device
+netlink: device macvlan0 up master (null): No such device
+netlink: add addr 172.20.20.52 dev macvlan1: No such device
+netlink: add addr fe80::34 dev macvlan1: No such device
+netlink: device macvlan1 up master (null): No such device
+netlink: add addr 172.20.20.53 dev ipvlan0: No such device
+netlink: add addr fe80::35 dev ipvlan0: No such device
+netlink: device ipvlan0 up master (null): No such device
+netlink: add addr 172.20.20.54 dev ipvlan1: No such device
+netlink: add addr fe80::36 dev ipvlan1: No such device
+netlink: device ipvlan1 up master (null): No such device
+netlink: add addr 172.20.20.55 dev veth0_macvtap: No such device
+netlink: add addr fe80::37 dev veth0_macvtap: No such device
+netlink: device veth0_macvtap up master (null): No such device
+netlink: add addr 172.20.20.56 dev veth1_macvtap: No such device
+netlink: add addr fe80::38 dev veth1_macvtap: No such device
+netlink: device veth1_macvtap up master (null): No such device
+netlink: add addr 172.20.20.57 dev macvtap0: No such device
+netlink: add addr fe80::39 dev macvtap0: No such device
+netlink: device macvtap0 up master (null): No such device
+netlink: add addr 172.20.20.58 dev macsec0: No such device
+netlink: add addr fe80::3a dev macsec0: No such device
+netlink: device macsec0 up master (null): No such device
+netlink: add addr 172.20.20.59 dev veth0_to_batadv: No such device
+netlink: add addr fe80::3b dev veth0_to_batadv: No such device
+netlink: device veth0_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.60 dev veth1_to_batadv: No such device
+netlink: add addr fe80::3c dev veth1_to_batadv: No such device
+netlink: device veth1_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.61 dev batadv_slave_0: No such device
+netlink: add addr fe80::3d dev batadv_slave_0: No such device
+netlink: device batadv_slave_0 up master (null): No such device
+netlink: add addr 172.20.20.62 dev batadv_slave_1: No such device
+netlink: add addr fe80::3e dev batadv_slave_1: No such device
+netlink: device batadv_slave_1 up master (null): No such device
+netlink: add addr 172.20.20.63 dev geneve0: No such device
+netlink: add addr fe80::3f dev geneve0: No such device
+netlink: device geneve0 up master (null): No such device
+netlink: add addr 172.20.20.64 dev geneve1: No such device
+netlink: add addr fe80::40 dev geneve1: No such device
+netlink: device geneve1 up master (null): No such device
+netlink: add addr 172.20.20.65 dev wg0: No such device
+netlink: add addr fe80::41 dev wg0: No such device
+netlink: device wg0 up master (null): No such device
+netlink: add addr 172.20.20.66 dev wg1: No such device
+netlink: add addr fe80::42 dev wg1: No such device
+netlink: device wg1 up master (null): No such device
+netlink: add addr 172.20.20.67 dev wg2: No such device
+netlink: add addr fe80::43 dev wg2: No such device
+netlink: device wg2 up master (null): No such device
+iptable checkpoint filter/2: checkpoint entries=4 hooks=e size=632
+iptable checkpoint nat/2: checkpoint entries=5 hooks=1b size=784
+iptable checkpoint mangle/2: checkpoint entries=6 hooks=1f size=936
+iptable checkpoint filter/10: checkpoint entries=4 hooks=e size=856
+iptable checkpoint mangle/10: checkpoint entries=6 hooks=1f size=1272
+[3664ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 2
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3710ms] -> setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, 0x20000000, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3710ms] <- setsockopt$inet_tcp_int=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3711ms] -> close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3711ms] <- close$IOCTL_PRIVCMD_HYPERCALL17350111=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] -> prctl$PR_SET_DUMPABLE(0x4, 0x3)
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] <- prctl$PR_SET_DUMPABLE=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] -> shmget(0x798dd816, 0x3000, 0x4, 0x20ffb000)
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] <- shmget=0xffffffffffffffff errno=2 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] -> shmctl$SHM_LOCK(0x0, 0xb)
+Rrooach executor_linux175 size = 10000
+#0 [3712ms] <- shmctl$SHM_LOCK=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3713ms] -> socket$inet6_udplite(0xa, 0x2, 0x88)
+Rrooach executor_linux175 size = 10000
+#0 [3713ms] <- socket$inet6_udplite=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3714ms] -> getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, 0x20000040, 0x20000080)
+Rrooach executor_linux175 size = 10000
+#0 [3714ms] <- getsockopt$inet6_mreq=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3714ms] -> ioctl$ifreq_SIOCGIFINDEX_batadv_hard(0x13, 0x8933, 0x200000c0)
+Rrooach executor_linux175 size = 10000
+#0 [3729ms] <- ioctl$ifreq_SIOCGIFINDEX_batadv_hard=0xffffffffffffffff errno=19 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3729ms] -> syz_open_dev$tty20(0xc, 0x4, 0x14)
+Rrooach executor_linux175 size = 10000
+#0 [3732ms] <- syz_open_dev$tty20=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3733ms] -> ioctl$EXT4_IOC_SETFLAGS(0x14, 0x40086602, 0x20000100)
+Rrooach executor_linux175 size = 10000
+#0 [3734ms] <- ioctl$EXT4_IOC_SETFLAGS=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3736ms] -> open$IOCTL_PRIVCMD_HYPERCALL11740_20(0x20000140)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- open$IOCTL_PRIVCMD_HYPERCALL11740_20=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] -> ioctl$SNDRV_TIMER_IOCTL_STATUS64(0x15, 0x80605414, 0x20000180)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- ioctl$SNDRV_TIMER_IOCTL_STATUS64=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] -> syz_genetlink_get_family_id$nl80211(0x20000240)
+syz_genetlink_get_family_id(nl80211)
+Rrooach executor_linux175 size = 10000
+#0 [3737ms] <- syz_genetlink_get_family_id$nl80211=0x1a errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3738ms] -> sendmsg$NL80211_CMD_START_SCHED_SCAN(0x15, 0x20000340, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3738ms] <- sendmsg$NL80211_CMD_START_SCHED_SCAN=0xffffffffffffffff errno=88 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] -> openat$xenevtchn(0xffffffffffffff9c, 0x20000380, 0x5040, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] <- openat$xenevtchn=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] -> write$P9_RXATTRWALK(0xffffffffffffffff, 0x200003c0, 0xf)
+Rrooach executor_linux175 size = 10000
+#0 [3739ms] <- write$P9_RXATTRWALK=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] -> openat$vga_arbiter(0xffffffffffffff9c, 0x20000400, 0x1, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- openat$vga_arbiter=0x16 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] -> ioctl$EVIOCGRAB(0x16, 0x40044590, 0x20000440)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- ioctl$EVIOCGRAB=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] -> ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(0xffffffffffffffff, 0xc0406619, 0x20000480)
+Rrooach executor_linux175 size = 10000
+#0 [3740ms] <- ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] -> socket$nl_route(0x10, 0x3, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] <- socket$nl_route=0x17 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL47(0x17, 0x305000, 0x200004c0)
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL47=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] -> ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(0x16, 0x408c5333, 0x20000500)
+Rrooach executor_linux175 size = 10000
+#0 [3741ms] <- ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3742ms] -> semget$private(0x0, 0x2, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3742ms] <- semget$private=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3742ms] -> semctl$IPC_RMID(0x0, 0x0, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3742ms] <- semctl$IPC_RMID=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> ioctl$EVIOCGSND(0x15, 0x8040451a, 0x200005c0)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- ioctl$EVIOCGSND=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> sendmsg$OSF_MSG_ADD(0xffffffffffffffff, 0x20000e00, 0x4000880)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- sendmsg$OSF_MSG_ADD=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> ioctl$int_out(0xffffffffffffffff, 0x2, 0x20000e40)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- ioctl$int_out=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] -> open$IOCTL_PRIVCMD_HYPERCALL184191(0x20000e80)
+Rrooach executor_linux175 size = 10000
+#0 [3743ms] <- open$IOCTL_PRIVCMD_HYPERCALL184191=0x18 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] -> ioctl$SG_GET_REQUEST_TABLE(0x18, 0x2286, 0x20000ec0)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- ioctl$SG_GET_REQUEST_TABLE=0xffffffffffffffff errno=25 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] -> sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, 0x20001600, 0x4040)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- sendmsg$NFNL_MSG_COMPAT_GET=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+Rrooach executor_linux175 size = 10000
+enabling collider
+#0 [3744ms] -> setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, 0x20000000, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3744ms] <- setsockopt$inet_tcp_int=0xffffffffffffffff errno=9 cover=10000 
+#0 [3746ms] -> close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [3747ms] <- close$IOCTL_PRIVCMD_HYPERCALL17350111=0xffffffffffffffff errno=9 cover=10000 
+#1 [3759ms] -> prctl$PR_SET_DUMPABLE(0x4, 0x3)
+Rrooach executor_linux175 size = 10000
+#1 [3759ms] <- prctl$PR_SET_DUMPABLE=0xffffffffffffffff errno=22 cover=10000 
+#0 [3759ms] -> shmget(0x798dd816, 0x3000, 0x4, 0x20ffb000)
+Rrooach executor_linux175 size = 10000
+#0 [3759ms] <- shmget=0xffffffffffffffff errno=2 cover=10000 #1 [3759ms] -> shmctl$SHM_LOCK(0x0, 0xb)
+Rrooach executor_linux175 size = 10000
+#1 [3759ms] <- shmctl$SHM_LOCK=0xffffffffffffffff errno=22 cover=10000 
+
+#1 [3761ms] -> socket$inet6_udplite(0xa, 0x2, 0x88)
+Rrooach executor_linux175 size = 10000
+#1 [3761ms] <- socket$inet6_udplite=0x3 errno=0 cover=10000 
+#2 [3774ms] -> getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, 0x20000040, 0x20000080)
+Rrooach executor_linux175 size = 10000
+#2 [3774ms] <- getsockopt$inet6_mreq=0xffffffffffffffff errno=9 cover=10000 
+#1 [3775ms] -> syz_open_dev$tty20(0xc, 0x4, 0x14)
+#0 [3775ms] -> ioctl$ifreq_SIOCGIFINDEX_batadv_hard(0x3, 0x8933, Rrooach executor_linux175 size = 10000
+0x200000c0)
+#1 [3775ms] <- syz_open_dev$tty20=0x4 errno=0 cover=10000 
+#1 [3775ms] -> ioctl$EXT4_IOC_SETFLAGS(0x4, 0x40086602, 0x20000100)
+Rrooach executor_linux175 size = 10000
+#1 [3775ms] <- ioctl$EXT4_IOC_SETFLAGS=0xffffffffffffffff errno=25 cover=10000 
+#2 [3776ms] -> open$IOCTL_PRIVCMD_HYPERCALL11740_20(0x20000140)
+Rrooach executor_linux175 size = 10000
+#2 [3776ms] <- open$IOCTL_PRIVCMD_HYPERCALL11740_20=0x5 errno=0 cover=10000 
+#1 [3776ms] -> ioctl$SNDRV_TIMER_IOCTL_STATUS64(0x5, 0x80605414, 0x20000180)
+Rrooach executor_linux175 size = 10000
+#1 [3776ms] <- ioctl$SNDRV_TIMER_IOCTL_STATUS64=0xffffffffffffffff errno=25 cover=10000 
+#2 [3776ms] -> syz_genetlink_get_family_id$nl80211(0x20000240)
+syz_genetlink_get_family_id(nl80211)
+Rrooach executor_linux175 size = 10000
+#2 [3776ms] <- syz_genetlink_get_family_id$nl80211=0x1a errno=0 cover=10000 
+#1 [3776ms] -> sendmsg$NL80211_CMD_START_SCHED_SCAN(0x5, 0x20000340, 0x4)
+Rrooach executor_linux175 size = 10000
+#1 [3777ms] <- sendmsg$NL80211_CMD_START_SCHED_SCAN=0xffffffffffffffff errno=88 cover=10000 
+#2 [3776ms] -> openat$xenevtchn(0xffffffffffffff9c, 0x20000380, 0x5040, 0x0)
+Rrooach executor_linux175 size = 10000
+#2 [3777ms] <- openat$xenevtchn=0xffffffffffffffff errno=22 cover=10000 
+#2 [3777ms] -> openat$vga_arbiter(0xffffffffffffff9c, 0x20000400, 0x1, 0x0)
+Rrooach executor_linux175 size = 10000
+#2 [3777ms] <- openat$vga_arbiter=0x6 errno=0 cover=10000 
+#2 [3778ms] -> ioctl$EVIOCGRAB(0x6, 0x40044590, 0x20000440)
+Rrooach executor_linux175 size = 10000
+#2 [3778ms] <- ioctl$EVIOCGRAB=0xffffffffffffffff errno=25 cover=10000 
+#1 [3777ms] -> write$P9_RXATTRWALK(0xffffffffffffffff, 0x200003c0, 0xf)
+Rrooach executor_linux175 size = 10000
+#1 [3778ms] <- write$P9_RXATTRWALK=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [3799ms] <- ioctl$ifreq_SIOCGIFINDEX_batadv_hard=0xffffffffffffffff errno=19 cover=10000 
+#3 [3806ms] -> ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(0xffffffffffffffff, 0xc0406619, 0x20000480)
+Rrooach executor_linux175 size = 10000
+#3 [3806ms] <- ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS=0xffffffffffffffff errno=9 cover=10000 
+#0 [3807ms] -> socket$nl_route(0x10, 0x3, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3807ms] <- socket$nl_route=0x7 errno=0 cover=10000 
+#1 [3807ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL47(0x17, 0x305000, 0x200004c0)
+Rrooach executor_linux175 size = 10000
+#1 [3807ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL47=0xffffffffffffffff errno=9 cover=10000 
+#1 [3808ms] -> semget$private(0x0, 0x2, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3808ms] -> ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(0x6, 0x408c5333, 0x20000500)
+Rrooach executor_linux175 size = 10000
+#0 [3808ms] <- ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE=0xffffffffffffffff errno=25 cover=10000 
+#1 [3808ms] <- semget$private=0x1 errno=0 cover=10000 
+#1 [3808ms] -> ioctl$EVIOCGSND(0x5, 0x8040451a, 0x200005c0)
+#0 [3808ms] -> semctl$IPC_RMID(0x1, 0x0, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [3808ms] <- semctl$IPC_RMID=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#1 [3809ms] <- ioctl$EVIOCGSND=0xffffffffffffffff errno=25 cover=10000 
+#1 [3809ms] -> ioctl$int_out(0xffffffffffffffff, 0x2, 0x20000e40)
+#0 [3809ms] -> sendmsg$OSF_MSG_ADD(0xffffffffffffffff, 0x20000e00, 0x4000880)
+Rrooach executor_linux175 size = 10000
+#0 [3809ms] <- sendmsg$OSF_MSG_ADD=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#1 [3810ms] <- ioctl$int_out=0xffffffffffffffff errno=9 cover=10000 
+#1 [3810ms] -> ioctl$SG_GET_REQUEST_TABLE(0x18, 0x2286, 0x20000ec0)
+#0 [3810ms] -> open$IOCTL_PRIVCMD_HYPERCALL184191(0x20000e80)
+Rrooach executor_linux175 size = 10000
+#0 [3810ms] <- open$IOCTL_PRIVCMD_HYPERCALL184191=0x8 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#1 [3811ms] <- ioctl$SG_GET_REQUEST_TABLE=0xffffffffffffffff errno=9 cover=10000 
+#0 [3811ms] -> sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, 0x20001600, 0x4040)
+Rrooach executor_linux175 size = 10000
+#0 [3811ms] <- sendmsg$NFNL_MSG_COMPAT_GET=0xffffffffffffffff errno=9 cover=10000 
+2020/05/11 04:10:26 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:10:26 result hanged=false: 
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 getting cover
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 get report
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 setting fault
+2020/05/11 04:10:26 #0: triaging type=0
+2020/05/11 04:10:26 triaging input for call #1 close$IOCTL_PRIVCMD_HYPERCALL17350111 (new signal=1)
+04:10:26 executing program 0:
+setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, &(0x7f0000000000)=0x4, 0x4)
+close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+prctl$PR_SET_DUMPABLE(0x4, 0x3)
+r0 = shmget(0x3, 0x3000, 0x4, &(0x7f0000ffb000/0x3000)=nil)
+shmctl$SHM_LOCK(r0, 0xb)
+r1 = socket$inet6_udplite(0xa, 0x2, 0x88)
+getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, &(0x7f0000000040)={@rand_addr, <r2=>0x0}, &(0x7f0000000080)=0x14)
+ioctl$ifreq_SIOCGIFINDEX_batadv_hard(r1, 0x8933, &(0x7f00000000c0)={'batadv_slave_1\x00', r2})
+r3 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+ioctl$EXT4_IOC_SETFLAGS(r3, 0x40086602, &(0x7f0000000100)=0x20014150)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$SNDRV_TIMER_IOCTL_STATUS64(r4, 0x80605414, &(0x7f0000000180))
+r5 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000240)='nl80211\x00')
+sendmsg$NL80211_CMD_START_SCHED_SCAN(r4, &(0x7f0000000340)={&(0x7f0000000200)={0x10, 0x0, 0x0, 0x80}, 0xc, &(0x7f0000000300)={&(0x7f0000000280)={0x74, r5, 0x400, 0x70bd2a, 0x25dfdbfb, {}, [@NL80211_ATTR_WDEV={0xc, 0x99, {0x7f, 0x2}}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x8, 0x1}}, @NL80211_ATTR_SCHED_SCAN_MULTI={0x4}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x7, 0x5}}, @NL80211_ATTR_BSSID={0xa, 0xf5, @broadcast}, @NL80211_ATTR_SCAN_FREQUENCIES={0x34, 0x2c, 0x0, 0x1, [{0x8, 0x0, 0x33e95533}, {0x8, 0x0, 0xffff686f}, {0x8, 0x0, 0xb2c}, {0x8, 0x0, 0x101}, {0x8, 0x0, 0x200}, {0x8, 0x0, 0x2}]}]}, 0x74}, 0x1, 0x0, 0x0, 0x20040804}, 0x4)
+r6 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x5040, 0x0)
+write$P9_RXATTRWALK(r6, &(0x7f00000003c0)={0xf, 0x1f, 0x1, 0x3}, 0xf)
+r7 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000400)='/dev/vga_arbiter\x00', 0x1, 0x0)
+ioctl$EVIOCGRAB(r7, 0x40044590, &(0x7f0000000440)=0x8)
+ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(r6, 0xc0406619, &(0x7f0000000480)={{0x2, 0x0, @descriptor="3165185d19de81e8"}})
+r8 = socket$nl_route(0x10, 0x3, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL47(r8, 0x305000, &(0x7f00000004c0)={0x22, 0x4, 0x1, 0x100000000, 0x1, 0x8})
+ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(r7, 0x408c5333, &(0x7f0000000500)={0xa9, 0x8, 0x0, 'queue0\x00', 0x7})
+r9 = semget$private(0x0, 0x2, 0x0)
+semctl$IPC_RMID(r9, 0x0, 0x0)
+ioctl$EVIOCGSND(r4, 0x8040451a, &(0x7f00000005c0)=""/93)
+sendmsg$OSF_MSG_ADD(r6, &(0x7f0000000e00)={&(0x7f0000000640)={0x10, 0x0, 0x0, 0x8}, 0xc, &(0x7f0000000dc0)={&(0x7f0000000680)={0x710, 0x0, 0x5, 0x201, 0x0, 0x0, {0x5, 0x0, 0x9}, [{{0x254, 0x1, {{0x2, 0x2}, 0x4, 0x1, 0x6, 0x2, 0x2, 'syz0\x00', "0885763322781f53a1ab781eac10c5b4d00912830d5e441dad93a4b827eaf260", "50df2d6d930c9ee0b6c162df2fe9e86bdf32ef36c1d2a6fc1f213e121946bef2", [{0x1, 0x1, {0x3, 0x5}}, {0x0, 0x1, {0x0, 0x2}}, {0x4, 0xa1, {0x1, 0x5}}, {0x9, 0x4, {0x2, 0x1}}, {0x401, 0xfe59, {0x3, 0x41}}, {0x1, 0x6, {0x3, 0x5}}, {0x4, 0xab, {0x3}}, {0x0, 0x401, {0x0, 0x3}}, {0x3, 0x325, {0x2}}, {0x5, 0xc8, {0x2, 0x800}}, {0x5, 0x0, {0x0, 0xfffff000}}, {0x2, 0xfffa, {0x3, 0x1ff0}}, {0x9, 0xc7, {0x2, 0xc456}}, {0x5, 0xffff, {0x2, 0xffffff80}}, {0xfff7, 0x2, {0x1, 0x401}}, {0x2, 0x5, {0x2, 0x1f}}, {0x9, 0x1000, {0x0, 0x7fff}}, {0x7, 0x6, {0x3, 0xd5}}, {0x9, 0x4b36, {0x3, 0x1f}}, {0x7, 0x0, {0x2, 0x8}}, {0x0, 0xe56c, {0x2, 0x5}}, {0xff, 0x401, {0x0, 0x3}}, {0x7fff, 0x5, {0x2, 0x1}}, {0x9, 0xffff, {0x1, 0x1}}, {0x1, 0x2, {0x0, 0x3}}, {0xffff, 0x101, {0x0, 0xfffffff8}}, {0x5, 0x80, {0x3, 0x9}}, {0x2000, 0x9, {0x2, 0x40}}, {0x9, 0x9e41, {0x0, 0x20}}, {0x3f49, 0x9, {0x2, 0x28}}, {0x3, 0xff, {0x3, 0x4}}, {0x1, 0x4, {0x1, 0x200}}, {0x1, 0x6, {0x0, 0x5}}, {0x8, 0x1000}, {0x9, 0x0, {0x0, 0x80}}, {0x7ff, 0xffff, {0x1}}, {0xfffb, 0x5, {0x0, 0x6}}, {0xa9bb, 0x29, {0x2, 0x200}}, {0xd00, 0x8000, {0x4, 0x5}}, {0x2, 0x100, {0x1, 0x20}}]}}}, {{0x254, 0x1, {{0x2, 0x4}, 0x0, 0x0, 0x5, 0x7ff, 0x1c, 'syz0\x00', "31e97ba35ae466bf85a1078ba5a3137024e7848b0cb215b4745a3cd48f6c5d15", "61e387ec55388ce1b07b94ccf437e25fae176d7143b36fe71ce2e08d46aa3986", [{0x1, 0x96, {0x1, 0x10000}}, {0x5, 0x13, {0x0, 0xffffffff}}, {0x2, 0x9, {0x0, 0x9}}, {0x6, 0x1, {0x2, 0x2}}, {0x7, 0x8, {0x2, 0x8}}, {0x8, 0x1, {0x0, 0xaf8}}, {0x3, 0x3ff, {0x1, 0x9}}, {0x6, 0x20, {0x2, 0x4}}, {0x115f, 0xff80, {0x3, 0x400}}, {0x1, 0x4, {0x1, 0x9}}, {0x1, 0x7, {0x3, 0x6}}, {0x1f, 0x9586, {0x3, 0x2}}, {0x5, 0x2}, {0x8965, 0x200, {0x0, 0x1}}, {0xd400, 0x754e, {0x0, 0xffffffff}}, {0x101, 0x9, {0x3, 0x7ff}}, {0xb06, 0x0, {0x3, 0x8001}}, {0xac, 0x9, {0x0, 0xdb6}}, {0x9, 0x9, {0x0, 0x7}}, {0x40, 0x7, {0x2, 0x3}}, {0x1f, 0x9, {0x1, 0xffffffdc}}, {0x5, 0xaa79, {0x0, 0x6}}, {0x3, 0x6, {0x0, 0x6}}, {0x4, 0x0, {0x3, 0xc0000}}, {0x3, 0x7ff, {0x0, 0x9}}, {0x1, 0x2021, {0x2, 0x9}}, {0x4, 0x7, {0x3, 0x3}}, {0x40, 0x2, {0x0, 0x5}}, {0x5, 0x2, {0x2, 0x3}}, {0xffff, 0x0, {0x1, 0x9}}, {0x200, 0x400, {0x3, 0xfffffffe}}, {0x891, 0x1, {0x2, 0xff}}, {0x100, 0x8, {0x1, 0x1}}, {0x8, 0x101, {0x3, 0x71}}, {0xfff7, 0x301, {0x3, 0x487}}, {0x4c83, 0x1f, {0x0, 0x3f}}, {0x8, 0xed, {0x0, 0x200}}, {0x2, 0x5, {0x2, 0x3}}, {0x1000, 0x1ff, {0x3}}, {0x9, 0x200, {0x0, 0x8608}}]}}}, {{0x254, 0x1, {{0x1, 0x1}, 0xff, 0x3, 0x7, 0x7f, 0x27, 'syz0\x00', "1e1febf7f4dc979cbcc2b1c3b01cc504fb6990b901560080c09997944b938177", "22bc4103b74309772701f3598b73e1c35906fb5c2eddec12306de4a5c3ffaab3", [{0x83c7, 0x3, {0x0, 0xfffffff8}}, {0x7, 0xa8b7, {0x2, 0x3}}, {0xe4, 0x3, {0x3, 0x4}}, {0x6, 0xdf0, {0x2, 0x1ff}}, {0x5, 0x0, {0x1, 0x100}}, {0xfffa, 0x3, {0x2, 0xff}}, {0x9, 0x8000, {0x3, 0x10000}}, {0xffff, 0x4b03, {0x0, 0xe0000}}, {0xff7f, 0x35, {0x2, 0x10001}}, {0x1, 0x2, {0x3, 0x8}}, {0x2, 0x3ff, {0x2, 0x101}}, {0x6, 0x7, {0x2, 0x8000}}, {0x0, 0x1, {0x2, 0x6}}, {0x1, 0x5a4d, {0x2, 0x3b5}}, {0x2, 0x4, {0x3, 0x9}}, {0x1, 0x401, {0x2, 0x2020}}, {0x104, 0x401, {0x1}}, {0x71, 0x7f, {0x3, 0x3}}, {0x6, 0x5e1, {0x1, 0x8}}, {0x8, 0xd0, {0x1, 0xbb8}}, {0x3ff, 0x58, {0x3, 0x3f}}, {0x2, 0x4110, {0x1}}, {0x6, 0x200, {0x3, 0x1}}, {0x4, 0x6, {0x3, 0x8}}, {0x3ff, 0x20, {0x3, 0x9c4}}, {0x1e, 0x4, {0x1, 0xffff}}, {0xeff, 0x3, {0x3, 0x8}}, {0x4, 0xb, {0x0, 0x80000001}}, {0xff, 0x200, {0x2, 0x40}}, {0xc8, 0x7, {0x3, 0x1}}, {0x0, 0x3, {0x5, 0x6}}, {0x20, 0x4, {0x1, 0x9}}, {0x3, 0x1ff, {0x3, 0x1}}, {0x750, 0x1ff, {0x3, 0x7}}, {0x6, 0x7, {0x1, 0x7f}}, {0x1, 0x1f, {0x2, 0x7}}, {0x2, 0x200, {0x2, 0x4}}, {0x8, 0x20, {0x2, 0xffffffff}}, {0x3, 0x3, {0x2, 0x7}}, {0x7e00, 0x8001, {0x3, 0x5}}]}}}]}, 0x710}, 0x1, 0x0, 0x0, 0x4000895}, 0x4000880)
+ioctl$int_out(0xffffffffffffffff, 0x2, &(0x7f0000000e40))
+r10 = open$IOCTL_PRIVCMD_HYPERCALL184191(&(0x7f0000000e80)='/proc/xen/privcmd\x00')
+ioctl$SG_GET_REQUEST_TABLE(r10, 0x2286, &(0x7f0000000ec0))
+sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, &(0x7f0000001600)={&(0x7f0000001540)={0x10, 0x0, 0x0, 0x10000}, 0xc, &(0x7f00000015c0)={&(0x7f0000001580)={0x30, 0x0, 0xb, 0x3, 0x0, 0x0, {0xa, 0x0, 0x2}, [@NFTA_COMPAT_NAME={0xb, 0x1, 'queue0\x00'}, @NFTA_COMPAT_TYPE={0x8}, @NFTA_COMPAT_REV={0x8, 0x2, 0x1, 0x0, 0x4}]}, 0x30}, 0x1, 0x0, 0x0, 0x20020000}, 0x4040)
+
+[3848ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 19
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3893ms] -> setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, 0x20000000, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3894ms] <- setsockopt$inet_tcp_int=0xffffffffffffffff errno=9 cover=10000 
+SIGSEGV on 0x7f636ece1878, exiting
+2020/05/11 04:10:26 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:10:26 result hanged=false: 
+04:10:26 executing program 0:
+setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, &(0x7f0000000000)=0x4, 0x4)
+close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+prctl$PR_SET_DUMPABLE(0x4, 0x3)
+r0 = shmget(0x3, 0x3000, 0x4, &(0x7f0000ffb000/0x3000)=nil)
+shmctl$SHM_LOCK(r0, 0xb)
+r1 = socket$inet6_udplite(0xa, 0x2, 0x88)
+getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, &(0x7f0000000040)={@rand_addr, <r2=>0x0}, &(0x7f0000000080)=0x14)
+ioctl$ifreq_SIOCGIFINDEX_batadv_hard(r1, 0x8933, &(0x7f00000000c0)={'batadv_slave_1\x00', r2})
+r3 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+ioctl$EXT4_IOC_SETFLAGS(r3, 0x40086602, &(0x7f0000000100)=0x20014150)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$SNDRV_TIMER_IOCTL_STATUS64(r4, 0x80605414, &(0x7f0000000180))
+r5 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000240)='nl80211\x00')
+sendmsg$NL80211_CMD_START_SCHED_SCAN(r4, &(0x7f0000000340)={&(0x7f0000000200)={0x10, 0x0, 0x0, 0x80}, 0xc, &(0x7f0000000300)={&(0x7f0000000280)={0x74, r5, 0x400, 0x70bd2a, 0x25dfdbfb, {}, [@NL80211_ATTR_WDEV={0xc, 0x99, {0x7f, 0x2}}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x8, 0x1}}, @NL80211_ATTR_SCHED_SCAN_MULTI={0x4}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x7, 0x5}}, @NL80211_ATTR_BSSID={0xa, 0xf5, @broadcast}, @NL80211_ATTR_SCAN_FREQUENCIES={0x34, 0x2c, 0x0, 0x1, [{0x8, 0x0, 0x33e95533}, {0x8, 0x0, 0xffff686f}, {0x8, 0x0, 0xb2c}, {0x8, 0x0, 0x101}, {0x8, 0x0, 0x200}, {0x8, 0x0, 0x2}]}]}, 0x74}, 0x1, 0x0, 0x0, 0x20040804}, 0x4)
+r6 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x5040, 0x0)
+write$P9_RXATTRWALK(r6, &(0x7f00000003c0)={0xf, 0x1f, 0x1, 0x3}, 0xf)
+r7 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000400)='/dev/vga_arbiter\x00', 0x1, 0x0)
+ioctl$EVIOCGRAB(r7, 0x40044590, &(0x7f0000000440)=0x8)
+ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(r6, 0xc0406619, &(0x7f0000000480)={{0x2, 0x0, @descriptor="3165185d19de81e8"}})
+r8 = socket$nl_route(0x10, 0x3, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL47(r8, 0x305000, &(0x7f00000004c0)={0x22, 0x4, 0x1, 0x100000000, 0x1, 0x8})
+ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(r7, 0x408c5333, &(0x7f0000000500)={0xa9, 0x8, 0x0, 'queue0\x00', 0x7})
+r9 = semget$private(0x0, 0x2, 0x0)
+semctl$IPC_RMID(r9, 0x0, 0x0)
+ioctl$EVIOCGSND(r4, 0x8040451a, &(0x7f00000005c0)=""/93)
+sendmsg$OSF_MSG_ADD(r6, &(0x7f0000000e00)={&(0x7f0000000640)={0x10, 0x0, 0x0, 0x8}, 0xc, &(0x7f0000000dc0)={&(0x7f0000000680)={0x710, 0x0, 0x5, 0x201, 0x0, 0x0, {0x5, 0x0, 0x9}, [{{0x254, 0x1, {{0x2, 0x2}, 0x4, 0x1, 0x6, 0x2, 0x2, 'syz0\x00', "0885763322781f53a1ab781eac10c5b4d00912830d5e441dad93a4b827eaf260", "50df2d6d930c9ee0b6c162df2fe9e86bdf32ef36c1d2a6fc1f213e121946bef2", [{0x1, 0x1, {0x3, 0x5}}, {0x0, 0x1, {0x0, 0x2}}, {0x4, 0xa1, {0x1, 0x5}}, {0x9, 0x4, {0x2, 0x1}}, {0x401, 0xfe59, {0x3, 0x41}}, {0x1, 0x6, {0x3, 0x5}}, {0x4, 0xab, {0x3}}, {0x0, 0x401, {0x0, 0x3}}, {0x3, 0x325, {0x2}}, {0x5, 0xc8, {0x2, 0x800}}, {0x5, 0x0, {0x0, 0xfffff000}}, {0x2, 0xfffa, {0x3, 0x1ff0}}, {0x9, 0xc7, {0x2, 0xc456}}, {0x5, 0xffff, {0x2, 0xffffff80}}, {0xfff7, 0x2, {0x1, 0x401}}, {0x2, 0x5, {0x2, 0x1f}}, {0x9, 0x1000, {0x0, 0x7fff}}, {0x7, 0x6, {0x3, 0xd5}}, {0x9, 0x4b36, {0x3, 0x1f}}, {0x7, 0x0, {0x2, 0x8}}, {0x0, 0xe56c, {0x2, 0x5}}, {0xff, 0x401, {0x0, 0x3}}, {0x7fff, 0x5, {0x2, 0x1}}, {0x9, 0xffff, {0x1, 0x1}}, {0x1, 0x2, {0x0, 0x3}}, {0xffff, 0x101, {0x0, 0xfffffff8}}, {0x5, 0x80, {0x3, 0x9}}, {0x2000, 0x9, {0x2, 0x40}}, {0x9, 0x9e41, {0x0, 0x20}}, {0x3f49, 0x9, {0x2, 0x28}}, {0x3, 0xff, {0x3, 0x4}}, {0x1, 0x4, {0x1, 0x200}}, {0x1, 0x6, {0x0, 0x5}}, {0x8, 0x1000}, {0x9, 0x0, {0x0, 0x80}}, {0x7ff, 0xffff, {0x1}}, {0xfffb, 0x5, {0x0, 0x6}}, {0xa9bb, 0x29, {0x2, 0x200}}, {0xd00, 0x8000, {0x4, 0x5}}, {0x2, 0x100, {0x1, 0x20}}]}}}, {{0x254, 0x1, {{0x2, 0x4}, 0x0, 0x0, 0x5, 0x7ff, 0x1c, 'syz0\x00', "31e97ba35ae466bf85a1078ba5a3137024e7848b0cb215b4745a3cd48f6c5d15", "61e387ec55388ce1b07b94ccf437e25fae176d7143b36fe71ce2e08d46aa3986", [{0x1, 0x96, {0x1, 0x10000}}, {0x5, 0x13, {0x0, 0xffffffff}}, {0x2, 0x9, {0x0, 0x9}}, {0x6, 0x1, {0x2, 0x2}}, {0x7, 0x8, {0x2, 0x8}}, {0x8, 0x1, {0x0, 0xaf8}}, {0x3, 0x3ff, {0x1, 0x9}}, {0x6, 0x20, {0x2, 0x4}}, {0x115f, 0xff80, {0x3, 0x400}}, {0x1, 0x4, {0x1, 0x9}}, {0x1, 0x7, {0x3, 0x6}}, {0x1f, 0x9586, {0x3, 0x2}}, {0x5, 0x2}, {0x8965, 0x200, {0x0, 0x1}}, {0xd400, 0x754e, {0x0, 0xffffffff}}, {0x101, 0x9, {0x3, 0x7ff}}, {0xb06, 0x0, {0x3, 0x8001}}, {0xac, 0x9, {0x0, 0xdb6}}, {0x9, 0x9, {0x0, 0x7}}, {0x40, 0x7, {0x2, 0x3}}, {0x1f, 0x9, {0x1, 0xffffffdc}}, {0x5, 0xaa79, {0x0, 0x6}}, {0x3, 0x6, {0x0, 0x6}}, {0x4, 0x0, {0x3, 0xc0000}}, {0x3, 0x7ff, {0x0, 0x9}}, {0x1, 0x2021, {0x2, 0x9}}, {0x4, 0x7, {0x3, 0x3}}, {0x40, 0x2, {0x0, 0x5}}, {0x5, 0x2, {0x2, 0x3}}, {0xffff, 0x0, {0x1, 0x9}}, {0x200, 0x400, {0x3, 0xfffffffe}}, {0x891, 0x1, {0x2, 0xff}}, {0x100, 0x8, {0x1, 0x1}}, {0x8, 0x101, {0x3, 0x71}}, {0xfff7, 0x301, {0x3, 0x487}}, {0x4c83, 0x1f, {0x0, 0x3f}}, {0x8, 0xed, {0x0, 0x200}}, {0x2, 0x5, {0x2, 0x3}}, {0x1000, 0x1ff, {0x3}}, {0x9, 0x200, {0x0, 0x8608}}]}}}, {{0x254, 0x1, {{0x1, 0x1}, 0xff, 0x3, 0x7, 0x7f, 0x27, 'syz0\x00', "1e1febf7f4dc979cbcc2b1c3b01cc504fb6990b901560080c09997944b938177", "22bc4103b74309772701f3598b73e1c35906fb5c2eddec12306de4a5c3ffaab3", [{0x83c7, 0x3, {0x0, 0xfffffff8}}, {0x7, 0xa8b7, {0x2, 0x3}}, {0xe4, 0x3, {0x3, 0x4}}, {0x6, 0xdf0, {0x2, 0x1ff}}, {0x5, 0x0, {0x1, 0x100}}, {0xfffa, 0x3, {0x2, 0xff}}, {0x9, 0x8000, {0x3, 0x10000}}, {0xffff, 0x4b03, {0x0, 0xe0000}}, {0xff7f, 0x35, {0x2, 0x10001}}, {0x1, 0x2, {0x3, 0x8}}, {0x2, 0x3ff, {0x2, 0x101}}, {0x6, 0x7, {0x2, 0x8000}}, {0x0, 0x1, {0x2, 0x6}}, {0x1, 0x5a4d, {0x2, 0x3b5}}, {0x2, 0x4, {0x3, 0x9}}, {0x1, 0x401, {0x2, 0x2020}}, {0x104, 0x401, {0x1}}, {0x71, 0x7f, {0x3, 0x3}}, {0x6, 0x5e1, {0x1, 0x8}}, {0x8, 0xd0, {0x1, 0xbb8}}, {0x3ff, 0x58, {0x3, 0x3f}}, {0x2, 0x4110, {0x1}}, {0x6, 0x200, {0x3, 0x1}}, {0x4, 0x6, {0x3, 0x8}}, {0x3ff, 0x20, {0x3, 0x9c4}}, {0x1e, 0x4, {0x1, 0xffff}}, {0xeff, 0x3, {0x3, 0x8}}, {0x4, 0xb, {0x0, 0x80000001}}, {0xff, 0x200, {0x2, 0x40}}, {0xc8, 0x7, {0x3, 0x1}}, {0x0, 0x3, {0x5, 0x6}}, {0x20, 0x4, {0x1, 0x9}}, {0x3, 0x1ff, {0x3, 0x1}}, {0x750, 0x1ff, {0x3, 0x7}}, {0x6, 0x7, {0x1, 0x7f}}, {0x1, 0x1f, {0x2, 0x7}}, {0x2, 0x200, {0x2, 0x4}}, {0x8, 0x20, {0x2, 0xffffffff}}, {0x3, 0x3, {0x2, 0x7}}, {0x7e00, 0x8001, {0x3, 0x5}}]}}}]}, 0x710}, 0x1, 0x0, 0x0, 0x4000895}, 0x4000880)
+ioctl$int_out(0xffffffffffffffff, 0x2, &(0x7f0000000e40))
+r10 = open$IOCTL_PRIVCMD_HYPERCALL184191(&(0x7f0000000e80)='/proc/xen/privcmd\x00')
+ioctl$SG_GET_REQUEST_TABLE(r10, 0x2286, &(0x7f0000000ec0))
+sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, &(0x7f0000001600)={&(0x7f0000001540)={0x10, 0x0, 0x0, 0x10000}, 0xc, &(0x7f00000015c0)={&(0x7f0000001580)={0x30, 0x0, 0xb, 0x3, 0x0, 0x0, {0xa, 0x0, 0x2}, [@NFTA_COMPAT_NAME={0xb, 0x1, 'queue0\x00'}, @NFTA_COMPAT_TYPE={0x8}, @NFTA_COMPAT_REV={0x8, 0x2, 0x1, 0x0, 0x4}]}, 0x30}, 0x1, 0x0, 0x0, 0x20020000}, 0x4040)
+
+[3897ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 27
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3939ms] -> setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, 0x20000000, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3939ms] <- setsockopt$inet_tcp_int=0xffffffffffffffff errno=9 cover=10000 
+SIGSEGV on 0x7f636ece1878, exiting
+04:10:26 executing program 0:
+setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, &(0x7f0000000000)=0x4, 0x4)
+close$IOCTL_PRIVCMD_HYPERCALL17350111(0xffffffffffffffff)
+prctl$PR_SET_DUMPABLE(0x4, 0x3)
+r0 = shmget(0x3, 0x3000, 0x4, &(0x7f0000ffb000/0x3000)=nil)
+shmctl$SHM_LOCK(r0, 0xb)
+r1 = socket$inet6_udplite(0xa, 0x2, 0x88)
+getsockopt$inet6_mreq(0xffffffffffffffff, 0x29, 0x1c, &(0x7f0000000040)={@rand_addr, <r2=>0x0}, &(0x7f0000000080)=0x14)
+ioctl$ifreq_SIOCGIFINDEX_batadv_hard(r1, 0x8933, &(0x7f00000000c0)={'batadv_slave_1\x00', r2})
+r3 = syz_open_dev$tty20(0xc, 0x4, 0x0)
+ioctl$EXT4_IOC_SETFLAGS(r3, 0x40086602, &(0x7f0000000100)=0x20014150)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL11740_20(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$SNDRV_TIMER_IOCTL_STATUS64(r4, 0x80605414, &(0x7f0000000180))
+r5 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000240)='nl80211\x00')
+sendmsg$NL80211_CMD_START_SCHED_SCAN(r4, &(0x7f0000000340)={&(0x7f0000000200)={0x10, 0x0, 0x0, 0x80}, 0xc, &(0x7f0000000300)={&(0x7f0000000280)={0x74, r5, 0x400, 0x70bd2a, 0x25dfdbfb, {}, [@NL80211_ATTR_WDEV={0xc, 0x99, {0x7f, 0x2}}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x8, 0x1}}, @NL80211_ATTR_SCHED_SCAN_MULTI={0x4}, @NL80211_ATTR_SCHED_SCAN_RSSI_ADJUST={0x6, 0xf7, {0x7, 0x5}}, @NL80211_ATTR_BSSID={0xa, 0xf5, @broadcast}, @NL80211_ATTR_SCAN_FREQUENCIES={0x34, 0x2c, 0x0, 0x1, [{0x8, 0x0, 0x33e95533}, {0x8, 0x0, 0xffff686f}, {0x8, 0x0, 0xb2c}, {0x8, 0x0, 0x101}, {0x8, 0x0, 0x200}, {0x8, 0x0, 0x2}]}]}, 0x74}, 0x1, 0x0, 0x0, 0x20040804}, 0x4)
+r6 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x5040, 0x0)
+write$P9_RXATTRWALK(r6, &(0x7f00000003c0)={0xf, 0x1f, 0x1, 0x3}, 0xf)
+r7 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000400)='/dev/vga_arbiter\x00', 0x1, 0x0)
+ioctl$EVIOCGRAB(r7, 0x40044590, &(0x7f0000000440)=0x8)
+ioctl$FS_IOC_REMOVE_ENCRYPTION_KEY_ALL_USERS(r6, 0xc0406619, &(0x7f0000000480)={{0x2, 0x0, @descriptor="3165185d19de81e8"}})
+r8 = socket$nl_route(0x10, 0x3, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL47(r8, 0x305000, &(0x7f00000004c0)={0x22, 0x4, 0x1, 0x100000000, 0x1, 0x8})
+ioctl$SNDRV_SEQ_IOCTL_DELETE_QUEUE(r7, 0x408c5333, &(0x7f0000000500)={0xa9, 0x8, 0x0, 'queue0\x00', 0x7})
+r9 = semget$private(0x0, 0x2, 0x0)
+semctl$IPC_RMID(r9, 0x0, 0x0)
+ioctl$EVIOCGSND(r4, 0x8040451a, &(0x7f00000005c0)=""/93)
+sendmsg$OSF_MSG_ADD(r6, &(0x7f0000000e00)={&(0x7f0000000640)={0x10, 0x0, 0x0, 0x8}, 0xc, &(0x7f0000000dc0)={&(0x7f0000000680)={0x710, 0x0, 0x5, 0x201, 0x0, 0x0, {0x5, 0x0, 0x9}, [{{0x254, 0x1, {{0x2, 0x2}, 0x4, 0x1, 0x6, 0x2, 0x2, 'syz0\x00', "0885763322781f53a1ab781eac10c5b4d00912830d5e441dad93a4b827eaf260", "50df2d6d930c9ee0b6c162df2fe9e86bdf32ef36c1d2a6fc1f213e121946bef2", [{0x1, 0x1, {0x3, 0x5}}, {0x0, 0x1, {0x0, 0x2}}, {0x4, 0xa1, {0x1, 0x5}}, {0x9, 0x4, {0x2, 0x1}}, {0x401, 0xfe59, {0x3, 0x41}}, {0x1, 0x6, {0x3, 0x5}}, {0x4, 0xab, {0x3}}, {0x0, 0x401, {0x0, 0x3}}, {0x3, 0x325, {0x2}}, {0x5, 0xc8, {0x2, 0x800}}, {0x5, 0x0, {0x0, 0xfffff000}}, {0x2, 0xfffa, {0x3, 0x1ff0}}, {0x9, 0xc7, {0x2, 0xc456}}, {0x5, 0xffff, {0x2, 0xffffff80}}, {0xfff7, 0x2, {0x1, 0x401}}, {0x2, 0x5, {0x2, 0x1f}}, {0x9, 0x1000, {0x0, 0x7fff}}, {0x7, 0x6, {0x3, 0xd5}}, {0x9, 0x4b36, {0x3, 0x1f}}, {0x7, 0x0, {0x2, 0x8}}, {0x0, 0xe56c, {0x2, 0x5}}, {0xff, 0x401, {0x0, 0x3}}, {0x7fff, 0x5, {0x2, 0x1}}, {0x9, 0xffff, {0x1, 0x1}}, {0x1, 0x2, {0x0, 0x3}}, {0xffff, 0x101, {0x0, 0xfffffff8}}, {0x5, 0x80, {0x3, 0x9}}, {0x2000, 0x9, {0x2, 0x40}}, {0x9, 0x9e41, {0x0, 0x20}}, {0x3f49, 0x9, {0x2, 0x28}}, {0x3, 0xff, {0x3, 0x4}}, {0x1, 0x4, {0x1, 0x200}}, {0x1, 0x6, {0x0, 0x5}}, {0x8, 0x1000}, {0x9, 0x0, {0x0, 0x80}}, {0x7ff, 0xffff, {0x1}}, {0xfffb, 0x5, {0x0, 0x6}}, {0xa9bb, 0x29, {0x2, 0x200}}, {0xd00, 0x8000, {0x4, 0x5}}, {0x2, 0x100, {0x1, 0x20}}]}}}, {{0x254, 0x1, {{0x2, 0x4}, 0x0, 0x0, 0x5, 0x7ff, 0x1c, 'syz0\x00', "31e97ba35ae466bf85a1078ba5a3137024e7848b0cb215b4745a3cd48f6c5d15", "61e387ec55388ce1b07b94ccf437e25fae176d7143b36fe71ce2e08d46aa3986", [{0x1, 0x96, {0x1, 0x10000}}, {0x5, 0x13, {0x0, 0xffffffff}}, {0x2, 0x9, {0x0, 0x9}}, {0x6, 0x1, {0x2, 0x2}}, {0x7, 0x8, {0x2, 0x8}}, {0x8, 0x1, {0x0, 0xaf8}}, {0x3, 0x3ff, {0x1, 0x9}}, {0x6, 0x20, {0x2, 0x4}}, {0x115f, 0xff80, {0x3, 0x400}}, {0x1, 0x4, {0x1, 0x9}}, {0x1, 0x7, {0x3, 0x6}}, {0x1f, 0x9586, {0x3, 0x2}}, {0x5, 0x2}, {0x8965, 0x200, {0x0, 0x1}}, {0xd400, 0x754e, {0x0, 0xffffffff}}, {0x101, 0x9, {0x3, 0x7ff}}, {0xb06, 0x0, {0x3, 0x8001}}, {0xac, 0x9, {0x0, 0xdb6}}, {0x9, 0x9, {0x0, 0x7}}, {0x40, 0x7, {0x2, 0x3}}, {0x1f, 0x9, {0x1, 0xffffffdc}}, {0x5, 0xaa79, {0x0, 0x6}}, {0x3, 0x6, {0x0, 0x6}}, {0x4, 0x0, {0x3, 0xc0000}}, {0x3, 0x7ff, {0x0, 0x9}}, {0x1, 0x2021, {0x2, 0x9}}, {0x4, 0x7, {0x3, 0x3}}, {0x40, 0x2, {0x0, 0x5}}, {0x5, 0x2, {0x2, 0x3}}, {0xffff, 0x0, {0x1, 0x9}}, {0x200, 0x400, {0x3, 0xfffffffe}}, {0x891, 0x1, {0x2, 0xff}}, {0x100, 0x8, {0x1, 0x1}}, {0x8, 0x101, {0x3, 0x71}}, {0xfff7, 0x301, {0x3, 0x487}}, {0x4c83, 0x1f, {0x0, 0x3f}}, {0x8, 0xed, {0x0, 0x200}}, {0x2, 0x5, {0x2, 0x3}}, {0x1000, 0x1ff, {0x3}}, {0x9, 0x200, {0x0, 0x8608}}]}}}, {{0x254, 0x1, {{0x1, 0x1}, 0xff, 0x3, 0x7, 0x7f, 0x27, 'syz0\x00', "1e1febf7f4dc979cbcc2b1c3b01cc504fb6990b901560080c09997944b938177", "22bc4103b74309772701f3598b73e1c35906fb5c2eddec12306de4a5c3ffaab3", [{0x83c7, 0x3, {0x0, 0xfffffff8}}, {0x7, 0xa8b7, {0x2, 0x3}}, {0xe4, 0x3, {0x3, 0x4}}, {0x6, 0xdf0, {0x2, 0x1ff}}, {0x5, 0x0, {0x1, 0x100}}, {0xfffa, 0x3, {0x2, 0xff}}, {0x9, 0x8000, {0x3, 0x10000}}, {0xffff, 0x4b03, {0x0, 0xe0000}}, {0xff7f, 0x35, {0x2, 0x10001}}, {0x1, 0x2, {0x3, 0x8}}, {0x2, 0x3ff, {0x2, 0x101}}, {0x6, 0x7, {0x2, 0x8000}}, {0x0, 0x1, {0x2, 0x6}}, {0x1, 0x5a4d, {0x2, 0x3b5}}, {0x2, 0x4, {0x3, 0x9}}, {0x1, 0x401, {0x2, 0x2020}}, {0x104, 0x401, {0x1}}, {0x71, 0x7f, {0x3, 0x3}}, {0x6, 0x5e1, {0x1, 0x8}}, {0x8, 0xd0, {0x1, 0xbb8}}, {0x3ff, 0x58, {0x3, 0x3f}}, {0x2, 0x4110, {0x1}}, {0x6, 0x200, {0x3, 0x1}}, {0x4, 0x6, {0x3, 0x8}}, {0x3ff, 0x20, {0x3, 0x9c4}}, {0x1e, 0x4, {0x1, 0xffff}}, {0xeff, 0x3, {0x3, 0x8}}, {0x4, 0xb, {0x0, 0x80000001}}, {0xff, 0x200, {0x2, 0x40}}, {0xc8, 0x7, {0x3, 0x1}}, {0x0, 0x3, {0x5, 0x6}}, {0x20, 0x4, {0x1, 0x9}}, {0x3, 0x1ff, {0x3, 0x1}}, {0x750, 0x1ff, {0x3, 0x7}}, {0x6, 0x7, {0x1, 0x7f}}, {0x1, 0x1f, {0x2, 0x7}}, {0x2, 0x200, {0x2, 0x4}}, {0x8, 0x20, {0x2, 0xffffffff}}, {0x3, 0x3, {0x2, 0x7}}, {0x7e00, 0x8001, {0x3, 0x5}}]}}}]}, 0x710}, 0x1, 0x0, 0x0, 0x4000895}, 0x4000880)
+ioctl$int_out(0xffffffffffffffff, 0x2, &(0x7f0000000e40))
+r10 = open$IOCTL_PRIVCMD_HYPERCALL184191(&(0x7f0000000e80)='/proc/xen/privcmd\x00')
+ioctl$SG_GET_REQUEST_TABLE(r10, 0x2286, &(0x7f0000000ec0))
+sendmsg$NFNL_MSG_COMPAT_GET(0xffffffffffffffff, &(0x7f0000001600)={&(0x7f0000001540)={0x10, 0x0, 0x0, 0x10000}, 0xc, &(0x7f00000015c0)={&(0x7f0000001580)={0x30, 0x0, 0xb, 0x3, 0x0, 0x0, {0xa, 0x0, 0x2}, [@NFTA_COMPAT_NAME={0xb, 0x1, 'queue0\x00'}, @NFTA_COMPAT_TYPE={0x8}, @NFTA_COMPAT_REV={0x8, 0x2, 0x1, 0x0, 0x4}]}, 0x30}, 0x1, 0x0, 0x0, 0x20020000}, 0x4040)
+
+2020/05/11 04:10:26 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:10:26 result hanged=false: 
+[3942ms] exec opts: procid=0 threaded=1 collide=0 cover=1 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 35
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3984ms] -> setsockopt$inet_tcp_int(0xffffffffffffffff, 0x6, 0x1, 0x20000000, 0x4)
+Rrooach executor_linux175 size = 10000
+#0 [3984ms] <- setsockopt$inet_tcp_int=0xffffffffffffffff errno=9 cover=10000 
+SIGSEGV on 0x7f636ece1878, exiting
+2020/05/11 04:10:26 env.config.Flags = 1955,  FlagSignal = 2
+2020/05/11 04:10:26 result hanged=false: 
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 getting cover
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 get report
+2020/05/11 04:10:26 --------------------
+2020/05/11 04:10:26 setting fault
+2020/05/11 04:10:26 #0: generated
+04:10:26 executing program 0:
+r0 = fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+r1 = dup(r0)
+close$IOCTL_PRIVCMD_HYPERCALL19578_222(r1)
+r2 = openat$urandom(0xffffffffffffff9c, &(0x7f0000000000)='/dev/urandom\x00', 0x0, 0x0)
+ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS(r2, 0xc080661a, &(0x7f0000000040)={{0x3, 0x0, @reserved="77c1761ff707da5e7f39d045a85e4c817def352e46af001b5e9af27a88ed1472"}})
+r3 = syz_genetlink_get_family_id$nl80211(&(0x7f0000000100)='nl80211\x00')
+getsockopt$inet_pktinfo(r0, 0x0, 0x8, &(0x7f0000000140)={<r4=>0x0, @local}, &(0x7f0000000180)=0xc)
+sendmsg$NL80211_CMD_SET_WIPHY_NETNS(r0, &(0x7f0000000240)={&(0x7f00000000c0)={0x10, 0x0, 0x0, 0x400}, 0xc, &(0x7f0000000200)={&(0x7f00000001c0)={0x28, r3, 0x1, 0x70bd28, 0x25dfdbfc, {}, [@NL80211_ATTR_IFINDEX={0x8, 0x3, r4}, @NL80211_ATTR_WDEV={0xc, 0x99, {0x7, 0x2}}]}, 0x28}, 0x1, 0x0, 0x0, 0x4041}, 0x2000c000)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL173501111(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL58(r5, 0x305000, &(0x7f00000002c0)={0x24, 0x10000, 0xd5, 0x2, 0x800, 0x6})
+getresuid(&(0x7f0000000480), &(0x7f00000004c0)=<r6=>0x0, &(0x7f0000000500))
+r7 = getuid()
+syz_mount_image$msdos(&(0x7f0000000300)='msdos\x00', &(0x7f0000000340)='./file0\x00', 0x1, 0x2, &(0x7f0000000440)=[{&(0x7f0000000380)="ddf5ef2097afd4bc642f5ee727d2e703fd62035c2aa11b7cff995955ab179d0dff41054cd2e4d146a4ab276b0954b43bb74909d2e63831f4195831c8aefb116ec7f29a17f73cc7a398", 0x49, 0x10000}, {&(0x7f0000000400)="61487455c3f4a55ce34294788bb539", 0xf, 0x6}], 0x40000, &(0x7f0000000540)={[{@fat=@tz_utc='tz=UTC'}], [{@subj_user={'subj_user', 0x3d, 'system'}}, {@appraise_type='appraise_type=imasig'}, {@dont_hash='dont_hash'}, {@euid_eq={'euid', 0x3d, r6}}, {@uid_lt={'uid<', r7}}, {@appraise='appraise'}, {@context={'context', 0x3d, 'root'}}]})
+r8 = socket$inet_udplite(0x2, 0x2, 0x88)
+ioctl$void(r8, 0x5451)
+ioctl$EXT4_IOC_GROUP_ADD(0xffffffffffffffff, 0x40286608, &(0x7f0000000600)={0x3, 0xffffffffffffffff, 0x7f, 0x1, 0x8, 0x7f})
+r9 = getpgrp(0x0)
+ptrace$setregs(0xf, r9, 0x1, &(0x7f0000000640)="2af224b3b03ab65c905e2eea822041adf7da3b4f2d4863f56104a0cc745f46579597b3e2ac42957d0f2c481e3f1d4414d5197786a8b23dbbb28b54a4bc777f7cb10a17c20e0b290f935566756427e40b1e4893479d2dc8d86a2e216c53edbc55f93e797f77b186153116719779f3547e704673a39d0f50a56e73f085c44e3333ea8e1df77cbf5694bb4929264054c3c710b17178dc20fc4299d61ffe7781c0ebfd5f7d9eb40f0b77d5a4968e5ea2bc9170297326e9ff02d3e3045ba6f53a8c22bae7739204ad472d5e12768918941323fded2807d646f6adfd4d3eda34e4d38052a11284c3288357624fc42ea91e69d025b1489f5416dec854c6cd0f38f3632eaa9e4d698f5072bb5361e9fa8bceb090bbae50fdd29943260a604039b1dbfd3856833d17d11a5a0e236ed4f563eb7fdf7d9fc68fb6f45dacf1b736b9b39627f61ade631d27b7ebf9fd21acdce694173b1a7602daeefa60bc3788f5046f8edd3c3841a64969b834f7e04d60fd3e4660a8a7c5d5579bba7bd0f22605912e28c710e2a0a55aca70f754a2d1774db06569af3284e873a3935c6394fd4f75f824250a6cbcd8dc8231d438fae2dff1e4afb2b4045591454caf217a3ec73eae869a6a5f2af8db42229e9c55abf266a41a4bfe80c716cbb5267c38fd66f700ead9ce1086c39ff7649ada6d5ceed253b1b26b217fbc05a3cf74926664801256ab87fbf81a625723872b0702dc499d3cceca1404ec54ba240b7b8e68d432c01be31b3342b1a3519e0a8a51f8d7ccbf667052328baac5d630782110e761b3e35727555bc9fa7d0c10a00fdefc2633d5c5bd9f199d8a08f897981c89e097fbb365e25a356c412d3e29b215a457f01a66737724b13cd4177391d392cdad95fb811ad45d859ef63f5ba7829931388afc3b4544af723d9d2a5a264d0c072ca9e0f77634c42fe21bba4a47f67ecda2efb8fa72b49cdc304453000376094a093f661b4e33dfa104acf37ed508f7d3c45290af5fb8a1da19daa69d9c795273430ac99b782af24e7ee80fe50e47747c11f4478f1e403f9d9621373418d485971d06320dd0ca3372561fdf39a358df7f093b0816a1b54e448d6944d57e0d862ddae5e1a54332095636bfd3c84c29b9c3bbc6e7a94a33782e573f9fcb58745080fef6250a9a9b5425b2de4bd75bf3a0a4674ab078120145be2befabc6ab64b7eda650ec01e4feb003474728556226e98e4433f8e5aef0b00bc628f07e3bfc4c58cb62515b9f255221e99358558b62eeecdcd104d0777ec0dc651c9505ea5e77f6dd294233f4f8dbd669577b8e774d04f8012aca8dd45cc8db6bfc91bc2435f1df89da78adffe2427a196886fa496d2e3e41ea8dc6198d79404aac72c8d570c372a3b77995408de069ebfb7a4cf767e949c8e6dc40e828905cfdb06df759b1dbd1e0a5f19605166564a702dd0f119a065acf17e812ffb579e6275a75707ff00800fa480346c42750b8a3b7622018a1ab228385d847495e7d07d7fed59f7d73a5f2c022bee794230188b41bde9730f24fbdddecc978bc4d0676a56ee3efa7cf860709e75d07239afc3dd98e47cf4dd76cbac9f0ed29d0af12b5ef9c024d61ddb4516377f413c8c924f2bc69798e88c64d45309721b8cbf157ddcbaf6a89cdac73d64d8fb45bf7ccd98ad7e328a6a6f93d731d11ff08f1941178617150122793d6e48ffcdd2f6f2e92351d993bbb6e3ada48d0a440ec2423937f4f31dc17cedb3adcd43d6ba89b771318368907194b6fa2fbfda0f3bedaf0001e061555a199046e16f2a8de5274ad587377b7fab4edd77e7ec1989f634aa2f395a9fb02e0861be50f9935333745de567e931bd94a7976c4cc538af762ff660169924a54fe996a14ee2d4c2151713bacfbf0e7e3e3e6f2efb6e607b1dc27d3c097aaeb50f76bb58a6dc40ff99943f0c05d9584a88748864f904312fefebc71de8aa71d63c5dcd40547a0aa95315bd9064974c3644f761aa070174a203e4641f77b325c35d103d9474b3c56a1bc531f170abb1786c57d6e51db20fe07c75c3c8a057983a9d40b5de7e4c30a12e406a29759c089c6b33910221b1888e18b202039585d0d1877b8bb93a5aa21ffe01177457d12a886677abcc816add90de2265b537934cb8ff178c26680253fd4e7b7b6c6697682a4cdee9efc7040bd35b2ae3d89c47009741fe9dfb708583a469e468d1c0dfe2ff54c4db45a26f926fc4dc5bf1ea12a05e3aebb3ce86884cd2038f0dfcfed640d964c6583b4ddd5098c0a7a0198aaac5ddf3c95c1c3cf5cd89eb7f38c37689a87fb6191710f5985ac22f94ebdd6e8b70af42778508649d84659c2260c298241093d7c6788f788cd79f2df90d8e1de474a62e1c21c0c6192d532b46248caac9611f366c45296243805cf5e095a96bc799f072e9504755bc27d052a62597a6493c152f7ac7717b0d4b133e293185887f5c3d72891ee6285930c9baa544412f6c1d79ca13d0500c33cccdacad16955112c7c315413ed9215a5623405aeffe52b5c5d7135ebb63584912447c57cc82f27dbc794cb61c5838c6c1deda5e04172a65eabc5e35ac32787ac99266bc2da0d6c3eda46c42888912e6365ce98c4d8d8552b321f2f1e5e38e508778cfb29f1fed603baae3050d499a685b35b01b7d2740f62a711cc14143f8568fb3be959e622e1639d68817c7681a98fb9e468d7a53b690390556e9d3c1ddad4d0a858282775bccc9607d7e77c7625d5eeca631b3dd4d2c52a2e49d4b2d3f36844b2598723e07498e6085e1c4ec05a34319e124ecab72b40212650b4e594b86dc17bc19c40e32281f7872fcbb1beb85b6ae38fbc9962cd4b59124e42325e7ad0b34be2eb4cc04452f7a99f7a85513c19dd892eeae8741029b342aec265c8b314ad29914239045fae05317c93d29af98ea4084e681422f0b1a27acedc84e19c144ea80dc51a99d0b476237d9eed68d2a9ab7938e208582014c541c081f09e3e077147f4f318510d20ba2497f184de5d25dc5f43b1ef5b7558a7889dcf4c44da64bb650a3f4097e419d6c7faaccc1c98bfae9a827776f4211059eab636d79d7bcf8c06aa28f647666ee73f11aa86a4a2a7f4099938f815dac963e26c5b9b594c2e62f84465b3e7812fa467c30b97812fcb07fba5e6bf8c7bfb934899d02ca84507562aedd024b26f3635499fa03b2e6dffc683a1cec6c3252bbf73eeb7c33a8b314d4973689e78a917ae3bd56b4f93f0500268ae2bb5f95756455d6df211a98941e93b938880a5eeb031e2d8b338c18b3019d88cebbc9d982001fdddf4ab836faac2879c67c09c17b389ca0bbd3e0974a8b0f9fd52d8105ba7501761839eb1a49e83764ba2371a849d451955ae130644a03c76f6f4d943ae6a92f00f4d26086f826da2dc0ce117363ced73e96253d8b1f75161464bb1e7f590deb921bed353c831e5195c5c84e232fb571d133ec70501e09e24cb83004b72988d165e6fe36cad1933f0328a36cf189577933240f542dfff8a63af17dac24a2841717cd74a1de92b06f0548b08a0f0196415c51051d538feecbf02930b8eb5008ca3e6dbbd16033ea71eacc943828fbc32965a6a2ee80f7afbb164b13c703dd446f80f873e42fc35025cf0d10c2a913e5ea47abcb26cddbbe0fb8a5d40ace510d78196bd47f02e4cacdb75cccfdf1f8fa831c88fb363dfd98e524336c98ee771c6d80c3d1bb9da28f492e44a131d625250f092e6d4dbcb8227b2613317484438dff4dcbb76c71af1caceb82ff939f2b49c0f83e2e82097138bbb0bf02ed1c9d8b6bc4f6d44efecffa05f2760e5819b6cb35b570f26a5fd73ab1efb65b4a4f7f83d189e03dc050d72289318e3d50e6c2cbd2507e24d41918a7977a222e5ab28bf1d14637f85cfa69b6595a2f0afbfdb20f03c1d48f4e3dc98c58967cb8029b149031a4b9caecca5c50596e7f8da72fd9c409d4e6d8060bdf7474156a5df1e4cf39e9ff1f6c47a16717240161798bea0e23b0a03a7096e0d0330a742af5d87262587f874a665f77433e6cdccae0fafe31a597622d2ecb5eff4d04ea93b8ff40ade0396e88bca3f942d2301bae1ae72a596ad9b435cd00c09dd90a2be9a436a73a8b0bee2a38f5e1cb4beba3ae2d905f8751ab8a7147c02f734ca56b975cd915af4b17a042f6657cb5a9a2722cb8c458452a2c2798e77b8989cf89db1ff704029ec8415def6c0ca4481eaf6c0337f39423c1193c6b20a20a64ae91e87f2278378fe1ccc732eebbcc3fe2c558383391be815320777b65836c6f8fcace154d7a54fb9d912faf19cbc15c2b122e5ecadb3250867175812a2afad43e9d01ae8444c0b8ab29e0c32d92d79f1e87acb8d74f7b3c487d1e0e638a37aa1d52258f0dae2e7e154b8e14ec4f39914f485334b504da08a3a4c08c67b9ef660f3e961d73cc5af6fbe3f52e0e8eff497137c18edbd1fb03d755e011773dab990de88b2f652ec46ec8ebd22829ecc410b398074cac4d4a9d14c2a7a94106c1afdb048187a8ebe15cff7b175ef05ab4ea30f3f238854ec2102257a0ab792453159acde5deb5974b74b2aafff954752e08c2fdde7c41cd39379dc16fbb3d18b4d6c334b2ad77bc3722131ed4f3d7924127119a14e812b1a37150ea0af5b4e83d04eb93746b15503f49fd28275bba545366757230cc6d672110315302120979930c0e0ad889991a4ab6320061a3518b022d5d602b3eff7b078c8b0b98059736ab8f3688a9cb1399cb6d0d9ea5165b6df3ee037781207afb603d71e7200d631a18b5f9d5b50b3750197a4a486e9b6932063fbf7dbe23b4a3961ef0d0dadd340a6e73cd96921f70b09134fdc6754c5928a4c2cd0f4a04bb5f2ce82f692642cf0abd072b37c30d251eaf931c9c1d1e08c84a001cb7cf7272a72d96e46198462a5f59f1ef2b97ab37d5ecb25980e06d4f62772555a66c00b5eff0b64e66e0bd0a25130712fee782b2f907c4337beba8b12ee3f0b266e2d03dd74398ddad901cc3f7158dcc8d2171b12850ee98f12cf15b319dd6a75dc03d2f7da5697614b10ed743de22e0509227d06ff5f9519f327e2ebdc1a1ab7a1e007d3d3e1bcf7e6b92455bffb0bf35df4db726faf959523e86c163669e549eb0dd6cd21b2e9d850a1a99c7dd73b8c18cce9acff70dcea19639c9246633d828348fe669b09ffbbfd998b6640634dcb11c4268756c4148d193f8601ba97cfb6a4f796eebece9a21bd4e8d690d2c214f28e57b2e9cd4233ad8e0291f8abfc4f7e6c78120f274347dd2874c7e82e593ea2c5434edd9e298ae99fa6d52998cb39b0aa638d32e9b40839a257aaeb0b750dd0d5d12f8a5eb9a2109f0aa9de45c69f2a4b83cffd961c86eb253cbf72cebf0543fe8bcc2f244313e50c807778e15681cec5b6b083487336399ca625be4728a49d3c85d47af25814660e0584055ca120cedce3f519a783bac14a7f86d39484e65e1795ccb45f513aa46243349683114ad41de20f5aa85bd35457e36efe684221c8f9d62d9c1c0856b4d0c47efd2e42e5e99dfa35cbd03850d0c39fb36c20744eb0a1dd9a311fe2a05d632b13c88153a4f7f00bbd6001f75ce0e73b2f1b9ad005952563033a58fa7847222046ca7ed639a613095313174f2953bae11cbaaea5d20489a3d83b79719ba67881a6de17edc6fcc679e6e4ec9efa55b6c3a133ad5651dbd01b142e67e78a8d85fb705fadd87457e591204c727e12c8635e1556d560fe623760a27f90a2b8a3f92df4f982db66c4b67122f9b618a4bc3b26dfc17ad0721969fd9cad4592041")
+openat$autofs(0xffffffffffffff9c, &(0x7f0000001640)='/dev/autofs\x00', 0x80800, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL_net0(r5, 0x305000, &(0x7f0000001680)={0x4, 0x0, 0x5, 0x2, 0x6, 0xd2e})
+r10 = openat$autofs(0xffffffffffffff9c, &(0x7f00000016c0)='/dev/autofs\x00', 0x0, 0x0)
+sendmsg$AUDIT_GET_FEATURE(r10, &(0x7f00000017c0)={&(0x7f0000001700)={0x10, 0x0, 0x0, 0x400000}, 0xc, &(0x7f0000001780)={&(0x7f0000001740)={0x10, 0x3fb, 0x200, 0x70bd2c, 0x25dfdbfd, "", ["", ""]}, 0x10}, 0x1, 0x0, 0x0, 0x20000884}, 0x4000)
+r11 = accept(0xffffffffffffffff, &(0x7f0000001800)=@pppol2tpv3in6={0x18, 0x1, {0x0, 0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0, {0xa, 0x0, 0x0, @local}}}, &(0x7f0000001880)=0x80)
+getsockopt$inet6_IPV6_IPSEC_POLICY(r11, 0x29, 0x22, &(0x7f00000018c0)={{{@in6=@remote, @in6=@empty}}, {{@in=@loopback}, 0x0, @in6=@initdev}}, &(0x7f00000019c0)=0xe8)
+accept4(r10, &(0x7f0000001a00)=@x25, &(0x7f0000001a80)=0x80, 0x80400)
+r12 = open$IOCTL_PRIVCMD_HYPERCALL117400(&(0x7f0000001ac0)='/proc/xen/privcmd\x00')
+r13 = syz_genetlink_get_family_id$ipvs(&(0x7f0000001b40)='IPVS\x00')
+sendmsg$IPVS_CMD_SET_INFO(r12, &(0x7f0000001c80)={&(0x7f0000001b00)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f0000001c40)={&(0x7f0000001b80)={0xb8, r13, 0x10, 0x70bd27, 0x25dfdbfe, {}, [@IPVS_CMD_ATTR_DAEMON={0x64, 0x3, 0x0, 0x1, [@IPVS_DAEMON_ATTR_MCAST_PORT={0x6, 0x7, 0x4e22}, @IPVS_DAEMON_ATTR_MCAST_GROUP={0x8, 0x5, @rand_addr=0x64010102}, @IPVS_DAEMON_ATTR_MCAST_TTL={0x5}, @IPVS_DAEMON_ATTR_MCAST_IFN={0x14, 0x2, 'wg0\x00'}, @IPVS_DAEMON_ATTR_MCAST_TTL={0x5, 0x8, 0xa5}, @IPVS_DAEMON_ATTR_MCAST_PORT={0x6, 0x7, 0x4e23}, @IPVS_DAEMON_ATTR_MCAST_GROUP6={0x14, 0x6, @private1={0xfc, 0x1, [], 0x1}}, @IPVS_DAEMON_ATTR_MCAST_TTL={0x5, 0x8, 0x3}, @IPVS_DAEMON_ATTR_MCAST_PORT={0x6, 0x7, 0x4e20}]}, @IPVS_CMD_ATTR_DAEMON={0x18, 0x3, 0x0, 0x1, [@IPVS_DAEMON_ATTR_MCAST_IFN={0x14, 0x2, 'tunl0\x00'}]}, @IPVS_CMD_ATTR_TIMEOUT_UDP={0x8, 0x6, 0x1f}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8}, @IPVS_CMD_ATTR_TIMEOUT_TCP_FIN={0x8, 0x5, 0x48000000}, @IPVS_CMD_ATTR_TIMEOUT_UDP={0x8, 0x6, 0xfffffffb}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8, 0x4, 0x200}]}, 0xb8}, 0x1, 0x0, 0x0, 0xc0}, 0x4020000)
+pkey_alloc(0x0, 0x1)
+mq_notify(0xffffffffffffffff, &(0x7f0000001d00)={0x0, 0x35, 0x4, @tid=r9})
+
+[4026ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 43
+Rrooach exe577reset
+Rrooach exe580set
+#0 [4069ms] -> fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [4069ms] <- fcntl$dupfd=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4070ms] -> dup(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [4070ms] <- dup=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4070ms] -> close$IOCTL_PRIVCMD_HYPERCALL19578_222(0xffffffffffffffff)
+Rrooach executor_linux175 size = 10000
+#0 [4070ms] <- close$IOCTL_PRIVCMD_HYPERCALL19578_222=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] -> openat$urandom(0xffffffffffffff9c, 0x20000000, 0x0, 0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] <- openat$urandom=0x13 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] -> ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS(0x13, 0xc080661a, 0x20000040)
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] <- ioctl$FS_IOC_GET_ENCRYPTION_KEY_STATUS=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] -> syz_genetlink_get_family_id$nl80211(0x20000100)
+syz_genetlink_get_family_id(nl80211)
+Rrooach executor_linux175 size = 10000
+#0 [4071ms] <- syz_genetlink_get_family_id$nl80211=0x1a errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] -> getsockopt$inet_pktinfo(0xffffffffffffffff, 0x0, 0x8, 0x20000140, 0x20000180)
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] <- getsockopt$inet_pktinfo=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] -> sendmsg$NL80211_CMD_SET_WIPHY_NETNS(0xffffffffffffffff, 0x20000240, 0x2000c000)
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] <- sendmsg$NL80211_CMD_SET_WIPHY_NETNS=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] -> open$IOCTL_PRIVCMD_HYPERCALL173501111(0x20000280)
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] <- open$IOCTL_PRIVCMD_HYPERCALL173501111=0x14 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL58(0x14, 0x305000, 0x200002c0)
+Rrooach executor_linux175 size = 10000
+#0 [4072ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL58=0xffffffffffffffff errno=14 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4073ms] -> getresuid(0x20000480, 0x200004c0, 0x20000500)
+Rrooach executor_linux175 size = 10000
+#0 [4073ms] <- getresuid=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4073ms] -> getuid()
+Rrooach executor_linux175 size = 10000
+#0 [4073ms] <- getuid=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4073ms] -> syz_mount_image$msdos(0x20000300, 0x20000340, 0x1, 0x2, 0x20000440, 0x40000, 0x20000540)
+syz_mount_image: size=131072 segs=2 loop='/dev/loop0' dir='./file0' fs='msdos' flags=262144 opts='tz=UTC,subj_user=system,appraise_type=imasig,dont_hash,euid=00000000000000000000,uid<00000000000000000000,appraise,context=root,'
+Rrooach executor_linux175 size = 10000
+#0 [4074ms] <- syz_mount_image$msdos=0xffffffffffffffff errno=22 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4074ms] -> socket$inet_udplite(0x2, 0x2, 0x88)
+Rrooach executor_linux175 size = 10000
+#0 [4074ms] <- socket$inet_udplite=0x15 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4075ms] -> ioctl$void(0x15, 0x5451)
+Rrooach executor_linux175 size = 10000
+#0 [4075ms] <- ioctl$void=0x0 errno=0 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4075ms] -> ioctl$EXT4_IOC_GROUP_ADD(0xffffffffffffffff, 0x40286608, 0x20000600)
+Rrooach executor_linux175 size = 10000
+#0 [4075ms] <- ioctl$EXT4_IOC_GROUP_ADD=0xffffffffffffffff errno=9 cover=10000 
+Rrooach executor_linux175 size = 10000
+#0 [4075ms] -> getpgrp(0x0)
+Rrooach executor_linux175 size = 10000
+#0 [4076ms] <- getpgrp=0x2b errno=0 cover=10000 
+debug1: channel 0: free: client-session, nchannels 1
+debug1: fd 0 clearing O_NONBLOCK
+debug1: fd 1 clearing O_NONBLOCK
+Connection to localhost closed by remote host.
+Transferred: sent 2820, received 89480 bytes, in 11.4 seconds
+Bytes per second: sent 248.3, received 7877.4
+debug1: Exit status -1
