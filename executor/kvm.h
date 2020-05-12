@@ -1,5 +1,6 @@
 // Copyright 2017 syzkaller project authors. All rights reserved.
-// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in
+// the LICENSE file.
 
 #define ADDR_TEXT 0x0000
 #define ADDR_GDT 0x1000
