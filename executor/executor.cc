@@ -1,10 +1,11 @@
 // Copyright 2017 syzkaller project authors. All rights reserved.
-// Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
+// Use of this source code is governed by Apache 2 LICENSE that can be found in
+// the LICENSE file.
 
 // +build
-
 #include <algorithm>
 #include <errno.h>
+#include <fcntl.h>
 #include <signal.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -12,6 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/prctl.h>
+#include <sys/syscall.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -35,18 +38,21 @@
 #endif
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-
-// uint64 is impossible to printf without using the clumsy and verbose "%" PRId64.
-// So we define and use uint64. Note: pkg/csource does s/uint64/uint64/.
+#define BITS_PER_WORD 32
+#define MASK 0x1f
+#define SHIFT 5
+// uint64 is impossible to printf without using the clumsy and verbose "%"
+// PRId64. So we define and use uint64. Note: pkg/csource does s/uint64/uint64/.
 // Also define uint32/16/8 for consistency.
 typedef unsigned long long uint64;
 typedef unsigned int uint32;
 typedef unsigned short uint16;
 typedef unsigned char uint8;
 
-// exit/_exit do not necessary work (e.g. if fuzzer sets seccomp filter that prohibits exit_group).
-// Use doexit instead.  We must redefine exit to something that exists in stdlib,
-// because some standard libraries contain "using ::exit;", but has different signature.
+// exit/_exit do not necessary work (e.g. if fuzzer sets seccomp filter that
+// prohibits exit_group). Use doexit instead.  We must redefine exit to
+// something that exists in stdlib, because some standard libraries contain
+// "using ::exit;", but has different signature.
 #define exit vsnprintf
 
 // Note: zircon max fd is 256.
@@ -66,7 +72,8 @@ static NORETURN PRINTF(1, 2) void fail(const char* msg, ...);
 static NORETURN PRINTF(1, 2) void exitf(const char* msg, ...);
 static NORETURN void doexit(int status);
 
-// Print debug output, does not add \n at the end of msg as opposed to the previous functions.
+// Print debug output, does not add \n at the end of msg as opposed to the
+// previous functions.
 static PRINTF(1, 2) void debug(const char* msg, ...);
 void debug_dump_data(const char* data, int length);
 
@@ -167,7 +174,9 @@ static const uint64 arg_csum_inet = 0;
 static const uint64 arg_csum_chunk_data = 0;
 static const uint64 arg_csum_chunk_const = 1;
 
-typedef intptr_t(SYSCALLAPI* syscall_t)(intptr_t, intptr_t, intptr_t, intptr_t, intptr_t, intptr_t, intptr_t, intptr_t, intptr_t);
+typedef intptr_t(SYSCALLAPI* syscall_t)(intptr_t, intptr_t, intptr_t, intptr_t,
+					intptr_t, intptr_t, intptr_t, intptr_t,
+					intptr_t);
 
 struct call_t {
 	const char* name;
@@ -287,7 +296,9 @@ struct feature_t {
 	void (*setup)();
 };
 
-static thread_t* schedule_call(int call_index, int call_num, bool colliding, uint64 copyout_index, uint64 num_args, uint64* args, uint64* pos);
+static thread_t* schedule_call(int call_index, int call_num, bool colliding,
+			       uint64 copyout_index, uint64 num_args,
+			       uint64* args, uint64* pos);
 static void handle_completion(thread_t* th);
 static void copyout_call_results(thread_t* th);
 static void write_call_output(thread_t* th, bool finished);
@@ -297,10 +308,12 @@ static void thread_create(thread_t* th, int id);
 static void* worker_thread(void* arg);
 static uint64 read_input(uint64** input_posp, bool peek = false);
 static uint64 read_arg(uint64** input_posp);
-static uint64 read_const_arg(uint64** input_posp, uint64* size_p, uint64* bf, uint64* bf_off_p, uint64* bf_len_p);
+static uint64 read_const_arg(uint64** input_posp, uint64* size_p, uint64* bf,
+			     uint64* bf_off_p, uint64* bf_len_p);
 static uint64 read_result(uint64** input_posp);
 static uint64 swap(uint64 v, uint64 size, uint64 bf);
-static void copyin(char* addr, uint64 val, uint64 size, uint64 bf, uint64 bf_off, uint64 bf_len);
+static void copyin(char* addr, uint64 val, uint64 size, uint64 bf,
+		   uint64 bf_off, uint64 bf_len);
 static bool copyout(char* addr, uint64 size, uint64* res);
 static void setup_control_pipes();
 static void setup_features(char** enable, int n);
@@ -359,23 +372,24 @@ int main(int argc, char** argv)
 	os_init(argc, argv, (void*)SYZ_DATA_OFFSET, SYZ_NUM_PAGES * SYZ_PAGE_SIZE);
 
 #if SYZ_EXECUTOR_USES_SHMEM
-	if (mmap(&input_data[0], kMaxInput, PROT_READ, MAP_PRIVATE | MAP_FIXED, kInFd, 0) != &input_data[0])
+	if (mmap(&input_data[0], kMaxInput, PROT_READ, MAP_PRIVATE | MAP_FIXED, kInFd,
+		 0) != &input_data[0])
 		fail("mmap of input file failed");
-	// The output region is the only thing in executor process for which consistency matters.
-	// If it is corrupted ipc package will fail to parse its contents and panic.
-	// But fuzzer constantly invents new ways of how to currupt the region,
-	// so we map the region at a (hopefully) hard to guess address with random offset,
-	// surrounded by unmapped pages.
-	// The address chosen must also work on 32-bit kernels with 1GB user address space.
+	// The output region is the only thing in executor process for which
+	// consistency matters. If it is corrupted ipc package will fail to parse its
+	// contents and panic. But fuzzer constantly invents new ways of how to
+	// currupt the region, so we map the region at a (hopefully) hard to guess
+	// address with random offset, surrounded by unmapped pages. The address
+	// chosen must also work on 32-bit kernels with 1GB user address space.
 	void* preferred = (void*)(0x1b2bc20000ull + (1 << 20) * (getpid() % 128));
-	output_data = (uint32*)mmap(preferred, kMaxOutput,
-				    PROT_READ | PROT_WRITE, MAP_SHARED | MAP_FIXED, kOutFd, 0);
+	output_data = (uint32*)mmap(preferred, kMaxOutput, PROT_READ | PROT_WRITE,
+				    MAP_SHARED | MAP_FIXED, kOutFd, 0);
 	if (output_data != preferred)
 		fail("mmap of output file failed");
 
 	// Prevent test programs to mess with these fds.
-	// Due to races in collider mode, a program can e.g. ftruncate one of these fds,
-	// which will cause fuzzer to crash.
+	// Due to races in collider mode, a program can e.g. ftruncate one of these
+	// fds, which will cause fuzzer to crash.
 	close(kInFd);
 	close(kOutFd);
 #endif
@@ -388,6 +402,7 @@ int main(int argc, char** argv)
 #else
 	receive_execute();
 #endif
+
 	if (flag_coverage) {
 		for (int i = 0; i < kMaxThreads; i++) {
 			threads[i].cov.fd = kCoverFd + i;
@@ -397,6 +412,7 @@ int main(int argc, char** argv)
 		cover_open(&extra_cov, true);
 		cover_protect(&extra_cov);
 		if (flag_extra_coverage) {
+			printf("Rrooach: executor:402\n\n");
 			// Don't enable comps because we don't use them in the fuzzer yet.
 			cover_enable(&extra_cov, false, true);
 		}
@@ -422,14 +438,15 @@ int main(int argc, char** argv)
 
 #if SYZ_EXECUTOR_USES_FORK_SERVER
 	fprintf(stderr, "loop exited with status %d\n", status);
-	// Other statuses happen when fuzzer processes manages to kill loop, e.g. with:
-	// ptrace(PTRACE_SEIZE, 1, 0, 0x100040)
+	// Other statuses happen when fuzzer processes manages to kill loop, e.g.
+	// with: ptrace(PTRACE_SEIZE, 1, 0, 0x100040)
 	if (status != kFailStatus)
 		status = 0;
 	// If an external sandbox process wraps executor, the out pipe will be closed
-	// before the sandbox process exits this will make ipc package kill the sandbox.
-	// As the result sandbox process will exit with exit status 9 instead of the executor
-	// exit status (notably kFailStatus). So we duplicate the exit status on the pipe.
+	// before the sandbox process exits this will make ipc package kill the
+	// sandbox. As the result sandbox process will exit with exit status 9 instead
+	// of the executor exit status (notably kFailStatus). So we duplicate the exit
+	// status on the pipe.
 	reply_execute(status);
 	doexit(status);
 	// Unreachable.
@@ -456,7 +473,8 @@ void setup_control_pipes()
 
 void parse_env_flags(uint64 flags)
 {
-	// Note: Values correspond to ordering in pkg/ipc/ipc.go, e.g. FlagSandboxNamespace
+	// Note: Values correspond to ordering in pkg/ipc/ipc.go, e.g.
+	// FlagSandboxNamespace
 	flag_debug = flags & (1 << 0);
 	flag_coverage = flags & (1 << 1);
 	if (flags & (1 << 2))
@@ -521,7 +539,8 @@ void receive_execute()
 	flag_fault_nth = req.fault_nth;
 	if (!flag_threaded)
 		flag_collide = false;
-	debug("[%llums] exec opts: procid=%llu threaded=%d collide=%d cover=%d comps=%d dedup=%d fault=%d/%d/%d prog=%llu\n",
+	debug("[%llums] exec opts: procid=%llu threaded=%d collide=%d cover=%d "
+	      "comps=%d dedup=%d fault=%d/%d/%d prog=%llu\n",
 	      current_time_ms() - start_time_ms, procid, flag_threaded, flag_collide,
 	      flag_collect_cover, flag_comparisons, flag_dedup_cover, flag_fault,
 	      flag_fault_call, flag_fault_nth, req.prog_size);
@@ -569,9 +588,16 @@ void reply_execute(int status)
 // execute_one executes program stored in input_data.
 void execute_one()
 {
+	if (system("/root/reset"))
+		exitf("reset coverage failed");
+	debug("Rrooach exe577reset\n");
+	if (system("/root/cov"))
+		exitf("set coverage failed");
+	debug("Rrooach exe580set\n");
 	// Duplicate global collide variable on stack.
 	// Fuzzer once come up with ioctl(fd, FIONREAD, 0x920000),
-	// where 0x920000 was exactly collide address, so every iteration reset collide to 0.
+	// where 0x920000 was exactly collide address, so every iteration reset
+	// collide to 0.
 	bool colliding = false;
 #if SYZ_EXECUTOR_USES_SHMEM
 	output_pos = output_data;
@@ -645,7 +671,8 @@ retry:
 						case arg_csum_chunk_data:
 							debug_verbose("#%lld: data chunk, addr: %llx, size: %llu\n",
 								      chunk, chunk_value, chunk_size);
-							NONFAILING(csum_inet_update(&csum, (const uint8*)chunk_value, chunk_size));
+							NONFAILING(csum_inet_update(&csum, (const uint8*)chunk_value,
+										    chunk_size));
 							break;
 						case arg_csum_chunk_const:
 							if (chunk_size != 2 && chunk_size != 4 && chunk_size != 8) {
@@ -661,7 +688,8 @@ retry:
 						}
 					}
 					uint16 csum_value = csum_inet_digest(&csum);
-					debug_verbose("writing inet checksum %hx to %p\n", csum_value, csum_addr);
+					debug_verbose("writing inet checksum %hx to %p\n", csum_value,
+						      csum_addr);
 					copyin(csum_addr, csum_value, 2, binary_format_native, 0, 0);
 					break;
 				}
@@ -691,21 +719,28 @@ retry:
 		// TODO: find a way to tune timeout values.
 		if (strncmp(syscalls[call_num].name, "syz_usb", strlen("syz_usb")) == 0)
 			prog_extra_cover_timeout = 500;
-		if (strncmp(syscalls[call_num].name, "syz_usb_connect", strlen("syz_usb_connect")) == 0) {
-			prog_extra_timeout = 2000;
-			call_extra_timeout = 2000;
+		if (strncmp(syscalls[call_num].name, "syz_usb_connect",
+			    strlen("syz_usb_connect")) == 0) {
+			prog_extra_timeout = 3000;
+			call_extra_timeout = 3000;
 		}
-		if (strncmp(syscalls[call_num].name, "syz_usb_control_io", strlen("syz_usb_control_io")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_usb_control_io",
+			    strlen("syz_usb_control_io")) == 0)
 			call_extra_timeout = 300;
-		if (strncmp(syscalls[call_num].name, "syz_usb_ep_write", strlen("syz_usb_ep_write")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_usb_ep_write",
+			    strlen("syz_usb_ep_write")) == 0)
 			call_extra_timeout = 300;
-		if (strncmp(syscalls[call_num].name, "syz_usb_ep_read", strlen("syz_usb_ep_read")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_usb_ep_read",
+			    strlen("syz_usb_ep_read")) == 0)
 			call_extra_timeout = 300;
-		if (strncmp(syscalls[call_num].name, "syz_usb_disconnect", strlen("syz_usb_disconnect")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_usb_disconnect",
+			    strlen("syz_usb_disconnect")) == 0)
 			call_extra_timeout = 300;
-		if (strncmp(syscalls[call_num].name, "syz_open_dev$hiddev", strlen("syz_open_dev$hiddev")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_open_dev$hiddev",
+			    strlen("syz_open_dev$hiddev")) == 0)
 			call_extra_timeout = 50;
-		if (strncmp(syscalls[call_num].name, "syz_mount_image", strlen("syz_mount_image")) == 0)
+		if (strncmp(syscalls[call_num].name, "syz_mount_image",
+			    strlen("syz_mount_image")) == 0)
 			call_extra_timeout = 50;
 		uint64 copyout_index = read_input(&input_pos);
 		uint64 num_args = read_input(&input_pos);
@@ -716,15 +751,16 @@ retry:
 			args[i] = read_arg(&input_pos);
 		for (uint64 i = num_args; i < kMaxArgs; i++)
 			args[i] = 0;
-		thread_t* th = schedule_call(call_index++, call_num, colliding, copyout_index,
-					     num_args, args, input_pos);
+		thread_t* th = schedule_call(call_index++, call_num, colliding,
+					     copyout_index, num_args, args, input_pos);
 
 		if (colliding && (call_index % 2) == 0) {
 			// Don't wait for every other call.
 			// We already have results from the previous execution.
 		} else if (flag_threaded) {
 			// Wait for call completion.
-			// Note: sys knows about this 25ms timeout when it generates timespec/timeval values.
+			// Note: sys knows about this 25ms timeout when it generates
+			// timespec/timeval values.
 			uint64 timeout_ms = 45 + call_extra_timeout;
 			if (flag_debug && timeout_ms < 1000)
 				timeout_ms = 1000;
@@ -743,8 +779,11 @@ retry:
 				fail("using non-main thread in non-thread mode");
 			event_reset(&th->ready);
 			execute_call(th);
+			debug("RRooach:749");
 			event_set(&th->done);
+			debug("RRooach:751");
 			handle_completion(th);
+			debug("RRooach:753");
 		}
 	}
 
@@ -801,7 +840,9 @@ retry:
 	}
 }
 
-thread_t* schedule_call(int call_index, int call_num, bool colliding, uint64 copyout_index, uint64 num_args, uint64* args, uint64* pos)
+thread_t* schedule_call(int call_index, int call_num, bool colliding,
+			uint64 copyout_index, uint64 num_args, uint64* args,
+			uint64* pos)
 {
 	// Find a spare thread to execute the call.
 	int i;
@@ -839,20 +880,26 @@ thread_t* schedule_call(int call_index, int call_num, bool colliding, uint64 cop
 
 #if SYZ_EXECUTOR_USES_SHMEM
 template <typename cover_data_t>
-void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover_count_pos)
+void write_coverage_signal(cover_t* cov, uint32* signal_count_pos,
+			   uint32* cover_count_pos)
 {
 	// Write out feedback signals.
-	// Currently it is code edges computed as xor of two subsequent basic block PCs.
-	cover_data_t* cover_data = ((cover_data_t*)cov->data) + 1;
+	// Currently it is code edges computed as xor of two subsequent basic block
+	// PCs.
+	long long int* cover_data = ((long long int*)cov->data);
 	uint32 nsig = 0;
-	cover_data_t prev = 0;
+	uint32 prev = 0;
 	for (uint32 i = 0; i < cov->size; i++) {
-		cover_data_t pc = cover_data[i];
+		uint32 pc;
+		if (cover_data[i >> SHIFT] & (1 << (i & MASK)))
+			pc = i;
+		else
+			continue;
 		if (!cover_check(pc)) {
-			debug("got bad pc: 0x%llx\n", (uint64)pc);
+			debug("got bad pc: 0x%x\n", (uint32)pc);
 			doexit(0);
 		}
-		cover_data_t sig = pc ^ prev;
+		uint32 sig = pc ^ prev;
 		prev = hash(pc);
 		if (dedup(sig))
 			continue;
@@ -867,7 +914,7 @@ void write_coverage_signal(cover_t* cov, uint32* signal_count_pos, uint32* cover
 	// Write out real coverage (basic block PCs).
 	uint32 cover_size = cov->size;
 	if (flag_dedup_cover) {
-		cover_data_t* end = cover_data + cover_size;
+		long long int* end = cover_data + cover_size;
 		cover_unprotect(cov);
 		std::sort(cover_data, end);
 		cover_size = std::unique(cover_data, end) - cover_data;
@@ -894,8 +941,23 @@ void handle_completion(thread_t* th)
 	}
 	th->executing = false;
 	running--;
-	if (running < 0)
+	if (running < 0) {
+		// This fires periodically for the past 2 years (see issue #502).
+		fprintf(stderr,
+			"running=%d collide=%d completed=%d flag_threaded=%d "
+			"flag_collide=%d current=%d\n",
+			running, collide, completed, flag_threaded, flag_collide, th->id);
+		for (int i = 0; i < kMaxThreads; i++) {
+			thread_t* th1 = &threads[i];
+			fprintf(stderr,
+				"th #%2d: created=%d executing=%d colliding=%d"
+				" ready=%d done=%d call_index=%d res=%lld reserrno=%d\n",
+				i, th1->created, th1->executing, th1->colliding,
+				event_isset(&th1->ready), event_isset(&th1->done),
+				th1->call_index, (uint64)th1->res, th1->reserrno);
+		}
 		fail("running = %d", running);
+	}
 }
 
 void copyout_call_results(thread_t* th)
@@ -952,7 +1014,8 @@ void write_call_output(thread_t* th, bool finished)
 	if (flag_comparisons) {
 		// Collect only the comparisons
 		uint32 ncomps = th->cov.size;
-		kcov_comparison_t* start = (kcov_comparison_t*)(th->cov.data + sizeof(uint64));
+		kcov_comparison_t* start =
+		    (kcov_comparison_t*)(th->cov.data + sizeof(uint64));
 		kcov_comparison_t* end = start + ncomps;
 		if ((char*)end > th->cov.data_end)
 			fail("too many comparisons %u", ncomps);
@@ -971,13 +1034,16 @@ void write_call_output(thread_t* th, bool finished)
 		*comps_count_pos = comps_size;
 	} else if (flag_coverage) {
 		if (is_kernel_64_bit)
-			write_coverage_signal<uint64>(&th->cov, signal_count_pos, cover_count_pos);
+			write_coverage_signal<uint64>(&th->cov, signal_count_pos,
+						      cover_count_pos);
 		else
-			write_coverage_signal<uint32>(&th->cov, signal_count_pos, cover_count_pos);
+			write_coverage_signal<uint32>(&th->cov, signal_count_pos,
+						      cover_count_pos);
 	}
-	debug_verbose("out #%u: index=%u num=%u errno=%d finished=%d blocked=%d sig=%u cover=%u comps=%u\n",
-		      completed, th->call_index, th->call_num, reserrno, finished, blocked,
-		      *signal_count_pos, *cover_count_pos, *comps_count_pos);
+	debug_verbose("out #%u: index=%u num=%u errno=%d finished=%d blocked=%d "
+		      "sig=%u cover=%u comps=%u\n",
+		      completed, th->call_index, th->call_num, reserrno, finished,
+		      blocked, *signal_count_pos, *cover_count_pos, *comps_count_pos);
 	completed++;
 	write_completed(completed);
 #else
@@ -1015,11 +1081,14 @@ void write_extra_output()
 	uint32* cover_count_pos = write_output(0); // filled in later
 	write_output(0); // comps_count_pos
 	if (is_kernel_64_bit)
-		write_coverage_signal<uint64>(&extra_cov, signal_count_pos, cover_count_pos);
+		write_coverage_signal<uint64>(&extra_cov, signal_count_pos,
+					      cover_count_pos);
 	else
-		write_coverage_signal<uint32>(&extra_cov, signal_count_pos, cover_count_pos);
+		write_coverage_signal<uint32>(&extra_cov, signal_count_pos,
+					      cover_count_pos);
 	cover_reset(&extra_cov);
-	debug_verbose("extra: sig=%u cover=%u\n", *signal_count_pos, *cover_count_pos);
+	debug_verbose("extra: sig=%u cover=%u\n", *signal_count_pos,
+		      *cover_count_pos);
 	completed++;
 	write_completed(completed);
 #endif
@@ -1055,8 +1124,8 @@ void* worker_thread(void* arg)
 void execute_call(thread_t* th)
 {
 	const call_t* call = &syscalls[th->call_num];
-	debug("#%d [%llums] -> %s(",
-	      th->id, current_time_ms() - start_time_ms, call->name);
+	debug("#%d [%llums] -> %s(", th->id, current_time_ms() - start_time_ms,
+	      call->name);
 	for (int i = 0; i < th->num_args; i++) {
 		if (i != 0)
 			debug(", ");
@@ -1076,11 +1145,12 @@ void execute_call(thread_t* th)
 	errno = 0;
 	th->res = execute_syscall(call, th->args);
 	th->reserrno = errno;
+
 	if (th->res == -1 && th->reserrno == 0)
 		th->reserrno = EINVAL; // our syz syscalls may misbehave
 	if (flag_coverage) {
 		cover_collect(&th->cov);
-		if (th->cov.size >= kCoverSize)
+		if (th->cov.size > 3000000)
 			fail("#%d: too much cover %u", th->id, th->cov.size);
 	}
 	th->fault_injected = false;
@@ -1089,8 +1159,9 @@ void execute_call(thread_t* th)
 		th->fault_injected = fault_injected(fail_fd);
 	}
 
-	debug("#%d [%llums] <- %s=0x%llx errno=%d ",
-	      th->id, current_time_ms() - start_time_ms, call->name, (uint64)th->res, th->reserrno);
+	debug("#%d [%llums] <- %s=0x%llx errno=%d ", th->id,
+	      current_time_ms() - start_time_ms, call->name, (uint64)th->res,
+	      th->reserrno);
 	if (flag_coverage)
 		debug("cover=%u ", th->cov.size);
 	if (flag_fault && th->call_index == flag_fault_call)
@@ -1132,20 +1203,24 @@ static bool dedup(uint32 sig)
 #endif
 
 template <typename T>
-void copyin_int(char* addr, uint64 val, uint64 bf, uint64 bf_off, uint64 bf_len)
+void copyin_int(char* addr, uint64 val, uint64 bf, uint64 bf_off,
+		uint64 bf_len)
 {
 	if (bf_off == 0 && bf_len == 0) {
 		*(T*)addr = swap(val, sizeof(T), bf);
 		return;
 	}
 	T x = swap(*(T*)addr, sizeof(T), bf);
-	x = (x & ~BITMASK(bf_off, bf_len)) | ((val << bf_off) & BITMASK(bf_off, bf_len));
+	x = (x & ~BITMASK(bf_off, bf_len)) |
+	    ((val << bf_off) & BITMASK(bf_off, bf_len));
 	*(T*)addr = swap(x, sizeof(T), bf);
 }
 
-void copyin(char* addr, uint64 val, uint64 size, uint64 bf, uint64 bf_off, uint64 bf_len)
+void copyin(char* addr, uint64 val, uint64 size, uint64 bf, uint64 bf_off,
+	    uint64 bf_len)
 {
-	if (bf != binary_format_native && bf != binary_format_bigendian && (bf_off != 0 || bf_len != 0))
+	if (bf != binary_format_native && bf != binary_format_bigendian &&
+	    (bf_off != 0 || bf_len != 0))
 		fail("bitmask for string format %llu/%llu", bf_off, bf_len);
 	switch (bf) {
 	case binary_format_native:
@@ -1190,23 +1265,22 @@ void copyin(char* addr, uint64 val, uint64 size, uint64 bf, uint64 bf_off, uint6
 bool copyout(char* addr, uint64 size, uint64* res)
 {
 	bool ok = false;
-	NONFAILING(
-	    switch (size) {
-		    case 1:
-			    *res = *(uint8*)addr;
-			    break;
-		    case 2:
-			    *res = *(uint16*)addr;
-			    break;
-		    case 4:
-			    *res = *(uint32*)addr;
-			    break;
-		    case 8:
-			    *res = *(uint64*)addr;
-			    break;
-		    default:
-			    fail("copyout: bad argument size %llu", size);
-	    } __atomic_store_n(&ok, true, __ATOMIC_RELEASE););
+	NONFAILING(switch (size) {
+		case 1:
+			*res = *(uint8*)addr;
+			break;
+		case 2:
+			*res = *(uint16*)addr;
+			break;
+		case 4:
+			*res = *(uint32*)addr;
+			break;
+		case 8:
+			*res = *(uint64*)addr;
+			break;
+		default:
+			fail("copyout: bad argument size %llu", size);
+	} __atomic_store_n(&ok, true, __ATOMIC_RELEASE););
 	return ok;
 }
 
@@ -1253,7 +1327,8 @@ uint64 swap(uint64 v, uint64 size, uint64 bf)
 	}
 }
 
-uint64 read_const_arg(uint64** input_posp, uint64* size_p, uint64* bf_p, uint64* bf_off_p, uint64* bf_len_p)
+uint64 read_const_arg(uint64** input_posp, uint64* size_p, uint64* bf_p,
+		      uint64* bf_off_p, uint64* bf_len_p)
 {
 	uint64 meta = read_input(input_posp);
 	uint64 val = read_input(input_posp);
@@ -1288,7 +1363,8 @@ uint64 read_input(uint64** input_posp, bool peek)
 {
 	uint64* input_pos = *input_posp;
 	if ((char*)input_pos >= input_data + kMaxInput)
-		fail("input command overflows input %p: [%p:%p)", input_pos, input_data, input_data + kMaxInput);
+		fail("input command overflows input %p: [%p:%p)", input_pos, input_data,
+		     input_data + kMaxInput);
 	if (!peek)
 		*input_posp = input_pos + 1;
 	return *input_pos;
@@ -1297,9 +1373,10 @@ uint64 read_input(uint64** input_posp, bool peek)
 #if SYZ_EXECUTOR_USES_SHMEM
 uint32* write_output(uint32 v)
 {
-	if (output_pos < output_data || (char*)output_pos >= (char*)output_data + kMaxOutput)
-		fail("output overflow: pos=%p region=[%p:%p]",
-		     output_pos, output_data, (char*)output_data + kMaxOutput);
+	if (output_pos < output_data ||
+	    (char*)output_pos >= (char*)output_data + kMaxOutput)
+		fail("output overflow: pos=%p region=[%p:%p]", output_pos, output_data,
+		     (char*)output_data + kMaxOutput);
 	*output_pos = v;
 	return output_pos++;
 }
@@ -1351,7 +1428,8 @@ void kcov_comparison_t::write()
 
 bool kcov_comparison_t::ignore() const
 {
-	// Comparisons with 0 are not interesting, fuzzer should be able to guess 0's without help.
+	// Comparisons with 0 are not interesting, fuzzer should be able to guess 0's
+	// without help.
 	if (arg1 == 0 && (arg2 == 0 || (type & KCOV_CMP_CONST)))
 		return true;
 	if ((type & KCOV_CMP_SIZE_MASK) == KCOV_CMP_SIZE8) {
@@ -1383,7 +1461,8 @@ bool kcov_comparison_t::ignore() const
 	return false;
 }
 
-bool kcov_comparison_t::operator==(const struct kcov_comparison_t& other) const
+bool kcov_comparison_t::operator==(
+    const struct kcov_comparison_t& other) const
 {
 	// We don't check for PC equality now, because it is not used.
 	return type == other.type && arg1 == other.arg1 && arg2 == other.arg2;
@@ -1404,6 +1483,10 @@ void setup_features(char** enable, int n)
 {
 	// This does any one-time setup for the requested features on the machine.
 	// Note: this can be called multiple times and must be idempotent.
+#if SYZ_HAVE_FEATURES
+	// Note: this is not executed in C reproducers.
+	setup_machine();
+#endif
 	for (int i = 0; i < n; i++) {
 		bool found = false;
 #if SYZ_HAVE_FEATURES

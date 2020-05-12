@@ -69,8 +69,7 @@ func ctorLinux(cfg *config) (Reporter, []string, error) {
 		regexp.MustCompile(`^mm/vmalloc.c`),
 		regexp.MustCompile(`^mm/page_alloc.c`),
 		regexp.MustCompile(`^mm/util.c`),
-		regexp.MustCompile(`^kernel/rcu/.*`),
-		regexp.MustCompile(`^arch/.*/kernel/traps.c`),
+		regexp.MustCompile(`^kernel/rcu/.*`), regexp.MustCompile(`^arch/.*/kernel/traps.c`),
 		regexp.MustCompile(`^arch/.*/mm/fault.c`),
 		regexp.MustCompile(`^arch/.*/mm/physaddr.c`),
 		regexp.MustCompile(`^kernel/locking/.*`),
@@ -863,6 +862,36 @@ func warningStackFmt(skip ...string) *stackFmt {
 
 var linuxOopses = append([]*oops{
 	{
+		[]byte("====ERROR:"),
+		[]oopsFormat{
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: heap overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: heap overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: stack overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: stack overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: global variable overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: global variable overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: use after free on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: use after free on address %[1]v",
+				noStackTrace: true,
+			},
+		},
+		[]*regexp.Regexp{},
+	},
+	{
 		[]byte("BUG:"),
 		[]oopsFormat{
 			{
@@ -1100,6 +1129,12 @@ var linuxOopses = append([]*oops{
 	{
 		[]byte("WARNING:"),
 		[]oopsFormat{
+			{
+				title:        compile("WARNING: ThreadSanitizer:"),
+				report:       compile("WARNING: ThreadSanitizer: data race"),
+				fmt:          "ThreadSanitizer: data race",
+				noStackTrace: true,
+			},
 			{
 				title: compile("WARNING: .*lib/debugobjects\\.c.* (?:debug_print|debug_check)"),
 				fmt:   "WARNING: ODEBUG bug in %[1]v",
