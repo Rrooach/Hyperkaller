@@ -3,12 +3,15 @@ package faultfuzzer
 import (
 	"github.com/google/syzkaller/pkg/log"
 	"os/exec"
-	"strconv"
+	"os"
+    "io/ioutil"
+    "bufio"
+    "github.com/scylladb/go-set/strset"
 )
 
-var queue = make([]int64, 0)
-var history = make(map[int64]bool)
-var current int64
+var queue = make([]string, 0)
+var history = strset.New()
+var current string
 var maxfault = 0x3fffffff
 
 func ecmd(cmd string) string {
@@ -33,39 +36,59 @@ func num_bits(num int64) int {
 	return ret
 }
 
+func no_zero_cov(cov string) bool{
+    for _, char:=range cov{
+        if char!=0 {
+            return true
+        }
+    }
+    return false
+}
+
 func Get_cover() {
-	res := ecmd("~/get_fault_site")
-	cov, err := strconv.ParseInt(res, 10, 64)
-	_ = err
-	exists := history[cov]
-	if !exists && (cov != 0) {
-		queue = append(queue, cov)
-		history[cov] = true
+	ecmd("~/get_fault_site")
+
+    cov, _ := ioutil.ReadFile("/dev/fault")
+
+	exists := history.Has(string(cov))
+	if !exists && no_zero_cov(string(cov)) {
+		queue = append(queue, string(cov))
+        history.Add(string(cov))
 		log.Logf(0, "--------------------------")
-		log.Logf(0, "old cov: %v", current)
-		log.Logf(0, "new cov: %v", cov)
+		log.Logf(0, "new cov")
 	}
-	if num_bits(cov) > num_bits(current) {
-		mutate()
-	}
+	//if num_bits(cov) > num_bits(current) {
+	//	mutate()
+	//}
+}
+
+func write_fault(fault string){
+    file, _ := os.Create("/dev/fault")
+    writer:=bufio.NewWriter(file)
+    writer.WriteString(fault)
+    writer.Flush()
 }
 
 func Set_fault() int {
-	var fault int64
+    var fault string
 	if len(queue) == 0 {
 		log.Logf(0, "--------------------------")
 		log.Logf(0, "queue is empty")
-        fault = 0
-        ecmd("~/set_fault " + strconv.FormatInt(fault, 10))
+        fault = ""
+
+        write_fault(fault)
+
+        ecmd("~/set_fault")
         log.Logf(0, "--------------------------")
-        log.Logf(0, "set fault to %v", fault)
+        log.Logf(0, "set fault")
 		return 1
 	}
     fault = queue[0]
     queue = queue[1:]
     current = fault
-    ecmd("~/set_fault " + strconv.FormatInt(int64(fault), 10))
+    write_fault(fault)
+    ecmd("~/set_fault")
     log.Logf(0, "--------------------------")
-    log.Logf(0, "set fault to %v", fault)
+    log.Logf(0, "set fault")
 	return 0
 }
