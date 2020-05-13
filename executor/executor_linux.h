@@ -169,7 +169,15 @@ static void cover_reset(cover_t *cov) {
 }
 
 static void cover_collect(cover_t *cov) { 
+<<<<<<< HEAD
   cov->size = 4685;
+=======
+  FILE *fp=fopen("/dev/cov","r"); 
+  fseek(fp,0L,SEEK_END);
+  int fsize=ftell(fp);
+  fclose(fp); 
+  cov->size = fsize; //4686;
+>>>>>>> db28bf5a2ff8c7b408ea5c8bc46b027ac67682e4
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
