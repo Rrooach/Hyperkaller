@@ -87,7 +87,7 @@ type archConfig struct {
 var archConfigs = map[string]*archConfig{
 	"linux/amd64": {
 		Qemu:      "qemu-system-x86_64",
-		QemuArgs:  "-enable-kvm -cpu host,migratable=off",
+		QemuArgs:  "-enable-kvm",
 		TargetDir: "/",
 		// e1000e fails on recent Debian distros with:
 		// Initialization of device e1000e failed: failed to find romfile "efi-e1000e.rom
@@ -343,8 +343,6 @@ func (inst *instance) boot() error {
 		"-smp", strconv.Itoa(inst.cfg.CPU),
 		"-net", "nic" + inst.archConfig.NicModel,
 		"-net", fmt.Sprintf("user,host=%v,hostfwd=tcp::%v-:22", hostAddr, inst.port),
-		"-display", "none",
-		"-serial", "stdio",
 		"-no-reboot",
 	}
 	args = append(args, splitArgs(inst.cfg.QemuArgs, filepath.Join(inst.workdir, "template"))...)

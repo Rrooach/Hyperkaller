@@ -23,9 +23,9 @@ type linux struct {
 	vmlinux               string
 	symbols               map[string][]symbolizer.Symbol
 	consoleOutputRe       *regexp.Regexp
+	questionableRes       []*regexp.Regexp
 	taskContext           *regexp.Regexp
 	cpuContext            *regexp.Regexp
-	questionableFrame     *regexp.Regexp
 	guiltyFileBlacklist   []*regexp.Regexp
 	reportStartIgnores    []*regexp.Regexp
 	infoMessagesWithStack [][]byte
@@ -49,9 +49,12 @@ func ctorLinux(cfg *config) (Reporter, []string, error) {
 		symbols: symbols,
 	}
 	ctx.consoleOutputRe = regexp.MustCompile(`^(?:\*\* [0-9]+ printk messages dropped \*\* )?(?:.* login: )?(?:\<[0-9]+\>)?\[ *[0-9]+\.[0-9]+\](\[ *(?:C|T)[0-9]+\])? `)
+	ctx.questionableRes = []*regexp.Regexp{
+		regexp.MustCompile(`(\[\<[0-9a-f]+\>\])? \? +[a-zA-Z0-9_.]+\+0x[0-9a-f]+/[0-9a-f]+`),
+		regexp.MustCompile(`\(unreliable\)`), // powerpc
+	}
 	ctx.taskContext = regexp.MustCompile(`\[ *T[0-9]+\]`)
 	ctx.cpuContext = regexp.MustCompile(`\[ *C[0-9]+\]`)
-	ctx.questionableFrame = regexp.MustCompile(`(\[\<[0-9a-f]+\>\])? \? `)
 	ctx.eoi = []byte("<EOI>")
 	ctx.guiltyFileBlacklist = []*regexp.Regexp{
 		regexp.MustCompile(`.*\.h`),
@@ -66,8 +69,7 @@ func ctorLinux(cfg *config) (Reporter, []string, error) {
 		regexp.MustCompile(`^mm/vmalloc.c`),
 		regexp.MustCompile(`^mm/page_alloc.c`),
 		regexp.MustCompile(`^mm/util.c`),
-		regexp.MustCompile(`^kernel/rcu/.*`),
-		regexp.MustCompile(`^arch/.*/kernel/traps.c`),
+		regexp.MustCompile(`^kernel/rcu/.*`), regexp.MustCompile(`^arch/.*/kernel/traps.c`),
 		regexp.MustCompile(`^arch/.*/mm/fault.c`),
 		regexp.MustCompile(`^arch/.*/mm/physaddr.c`),
 		regexp.MustCompile(`^kernel/locking/.*`),
@@ -121,8 +123,6 @@ func ctorLinux(cfg *config) (Reporter, []string, error) {
 	return ctx, suppressions, nil
 }
 
-const contextConsole = "console"
-
 func (ctx *linux) ContainsCrash(output []byte) bool {
 	return containsCrash(output, linuxOopses, ctx.ignores)
 }
@@ -132,46 +132,35 @@ func (ctx *linux) Parse(output []byte) *Report {
 	if oops == nil {
 		return nil
 	}
-	for questionable := false; ; questionable = true {
-		rep := &Report{
-			Output:   output,
-			StartPos: startPos,
-		}
-		endPos, reportEnd, report, prefix := ctx.findReport(output, oops, startPos, context, questionable)
-		rep.EndPos = endPos
-		title, corrupted, format := extractDescription(report[:reportEnd], oops, linuxStackParams)
-		if title == "" {
-			prefix = nil
-			report = output[rep.StartPos:rep.EndPos]
-			title, corrupted, format = extractDescription(report, oops, linuxStackParams)
-			if title == "" {
-				panic(fmt.Sprintf("non matching oops for %q context=%q in:\n%s\n",
-					oops.header, context, report))
-			}
-		}
-		rep.Title = title
-		rep.Corrupted = corrupted != ""
-		rep.CorruptedReason = corrupted
-		for _, line := range prefix {
-			rep.Report = append(rep.Report, line...)
-			rep.Report = append(rep.Report, '\n')
-		}
-		rep.reportPrefixLen = len(rep.Report)
-		rep.Report = append(rep.Report, report...)
-		if !rep.Corrupted {
-			rep.Corrupted, rep.CorruptedReason = ctx.isCorrupted(title, report, format)
-		}
-		if rep.CorruptedReason == corruptedNoFrames && context != contextConsole && !questionable {
-			// Some crash reports have all frames questionable.
-			// So if we get a corrupted report because there are no frames,
-			// try again now looking at questionable frames.
-			// Only do this if we have a real context (CONFIG_PRINTK_CALLER=y),
-			// to be on the safer side. Without context it's too easy to use
-			// a stray frame from a wrong context.
-			continue
-		}
-		return rep
+	rep := &Report{
+		Output:   output,
+		StartPos: startPos,
 	}
+	endPos, reportEnd, report, prefix := ctx.findReport(output, oops, startPos, context)
+	rep.EndPos = endPos
+	title, corrupted, format := extractDescription(report[:reportEnd], oops, linuxStackParams)
+	if title == "" {
+		prefix = nil
+		report = output[rep.StartPos:rep.EndPos]
+		title, corrupted, format = extractDescription(report, oops, linuxStackParams)
+		if title == "" {
+			panic(fmt.Sprintf("non matching oops for %q context=%q in:\n%s\n",
+				oops.header, context, report))
+		}
+	}
+	rep.Title = title
+	rep.Corrupted = corrupted != ""
+	rep.CorruptedReason = corrupted
+	for _, line := range prefix {
+		rep.Report = append(rep.Report, line...)
+		rep.Report = append(rep.Report, '\n')
+	}
+	rep.reportPrefixLen = len(rep.Report)
+	rep.Report = append(rep.Report, report...)
+	if !rep.Corrupted {
+		rep.Corrupted, rep.CorruptedReason = ctx.isCorrupted(title, report, format)
+	}
+	return rep
 }
 
 func (ctx *linux) findFirstOops(output []byte) (oops *oops, startPos int, context string) {
@@ -197,7 +186,7 @@ func (ctx *linux) findFirstOops(output []byte) (oops *oops, startPos int, contex
 
 // Yes, it is complex, but all state and logic are tightly coupled. It's unclear how to simplify it.
 // nolint: gocyclo
-func (ctx *linux) findReport(output []byte, oops *oops, startPos int, context string, useQuestionable bool) (
+func (ctx *linux) findReport(output []byte, oops *oops, startPos int, context string) (
 	endPos, reportEnd int, report []byte, prefix [][]byte) {
 	// Prepend 5 lines preceding start of the report,
 	// they can contain additional info related to the report.
@@ -218,7 +207,7 @@ func (ctx *linux) findReport(output []byte, oops *oops, startPos int, context st
 		}
 		line := output[pos:next]
 		context1 := ctx.extractContext(line)
-		stripped, questionable := ctx.stripLinePrefix(line, context1, useQuestionable)
+		stripped, questionable := ctx.stripLinePrefix(line, context1)
 		if pos < startPos {
 			if context1 == context && len(stripped) != 0 && !questionable {
 				prefix = append(prefix, append([]byte{}, stripped...))
@@ -284,34 +273,27 @@ func (ctx *linux) findReport(output []byte, oops *oops, startPos int, context st
 		}
 		report = append(report, stripped...)
 		report = append(report, '\n')
-		if secondReportPos == 0 || context != "" && context != contextConsole {
+		if secondReportPos == 0 || context != "" && context != "console" {
 			reportEnd = len(report)
 		}
 	}
 	return
 }
 
-func (ctx *linux) stripLinePrefix(line []byte, context string, useQuestionable bool) ([]byte, bool) {
+func (ctx *linux) stripLinePrefix(line []byte, context string) ([]byte, bool) {
 	if last := len(line) - 1; last >= 0 && line[last] == '\r' {
 		line = line[:last]
 	}
 	if context == "" {
 		return line, false
 	}
-	start := bytes.Index(line, []byte("] "))
-	line = line[start+2:]
-	if !bytes.Contains(line, ctx.eoi) {
-		// x86_64 prefix.
-		if ctx.questionableFrame.Match(line) {
-			pos := bytes.Index(line, []byte(" ? "))
-			return line[pos+2:], !useQuestionable
-		}
-		// powerpc suffix.
-		if bytes.HasSuffix(line, []byte(" (unreliable)")) {
-			return line[:len(line)-13], !useQuestionable
+	start := bytes.Index(line, []byte("] ")) + 2
+	for _, re := range ctx.questionableRes {
+		if re.Match(line) && !bytes.Contains(line, ctx.eoi) {
+			return line[start:], true
 		}
 	}
-	return line, false
+	return line[start:], false
 }
 
 func (ctx *linux) extractContext(line []byte) string {
@@ -320,7 +302,7 @@ func (ctx *linux) extractContext(line []byte) string {
 		return ""
 	}
 	if match[2] == -1 {
-		return contextConsole
+		return "console"
 	}
 	return string(line[match[2]:match[3]])
 }
@@ -809,7 +791,6 @@ var linuxStackParams = &stackParams{
 		"kasprintf",
 		"kvasprintf",
 		"printk",
-		"va_format",
 		"dev_info",
 		"dev_notice",
 		"dev_warn",
@@ -853,10 +834,6 @@ var linuxStackParams = &stackParams{
 		"usb_control_msg",
 		"usb_hcd_submit_urb",
 		"usb_submit_urb",
-		"^complete$",
-		"wait_for_completion",
-		"^kfree$",
-		"kfree_skb",
 	},
 	corruptedLines: []*regexp.Regexp{
 		// Fault injection stacks are frequently intermixed with crash reports.
@@ -884,6 +861,36 @@ func warningStackFmt(skip ...string) *stackFmt {
 }
 
 var linuxOopses = append([]*oops{
+	{
+		[]byte("====ERROR:"),
+		[]oopsFormat{
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: heap overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: heap overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: stack overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: stack overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: global variable overflow on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: global variable overflow on address %[1]v",
+				noStackTrace: true,
+			},
+			{
+				title:        compile("====ERROR: XenSanitizer:"),
+				report:       compile("====ERROR: XenSanitizer: use after free on address (0x[0-9a-f]+)"),
+				fmt:          "XenSanitizer: use after free on address %[1]v",
+				noStackTrace: true,
+			},
+		},
+		[]*regexp.Regexp{},
+	},
 	{
 		[]byte("BUG:"),
 		[]oopsFormat{
@@ -1122,6 +1129,12 @@ var linuxOopses = append([]*oops{
 	{
 		[]byte("WARNING:"),
 		[]oopsFormat{
+			{
+				title:        compile("WARNING: ThreadSanitizer:"),
+				report:       compile("WARNING: ThreadSanitizer: data race"),
+				fmt:          "ThreadSanitizer: data race",
+				noStackTrace: true,
+			},
 			{
 				title: compile("WARNING: .*lib/debugobjects\\.c.* (?:debug_print|debug_check)"),
 				fmt:   "WARNING: ODEBUG bug in %[1]v",
@@ -1363,6 +1376,13 @@ var linuxOopses = append([]*oops{
 		[]*regexp.Regexp{
 			compile("INFO: lockdep is turned off"),
 			compile("INFO: Stall ended before state dump start"),
+			// This is printed by nmi_check_duration(), the message simply states
+			// that an interrupt took too long. It happens a lot in qemu,
+			// and the messages are frequently corrupted (intermixed with other
+			// kernel output as they are printed from NMI) and are not matched
+			// against this suppression. There is a debug var that holds the current
+			// max duration, so potentially this can be fixed with:
+			// echo 10000000000 > /sys/kernel/debug/x86/nmi_longest_ns
 			compile("INFO: NMI handler"),
 			compile("INFO: recovery required on readonly filesystem"),
 			compile("(handler|interrupt).*took too long"),

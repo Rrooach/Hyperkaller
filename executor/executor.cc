@@ -1429,8 +1429,8 @@ bool kcov_comparison_t::ignore() const {
   return false;
 }
 
-bool kcov_comparison_t::
-operator==(const struct kcov_comparison_t &other) const {
+bool kcov_comparison_t::operator==(
+    const struct kcov_comparison_t &other) const {
   // We don't check for PC equality now, because it is not used.
   return type == other.type && arg1 == other.arg1 && arg2 == other.arg2;
 }
