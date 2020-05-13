@@ -93,7 +93,7 @@ static void cover_open(cover_t *cov, bool extra) {
   // fstat(fd, &fileStat);
   // int file_size = (int)fileStat.st_size;
 
-  if (dup2(fd, cov->fd) < 0)
+  if (dup2(fd, cov->fd) < 0)  
     fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
   close(fd);
   // const int kcov_init_trace = .  is_kernel_64_bit ? KCOV_INIT_TRACE64 :
@@ -108,7 +108,7 @@ static void cover_open(cover_t *cov, bool extra) {
                            MAP_SHARED, cov->fd, 0);
   if (cov->data == MAP_FAILED)
     fail("cover mmap failed");
-  cov->data_end = cov->data + mmap_alloc_size;
+  cov->data_end = cov->data + cover_size;
   debug("Rrooach: executor_linux 107 size = %d   data = %s   \n", cov->size,
         cov->data);
   // size = %d
