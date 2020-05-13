@@ -57,7 +57,7 @@ static inline __u64 kcov_remote_handle(__u64 subsys, __u64 inst) {
 }
 
 static bool detect_kernel_bitness();
- 
+
 static void os_init(int argc, char **argv, void *data, size_t data_size) {
   prctl(PR_SET_PDEATHSIG, SIGKILL, 0, 0, 0);
   is_kernel_64_bit = detect_kernel_bitness();
@@ -93,12 +93,12 @@ static void cover_open(cover_t *cov, bool extra) {
   // fstat(fd, &fileStat);
   // int file_size = (int)fileStat.st_size;
 
-  if (dup2(fd, cov->fd) < 0)  
+  if (dup2(fd, cov->fd) < 0)
     fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
   close(fd);
   // const int kcov_init_trace = .  is_kernel_64_bit ? KCOV_INIT_TRACE64 :
   // KCOV_INIT_TRACE32;
-  cover_size = 150000/32;//extra ? kExtraCoverSize : kCoverSize;
+  cover_size = 150000 / 32; // extra ? kExtraCoverSize : kCoverSize;
   if (system("/root/cov"))
     // if (ioctl(cov->fd, kcov_init_trace, cover_size))
     fail("cover init trace write failed");
@@ -168,8 +168,8 @@ static void cover_reset(cover_t *cov) {
   *(uint64 *)cov->data = 0;
 }
 
-static void cover_collect(cover_t *cov) { 
-  cov->size = 150000/32;
+static void cover_collect(cover_t *cov) {
+  cov->size = 150000 / 32;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
