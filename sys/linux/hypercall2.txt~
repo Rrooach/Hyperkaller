@@ -1,0 +1,40 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+resource fd2[int32]: -1
+define PRIVCMD_HYPERCALL_SIZE	sizeof(struct {u64 op; u64 arg[5]; }) 
+#define IOCTL_PRIVCMD_HYPERCALL _IOWR('E', 0, struct {u64 op; u64 arg[5]; u64 retvl;}) 
+
+open$IOCTL_PRIVCMD_HYPERCALL25(file ptr[in, string["/proc/xen/privcmd"]]) fd2
+
+ioctl$IOCTL_PRIVCMD_HYPERCALL220(fd fd2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall220])
+ioctl$IOCTL_PRIVCMD_HYPERCALL221(fd fd2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall221])
+ioctl$IOCTL_PRIVCMD_HYPERCALL222(fd fd2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall222])
+ioctl$IOCTL_PRIVCMD_HYPERCALL223(fd fd2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall223])
+ioctl$IOCTL_PRIVCMD_HYPERCALL224(fd fd2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall224])
+
+close$IOCTL_PRIVCMD_HYPERCALL25(fd fd2)
+
+my_hypercall220 {
+	__HYPERVISOR_hypercall_type	int32[0:55]
+	args array[int64, 5]
+}
+
+my_hypercall221 {
+	__HYPERVISOR_hypercall_type	int32[0:55]
+	args array[int64, 5]
+}
+
+my_hypercall222 {
+	__HYPERVISOR_hypercall_type	int32[0:55]
+	args array[int64, 5]
+}
+
+my_hypercall223 {
+	__HYPERVISOR_hypercall_type	int32[0:55]
+	args array[int64, 5]
+}
+
+my_hypercall224 {
+	__HYPERVISOR_hypercall_type	int32[0:55]
+	args array[int64, 5]
+}
