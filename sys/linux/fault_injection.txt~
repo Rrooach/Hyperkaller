@@ -13,3 +13,7 @@ my_hypercall_fs1 {
 	__HYPERVISOR_hypercall_type	const[42, int64]
 	args array[const[-4, int64], 5]
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51d88eff726a6349d74a6586d2665ee7db6c07f1
