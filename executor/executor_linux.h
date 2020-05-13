@@ -98,7 +98,7 @@ static void cover_open(cover_t *cov, bool extra) {
   close(fd);
   // const int kcov_init_trace = .  is_kernel_64_bit ? KCOV_INIT_TRACE64 :
   // KCOV_INIT_TRACE32;
-  cover_size = 1+150000/32;//extra ? kExtraCoverSize : kCoverSize;
+  cover_size = 150000/32;//extra ? kExtraCoverSize : kCoverSize;
   if (system("/root/cov"))
     // if (ioctl(cov->fd, kcov_init_trace, cover_size))
     fail("cover init trace write failed");
@@ -169,15 +169,7 @@ static void cover_reset(cover_t *cov) {
 }
 
 static void cover_collect(cover_t *cov) { 
-<<<<<<< HEAD
-  cov->size = 4685;
-=======
-  FILE *fp=fopen("/dev/cov","r"); 
-  fseek(fp,0L,SEEK_END);
-  int fsize=ftell(fp);
-  fclose(fp); 
-  cov->size = fsize; //4686;
->>>>>>> db28bf5a2ff8c7b408ea5c8bc46b027ac67682e4
+  cov->size = 150000/32;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 

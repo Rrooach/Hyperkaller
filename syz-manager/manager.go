@@ -334,8 +334,6 @@ func (mgr *Manager) vmLoop() {
 			len(pendingRepro), len(reproducing), len(reproQueue))
 
 		canRepro := func() bool {
-            //add by sule
-            reproQueue = make ([]*Crash, 0)
 			return phase >= phaseTriagedHub &&
 				len(reproQueue) != 0 && reproInstances+instancesPerRepro <= vmCount
 		}
