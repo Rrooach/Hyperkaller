@@ -57,7 +57,7 @@ static inline __u64 kcov_remote_handle(__u64 subsys, __u64 inst) {
 }
 
 static bool detect_kernel_bitness();
-
+ 
 static void os_init(int argc, char **argv, void *data, size_t data_size) {
   prctl(PR_SET_PDEATHSIG, SIGKILL, 0, 0, 0);
   is_kernel_64_bit = detect_kernel_bitness();
@@ -168,8 +168,12 @@ static void cover_reset(cover_t *cov) {
   *(uint64 *)cov->data = 0;
 }
 
-static void cover_collect(cover_t *cov) {
-  cov->size = 4686;
+static void cover_collect(cover_t *cov) { 
+  FILE *fp=fopen("/dev/cov","r"); 
+  fseek(fp,0L,SEEK_END);
+  int fsize=ftell(fp);
+  fclose(fp); 
+  cov->size = fsize; //4686;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
