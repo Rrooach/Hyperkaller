@@ -1,0 +1,283 @@
+Extracting prog: 4m27.373964705s
+Minimizing prog: 0s
+Simplifying prog options: 0s
+Extracting C: 0s
+Simplifying C: 0s
+
+
+21 programs, 1 VMs, timeouts [15s 6m0s]
+extracting reproducer from 21 programs
+single: executing 1 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12
+detailed listing:
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+r2 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000000c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r2)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000100)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r3)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r4, 0x305000, &(0x7f0000000180))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000001c0)='/proc/xen/privcmd\x00')
+r5 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r5)
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f0000000240))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+r6 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000300)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r7)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000003c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000400)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r8, 0x305000, &(0x7f0000000440))
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f00000004c0))
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 21 programs with base timeout 15s
+bisect: bisecting 21 programs
+bisect: executing all 21 programs
+testing program (duration=20s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [2, 2, 2, 4, 2, 2, 2, 4, 2, 2, 4, 1, 1, 1, 2, 1, 1, 2, 2, 1, 30]
+detailed listing:
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+r2 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000000c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r2)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000100)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r3)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r4, 0x305000, &(0x7f0000000180))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000001c0)='/proc/xen/privcmd\x00')
+r5 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r5)
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f0000000240))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+r6 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000300)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r7)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000003c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000400)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r8, 0x305000, &(0x7f0000000440))
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f00000004c0))
+
+program did not crash
+bisect: didn't crash
+single: executing 1 programs separately with timeout 6m0s
+testing program (duration=6m0s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-close$IOCTL_PRIVCMD_HYPERCALL_fs12-open$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12-ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12
+detailed listing:
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+r2 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000000c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r2)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000100)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r3)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r4, 0x305000, &(0x7f0000000180))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000001c0)='/proc/xen/privcmd\x00')
+r5 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r5)
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f0000000240))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+r6 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000300)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r7)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000003c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000400)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r8, 0x305000, &(0x7f0000000440))
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f00000004c0))
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 21 programs with base timeout 6m0s
+bisect: bisecting 21 programs
+bisect: executing all 21 programs
+testing program (duration=6m5s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [2, 2, 2, 4, 2, 2, 2, 4, 2, 2, 4, 1, 1, 1, 2, 1, 1, 2, 2, 1, 30]
+detailed listing:
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(0x0)
+executing program 0:
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r0)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r1)
+r2 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000000c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r2)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000100)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r3)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r4, 0x305000, &(0x7f0000000180))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000001c0)='/proc/xen/privcmd\x00')
+r5 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r5)
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f0000000240))
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+r6 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000300)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r7)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r4)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff)
+open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f00000003c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL_fs12(r6)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL_fs12(&(0x7f0000000400)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(r8, 0x305000, &(0x7f0000000440))
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs12(0xffffffffffffffff, 0x305000, &(0x7f00000004c0))
+
+program did not crash
+bisect: didn't crash
+failed to extract reproducer
+reproducing took 4m27.373966992s

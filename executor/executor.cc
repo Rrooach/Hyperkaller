@@ -1096,6 +1096,7 @@ void *worker_thread(void *arg) {
   for (;;) {
     event_wait(&th->ready);
     event_reset(&th->ready);
+    debug("Rrooach: 1099");
     execute_call(th);
     event_set(&th->done);
   }

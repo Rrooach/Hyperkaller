@@ -1,0 +1,727 @@
+OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017
+debug1: Reading configuration data /dev/null
+debug1: Connecting to localhost [127.0.0.1] port 49400.
+debug1: fd 3 clearing O_NONBLOCK
+debug1: Connection established.
+debug1: permanently_set_uid: 0/0
+debug1: identity file /root/p2/key type 0
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/p2/key-cert type -1
+debug1: Local version string SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
+debug1: Remote protocol version 2.0, remote software version OpenSSH_7.9p1 Debian-10+deb10u2
+debug1: match: OpenSSH_7.9p1 Debian-10+deb10u2 pat OpenSSH* compat 0x04000000
+debug1: Authenticating to localhost:49400 as 'root'
+debug1: SSH2_MSG_KEXINIT sent
+debug1: SSH2_MSG_KEXINIT received
+debug1: kex: algorithm: curve25519-sha256
+debug1: kex: host key algorithm: ecdsa-sha2-nistp256
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: Server host key: ecdsa-sha2-nistp256 SHA256:4/tWNp5otCN3Z8Xa0hYVLJjk+v55FwwYCFcUvt73Uug
+debug1: checking without port identifier
+Warning: Permanently added '[localhost]:49400' (ECDSA) to the list of known hosts.
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey after 134217728 blocks
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey,password
+debug1: Next authentication method: publickey
+debug1: Offering public key: RSA SHA256:CYnBEFcxsXRB+Lqq3RxKWrmSrcNoJTi0nhG3g2GVQxY /root/p2/key
+debug1: Server accepts key: pkalg rsa-sha2-512 blen 279
+debug1: Authentication succeeded (publickey).
+Authenticated to localhost ([127.0.0.1]:49400).
+debug1: channel 0: new [client-session]
+debug1: Requesting no-more-sessions@openssh.com
+debug1: Entering interactive session.
+debug1: pledge: network
+debug1: client_input_global_request: rtype hostkeys-00@openssh.com want_reply 0
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Remote: /root/.ssh/authorized_keys:1: key options: agent-forwarding port-forwarding pty user-rc x11-forwarding
+debug1: Sending command: cd / && /syz-fuzzer -executor=/syz-executor -name=vm-0 -arch=amd64 -manager=10.0.2.10:37143 -sandbox=none -procs=1 -cover=false -debug=true -test=false -vv=100
+2020/05/14 15:12:58 fuzzer started
+2020/05/14 15:12:59 dialing manager at 10.0.2.10:37143
+2020/05/14 15:12:59 syscalls: 3
+2020/05/14 15:12:59 code coverage: enabled
+2020/05/14 15:12:59 comparison tracing: enabled
+2020/05/14 15:12:59 extra coverage: enabled
+2020/05/14 15:12:59 setuid sandbox: enabled
+2020/05/14 15:12:59 namespace sandbox: /proc/self/ns/user does not exist
+2020/05/14 15:12:59 Android sandbox: enabled
+2020/05/14 15:12:59 fault injection: CONFIG_FAULT_INJECTION is not enabled
+2020/05/14 15:12:59 leak checking: CONFIG_DEBUG_KMEMLEAK is not enabled
+2020/05/14 15:12:59 net packet injection: /dev/net/tun does not exist
+2020/05/14 15:12:59 net device setup: enabled
+2020/05/14 15:12:59 concurrency sanitizer: /sys/kernel/debug/kcsan does not exist
+2020/05/14 15:12:59 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/14 15:12:59 USB emulation: /dev/raw-gadget does not exist
+2020/05/14 15:12:59 poll: candidates=0 inputs=16 signal=12
+2020/05/14 15:12:59 poll: candidates=0 inputs=0 signal=0
+2020/05/14 15:13:00 --------------------
+2020/05/14 15:13:00 getting cover
+2020/05/14 15:13:00 poll: candidates=0 inputs=0 signal=0
+2020/05/14 15:13:00 Rrooach: Covvvv
+2020/05/14 15:13:00 --------------------
+2020/05/14 15:13:00 setting fault
+2020/05/14 15:13:00 --------------------------
+2020/05/14 15:13:00 queue is empty
+2020/05/14 15:13:00 --------------------------
+2020/05/14 15:13:00 set fault
+2020/05/14 15:13:00 #0: generated
+15:13:00 executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r1, 0x305000, &(0x7f0000000080)={0x1b, [0x8, 0x5, 0x8, 0x3f, 0x4]})
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r0, 0x305000, &(0x7f00000000c0)={0x30, [0x3, 0x7, 0x401, 0x7, 0x6]})
+r2 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000100)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r2)
+r3 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r0)
+r4 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000180)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r4, 0x305000, &(0x7f00000001c0)={0xa, [0xfffffffffffffa0e, 0xb378, 0x3, 0x100000000, 0x1]})
+r5 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r5)
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000240)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r3, 0x305000, &(0x7f0000000280)={0x19, [0x7, 0xff, 0x8000, 0x7f, 0x5]})
+r6 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r6, 0x305000, &(0x7f0000000300)={0x11, [0x7, 0x21, 0x8, 0x5, 0x3]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r4)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r7, 0x305000, &(0x7f00000003c0)={0x2e, [0x9, 0x646, 0x5, 0xffffffffffffffc0, 0xce]})
+r8 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000400)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r8, 0x305000, &(0x7f0000000440)={0xb, [0x80000001, 0x7, 0x34c9, 0x800]})
+r9 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000480)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r9, 0x305000, &(0x7f00000004c0)={0x1d, [0x8, 0x7, 0x4, 0x6, 0x6]})
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r7, 0x305000, &(0x7f0000000500)={0x35, [0x44e4, 0x101, 0x7, 0x80, 0x5]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000540)='/proc/xen/privcmd\x00')
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000580)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r9, 0x305000, &(0x7f00000005c0)={0xa, [0x66c, 0x7, 0x81, 0xdc4, 0x40000000000000]})
+r10 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r10, 0x305000, &(0x7f0000000640)={0x35, [0xb9, 0x0, 0x73c, 0x9, 0x5]})
+
+2020/05/14 15:13:00 Rroooach: starting Env.Exec
+spawned loop pid 737
+mount(fusectl) failed: 2
+write(/syzcgroup/unified/cgroup.subtree_control) failed: 22
+mount(cgroup cpu) failed: 22
+mount(cgroup net) failed: 22
+netlink: add addr 172.30.0.1 dev nr0: No such device
+netlink: device nr0 up master (null): No such device
+netlink: add addr 172.30.1.1 dev rose0: No such device
+netlink: device rose0 up master (null): No such device
+netlink: adding device ip6gretap0 type ip6gretap: Operation not supported
+netlink: adding device bridge0 type bridge: Operation not supported
+netlink: adding device vcan0 type vcan: Operation not supported
+netlink: adding device bond0 type bond: Operation not supported
+netlink: adding device team0 type team: Operation not supported
+netlink: adding device dummy0 type dummy: Operation not supported
+netlink: adding device nlmon0 type nlmon: Operation not supported
+netlink: adding device caif0 type caif: Operation not supported
+netlink: adding device batadv0 type batadv: Operation not supported
+netlink: adding device vxcan1 type vxcan: Operation not supported
+netlink: adding device netdevsim0 type netdevsim: Operation not supported
+netlink: adding device (null) type veth: Operation not supported
+netlink: adding device xfrm0 type xfrm: Operation not supported
+netlink: adding device wg0 type wireguard: Operation not supported
+netlink: adding device wg1 type wireguard: Operation not supported
+netlink: adding device wg2 type wireguard: Operation not supported
+netlink: adding device bridge_slave_0 type veth peer veth0_to_bridge: Operation not supported
+netlink: adding device bridge_slave_1 type veth peer veth1_to_bridge: Operation not supported
+netlink: device bridge_slave_0 up master bridge0: No such device
+netlink: device bridge_slave_1 up master bridge0: No such device
+netlink: adding device bond_slave_0 type veth peer veth0_to_bond: Operation not supported
+netlink: adding device bond_slave_1 type veth peer veth1_to_bond: Operation not supported
+netlink: device bond_slave_0 up master bond0: No such device
+netlink: device bond_slave_1 up master bond0: No such device
+netlink: adding device team_slave_0 type veth peer veth0_to_team: Operation not supported
+netlink: adding device team_slave_1 type veth peer veth1_to_team: Operation not supported
+netlink: device team_slave_0 up master team0: No such device
+netlink: device team_slave_1 up master team0: No such device
+netlink: adding device batadv_slave_0 type veth peer veth0_to_batadv: Operation not supported
+netlink: adding device batadv_slave_1 type veth peer veth1_to_batadv: Operation not supported
+netlink: device batadv_slave_0 up master batadv0: No such device
+netlink: device batadv_slave_1 up master batadv0: No such device
+netlink: device bridge_slave_0 up master (null): No such device
+netlink: device bridge_slave_1 up master (null): No such device
+netlink: adding device hsr_slave_0 type veth peer veth0_to_hsr: Operation not supported
+netlink: adding device hsr_slave_1 type veth peer veth1_to_hsr: Operation not supported
+netlink: adding device hsr0 type hsr slave1 hsr_slave_0 slave2 hsr_slave_1: Operation not supported
+netlink: device hsr_slave_0 up master (null): No such device
+netlink: device hsr_slave_1 up master (null): No such device
+netlink: adding device veth0_virt_wifi type veth peer veth1_virt_wifi: Operation not supported
+netlink: adding device virt_wifi0 type virt_wifi link veth1_virt_wifi: Operation not supported
+netlink: adding device veth0_vlan type veth peer veth1_vlan: Operation not supported
+netlink: add vlan0 type vlan link veth0_vlan id 0: Operation not supported
+netlink: add vlan1 type vlan link veth0_vlan id 1: Operation not supported
+netlink: add macvlan0 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add macvlan1 type macvlan link veth1_vlan mode 4: Operation not supported
+netlink: add ipvlan0 type ipvlan link veth0_vlan mode 0: Operation not supported
+netlink: add ipvlan1 type ipvlan link veth0_vlan mode 2: Operation not supported
+netlink: adding device veth0_macvtap type veth peer veth1_macvtap: Operation not supported
+netlink: adding device macvtap0 type macvtap link veth0_macvtap: Operation not supported
+netlink: adding device macsec0 type macsec link veth1_macvtap: Operation not supported
+netlink: add geneve0 type geneve vni 0: Operation not supported
+netlink: add geneve1 type geneve vni 1: Operation not supported
+netlink: failed to get wireguard family id: No such file or directory
+netlink: add addr 172.20.20.10 dev lo: Success
+netlink: add addr fe80::0a dev lo: Success
+netlink: device lo up master (null): Success
+netlink: add addr 172.20.20.11 dev sit0: Success
+netlink: add addr fe80::0b dev sit0: Success
+netlink: device sit0 up master (null): Success
+netlink: add addr 172.20.20.12 dev bridge0: No such device
+netlink: add addr fe80::0c dev bridge0: No such device
+netlink: device bridge0 up master (null): No such device
+netlink: add addr 172.20.20.13 dev vcan0: No such device
+netlink: device vcan0 up master (null): No such device
+netlink: add addr 172.20.20.14 dev tunl0: No such device
+netlink: add addr fe80::0e dev tunl0: No such device
+netlink: device tunl0 up master (null): No such device
+netlink: add addr 172.20.20.15 dev gre0: No such device
+netlink: add addr fe80::0f dev gre0: No such device
+netlink: device gre0 up master (null): No such device
+netlink: add addr 172.20.20.16 dev gretap0: No such device
+netlink: add addr fe80::10 dev gretap0: No such device
+netlink: device gretap0 up master (null): No such device
+netlink: add addr 172.20.20.17 dev ip_vti0: No such device
+netlink: add addr fe80::11 dev ip_vti0: No such device
+netlink: device ip_vti0 up master (null): No such device
+netlink: add addr 172.20.20.18 dev ip6_vti0: No such device
+netlink: add addr fe80::12 dev ip6_vti0: No such device
+netlink: device ip6_vti0 up master (null): No such device
+netlink: add addr 172.20.20.19 dev ip6tnl0: No such device
+netlink: add addr fe80::13 dev ip6tnl0: No such device
+netlink: device ip6tnl0 up master (null): No such device
+netlink: add addr 172.20.20.20 dev ip6gre0: No such device
+netlink: add addr fe80::14 dev ip6gre0: No such device
+netlink: device ip6gre0 up master (null): No such device
+netlink: add addr 172.20.20.21 dev ip6gretap0: No such device
+netlink: add addr fe80::15 dev ip6gretap0: No such device
+netlink: device ip6gretap0 up master (null): No such device
+netlink: add addr 172.20.20.22 dev erspan0: No such device
+netlink: add addr fe80::16 dev erspan0: No such device
+netlink: device erspan0 up master (null): No such device
+netlink: add addr 172.20.20.23 dev bond0: No such device
+netlink: add addr fe80::17 dev bond0: No such device
+netlink: device bond0 up master (null): No such device
+netlink: add addr 172.20.20.24 dev veth0: No such device
+netlink: add addr fe80::18 dev veth0: No such device
+netlink: device veth0 up master (null): No such device
+netlink: add addr 172.20.20.25 dev veth1: No such device
+netlink: add addr fe80::19 dev veth1: No such device
+netlink: device veth1 up master (null): No such device
+netlink: add addr 172.20.20.26 dev team0: No such device
+netlink: add addr fe80::1a dev team0: No such device
+netlink: device team0 up master (null): No such device
+netlink: add addr 172.20.20.27 dev veth0_to_bridge: No such device
+netlink: add addr fe80::1b dev veth0_to_bridge: No such device
+netlink: device veth0_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.28 dev veth1_to_bridge: No such device
+netlink: add addr fe80::1c dev veth1_to_bridge: No such device
+netlink: device veth1_to_bridge up master (null): No such device
+netlink: add addr 172.20.20.29 dev veth0_to_bond: No such device
+netlink: add addr fe80::1d dev veth0_to_bond: No such device
+netlink: device veth0_to_bond up master (null): No such device
+netlink: add addr 172.20.20.30 dev veth1_to_bond: No such device
+netlink: add addr fe80::1e dev veth1_to_bond: No such device
+netlink: device veth1_to_bond up master (null): No such device
+netlink: add addr 172.20.20.31 dev veth0_to_team: No such device
+netlink: add addr fe80::1f dev veth0_to_team: No such device
+netlink: device veth0_to_team up master (null): No such device
+netlink: add addr 172.20.20.32 dev veth1_to_team: No such device
+netlink: add addr fe80::20 dev veth1_to_team: No such device
+netlink: device veth1_to_team up master (null): No such device
+netlink: add addr 172.20.20.33 dev veth0_to_hsr: No such device
+netlink: add addr fe80::21 dev veth0_to_hsr: No such device
+netlink: device veth0_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.34 dev veth1_to_hsr: No such device
+netlink: add addr fe80::22 dev veth1_to_hsr: No such device
+netlink: device veth1_to_hsr up master (null): No such device
+netlink: add addr 172.20.20.35 dev hsr0: No such device
+netlink: add addr fe80::23 dev hsr0: No such device
+netlink: device hsr0 up master (null): No such device
+netlink: add addr 172.20.20.36 dev dummy0: No such device
+netlink: add addr fe80::24 dev dummy0: No such device
+netlink: device dummy0 up master (null): No such device
+netlink: add addr 172.20.20.37 dev nlmon0: No such device
+netlink: add addr fe80::25 dev nlmon0: No such device
+netlink: device nlmon0 up master (null): No such device
+netlink: add addr 172.20.20.38 dev vxcan0: No such device
+netlink: device vxcan0 up master (null): No such device
+netlink: add addr 172.20.20.39 dev vxcan1: No such device
+netlink: device vxcan1 up master (null): No such device
+netlink: add addr 172.20.20.40 dev caif0: No such device
+netlink: add addr fe80::28 dev caif0: No such device
+netlink: device caif0 up master (null): No such device
+netlink: add addr 172.20.20.41 dev batadv0: No such device
+netlink: add addr fe80::29 dev batadv0: No such device
+netlink: device batadv0 up master (null): No such device
+netlink: add addr 172.20.20.42 dev netdevsim0: No such device
+netlink: add addr fe80::2a dev netdevsim0: No such device
+netlink: device netdevsim0 up master (null): No such device
+netlink: add addr 172.20.20.43 dev xfrm0: No such device
+netlink: add addr fe80::2b dev xfrm0: No such device
+netlink: device xfrm0 up master (null): No such device
+netlink: add addr 172.20.20.44 dev veth0_virt_wifi: No such device
+netlink: add addr fe80::2c dev veth0_virt_wifi: No such device
+netlink: device veth0_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.45 dev veth1_virt_wifi: No such device
+netlink: add addr fe80::2d dev veth1_virt_wifi: No such device
+netlink: device veth1_virt_wifi up master (null): No such device
+netlink: add addr 172.20.20.46 dev virt_wifi0: No such device
+netlink: add addr fe80::2e dev virt_wifi0: No such device
+netlink: device virt_wifi0 up master (null): No such device
+netlink: add addr 172.20.20.47 dev veth0_vlan: No such device
+netlink: add addr fe80::2f dev veth0_vlan: No such device
+netlink: device veth0_vlan up master (null): No such device
+netlink: add addr 172.20.20.48 dev veth1_vlan: No such device
+netlink: add addr fe80::30 dev veth1_vlan: No such device
+netlink: device veth1_vlan up master (null): No such device
+netlink: add addr 172.20.20.49 dev vlan0: No such device
+netlink: add addr fe80::31 dev vlan0: No such device
+netlink: device vlan0 up master (null): No such device
+netlink: add addr 172.20.20.50 dev vlan1: No such device
+netlink: add addr fe80::32 dev vlan1: No such device
+netlink: device vlan1 up master (null): No such device
+netlink: add addr 172.20.20.51 dev macvlan0: No such device
+netlink: add addr fe80::33 dev macvlan0: No such device
+netlink: device macvlan0 up master (null): No such device
+netlink: add addr 172.20.20.52 dev macvlan1: No such device
+netlink: add addr fe80::34 dev macvlan1: No such device
+netlink: device macvlan1 up master (null): No such device
+netlink: add addr 172.20.20.53 dev ipvlan0: No such device
+netlink: add addr fe80::35 dev ipvlan0: No such device
+netlink: device ipvlan0 up master (null): No such device
+netlink: add addr 172.20.20.54 dev ipvlan1: No such device
+netlink: add addr fe80::36 dev ipvlan1: No such device
+netlink: device ipvlan1 up master (null): No such device
+netlink: add addr 172.20.20.55 dev veth0_macvtap: No such device
+netlink: add addr fe80::37 dev veth0_macvtap: No such device
+netlink: device veth0_macvtap up master (null): No such device
+netlink: add addr 172.20.20.56 dev veth1_macvtap: No such device
+netlink: add addr fe80::38 dev veth1_macvtap: No such device
+netlink: device veth1_macvtap up master (null): No such device
+netlink: add addr 172.20.20.57 dev macvtap0: No such device
+netlink: add addr fe80::39 dev macvtap0: No such device
+netlink: device macvtap0 up master (null): No such device
+netlink: add addr 172.20.20.58 dev macsec0: No such device
+netlink: add addr fe80::3a dev macsec0: No such device
+netlink: device macsec0 up master (null): No such device
+netlink: add addr 172.20.20.59 dev veth0_to_batadv: No such device
+netlink: add addr fe80::3b dev veth0_to_batadv: No such device
+netlink: device veth0_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.60 dev veth1_to_batadv: No such device
+netlink: add addr fe80::3c dev veth1_to_batadv: No such device
+netlink: device veth1_to_batadv up master (null): No such device
+netlink: add addr 172.20.20.61 dev batadv_slave_0: No such device
+netlink: add addr fe80::3d dev batadv_slave_0: No such device
+netlink: device batadv_slave_0 up master (null): No such device
+netlink: add addr 172.20.20.62 dev batadv_slave_1: No such device
+netlink: add addr fe80::3e dev batadv_slave_1: No such device
+netlink: device batadv_slave_1 up master (null): No such device
+netlink: add addr 172.20.20.63 dev geneve0: No such device
+netlink: add addr fe80::3f dev geneve0: No such device
+netlink: device geneve0 up master (null): No such device
+netlink: add addr 172.20.20.64 dev geneve1: No such device
+netlink: add addr fe80::40 dev geneve1: No such device
+netlink: device geneve1 up master (null): No such device
+netlink: add addr 172.20.20.65 dev wg0: No such device
+netlink: add addr fe80::41 dev wg0: No such device
+netlink: device wg0 up master (null): No such device
+netlink: add addr 172.20.20.66 dev wg1: No such device
+netlink: add addr fe80::42 dev wg1: No such device
+netlink: device wg1 up master (null): No such device
+netlink: add addr 172.20.20.67 dev wg2: No such device
+netlink: add addr fe80::43 dev wg2: No such device
+netlink: device wg2 up master (null): No such device
+iptable checkpoint filter/2: checkpoint entries=4 hooks=e size=632
+iptable checkpoint nat/2: checkpoint entries=5 hooks=1b size=784
+iptable checkpoint mangle/2: checkpoint entries=6 hooks=1f size=936
+iptable checkpoint filter/10: checkpoint entries=4 hooks=e size=856
+iptable checkpoint mangle/10: checkpoint entries=6 hooks=1f size=1272
+[3589ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 2
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3631ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000000)
+#0 [3631ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3632ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000040)
+#0 [3632ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x4 errno=0 
+#0 [3632ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x4, 0x305000, 0x20000080)
+#0 [3632ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#0 [3633ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x200000c0)
+#0 [3633ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3633ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000100)
+#0 [3633ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#0 [3634ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x5)
+#0 [3634ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#0 [3634ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000140)
+#0 [3634ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#0 [3634ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x3)
+#0 [3635ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#0 [3635ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000180)
+#0 [3635ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3635ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x200001c0)
+#0 [3635ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#0 [3636ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000200)
+#0 [3636ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#0 [3636ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x6)
+#0 [3636ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#0 [3636ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000240)
+#0 [3636ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#0 [3637ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x5, 0x305000, 0x20000280)
+#0 [3637ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#0 [3637ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x200002c0)
+#0 [3637ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x7 errno=0 
+#0 [3638ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x7, 0x305000, 0x20000300)
+#0 [3638ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#0 [3638ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000340)
+#0 [3638ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x8 errno=0 
+#0 [3638ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x3)
+#0 [3638ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#0 [3639ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000380)
+#0 [3639ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3639ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x200003c0)
+#0 [3639ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0x0 errno=0 
+#0 [3640ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000400)
+#0 [3640ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x9 errno=0 
+#0 [3640ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x9, 0x305000, 0x20000440)
+#0 [3640ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#0 [3641ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000480)
+#0 [3641ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xa errno=0 
+#0 [3641ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xa, 0x305000, 0x200004c0)
+#0 [3641ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#0 [3642ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x20000500)
+#0 [3642ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#0 [3642ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000540)
+#0 [3642ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xb errno=0 
+#0 [3642ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000580)
+#0 [3642ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xc errno=0 
+#0 [3642ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xa, 0x305000, 0x200005c0)
+#0 [3642ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#0 [3643ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000600)
+#0 [3643ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xd errno=0 
+#0 [3643ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xd, 0x305000, 0x20000640)
+#0 [3643ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+enabling collider
+#0 [3644ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000000)
+#0 [3644ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3644ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000040#1 [3644ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x4, 0x305000, 0x20000080)
+#1 [3644ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=9 
+)
+#0 [3644ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x4 errno=0 
+#1 [3644ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x200000c0)
+#1 [3645ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3645ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000100)
+#0 [3645ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#0 [3645ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x5)
+#0 [3645ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#1 [3645ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000140)
+#1 [3645ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#1 [3645ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000180)
+#1 [3646ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#1 [3646ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x6, 0x305000, 0x200001c0)
+#0 [3646ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(#1 [3646ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+0x3)
+#0 [3646ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#2 [3646ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000200)
+#2 [3646ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#1 [3646ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000240)
+#0 [3646ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(#1 [3646ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x7 errno=0 
+0x3)
+#0 [3647ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#1 [3647ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x200002c0#0 [3647ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x5, 0x305000, 0x20000280)
+)
+#0 [3647ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#1 [3647ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3647ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x20000300)
+#1 [3647ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000340)
+#1 [3648ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x8 errno=0 
+#0 [3648ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#1 [3648ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000380)
+#0 [3648ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(#1 [3648ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x9 errno=0 
+0x6)
+#0 [3648ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+#0 [3648ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x9, 0x305000, 0x200003c0)
+#1 [3649ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(#0 [3649ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0x0 errno=0 
+0x20000400)
+#1 [3649ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#1 [3649ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000480)
+#1 [3649ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xa errno=0 
+#0 [3649ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x6, 0x305000, 0x20000440)
+#0 [3649ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#1 [3649ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xa, 0x305000, 0x200004c0)
+#1 [3649ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#2 [3649ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x9, 0x305000, 0x20000500)
+#2 [3650ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=38 
+#0 [3650ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000540)
+#1 [3650ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000580#0 [3650ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xb errno=0 
+)
+#1 [3650ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xc errno=0 
+#0 [3651ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xa, 0x305000, 0x200005c0#1 [3651ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000600)
+#1 [3651ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xd errno=0 
+)
+#0 [3651ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=22 
+#0 [3651ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xd, 0x305000, 0x20000640)
+#0 [3651ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=9 
+2020/05/14 15:13:04 Rrooach: 289
+2020/05/14 15:13:04 env.config.Flags = 1953,  FlagSignal = 2
+2020/05/14 15:13:04 Rrooach: ipc319
+2020/05/14 15:13:04 Rrooach: anayless198
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: ipc321
+2020/05/14 15:13:04 Rrooach: ipc325
+2020/05/14 15:13:04 result hanged=false: 
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 getting cover
+2020/05/14 15:13:04 Rrooach: Covvvv
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 get report
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 setting fault
+2020/05/14 15:13:04 --------------------------
+2020/05/14 15:13:04 queue is empty
+2020/05/14 15:13:04 --------------------------
+2020/05/14 15:13:04 set fault
+2020/05/14 15:13:04 #0: mutated
+15:13:04 executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+r1 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000000c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r1, 0x305000, &(0x7f0000000100)={0x31, [0x7, 0x5, 0x1, 0x1ff, 0x9]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r0)
+
+2020/05/14 15:13:04 Rroooach: starting Env.Exec
+[3715ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 10
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3751ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+#0 [3751ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xffffffffffffffff errno=14 
+#0 [3751ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000080)
+#0 [3752ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3752ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000000)
+#0 [3752ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x4 errno=0 
+#0 [3752ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x200000c0)
+#0 [3752ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#0 [3752ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x5, 0x305000, 0x20000100)
+#0 [3752ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3752ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000040)
+#0 [3752ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#0 [3753ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x4)
+#0 [3753ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+enabling collider
+#0 [3753ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+#0 [3753ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0xffffffffffffffff errno=14 
+#0 [3753ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000080)
+#0 [3753ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#1 [3753ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000000)
+#1 [3753ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x4 errno=0 
+#0 [3754ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x200000c0)
+#0 [3754ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#1 [3754ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x5, 0x305000, 0x20000100)
+#1 [3754ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3754ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000040)
+#0 [3754ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#1 [3754ms] -> close$IOCTL_PRIVCMD_HYPERCALL3071(0x4)
+#1 [3754ms] <- close$IOCTL_PRIVCMD_HYPERCALL3071=0x0 errno=0 
+2020/05/14 15:13:04 Rrooach: 289
+2020/05/14 15:13:04 env.config.Flags = 1953,  FlagSignal = 2
+2020/05/14 15:13:04 Rrooach: ipc319
+2020/05/14 15:13:04 Rrooach: anayless198
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: anayless201
+2020/05/14 15:13:04 Rrooach: anayless222
+2020/05/14 15:13:04 Rrooach: anayless235
+2020/05/14 15:13:04 Rrooach: anayless239	
+2020/05/14 15:13:04 Rrooach: ipc321
+2020/05/14 15:13:04 Rrooach: ipc325
+2020/05/14 15:13:04 result hanged=false: 
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 getting cover
+2020/05/14 15:13:04 Rrooach: Covvvv
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 get report
+2020/05/14 15:13:04 --------------------
+2020/05/14 15:13:04 setting fault
+2020/05/14 15:13:04 --------------------------
+2020/05/14 15:13:04 queue is empty
+2020/05/14 15:13:04 --------------------------
+2020/05/14 15:13:04 set fault
+2020/05/14 15:13:04 #0: generated
+15:13:04 executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000000)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r0, 0x305000, &(0x7f0000000040)={0x25, [0x0, 0x9, 0xd9b, 0x1, 0x8]})
+r1 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000080)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r1, 0x305000, &(0x7f00000000c0)={0xc, [0x9, 0x961, 0x1, 0x1]})
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xffffffffffffffff, 0x305000, &(0x7f0000000100)={0xb, [0x20, 0x87f, 0xfff, 0xffffffffffffff6b, 0x100000001]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xffffffffffffffff, 0x305000, &(0x7f0000000180)={0x5, [0x7, 0xddf, 0x10001, 0xffffffffffffffff]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000001c0)='/proc/xen/privcmd\x00')
+r2 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000200)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r2, 0x305000, &(0x7f0000000240)={0x4, [0x8001, 0x3f4a, 0x20, 0x8b6, 0x1]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000280)='/proc/xen/privcmd\x00')
+r3 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000002c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r3, 0x305000, &(0x7f0000000300)={0x33, [0x0, 0x0, 0x8000000080, 0x401, 0x7f]})
+r4 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000340)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r4, 0x305000, &(0x7f0000000380)={0x33, [0x1, 0x3, 0x20, 0x5, 0x70]})
+close$IOCTL_PRIVCMD_HYPERCALL3071(r1)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000003c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r5, 0x305000, &(0x7f0000000400)={0x18, [0x6a83, 0x100000000, 0x2, 0x2, 0x101]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000440)='/proc/xen/privcmd\x00')
+r6 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000480)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r6)
+r7 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000004c0)='/proc/xen/privcmd\x00')
+close$IOCTL_PRIVCMD_HYPERCALL3071(r7)
+r8 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000500)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r8, 0x305000, &(0x7f0000000540)={0x22, [0x100, 0xb, 0x8, 0x0, 0x4]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000580)='/proc/xen/privcmd\x00')
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f00000005c0)='/proc/xen/privcmd\x00')
+r9 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000600)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3072(r9, 0x305000, &(0x7f0000000640)={0x29, [0x6, 0x80000001, 0x0, 0x8, 0xfffffffffffff62a]})
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000680)='/proc/xen/privcmd\x00')
+
+2020/05/14 15:13:04 Rroooach: starting Env.Exec
+[3823ms] exec opts: procid=0 threaded=1 collide=1 cover=0 comps=0 dedup=1 fault=0/0/0 prog=0
+spawned worker pid 17
+Rrooach exe577reset
+Rrooach exe580set
+#0 [3862ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000000)
+#0 [3862ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x3 errno=0 
+#0 [3862ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x3, 0x305000, 0x20000040)
+#0 [3862ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3863ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000080)
+#0 [3863ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x4 errno=0 
+#0 [3863ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x4, 0x305000, 0x200000c0)
+#0 [3863ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=14 
+#0 [3863ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xffffffffffffffff, 0x305000, 0x20000100)
+#0 [3863ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=9 
+#0 [3863ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000140)
+#0 [3863ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x5 errno=0 
+#0 [3863ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0xffffffffffffffff, 0x305000, 0x20000180)
+#0 [3863ms] <- ioctl$IOCTL_PRIVCMD_HYPERCALL3072=0xffffffffffffffff errno=9 
+#0 [3863ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x200001c0)
+#0 [3863ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x6 errno=0 
+#0 [3864ms] -> open$IOCTL_PRIVCMD_HYPERCALL3071(0x20000200)
+#0 [3864ms] <- open$IOCTL_PRIVCMD_HYPERCALL3071=0x7 errno=0 
+#0 [3864ms] -> ioctl$IOCTL_PRIVCMD_HYPERCALL3072(0x7, 0x305000, 0x20000240)
+debug1: channel 0: free: client-session, nchannels 1
+debug1: fd 0 clearing O_NONBLOCK
+debug1: fd 1 clearing O_NONBLOCK
+Connection to localhost closed by remote host.
+Transferred: sent 2820, received 51096 bytes, in 11.2 seconds
+Bytes per second: sent 252.4, received 4573.3
+debug1: Exit status -1

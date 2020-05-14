@@ -1,0 +1,260 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+define IOCTL_PRIVCMD_HYPERCALL11000	0x305000
+resource fdt[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLt(file ptr[in, string["/proc/xen/privcmd"]]) fdt
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLt0(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt1(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt2(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt3(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt3])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt4(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt4])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt5(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt5])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt6(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt6])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt7(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt7])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt8(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt8])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt9(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt9])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt10(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt10])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt11(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt11])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt12(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt12])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt13(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt13])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt14(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt14])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt15(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt15])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt16(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt16])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt17(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt17])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt18(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt18])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt19(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt19])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt20(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt20])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt21(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt21])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt22(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt22])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt23(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt23])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt24(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt24])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt25(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt25])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt26(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt26])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt27(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt27])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt28(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt28])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt29(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt29])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt30(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt30])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt31(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt31])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt32(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt32])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt33(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt33])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt34(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt34])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt35(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt35])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt36(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt36])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt37(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt37])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt38(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt38])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt39(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt39])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt40(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt40])
+ioctl$IOCTL_PRIVCMD_HYPERCALLt41(fd fdt, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallt41])
+
+close$IOCTL_PRIVCMD_HYPERCALLt(fd fdt)
+
+my_hypercallt0 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt1 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt2 {
+	__HYPERVISOR_hypercall_type	const[2, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt3 {
+	__HYPERVISOR_hypercall_type	const[3, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt4 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt5 {
+	__HYPERVISOR_hypercall_type	const[5, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt6 {
+	__HYPERVISOR_hypercall_type	const[6, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt7 {
+	__HYPERVISOR_hypercall_type	const[7, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt8 {
+	__HYPERVISOR_hypercall_type	const[8, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt9 {
+	__HYPERVISOR_hypercall_type	const[9, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt10 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt11 {
+	__HYPERVISOR_hypercall_type	const[11, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt12 {
+	__HYPERVISOR_hypercall_type	const[12, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt13 {
+	__HYPERVISOR_hypercall_type	const[13, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt14 {
+	__HYPERVISOR_hypercall_type	const[14, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt15 {
+	__HYPERVISOR_hypercall_type	const[15, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt16 {
+	__HYPERVISOR_hypercall_type	const[16, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt17 {
+	__HYPERVISOR_hypercall_type	const[17, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt18 {
+	__HYPERVISOR_hypercall_type	const[18, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt19 {
+	__HYPERVISOR_hypercall_type	const[19, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt20 {
+	__HYPERVISOR_hypercall_type	const[20, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt21 {
+	__HYPERVISOR_hypercall_type	const[21, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt22 {
+	__HYPERVISOR_hypercall_type	const[22, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt23 {
+	__HYPERVISOR_hypercall_type	const[23, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt24 {
+	__HYPERVISOR_hypercall_type	const[24, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt25 {
+	__HYPERVISOR_hypercall_type	const[25, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt26 {
+	__HYPERVISOR_hypercall_type	const[26, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt27 {
+	__HYPERVISOR_hypercall_type	const[27, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt28 {
+	__HYPERVISOR_hypercall_type	const[28, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt29 {
+	__HYPERVISOR_hypercall_type	const[29, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt30 {
+	__HYPERVISOR_hypercall_type	const[30, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt31 {
+	__HYPERVISOR_hypercall_type	const[31, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt32 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt33 {
+	__HYPERVISOR_hypercall_type	const[33, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt34 {
+	__HYPERVISOR_hypercall_type	const[34, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt35 {
+	__HYPERVISOR_hypercall_type	const[35, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt36 {
+	__HYPERVISOR_hypercall_type	const[36, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt37 {
+	__HYPERVISOR_hypercall_type	const[37, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt38 {
+	__HYPERVISOR_hypercall_type	const[38, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt39 {
+	__HYPERVISOR_hypercall_type	const[39, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt40 {
+	__HYPERVISOR_hypercall_type	const[40, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallt41 {
+	__HYPERVISOR_hypercall_type	const[41, int64]
+	args				array[int64, 5]
+}
