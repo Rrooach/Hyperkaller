@@ -112,8 +112,8 @@ func (proc *Proc) loop() {
 		ecmd("~/trigger")
 		log.Logf(0, "--------------------")
 		log.Logf(0, "setting fault")
-		fv := faultfuzzer.Set_fault()
-
+		//fv := faultfuzzer.Set_fault()
+		fv := 1
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
 			if fv == 0 {

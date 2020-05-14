@@ -1,0 +1,2161 @@
+Extracting prog: 5m58.178751562s
+Minimizing prog: 0s
+Simplifying prog options: 0s
+Extracting C: 0s
+Simplifying C: 0s
+
+
+331 programs, 1 VMs, timeouts [15s 6m0s]
+extracting reproducer from 331 programs
+single: executing 1 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): creat-ioctl$sock_inet_SIOCDARP-open$IOCTL_PRIVCMD_HYPERCALL18421_5-creat-setsockopt$IP_VS_SO_SET_ADD-creat-setsockopt$IP_VS_SO_SET_ADD-creat-open$IOCTL_PRIVCMD_HYPERCALL18421_4-ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44-setsockopt$IP_VS_SO_SET_ADD-sendmsg$IPVS_CMD_FLUSH-ioctl$EVIOCGUNIQ-socket$nl_xfrm-ioctl$sock_inet_SIOCSIFADDR-ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51-creat-setsockopt$IP_VS_SO_SET_ADD-openat$cgroup_ro-write$P9_RATTACH
+detailed listing:
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+r4 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL18421_4(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44(r5, 0x305000, &(0x7f00000003c0)={0x2c, [0x6, 0x80000000, 0x200, 0x3, 0x2]})
+setsockopt$IP_VS_SO_SET_ADD(r4, 0x0, 0x482, 0x0, 0x0)
+sendmsg$IPVS_CMD_FLUSH(r3, &(0x7f0000000300)={&(0x7f0000000240)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f00000002c0)={&(0x7f0000000280)={0x2c, 0x0, 0x10, 0x70bd25, 0x25dfdbff, {}, [@IPVS_CMD_ATTR_SERVICE={0x4}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8, 0x4, 0x4}, @IPVS_CMD_ATTR_SERVICE={0xc, 0x1, 0x0, 0x1, [@IPVS_SVC_ATTR_AF={0x6, 0x1, 0xa}]}]}, 0x2c}, 0x1, 0x0, 0x0, 0x40488c4}, 0x810)
+ioctl$EVIOCGUNIQ(r4, 0x80404508, &(0x7f00000000c0)=""/228)
+r6 = socket$nl_xfrm(0x10, 0x3, 0x6)
+ioctl$sock_inet_SIOCSIFADDR(r6, 0x8916, &(0x7f0000000340)={'netdevsim0\x00', {0x2, 0x4e24, @rand_addr=0x64010100}})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000080))
+r7 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r7, 0x0, 0x482, 0x0, 0x0)
+r8 = openat$cgroup_ro(r7, &(0x7f00000001c0)='rdma.current\x00', 0x0, 0x0)
+write$P9_RATTACH(r8, &(0x7f0000000200)={0x14, 0x69, 0x2, {0x8, 0x2, 0x8}}, 0x14)
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 331 programs with base timeout 15s
+bisect: bisecting 331 programs
+bisect: executing all 331 programs
+testing program (duration=1m37s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [1, 1, 1, 2, 2, 2, 2, 4, 2, 2, 2, 4, 1, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 4, 1, 1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 21, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 4, 1, 2, 1, 1, 1, 2, 22, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 4, 21, 21, 21, 42, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 22, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 3, 2, 3, 9, 21, 16, 4, 15, 20]
+detailed listing:
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+lstat(&(0x7f0000001000)='./file0\x00', 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+prctl$PR_SET_MM_MAP(0x23, 0xe, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+executing program 0:
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+sendfile(0xffffffffffffffff, 0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+setsockopt$IP_VS_SO_SET_ADD(0xffffffffffffffff, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+getsockopt$IP_VS_SO_GET_VERSION(0xffffffffffffffff, 0x0, 0x480, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(r0, 0xc058534f, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r1, 0x8953, 0x0)
+executing program 0:
+socket$inet(0x2, 0x2, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+r0 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x0)
+openat$cgroup_procs(r0, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$batadv(0x0)
+executing program 0:
+ioctl$SNDRV_TIMER_IOCTL_START(0xffffffffffffffff, 0x54a0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x2)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+r1 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCSIFDSTADDR(0xffffffffffffffff, 0x8918, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+ioctl$TIOCSPTLCK(0xffffffffffffffff, 0x40045431, 0x0)
+executing program 0:
+listxattr(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+syz_read_part_table(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+pipe2(&(0x7f0000000f40)={0xffffffffffffffff, <r0=>0xffffffffffffffff}, 0x0)
+ioctl$VT_ACTIVATE(r0, 0x5606, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_ADD(0xffffffffffffffff, 0x4c80, 0x0)
+executing program 0:
+getrlimit(0xc, &(0x7f0000000f00))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', &(0x7f00000010c0), 0x24, 0x0)
+executing program 0:
+fcntl$setsig(0xffffffffffffffff, 0xa, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDELRT(0xffffffffffffffff, 0x890c, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$VT_SETMODE(r0, 0x5602, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+fcntl$setown(0xffffffffffffffff, 0x8, 0x0)
+executing program 0:
+syz_open_dev$vcsu(0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x7fff)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+syz_genetlink_get_family_id$nl80211(&(0x7f0000000140)='nl80211\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL50(0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, &(0x7f0000000480)=""/205)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDARP(0xffffffffffffffff, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(r0, 0x0, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL173502(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x10001, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(0xffffffffffffffff, 0x404c534a, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+executing program 0:
+lstat(0x0, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r1, 0x0, 0xffffffffffffffff)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={0x0}}, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={&(0x7f0000000000), 0xc, &(0x7f0000000080)={&(0x7f0000000040)={0x10, 0x3fb, 0x1, 0x70bd27, 0x25dfdbfd, "", ["", ""]}, 0x10}, 0x1, 0x0, 0x0, 0x10000080}, 0x4)
+r1 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r2 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r2, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d1c5c9879b40e01", 0x3c, r1}, 0x68)
+r3 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r3, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r4 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r5 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r4, 0x4c80, r5)
+r6 = openat$cgroup_procs(r4, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r6, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r7 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r8 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r7, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r8, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r6, r1, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(0xffffffffffffffff, 0xc058534f, 0x0)
+executing program 0:
+listxattr(&(0x7f0000000600)='./file0\x00', 0x0, 0x0)
+executing program 0:
+fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r0, 0x0, 0x0)
+executing program 0:
+ioctl$TCSETX(0xffffffffffffffff, 0x5433, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+pipe2(0x0, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$TCSETX(r0, 0x5433, 0x0)
+executing program 0:
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+executing program 0:
+setsockopt$inet_tcp_TCP_MD5SIG(0xffffffffffffffff, 0x6, 0xe, 0x0, 0x0)
+executing program 0:
+r0 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x0, 0x0)
+ioctl$sock_inet_SIOCGIFPFLAGS(r0, 0x8935, 0x0)
+executing program 0:
+ioctl$EVIOCGSW(0xffffffffffffffff, 0x8040451b, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x482, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000900))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCGIFPFLAGS(0xffffffffffffffff, 0x8935, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$devlink(0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(r0, 0x0, 0x0)
+executing program 0:
+sendmsg$AUDIT_GET_FEATURE(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+creat(0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCSIFDSTADDR(r0, 0x8918, 0x0)
+executing program 0:
+ioctl$TIOCGPTPEER(0xffffffffffffffff, 0x5441, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+getrlimit(0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, 0x0, 0x0, 0x0)
+executing program 0:
+lstat(&(0x7f0000001000)='./file0\x00', 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+ioctl$SNDRV_TIMER_IOCTL_START(0xffffffffffffffff, 0x54a0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(r0, 0x404c534a, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+executing program 0:
+ioctl$sock_inet_SIOCDARP(0xffffffffffffffff, 0x8953, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL173502(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$TCSETX(0xffffffffffffffff, 0x5433, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$TCSETX(r0, 0x5433, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+creat(0x0, 0x0)
+executing program 0:
+listxattr(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCSIFDSTADDR(0xffffffffffffffff, 0x8918, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x0)
+executing program 0:
+getrlimit(0xc, &(0x7f0000000f00))
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, 0x0, 0x0, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(0xffffffffffffffff, 0xc058534f, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+pipe2(0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+r1 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r1, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+socket$nl_audit(0x10, 0x3, 0x9)
+r8 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r8, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r9 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r9, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r8}, 0x68)
+r10 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r10, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r11 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r12 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r11, 0x4c80, r12)
+r13 = openat$cgroup_procs(r11, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r13, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r14 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r15 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r14, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r15, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r13, r8, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={0x0}}, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+syz_read_part_table(0x0, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+setsockopt$IP_VS_SO_SET_ADD(0xffffffffffffffff, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCGIFPFLAGS(0xffffffffffffffff, 0x8935, 0x0)
+executing program 0:
+r0 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r0, 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x2)
+executing program 0:
+sysfs$2(0x2, 0x0, &(0x7f0000000480)=""/205)
+executing program 0:
+fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(&(0x7f0000000140)='nl80211\x00')
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', &(0x7f00000010c0), 0x24, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDELRT(0xffffffffffffffff, 0x890c, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$batadv(0x0)
+executing program 0:
+ioctl$EVIOCGSW(0xffffffffffffffff, 0x8040451b, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={&(0x7f0000000000), 0xc, &(0x7f0000000080)={&(0x7f0000000040)={0x10, 0x3fb, 0x1, 0x70bd27, 0x25dfdbfd, "", ["", ""]}, 0x10}, 0x1, 0x0, 0x0, 0x10000080}, 0x4)
+r1 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r2 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r2, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d1c5c9879b40e01", 0x3c, r1}, 0x68)
+r3 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r3, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r4 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r5 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r4, 0x4c80, r5)
+r6 = openat$cgroup_procs(r4, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r6, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r7 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r8 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r7, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r8, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r6, r1, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+syz_genetlink_get_family_id$devlink(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(r0, 0x0, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(r0, 0xc058534f, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL50(0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(0xffffffffffffffff, 0x404c534a, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+executing program 0:
+listxattr(&(0x7f0000000600)='./file0\x00', 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$VT_SETMODE(r0, 0x5602, 0x0)
+executing program 0:
+fcntl$setown(0xffffffffffffffff, 0x8, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$TIOCGPTPEER(0xffffffffffffffff, 0x5441, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x0)
+openat$cgroup_procs(r0, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_MD5SIG(0xffffffffffffffff, 0x6, 0xe, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(r0, 0x404c534a, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40)={0xffffffffffffffff, <r0=>0xffffffffffffffff}, 0x0)
+ioctl$VT_ACTIVATE(r0, 0x5606, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x7fff)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+fcntl$setsig(0xffffffffffffffff, 0xa, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+sendfile(0xffffffffffffffff, 0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_ADD(0xffffffffffffffff, 0x4c80, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+lstat(0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+getsockopt$IP_VS_SO_GET_VERSION(0xffffffffffffffff, 0x0, 0x480, 0x0, 0x0)
+executing program 0:
+prctl$PR_SET_MM_MAP(0x23, 0xe, 0x0, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, 0x0)
+executing program 0:
+syz_open_dev$vcsu(0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCSIFDSTADDR(r0, 0x8918, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+r0 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x0, 0x0)
+ioctl$sock_inet_SIOCGIFPFLAGS(r0, 0x8935, 0x0)
+executing program 0:
+socket$inet(0x2, 0x2, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$AUDIT_GET_FEATURE(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x10001, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$TIOCSPTLCK(0xffffffffffffffff, 0x40045431, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x482, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(r0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$inet_tcp_TCP_REPAIR_WINDOW(r0, 0x6, 0x1d, &(0x7f0000000040)={0xa644, 0x7, 0x271, 0x53f, 0x7}, 0x14)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f0000000000)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+getsockopt$IP_SET_OP_GET_BYINDEX(r0, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+clock_adjtime(0x0, &(0x7f00000001c0)={0x80000000, 0xfffffffffffffffb, 0xff, 0x0, 0x1, 0x1a9, 0xb1, 0x0, 0x7fff, 0x7, 0x1, 0x6796, 0x0, 0x6, 0x6, 0xffff, 0xfffffffffffffff9, 0x9b, 0x6, 0xfffffffffffffffa, 0x3f64, 0x100000001, 0x7, 0x0, 0xffff, 0xf90a})
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+r2 = open$IOCTL_PRIVCMD_HYPERCALL40(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL40(r2, 0x305000, &(0x7f0000000180)={0x12, [0x1969, 0x0, 0xfc, 0x9]})
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL54(r1, 0x305000, &(0x7f0000000040)={0x2e, [0x1aae, 0xffffffff, 0x4fd, 0x7, 0x7fffffff]})
+setxattr$security_evm(&(0x7f0000000080)='./file0\x00', &(0x7f00000000c0)='security.evm\x00', &(0x7f0000000100)=@md5={0x1, "b6d9763f9c003942acafdff35343fb9a"}, 0x11, 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0xffffff5f, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8, 0x5, 0x1, 0x0, 0x2}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+getrlimit(0x0, 0x0)
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+fcntl$getflags(r1, 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+socket$nl_netfilter(0x10, 0x3, 0xc)
+socket$inet_tcp(0x2, 0x1, 0x0)
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fsetxattr$trusted_overlay_opaque(r0, &(0x7f00000000c0)='trusted.overlay.opaque\x00', &(0x7f0000000100)='y\x00', 0x2, 0x2)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+openat$cgroup_ro(r1, &(0x7f0000000080)='io.stat\x00', 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+setsockopt$SO_BINDTODEVICE(r3, 0x1, 0x19, &(0x7f0000000040)='veth1_to_hsr\x00', 0x33)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+ioctl$TIOCL_UNBLANKSCREEN(r0, 0x541c, &(0x7f0000000000))
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat(0xffffffffffffff9c, &(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+ioctl$TCSETSF(r0, 0x5404, &(0x7f0000000040)={0x800, 0x9a8, 0x3f, 0x5296, 0x1, "2f7ea4ad5d2f56bc0f6a68082fbd3a56c2c17f"})
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+ioctl$EVIOCGBITSW(r1, 0x80404525, &(0x7f0000000100)=""/24)
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+openat$cgroup_procs(r2, 0x0, 0x2, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+ioctl$sock_SIOCINQ(r3, 0x541b, &(0x7f0000000080))
+arch_prctl$ARCH_MAP_VDSO_64(0x2003, 0x9)
+openat$vcsa(0xffffffffffffff9c, &(0x7f00000000c0)='/dev/vcsa\x00', 0x200, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+r4 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL18421_4(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44(r5, 0x305000, &(0x7f00000003c0)={0x2c, [0x6, 0x80000000, 0x200, 0x3, 0x2]})
+setsockopt$IP_VS_SO_SET_ADD(r4, 0x0, 0x482, 0x0, 0x0)
+sendmsg$IPVS_CMD_FLUSH(r3, &(0x7f0000000300)={&(0x7f0000000240)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f00000002c0)={&(0x7f0000000280)={0x2c, 0x0, 0x10, 0x70bd25, 0x25dfdbff, {}, [@IPVS_CMD_ATTR_SERVICE={0x4}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8, 0x4, 0x4}, @IPVS_CMD_ATTR_SERVICE={0xc, 0x1, 0x0, 0x1, [@IPVS_SVC_ATTR_AF={0x6, 0x1, 0xa}]}]}, 0x2c}, 0x1, 0x0, 0x0, 0x40488c4}, 0x810)
+ioctl$EVIOCGUNIQ(r4, 0x80404508, &(0x7f00000000c0)=""/228)
+r6 = socket$nl_xfrm(0x10, 0x3, 0x6)
+ioctl$sock_inet_SIOCSIFADDR(r6, 0x8916, &(0x7f0000000340)={'netdevsim0\x00', {0x2, 0x4e24, @rand_addr=0x64010100}})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000080))
+r7 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r7, 0x0, 0x482, 0x0, 0x0)
+r8 = openat$cgroup_ro(r7, &(0x7f00000001c0)='rdma.current\x00', 0x0, 0x0)
+write$P9_RATTACH(r8, &(0x7f0000000200)={0x14, 0x69, 0x2, {0x8, 0x2, 0x8}}, 0x14)
+
+program did not crash
+bisect: didn't crash
+single: executing 1 programs separately with timeout 6m0s
+testing program (duration=6m0s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): creat-ioctl$sock_inet_SIOCDARP-open$IOCTL_PRIVCMD_HYPERCALL18421_5-creat-setsockopt$IP_VS_SO_SET_ADD-creat-setsockopt$IP_VS_SO_SET_ADD-creat-open$IOCTL_PRIVCMD_HYPERCALL18421_4-ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44-setsockopt$IP_VS_SO_SET_ADD-sendmsg$IPVS_CMD_FLUSH-ioctl$EVIOCGUNIQ-socket$nl_xfrm-ioctl$sock_inet_SIOCSIFADDR-ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51-creat-setsockopt$IP_VS_SO_SET_ADD-openat$cgroup_ro-write$P9_RATTACH
+detailed listing:
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+r4 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL18421_4(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44(r5, 0x305000, &(0x7f00000003c0)={0x2c, [0x6, 0x80000000, 0x200, 0x3, 0x2]})
+setsockopt$IP_VS_SO_SET_ADD(r4, 0x0, 0x482, 0x0, 0x0)
+sendmsg$IPVS_CMD_FLUSH(r3, &(0x7f0000000300)={&(0x7f0000000240)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f00000002c0)={&(0x7f0000000280)={0x2c, 0x0, 0x10, 0x70bd25, 0x25dfdbff, {}, [@IPVS_CMD_ATTR_SERVICE={0x4}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8, 0x4, 0x4}, @IPVS_CMD_ATTR_SERVICE={0xc, 0x1, 0x0, 0x1, [@IPVS_SVC_ATTR_AF={0x6, 0x1, 0xa}]}]}, 0x2c}, 0x1, 0x0, 0x0, 0x40488c4}, 0x810)
+ioctl$EVIOCGUNIQ(r4, 0x80404508, &(0x7f00000000c0)=""/228)
+r6 = socket$nl_xfrm(0x10, 0x3, 0x6)
+ioctl$sock_inet_SIOCSIFADDR(r6, 0x8916, &(0x7f0000000340)={'netdevsim0\x00', {0x2, 0x4e24, @rand_addr=0x64010100}})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000080))
+r7 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r7, 0x0, 0x482, 0x0, 0x0)
+r8 = openat$cgroup_ro(r7, &(0x7f00000001c0)='rdma.current\x00', 0x0, 0x0)
+write$P9_RATTACH(r8, &(0x7f0000000200)={0x14, 0x69, 0x2, {0x8, 0x2, 0x8}}, 0x14)
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 331 programs with base timeout 6m0s
+bisect: bisecting 331 programs
+bisect: executing all 331 programs
+testing program (duration=7m22s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [1, 1, 1, 2, 2, 2, 2, 4, 2, 2, 2, 4, 1, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 4, 1, 1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 21, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 4, 1, 2, 1, 1, 1, 2, 22, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 4, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 4, 21, 21, 21, 42, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 22, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 4, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 3, 2, 3, 9, 21, 16, 4, 15, 20]
+detailed listing:
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+lstat(&(0x7f0000001000)='./file0\x00', 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+prctl$PR_SET_MM_MAP(0x23, 0xe, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+executing program 0:
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+sendfile(0xffffffffffffffff, 0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+setsockopt$IP_VS_SO_SET_ADD(0xffffffffffffffff, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+getsockopt$IP_VS_SO_GET_VERSION(0xffffffffffffffff, 0x0, 0x480, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(r0, 0xc058534f, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r1, 0x8953, 0x0)
+executing program 0:
+socket$inet(0x2, 0x2, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+r0 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x0)
+openat$cgroup_procs(r0, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$batadv(0x0)
+executing program 0:
+ioctl$SNDRV_TIMER_IOCTL_START(0xffffffffffffffff, 0x54a0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x2)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+r1 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCSIFDSTADDR(0xffffffffffffffff, 0x8918, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+ioctl$TIOCSPTLCK(0xffffffffffffffff, 0x40045431, 0x0)
+executing program 0:
+listxattr(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+syz_read_part_table(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+pipe2(&(0x7f0000000f40)={0xffffffffffffffff, <r0=>0xffffffffffffffff}, 0x0)
+ioctl$VT_ACTIVATE(r0, 0x5606, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_ADD(0xffffffffffffffff, 0x4c80, 0x0)
+executing program 0:
+getrlimit(0xc, &(0x7f0000000f00))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', &(0x7f00000010c0), 0x24, 0x0)
+executing program 0:
+fcntl$setsig(0xffffffffffffffff, 0xa, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDELRT(0xffffffffffffffff, 0x890c, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$VT_SETMODE(r0, 0x5602, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+fcntl$setown(0xffffffffffffffff, 0x8, 0x0)
+executing program 0:
+syz_open_dev$vcsu(0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x7fff)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+syz_genetlink_get_family_id$nl80211(&(0x7f0000000140)='nl80211\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL50(0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, &(0x7f0000000480)=""/205)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDARP(0xffffffffffffffff, 0x8953, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(r0, 0x0, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL173502(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x10001, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(0xffffffffffffffff, 0x404c534a, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+executing program 0:
+lstat(0x0, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r1, 0x0, 0xffffffffffffffff)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={0x0}}, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={&(0x7f0000000000), 0xc, &(0x7f0000000080)={&(0x7f0000000040)={0x10, 0x3fb, 0x1, 0x70bd27, 0x25dfdbfd, "", ["", ""]}, 0x10}, 0x1, 0x0, 0x0, 0x10000080}, 0x4)
+r1 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r2 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r2, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d1c5c9879b40e01", 0x3c, r1}, 0x68)
+r3 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r3, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r4 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r5 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r4, 0x4c80, r5)
+r6 = openat$cgroup_procs(r4, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r6, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r7 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r8 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r7, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r8, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r6, r1, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(0xffffffffffffffff, 0xc058534f, 0x0)
+executing program 0:
+listxattr(&(0x7f0000000600)='./file0\x00', 0x0, 0x0)
+executing program 0:
+fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r0, 0x0, 0x0)
+executing program 0:
+ioctl$TCSETX(0xffffffffffffffff, 0x5433, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+pipe2(0x0, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$TCSETX(r0, 0x5433, 0x0)
+executing program 0:
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+executing program 0:
+setsockopt$inet_tcp_TCP_MD5SIG(0xffffffffffffffff, 0x6, 0xe, 0x0, 0x0)
+executing program 0:
+r0 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x0, 0x0)
+ioctl$sock_inet_SIOCGIFPFLAGS(r0, 0x8935, 0x0)
+executing program 0:
+ioctl$EVIOCGSW(0xffffffffffffffff, 0x8040451b, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x482, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000900))
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCGIFPFLAGS(0xffffffffffffffff, 0x8935, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$devlink(0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(r0, 0x0, 0x0)
+executing program 0:
+sendmsg$AUDIT_GET_FEATURE(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+creat(0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCSIFDSTADDR(r0, 0x8918, 0x0)
+executing program 0:
+ioctl$TIOCGPTPEER(0xffffffffffffffff, 0x5441, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+getrlimit(0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, 0x0, 0x0, 0x0)
+executing program 0:
+lstat(&(0x7f0000001000)='./file0\x00', 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40), 0x0)
+executing program 0:
+ioctl$SNDRV_TIMER_IOCTL_START(0xffffffffffffffff, 0x54a0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x0, 0x0)
+executing program 0:
+syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+executing program 0:
+sendmsg$BATADV_CMD_GET_GATEWAYS(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(r0, 0x404c534a, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(0xffffffffffffffff, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+executing program 0:
+ioctl$sock_inet_SIOCDARP(0xffffffffffffffff, 0x8953, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL173502(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$TCSETX(0xffffffffffffffff, 0x5433, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$TCSETX(r0, 0x5433, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+creat(0x0, 0x0)
+executing program 0:
+listxattr(0x0, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCSIFDSTADDR(0xffffffffffffffff, 0x8918, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x0)
+executing program 0:
+getrlimit(0xc, &(0x7f0000000f00))
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+openat(0xffffffffffffffff, 0x0, 0x0, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(0xffffffffffffffff, 0xc058534f, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, &(0x7f0000000dc0)={0x1})
+executing program 0:
+pipe2(0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+r1 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r1, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+socket$nl_audit(0x10, 0x3, 0x9)
+r8 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r8, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r9 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r9, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r8}, 0x68)
+r10 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r10, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r11 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r12 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r11, 0x4c80, r12)
+r13 = openat$cgroup_procs(r11, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r13, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r14 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r15 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r14, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r15, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r13, r8, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={0x0, 0x0, &(0x7f0000000080)={0x0}}, 0x0)
+executing program 0:
+r0 = socket$inet(0x2, 0x2, 0x0)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, 0x0, 0x0)
+executing program 0:
+ioctl$VT_ACTIVATE(0xffffffffffffffff, 0x5606, 0x0)
+executing program 0:
+syz_read_part_table(0x0, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+getsockopt$inet6_IPV6_FLOWLABEL_MGR(0xffffffffffffffff, 0x29, 0x20, 0x0, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x40)
+executing program 0:
+setsockopt$IP_VS_SO_SET_ADD(0xffffffffffffffff, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCGIFPFLAGS(0xffffffffffffffff, 0x8935, 0x0)
+executing program 0:
+r0 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r0, 0x0, 0x0)
+executing program 0:
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', 0x0, 0x0, 0x2)
+executing program 0:
+sysfs$2(0x2, 0x0, &(0x7f0000000480)=""/205)
+executing program 0:
+fcntl$dupfd(0xffffffffffffffff, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$nl80211(&(0x7f0000000140)='nl80211\x00')
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setxattr$system_posix_acl(&(0x7f0000000f80)='./file0\x00', &(0x7f0000000fc0)='system.posix_acl_default\x00', &(0x7f00000010c0), 0x24, 0x0)
+executing program 0:
+ioctl$sock_inet_SIOCDELRT(0xffffffffffffffff, 0x890c, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, 0x0, 0x0)
+executing program 0:
+syz_genetlink_get_family_id$batadv(0x0)
+executing program 0:
+ioctl$EVIOCGSW(0xffffffffffffffff, 0x8040451b, 0x0)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f00000000c0)={&(0x7f0000000000), 0xc, &(0x7f0000000080)={&(0x7f0000000040)={0x10, 0x3fb, 0x1, 0x70bd27, 0x25dfdbfd, "", ["", ""]}, 0x10}, 0x1, 0x0, 0x0, 0x10000080}, 0x4)
+r1 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r1, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r2 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r2, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0x4c, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d1c5c9879b40e01", 0x3c, r1}, 0x68)
+r3 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r3, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r4 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r5 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r4, 0x4c80, r5)
+r6 = openat$cgroup_procs(r4, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r6, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r7 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r8 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r7, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r8, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r6, r1, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+syz_genetlink_get_family_id$devlink(0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$BATADV_CMD_GET_GATEWAYS(r0, 0x0, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_QUERY_SUBS(r0, 0xc058534f, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL50(0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(0xffffffffffffffff, 0x404c534a, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x0, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+executing program 0:
+listxattr(&(0x7f0000000600)='./file0\x00', 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$VT_SETMODE(r0, 0x5602, 0x0)
+executing program 0:
+fcntl$setown(0xffffffffffffffff, 0x8, 0x0)
+executing program 0:
+ioctl$VT_SETMODE(0xffffffffffffffff, 0x5602, 0x0)
+executing program 0:
+ioctl$TIOCGPTPEER(0xffffffffffffffff, 0x5441, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x0)
+openat$cgroup_procs(r0, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+executing program 0:
+setsockopt$inet_tcp_TCP_MD5SIG(0xffffffffffffffff, 0x6, 0xe, 0x0, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(0xffffffffffffffff, 0xc08c5336, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$SNDRV_SEQ_IOCTL_SET_QUEUE_CLIENT(r0, 0x404c534a, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+pipe2(&(0x7f0000000f40)={0xffffffffffffffff, <r0=>0xffffffffffffffff}, 0x0)
+ioctl$VT_ACTIVATE(r0, 0x5606, 0x0)
+executing program 0:
+socket$inet(0x2, 0x0, 0x7fff)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+fcntl$setsig(0xffffffffffffffff, 0xa, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+sendfile(0xffffffffffffffff, 0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+ioctl$LOOP_CTL_ADD(0xffffffffffffffff, 0x4c80, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+lstat(0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+getsockopt$IP_VS_SO_GET_VERSION(0xffffffffffffffff, 0x0, 0x480, 0x0, 0x0)
+executing program 0:
+prctl$PR_SET_MM_MAP(0x23, 0xe, 0x0, 0x0)
+executing program 0:
+syz_open_procfs(0xffffffffffffffff, 0x0)
+executing program 0:
+syz_open_dev$vcsu(0x0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCSIFDSTADDR(r0, 0x8918, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$KDDISABIO(0xffffffffffffffff, 0x4b37)
+executing program 0:
+r0 = openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x0, 0x0)
+ioctl$sock_inet_SIOCGIFPFLAGS(r0, 0x8935, 0x0)
+executing program 0:
+socket$inet(0x2, 0x2, 0x0)
+executing program 0:
+sendmsg$DEVLINK_CMD_GET(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$NFNL_MSG_ACCT_NEW(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+sendmsg$AUDIT_GET_FEATURE(0xffffffffffffffff, 0x0, 0x0)
+executing program 0:
+creat(&(0x7f0000000000)='./file0\x00', 0x0)
+lstat(&(0x7f0000001000)='./file0\x00', &(0x7f0000001040))
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+executing program 0:
+sysfs$2(0x2, 0x10001, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$TIOCSPTLCK(0xffffffffffffffff, 0x40045431, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r0, 0x305000, 0x0)
+executing program 0:
+openat$vga_arbiter(0xffffffffffffff9c, &(0x7f0000000e80)='/dev/vga_arbiter\x00', 0x482, 0x0)
+executing program 0:
+setxattr$system_posix_acl(0x0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+getrlimit(0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+sendmsg$NL80211_CMD_STOP_SCHED_SCAN(r0, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$inet_tcp_TCP_REPAIR_WINDOW(r0, 0x6, 0x1d, &(0x7f0000000040)={0xa644, 0x7, 0x271, 0x53f, 0x7}, 0x14)
+fcntl$dupfd(r0, 0x0, 0xffffffffffffffff)
+executing program 0:
+r0 = socket$nl_audit(0x10, 0x3, 0x9)
+sendmsg$AUDIT_GET_FEATURE(r0, &(0x7f0000000000)={0x0, 0x0, &(0x7f0000000080)={&(0x7f0000000040)={0x10}, 0x10}}, 0x4)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+getsockopt$IP_SET_OP_GET_BYINDEX(r0, 0x1, 0x53, 0x0, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+clock_adjtime(0x0, &(0x7f00000001c0)={0x80000000, 0xfffffffffffffffb, 0xff, 0x0, 0x1, 0x1a9, 0xb1, 0x0, 0x7fff, 0x7, 0x1, 0x6796, 0x0, 0x6, 0x6, 0xffff, 0xfffffffffffffff9, 0x9b, 0x6, 0xfffffffffffffffa, 0x3f64, 0x100000001, 0x7, 0x0, 0xffff, 0xf90a})
+r1 = open$IOCTL_PRIVCMD_HYPERCALL50(&(0x7f0000000d80)='/proc/xen/privcmd\x00')
+r2 = open$IOCTL_PRIVCMD_HYPERCALL40(&(0x7f0000000140)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL40(r2, 0x305000, &(0x7f0000000180)={0x12, [0x1969, 0x0, 0xfc, 0x9]})
+ioctl$IOCTL_PRIVCMD_HYPERCALL51(r1, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL54(r1, 0x305000, &(0x7f0000000040)={0x2e, [0x1aae, 0xffffffff, 0x4fd, 0x7, 0x7fffffff]})
+setxattr$security_evm(&(0x7f0000000080)='./file0\x00', &(0x7f00000000c0)='security.evm\x00', &(0x7f0000000100)=@md5={0x1, "b6d9763f9c003942acafdff35343fb9a"}, 0x11, 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+executing program 0:
+socket$nl_audit(0x10, 0x3, 0x9)
+r0 = socket$inet(0x2, 0x2, 0x7fff)
+setsockopt$inet_tcp_TCP_QUEUE_SEQ(r0, 0x6, 0x15, &(0x7f0000000100)=0x6, 0x4)
+r1 = syz_open_procfs(0xffffffffffffffff, &(0x7f0000000140)='attr/exec\x00')
+sendmsg$NFNL_MSG_ACCT_NEW(r1, &(0x7f0000000280)={&(0x7f0000000180)={0x10, 0x0, 0x0, 0x40000}, 0xc, &(0x7f0000000240)={&(0x7f00000001c0)={0xffffff5f, 0x0, 0x7, 0x3, 0x0, 0x0, {0xc, 0x0, 0x5}, [@NFACCT_FLAGS={0x8, 0x5, 0x1, 0x0, 0x2}, @NFACCT_BYTES={0xc}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x4}, @NFACCT_PKTS={0xc, 0x2, 0x1, 0x0, 0x73}, @NFACCT_QUOTA={0xc, 0x6, 0x1, 0x0, 0x5}]}, 0x4c}, 0x1, 0x0, 0x0, 0x4008041}, 0x8000)
+prctl$PR_SET_MM_MAP(0x23, 0xe, &(0x7f0000000300)={&(0x7f0000ffd000/0x2000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000fff000/0x1000)=nil, &(0x7f0000ff3000/0xd000)=nil, &(0x7f0000ffe000/0x2000)=nil, &(0x7f0000ff0000/0x10000)=nil, &(0x7f0000ff5000/0x2000)=nil, &(0x7f0000ffd000/0x3000)=nil, &(0x7f0000ffb000/0x2000)=nil, &(0x7f0000ff9000/0x4000)=nil, &(0x7f0000fef000/0x4000)=nil, &(0x7f00000002c0)="d2082dff425b7d5ff2ba5422991a53a98c71e143dd9bcfa95e86376fa2ad27516699d3572949c48130fb100027a595d42bd2783f8d", 0x35, r0}, 0x68)
+r2 = openat$xenevtchn(0xffffffffffffff9c, &(0x7f0000000380)='/dev/xen/evtchn\x00', 0x202800, 0x0)
+ioctl$SNDRV_SEQ_IOCTL_GET_NAMED_QUEUE(r2, 0xc08c5336, &(0x7f00000003c0)={0xfff, 0x3, 0x0, 'queue1\x00', 0x1})
+socket$inet_icmp_raw(0x2, 0x3, 0x1)
+r3 = syz_open_dev$vcsu(&(0x7f0000000480)='/dev/vcsu#\x00', 0x400, 0x200180)
+r4 = ioctl$LOOP_CTL_GET_FREE(0xffffffffffffffff, 0x4c82)
+ioctl$LOOP_CTL_ADD(r3, 0x4c80, r4)
+r5 = openat$cgroup_procs(r3, &(0x7f00000004c0)='cgroup.threads\x00', 0x2, 0x0)
+fcntl$setsig(r5, 0xa, 0x1c)
+getsockopt$IP_SET_OP_GET_BYINDEX(0xffffffffffffffff, 0x1, 0x53, &(0x7f0000000500)={0x7, 0x7, 0x1}, &(0x7f0000000540)=0x28)
+r6 = openat(0xffffffffffffffff, &(0x7f0000000580)='./file0\x00', 0x200840, 0xeb)
+r7 = syz_genetlink_get_family_id$devlink(&(0x7f0000000600)='devlink\x00')
+sendmsg$DEVLINK_CMD_GET(r6, &(0x7f0000000780)={&(0x7f00000005c0)={0x10, 0x0, 0x0, 0x800}, 0xc, &(0x7f0000000740)={&(0x7f0000000640)={0xc8, r7, 0x10, 0x70bd2b, 0x25dfdbfe, {}, [@nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @pci={{0x8, 0x1, 'pci\x00'}, {0x11, 0x2, '0000:00:10.0\x00'}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}, @nsim={{0xe, 0x1, 'netdevsim\x00'}, {0xf, 0x2, {'netdevsim', 0x0}}}]}, 0xc8}, 0x1, 0x0, 0x0, 0x20000800}, 0x80)
+sendfile(r5, r0, &(0x7f00000007c0)=0x8001, 0x9)
+lsetxattr$trusted_overlay_nlink(&(0x7f0000000800)='./file0\x00', &(0x7f0000000840)='trusted.overlay.nlink\x00', &(0x7f0000000880)={'L-', 0x9}, 0x16, 0x0)
+syz_open_procfs(0x0, &(0x7f00000008c0)='net/sctp\x00')
+executing program 0:
+getrlimit(0x0, 0x0)
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+fcntl$getflags(r1, 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+socket$nl_netfilter(0x10, 0x3, 0xc)
+socket$inet_tcp(0x2, 0x1, 0x0)
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+fsetxattr$trusted_overlay_opaque(r0, &(0x7f00000000c0)='trusted.overlay.opaque\x00', &(0x7f0000000100)='y\x00', 0x2, 0x2)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+openat$cgroup_ro(r1, &(0x7f0000000080)='io.stat\x00', 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+setsockopt$SO_BINDTODEVICE(r3, 0x1, 0x19, &(0x7f0000000040)='veth1_to_hsr\x00', 0x33)
+ioctl$BLKTRACESTOP(r0, 0x1275, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+ioctl$TIOCL_UNBLANKSCREEN(r0, 0x541c, &(0x7f0000000000))
+openat$cgroup_procs(0xffffffffffffffff, 0x0, 0x2, 0x0)
+executing program 0:
+openat(0xffffffffffffff9c, &(0x7f0000000000)='./file0\x00', 0x0, 0x0)
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r0, 0x0, 0x482, 0x0, 0x0)
+ioctl$TCSETSF(r0, 0x5404, &(0x7f0000000040)={0x800, 0x9a8, 0x3f, 0x5296, 0x1, "2f7ea4ad5d2f56bc0f6a68082fbd3a56c2c17f"})
+r1 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r1, 0x0, 0x482, 0x0, 0x0)
+ioctl$EVIOCGBITSW(r1, 0x80404525, &(0x7f0000000100)=""/24)
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+openat$cgroup_procs(r2, 0x0, 0x2, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+ioctl$sock_SIOCINQ(r3, 0x541b, &(0x7f0000000080))
+arch_prctl$ARCH_MAP_VDSO_64(0x2003, 0x9)
+openat$vcsa(0xffffffffffffff9c, &(0x7f00000000c0)='/dev/vcsa\x00', 0x200, 0x0)
+executing program 0:
+r0 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+ioctl$sock_inet_SIOCDARP(r0, 0x8953, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f0000000040)='/proc/xen/privcmd\x00')
+r2 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r2, 0x0, 0x482, 0x0, 0x0)
+r3 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r3, 0x0, 0x482, 0x0, 0x0)
+r4 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+r5 = open$IOCTL_PRIVCMD_HYPERCALL18421_4(&(0x7f0000000380)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_44(r5, 0x305000, &(0x7f00000003c0)={0x2c, [0x6, 0x80000000, 0x200, 0x3, 0x2]})
+setsockopt$IP_VS_SO_SET_ADD(r4, 0x0, 0x482, 0x0, 0x0)
+sendmsg$IPVS_CMD_FLUSH(r3, &(0x7f0000000300)={&(0x7f0000000240)={0x10, 0x0, 0x0, 0x20}, 0xc, &(0x7f00000002c0)={&(0x7f0000000280)={0x2c, 0x0, 0x10, 0x70bd25, 0x25dfdbff, {}, [@IPVS_CMD_ATTR_SERVICE={0x4}, @IPVS_CMD_ATTR_TIMEOUT_TCP={0x8, 0x4, 0x4}, @IPVS_CMD_ATTR_SERVICE={0xc, 0x1, 0x0, 0x1, [@IPVS_SVC_ATTR_AF={0x6, 0x1, 0xa}]}]}, 0x2c}, 0x1, 0x0, 0x0, 0x40488c4}, 0x810)
+ioctl$EVIOCGUNIQ(r4, 0x80404508, &(0x7f00000000c0)=""/228)
+r6 = socket$nl_xfrm(0x10, 0x3, 0x6)
+ioctl$sock_inet_SIOCSIFADDR(r6, 0x8916, &(0x7f0000000340)={'netdevsim0\x00', {0x2, 0x4e24, @rand_addr=0x64010100}})
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000080))
+r7 = creat(&(0x7f0000000000)='./file0\x00', 0x0)
+setsockopt$IP_VS_SO_SET_ADD(r7, 0x0, 0x482, 0x0, 0x0)
+r8 = openat$cgroup_ro(r7, &(0x7f00000001c0)='rdma.current\x00', 0x0, 0x0)
+write$P9_RATTACH(r8, &(0x7f0000000200)={0x14, 0x69, 0x2, {0x8, 0x2, 0x8}}, 0x14)
+
+program did not crash
+bisect: didn't crash
+failed to extract reproducer
+reproducing took 5m58.178753525s

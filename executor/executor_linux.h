@@ -91,33 +91,33 @@ static void cover_open(cover_t *cov, bool extra) {
     FILE *tmpfs = fopen("/dev/cov", "a+");
     fclose(tmpfs);
   }
-  
-  fd = open("/dev/cov", O_RDWR); 
+
+  fd = open("/dev/cov", O_RDWR);
   if (dup2(fd, cov->fd) < 0)
     fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
-  close(fd); 
+  close(fd);
   debug("234\n");
-  cover_size = 640000; 
-  if (system("/root/cov")) 
+  cover_size = 640000;
+  if (system("/root/cov"))
     fail("cover init trace write failed");
   debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
-  mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);  
+  mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
   // FILE *fp;
   // fp = fopen("/dev/cov", "w+");
   // fseek(fp, 0, SEEK_SET);
-  // // int filesize = ftell(fp); 
+  // // int filesize = ftell(fp);
   // // cov->data = (char*)malloc(filesize*sizeof(int));
   // // if(fread(cov->data,filesize+1, 1, fp))
   // fclose(fp);
-  
+
   cov->data = (int *)mmap(NULL, (cover_size), PROT_READ | PROT_WRITE,
-                           MAP_SHARED, cov->fd, 0);
-  for(int i = 0; i < 1000; ++i)
-    debug("%d\t", cov->data[i]); 
+                          MAP_SHARED, cov->fd, 0);
+  for (int i = 0; i < 1000; ++i)
+    debug("%d\t", cov->data[i]);
   if (cov->data == MAP_FAILED)
     fail("cover mmap failed");
   cov->data_end = cov->data + cover_size;
-  debug("Rrooach: executor_linux 107 size = %d \n", cov->size ); 
+  debug("Rrooach: executor_linux 107 size = %d \n", cov->size);
 }
 
 static void cover_protect(cover_t *cov) {}
@@ -174,13 +174,13 @@ static void cover_reset(cover_t *cov) {
 
 static void cover_collect(cover_t *cov) {
   FILE *fp;
-	int filesize;
-	if ((fp=fopen("/dev/cov","r"))==NULL){
-		debug("coverage file not exist\n"); 
-	} 
-	fseek(fp,0,SEEK_END);  
-	filesize = ftell(fp); 
-  cov->size = filesize/32;
+  int filesize;
+  if ((fp = fopen("/dev/cov", "r")) == NULL) {
+    debug("coverage file not exist\n");
+  }
+  fseek(fp, 0, SEEK_END);
+  filesize = ftell(fp);
+  cov->size = filesize / 32;
   debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 

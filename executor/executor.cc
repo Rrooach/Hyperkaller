@@ -875,24 +875,24 @@ void write_coverage_signal(cover_t *cov, uint32 *signal_count_pos,
   // Write out feedback signals.
   // Currently it is code edges computed as xor of two subsequent basic block
   // PCs.
-  int *cover_data = ((int *)cov->data); 
-	uint32 nsig = 0;
-	uint32 prev = 0;
+  int *cover_data = ((int *)cov->data);
+  uint32 nsig = 0;
+  uint32 prev = 0;
   debug("Rrooach: 881\n\n");
   // uint32 cov_len = /sizeof(cov->data)/sizeof(cov->data[0]);
-	for (uint32 i = 0; i < cov->size/*cov_len-10*/; i++) { 
-		uint32 pc = cover_data[i];
-		if (!cover_check(pc)) {
-			debug("got bad pc: 0x%llx\n", (uint64)pc);
-			doexit(0);
-		}
-		uint32 sig = pc ^ prev;
-		prev = hash(pc);
-		if (dedup(sig))
-			continue;
-		write_output(sig);
-		nsig++;
-	}    
+  for (uint32 i = 0; i < cov->size /*cov_len-10*/; i++) {
+    uint32 pc = cover_data[i];
+    if (!cover_check(pc)) {
+      debug("got bad pc: 0x%llx\n", (uint64)pc);
+      doexit(0);
+    }
+    uint32 sig = pc ^ prev;
+    prev = hash(pc);
+    if (dedup(sig))
+      continue;
+    write_output(sig);
+    nsig++;
+  }
   // Write out number of signals.
   *signal_count_pos = nsig;
 
@@ -901,7 +901,7 @@ void write_coverage_signal(cover_t *cov, uint32 *signal_count_pos,
   // Write out real coverage (basic block PCs).
   uint32 cover_size = cov->size;
   if (flag_dedup_cover) {
-    int* end = cover_data + cover_size;
+    int *end = cover_data + cover_size;
     cover_unprotect(cov);
     std::sort(cover_data, end);
     cover_size = std::unique(cover_data, end) - cover_data;
@@ -1000,7 +1000,7 @@ void write_call_output(thread_t *th, bool finished) {
     uint32 ncomps = th->cov.size;
     kcov_comparison_t *start =
         (kcov_comparison_t *)(th->cov.data); /* + sizeof(uint64) */
-    kcov_comparison_t *end = start + ncomps; 
+    kcov_comparison_t *end = start + ncomps;
     if ((int *)end > th->cov.data_end)
       fail("too many comparisons %u", ncomps);
     cover_unprotect(&th->cov);
@@ -1427,8 +1427,8 @@ bool kcov_comparison_t::ignore() const {
   return false;
 }
 
-bool kcov_comparison_t::operator==(
-    const struct kcov_comparison_t &other) const {
+bool kcov_comparison_t::
+operator==(const struct kcov_comparison_t &other) const {
   // We don't check for PC equality now, because it is not used.
   return type == other.type && arg1 == other.arg1 && arg2 == other.arg2;
 }
