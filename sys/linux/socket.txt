@@ -181,11 +181,11 @@ cmsghdr {
 	cmsg_level	flags[cmsg_levels, int32]
 	cmsg_type	int32
 	data		array[int8]
-} [align[PTR_SIZE]]
+} [align_ptr]
 
 type cmsghdr_t[SOL, TYP, DATA] {
 	unaligned	cmsghdr_unaligned[SOL, TYP, DATA]
-} [align[PTR_SIZE]]
+} [align_ptr]
 
 type cmsghdr_unaligned[SOL, TYP, DATA] {
 	cmsg_len	len[parent, intptr]

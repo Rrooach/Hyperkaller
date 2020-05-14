@@ -24,6 +24,7 @@ func InitTarget(target *prog.Target) {
 		FIFREEZE:                    target.GetConst("FIFREEZE"),
 		FITHAW:                      target.GetConst("FITHAW"),
 		SNAPSHOT_FREEZE:             target.GetConst("SNAPSHOT_FREEZE"),
+		SNAPSHOT_UNFREEZE:           target.GetConst("SNAPSHOT_UNFREEZE"),
 		EXT4_IOC_SHUTDOWN:           target.GetConst("EXT4_IOC_SHUTDOWN"),
 		EXT4_IOC_RESIZE_FS:          target.GetConst("EXT4_IOC_RESIZE_FS"),
 		EXT4_IOC_MIGRATE:            target.GetConst("EXT4_IOC_MIGRATE"),
@@ -47,9 +48,9 @@ func InitTarget(target *prog.Target) {
 		ARCH_SET_GS: target.ConstMap["ARCH_SET_GS"],
 	}
 
-	target.MakeDataMmap = targets.MakePosixMmap(target, true, true)
+	target.MakeMmap = targets.MakePosixMmap(target)
 	target.Neutralize = arch.neutralize
-	target.SpecialTypes = map[string]func(g *prog.Gen, typ prog.Type, dir prog.Dir, old prog.Arg) (
+	target.SpecialTypes = map[string]func(g *prog.Gen, typ prog.Type, old prog.Arg) (
 		prog.Arg, []*prog.Call){
 		"timespec":                  arch.generateTimespec,
 		"timeval":                   arch.generateTimespec,
@@ -131,6 +132,7 @@ type arch struct {
 	FIFREEZE                    uint64
 	FITHAW                      uint64
 	SNAPSHOT_FREEZE             uint64
+	SNAPSHOT_UNFREEZE           uint64
 	EXT4_IOC_SHUTDOWN           uint64
 	EXT4_IOC_RESIZE_FS          uint64
 	EXT4_IOC_MIGRATE            uint64
@@ -250,7 +252,7 @@ func (arch *arch) neutralizeIoctl(c *prog.Call) {
 		cmd.Val = arch.FITHAW
 	case arch.SNAPSHOT_FREEZE:
 		// SNAPSHOT_FREEZE freezes all processes and leaves the machine dead.
-		cmd.Val = arch.FITHAW
+		cmd.Val = arch.SNAPSHOT_UNFREEZE
 	case arch.EXT4_IOC_SHUTDOWN:
 		// EXT4_IOC_SHUTDOWN on root fs effectively brings the machine down in weird ways.
 		// Fortunately, the value does not conflict with any other ioctl commands for now.
@@ -274,72 +276,67 @@ func (arch *arch) neutralizeIoctl(c *prog.Call) {
 	}
 }
 
-func (arch *arch) generateTimespec(g *prog.Gen, typ0 prog.Type, dir prog.Dir, old prog.Arg) (
-	arg prog.Arg, calls []*prog.Call) {
+func (arch *arch) generateTimespec(g *prog.Gen, typ0 prog.Type, old prog.Arg) (arg prog.Arg, calls []*prog.Call) {
 	typ := typ0.(*prog.StructType)
 	// We need to generate timespec/timeval that are either
 	// (1) definitely in the past, or
 	// (2) definitely in unreachable fututre, or
 	// (3) few ms ahead of now.
 	// Note: timespec/timeval can be absolute or relative to now.
-	// Note: executor has blocking syscall timeout of 45 ms,
-	// so we generate both 10ms and 60ms.
-	const (
-		timeout1 = uint64(10)
-		timeout2 = uint64(60)
-	)
+	// Note: executor has blocking syscall timeout of 20ms,
+	// so we generate both 10ms and 30ms.
 	usec := typ.Name() == "timeval"
 	switch {
 	case g.NOutOf(1, 4):
 		// Now for relative, past for absolute.
-		arg = prog.MakeGroupArg(typ, dir, []prog.Arg{
-			prog.MakeResultArg(typ.Fields[0].Type, dir, nil, 0),
-			prog.MakeResultArg(typ.Fields[1].Type, dir, nil, 0),
+		arg = prog.MakeGroupArg(typ, []prog.Arg{
+			prog.MakeResultArg(typ.Fields[0], nil, 0),
+			prog.MakeResultArg(typ.Fields[1], nil, 0),
 		})
 	case g.NOutOf(1, 3):
 		// Few ms ahead for relative, past for absolute
-		nsec := timeout1 * 1e6
+		nsec := uint64(10 * 1e6)
 		if g.NOutOf(1, 2) {
-			nsec = timeout2 * 1e6
+			nsec = 30 * 1e6
 		}
 		if usec {
 			nsec /= 1e3
 		}
-		arg = prog.MakeGroupArg(typ, dir, []prog.Arg{
-			prog.MakeResultArg(typ.Fields[0].Type, dir, nil, 0),
-			prog.MakeResultArg(typ.Fields[1].Type, dir, nil, nsec),
+		arg = prog.MakeGroupArg(typ, []prog.Arg{
+			prog.MakeResultArg(typ.Fields[0], nil, 0),
+			prog.MakeResultArg(typ.Fields[1], nil, nsec),
 		})
 	case g.NOutOf(1, 2):
 		// Unreachable fututre for both relative and absolute
-		arg = prog.MakeGroupArg(typ, dir, []prog.Arg{
-			prog.MakeResultArg(typ.Fields[0].Type, dir, nil, 2e9),
-			prog.MakeResultArg(typ.Fields[1].Type, dir, nil, 0),
+		arg = prog.MakeGroupArg(typ, []prog.Arg{
+			prog.MakeResultArg(typ.Fields[0], nil, 2e9),
+			prog.MakeResultArg(typ.Fields[1], nil, 0),
 		})
 	default:
 		// Few ms ahead for absolute.
 		meta := arch.clockGettimeSyscall
-		ptrArgType := meta.Args[1].Type.(*prog.PtrType)
-		argType := ptrArgType.Elem.(*prog.StructType)
-		tp := prog.MakeGroupArg(argType, prog.DirOut, []prog.Arg{
-			prog.MakeResultArg(argType.Fields[0].Type, prog.DirOut, nil, 0),
-			prog.MakeResultArg(argType.Fields[1].Type, prog.DirOut, nil, 0),
+		ptrArgType := meta.Args[1].(*prog.PtrType)
+		argType := ptrArgType.Type.(*prog.StructType)
+		tp := prog.MakeGroupArg(argType, []prog.Arg{
+			prog.MakeResultArg(argType.Fields[0], nil, 0),
+			prog.MakeResultArg(argType.Fields[1], nil, 0),
 		})
 		var tpaddr prog.Arg
-		tpaddr, calls = g.Alloc(ptrArgType, prog.DirIn, tp)
+		tpaddr, calls = g.Alloc(ptrArgType, tp)
 		gettime := &prog.Call{
 			Meta: meta,
 			Args: []prog.Arg{
-				prog.MakeConstArg(meta.Args[0].Type, prog.DirIn, arch.CLOCK_REALTIME),
+				prog.MakeConstArg(meta.Args[0], arch.CLOCK_REALTIME),
 				tpaddr,
 			},
 			Ret: prog.MakeReturnArg(meta.Ret),
 		}
 		calls = append(calls, gettime)
-		sec := prog.MakeResultArg(typ.Fields[0].Type, dir, tp.Inner[0].(*prog.ResultArg), 0)
-		nsec := prog.MakeResultArg(typ.Fields[1].Type, dir, tp.Inner[1].(*prog.ResultArg), 0)
-		msec := timeout1
+		sec := prog.MakeResultArg(typ.Fields[0], tp.Inner[0].(*prog.ResultArg), 0)
+		nsec := prog.MakeResultArg(typ.Fields[1], tp.Inner[1].(*prog.ResultArg), 0)
+		msec := uint64(10)
 		if g.NOutOf(1, 2) {
-			msec = timeout2
+			msec = 30
 		}
 		if usec {
 			nsec.OpDiv = 1e3
@@ -347,7 +344,7 @@ func (arch *arch) generateTimespec(g *prog.Gen, typ0 prog.Type, dir prog.Dir, ol
 		} else {
 			nsec.OpAdd = msec * 1e6
 		}
-		arg = prog.MakeGroupArg(typ, dir, []prog.Arg{sec, nsec})
+		arg = prog.MakeGroupArg(typ, []prog.Arg{sec, nsec})
 	}
 	return
 }

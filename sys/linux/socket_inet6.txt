@@ -23,7 +23,7 @@ sockaddr_in6 {
 
 sockaddr_storage_in6 {
 	addr	sockaddr_in6
-} [size[SOCKADDR_STORAGE_SIZE], align[PTR_SIZE]]
+} [size[SOCKADDR_STORAGE_SIZE], align_ptr]
 
 socket$inet6(domain const[AF_INET6], type flags[socket_type], proto int32) sock_in6
 accept$inet6(fd sock_in6, peer ptr[out, sockaddr_in6, opt], peerlen ptr[inout, len[peer, int32]]) sock_in6
@@ -81,11 +81,8 @@ setsockopt$inet6_group_source_req(fd sock_in6, level const[IPPROTO_IPV6], optnam
 setsockopt$inet6_MCAST_MSFILTER(fd sock_in6, level const[IPPROTO_IPV6], optname const[MCAST_MSFILTER], optval ptr[in, group_filter_in6], optlen len[optval])
 
 setsockopt$inet6_IPV6_PKTINFO(fd sock_in6, level const[IPPROTO_IPV6], optname const[IPV6_PKTINFO], optval ptr[in, in6_pktinfo], optlen len[optval])
-setsockopt$inet6_IPV6_HOPOPTS(fd sock_in6, level const[IPPROTO_IPV6], optname const[IPV6_HOPOPTS], optval ptr[in, ipv6_hopopts_ext_header], optlen len[optval])
-setsockopt$inet6_IPV6_RTHDR(fd sock_in6, level const[IPPROTO_IPV6], optname const[IPV6_RTHDR], optval ptr[in, ipv6_rt_hdr], optlen len[optval])
-setsockopt$inet6_IPV6_RTHDRDSTOPTS(fd sock_in6, level const[IPPROTO_IPV6], optname const[IPV6_RTHDRDSTOPTS], optval ptr[in, ipv6_dstopts_ext_header], optlen len[optval])
-setsockopt$inet6_IPV6_DSTOPTS(fd sock_in6, level const[IPPROTO_IPV6], optname const[IPV6_DSTOPTS], optval ptr[in, ipv6_dstopts_ext_header], optlen len[optval])
 
+# TODO: IPV6_HOPOPTS, IPV6_RTHDRDSTOPTS, IPV6_RTHDR, IPV6_DSTOPTS
 # TODO: IPV6_PATHMTU
 # TODO: IP6T_SO_GET_REVISION_MATCH, IP6T_SO_GET_REVISION_TARGET
 
@@ -213,8 +210,8 @@ mmsghdr_inet6 {
 cmsghdr_inet6 [
 	pktinfo		cmsghdr_t[SOL_IPV6, IPV6_PKTINFO, in6_pktinfo]
 	flowinfo	cmsghdr_t[SOL_IPV6, IPV6_FLOWINFO, int32be]
-	hopopts_2292	cmsghdr_t[SOL_IPV6, IPV6_HOPOPTS, ipv6_hopopts_ext_header]
-	hopopts		cmsghdr_t[SOL_IPV6, IPV6_HOPOPTS, ipv6_hopopts_ext_header]
+	hopopts_2292	cmsghdr_t[SOL_IPV6, IPV6_HOPOPTS, ipv6_hopots_ext_header]
+	hopopts		cmsghdr_t[SOL_IPV6, IPV6_HOPOPTS, ipv6_hopots_ext_header]
 	dstopts_2292	cmsghdr_t[SOL_IPV6, IPV6_2292DSTOPTS, ipv6_dstopts_ext_header]
 	dstopts		cmsghdr_t[SOL_IPV6, IPV6_RTHDRDSTOPTS, ipv6_dstopts_ext_header]
 	rthdrdstopts	cmsghdr_t[SOL_IPV6, IPV6_RTHDRDSTOPTS, ipv6_dstopts_ext_header]
