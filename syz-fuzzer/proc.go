@@ -6,13 +6,16 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"math/rand"
 	"os"
+	"os/exec"
 	"runtime/debug"
 	"sync/atomic"
 	"syscall"
 	"time"
 
+	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
 	"github.com/google/syzkaller/pkg/ipc"
@@ -62,6 +65,27 @@ func newProc(fuzzer *Fuzzer, pid int) (*Proc, error) {
 	}
 	return proc, nil
 }
+func cat(fname string) {
+	fh, err := os.Open(fname)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = io.Copy(os.Stdout, fh)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
+
+var report_flag = 0
 
 func (proc *Proc) loop() {
 	generatePeriod := 100
@@ -71,6 +95,36 @@ func (proc *Proc) loop() {
 		generatePeriod = 2
 	}
 	for i := 0; ; i++ {
+		/*********************************************/
+		//modifyed by sule
+		log.Logf(0, "--------------------")
+		log.Logf(0, "getting cover")
+		faultfuzzer.Get_cover()
+		if report_flag == 1 {
+			log.Logf(0, "--------------------")
+			log.Logf(0, "get report")
+			err_info := ecmd("~/error_report")
+			fmt.Printf("%v", err_info)
+		}
+		if report_flag == 0 {
+			report_flag = 1
+		}
+		ecmd("~/trigger")
+		log.Logf(0, "--------------------")
+		log.Logf(0, "setting fault")
+		fv := faultfuzzer.Set_fault()
+
+		fuzzerSnapshot := proc.fuzzer.snapshot()
+		if len(fuzzerSnapshot.corpus) != 0 {
+			if fv == 0 {
+				p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
+				log.Logf(1, "#%v: keep for fault", proc.pid)
+				proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
+				continue
+			}
+		}
+
+		/*********************************************/
 		item := proc.fuzzer.workQueue.dequeue()
 		if item != nil {
 			switch item := item.(type) {
@@ -87,7 +141,6 @@ func (proc *Proc) loop() {
 		}
 
 		ct := proc.fuzzer.choiceTable
-		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) == 0 || i%generatePeriod == 0 {
 			// Generate a new prog.
 			p := proc.fuzzer.target.Generate(proc.rnd, programLength, ct)
