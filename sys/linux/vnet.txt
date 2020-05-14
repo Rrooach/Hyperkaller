@@ -14,8 +14,6 @@ vnet_fragmentation {
 	frags	array[int32[0:4096], 4]
 }
 
-hop_limits = 0, 1, 255
-
 resource tcp_seq_num[int32]: 0x41424344
 
 tcp_resources {
@@ -412,7 +410,7 @@ ipv4_option_ra {
 
 ipv4_options {
 	options	array[ipv4_option]
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv4_types = IPPROTO_IP, IPPROTO_ICMP, IPPROTO_IGMP, IPPROTO_IPIP, IPPROTO_TCP, IPPROTO_EGP, IPPROTO_PUP, IPPROTO_UDP, IPPROTO_IDP, IPPROTO_TP, IPPROTO_DCCP, IPPROTO_IPV6, IPPROTO_RSVP, IPPROTO_GRE, IPPROTO_ESP, IPPROTO_AH, IPPROTO_MTP, IPPROTO_BEETPH, IPPROTO_ENCAP, IPPROTO_PIM, IPPROTO_COMP, IPPROTO_SCTP, IPPROTO_UDPLITE, IPPROTO_MPLS, IPPROTO_RAW, IPPROTO_L2TP
 
@@ -469,14 +467,14 @@ ipv6_types = IPPROTO_IP, IPPROTO_ICMP, IPPROTO_IGMP, IPPROTO_IPIP, IPPROTO_TCP, 
 
 ipv6_addr_empty {
 	a0	array[const[0x0, int8], 16]
-} [packed, align[4]]
+} [packed, align_4]
 
 type ipv6_addr_t[LAST] {
 	a0	const[0xfe, int8]
 	a1	const[0x80, int8]
 	a2	array[const[0x0, int8], 13]
 	a3	LAST
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_initdev {
 	a0	const[0xfe, int8]
@@ -484,39 +482,39 @@ ipv6_addr_initdev {
 	a2	array[const[0x0, int8], 12]
 	a3	int8[0:1]
 	a4	proc[1, 1, int8]
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_loopback {
 	a0	const[0, int64be]
 	a1	const[1, int64be]
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_ipv4 {
 	a0	array[const[0x0, int8], 10]
 	a1	array[const[0xff, int8], 2]
 	a3	ipv4_addr
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_multicast1 {
 	a0	const[0xff, int8]
 	a1	const[0x1, int8]
 	a2	array[const[0x0, int8], 13]
 	a3	const[0x1, int8]
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_multicast2 {
 	a0	const[0xff, int8]
 	a1	const[0x2, int8]
 	a2	array[const[0x0, int8], 13]
 	a3	const[0x1, int8]
-} [packed, align[4]]
+} [packed, align_4]
 
 type ipv6_addr_private[BYTE2] {
 	a0	const[0xfc, int8]
 	a1	const[BYTE2, int8]
 	a2	array[const[0x0, int8], 13]
 	a3	int8[0:1]
-} [packed, align[4]]
+} [packed, align_4]
 
 ipv6_addr_random = `20010000000000000000000000000000`, `20010000000000000000000000000001`, `20010000000000000000000000000002`
 
@@ -553,19 +551,19 @@ type ipv6_addr_mask array[flags[ipv4_addr_mask_vals, int32be], 4]
 # The length field in each of the extension headers specifies the
 # length of the header in 8-octet units not including the first 8 octets.
 ipv6_ext_header [
-	hopopts		ipv6_hopopts_ext_header
+	hopopts		ipv6_hopots_ext_header
 	routing		ipv6_rt_hdr
 	srh		ipv6_sr_hdr
 	fragment	ipv6_fragment_ext_header
 	dstopts		ipv6_dstopts_ext_header
 ] [varlen]
 
-ipv6_hopopts_ext_header {
+ipv6_hopots_ext_header {
 	next_header	flags[ipv6_types, int8]
 	length		bytesize8[options, int8]
 	pad		array[const[0, int8], 6]
 	options		array[ipv6_tlv_option]
-} [packed, align[8]]
+} [packed, align_8]
 
 ipv6_routing_types = IPV6_SRCRT_STRICT, IPV6_SRCRT_TYPE_0, IPV6_SRCRT_TYPE_2
 
@@ -576,7 +574,7 @@ ipv6_rt_hdr {
 	segments_left	int8
 	reserved	const[0, int32]
 	data		array[ipv6_addr]
-} [packed, align[8]]
+} [packed, align_8]
 
 ipv6_sr_hdr {
 	nexthdr		flags[ipv6_types, int8]
@@ -593,7 +591,7 @@ ipv6_sr_hdr {
 # we won't be able to calculate segments_left because it will need to
 # refer to a field of a subobject. What may help is allowing specifying
 # subfields as len/bytesize targets, e.g. "len[payload.segments]", or "bytesize[parent_struct.foo]".
-} [packed, align[8]]
+} [packed, align_8]
 
 ipv6_sr_flags = SR6_FLAG1_PROTECTED, SR6_FLAG1_OAM, SR6_FLAG1_ALERT, SR6_FLAG1_HMAC
 
@@ -605,14 +603,14 @@ ipv6_fragment_ext_header {
 	reserved2	const[0, int8:2]
 	fragment_off_lo	int8:5
 	identification	int32[100:104]
-} [packed, align[8]]
+} [packed, align_8]
 
 ipv6_dstopts_ext_header {
 	next_header	flags[ipv6_types, int8]
 	length		bytesize8[options, int8]
 	pad		array[const[0, int8], 6]
 	options		array[ipv6_tlv_option]
-} [packed, align[8]]
+} [packed, align_8]
 
 ipv6_tlv_option [
 	generic	ipv6_tlv_generic
@@ -703,7 +701,7 @@ type ipv6_packet_t[PROTO, PAYLOAD] {
 	flow_label	array[int8, 3]
 	length		len[payload, int16be]
 	next_header	PROTO
-	hop_limit	flags[hop_limits, int8]
+	hop_limit	int8
 	src_ip		ipv6_addr
 	dst_ip		ipv6_addr
 	payload		ipv6_packet_payload[PAYLOAD]
@@ -823,7 +821,7 @@ tcp_exp_smc_option {
 
 tcp_options {
 	options	array[tcp_option]
-} [packed, align[4]]
+} [packed, align_4]
 
 tcp_flags = TCPHDR_FIN, TCPHDR_SYN, TCPHDR_RST, TCPHDR_PSH, TCPHDR_ACK, TCPHDR_URG, TCPHDR_ECE, TCPHDR_CWR, TCPHDR_SYN_ECN
 
@@ -1185,7 +1183,7 @@ icmpv6_ipv6_packet {
 	flow_label	array[int8, 3]
 	length		int16be
 	next_header	flags[ipv6_types, int8]
-	hop_limit	flags[hop_limits, int8]
+	hop_limit	int8
 	src_ip		ipv6_addr
 	dst_ip		ipv6_addr
 	ext_headers	array[ipv6_ext_header]
@@ -1262,41 +1260,6 @@ icmpv6_mld_packet {
 	addr	ipv6_addr
 } [packed]
 
-# https://tools.ietf.org/html/rfc3810#section-5.1
-icmpv6_mldv2_listener_query_packet {
-	type		const[ICMPV6_MGM_QUERY, int8]
-	code		const[0, int8]
-	csum		csum[parent, pseudo, IPPROTO_ICMPV6, int16be]
-	mrd		int16be
-	unused		int16
-	mca		ipv6_addr
-	qrv		int8:3
-	suppress	int8:1
-	resv2		int8:4
-	qqic		int8
-	nsrcs		len[srcs, int16be]
-	srcs		array[ipv6_addr]
-} [packed]
-
-icmpv6_mldv2_grec {
-	type		int8
-	auxwords	len[aux, int8]
-	nsrcs		len[srcs, int16be]
-	mca		ipv6_addr
-	srcs		array[ipv6_addr]
-	aux		array[int32]
-} [packed]
-
-# https://tools.ietf.org/html/rfc3810#section-5.2
-icmpv6_mldv2_listener_report_packet {
-	type	const[ICMPV6_MLD2_REPORT, int8]
-	code	const[0, int8]
-	csum	csum[parent, pseudo, IPPROTO_ICMPV6, int16be]
-	unused	int16
-	ngrec	len[grec, int16be]
-	grec	array[icmpv6_mldv2_grec]
-} [packed]
-
 icmpv6_ni_types = ICMPV6_NI_QUERY, ICMPV6_NI_REPLY
 
 # https://tools.ietf.org/html/rfc4620#section-4
@@ -1334,7 +1297,7 @@ icmpv6_ndisc_router_advert_packet {
 	type		const[NDISC_ROUTER_ADVERTISEMENT, int8]
 	code		const[0, int8]
 	csum		csum[parent, pseudo, IPPROTO_ICMPV6, int16be]
-	cur_hop_limit	flags[hop_limits, int8]
+	cur_hop_limit	int8
 # TODO: Implement bitflags for the router advert flags
 	router_flags	int8
 	router_lifetime	int16
@@ -1383,14 +1346,13 @@ icmpv6_packet [
 	echo_request	icmpv6_echo_request_packet
 	echo_reply	icmpv6_echo_reply_packet
 	mld		icmpv6_mld_packet
-	mlv2_query	icmpv6_mldv2_listener_query_packet
-	mlv2_report	icmpv6_mldv2_listener_report_packet
 	ni		icmpv6_ni_packet
 	ndisc_rs	icmpv6_ndisc_router_solicit_packet
 	ndisc_ra	icmpv6_ndisc_router_advert_packet
 	ndisc_na	icmpv6_ndisc_neigh_advert_packet
 	ndisc_ns	icmpv6_ndisc_neigh_solicit_packet
 	ndisc_redir	icmpv6_ndisc_redir_packet
+# TODO: ICMPV6_MLD2_REPORT
 # TODO: ICMPV6_DHAAD_REQUEST, ICMPV6_DHAAD_REPLY, ICMPV6_MOBILE_PREFIX_SOL, ICMPV6_MOBILE_PREFIX_ADV (with ipv6 ext headers)
 ] [varlen]
 

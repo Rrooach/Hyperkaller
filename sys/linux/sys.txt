@@ -60,28 +60,28 @@ resource fd_dir[fd]: AT_FDCWD
 # E.g. pid/uid stored as intptr/int64.
 type alignptr[T] {
 	v	T
-} [align[PTR_SIZE]]
+} [align_ptr]
 
 type align32[T] {
 	v	T
-} [align[4]]
+} [align_4]
 
 type align64[T] {
 	v	T
-} [align[8]]
+} [align_8]
 
 type signalno int32[0:65]
 type signalnoptr intptr[0:65]
 
 syz_execute_func(text ptr[in, text[target]])
 
-open(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
+#open(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
 # Just so that we have something that creates fd_dir resources.
-open$dir(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
+#open$dir(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
 openat$dir(fd const[AT_FDCWD], file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
 openat(fd fd_dir[opt], file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
 creat(file ptr[in, filename], mode flags[open_mode]) fd
-close(fd fd)
+#close(fd fd)
 read(fd fd, buf buffer[out], count len[buf])
 pread64(fd fd, buf buffer[out], count len[buf], pos fileoff)
 readv(fd fd, vec ptr[in, array[iovec_out]], vlen len[vec])
@@ -182,15 +182,9 @@ restart_syscall()
 # Almighty!
 ioctl(fd fd, cmd int32, arg buffer[in])
 
+ioctl$void(fd fd, cmd flags[ioctl_void])
 ioctl$int_in(fd fd, cmd flags[ioctl_int_in], v ptr[in, int64])
 ioctl$int_out(fd fd, cmd flags[ioctl_int_out], v ptr[out, intptr])
-
-ioctl$FIOCLEX(fd fd, cmd const[FIOCLEX])
-ioctl$FIONCLEX(fd fd, cmd const[FIONCLEX])
-ioctl$FITHAW(fd fd, cmd const[FITHAW])
-
-# FIFREEZE is disabled because it can easily kill the machine.
-ioctl$FIFREEZE(fd fd, cmd const[FIFREEZE]) (disabled)
 
 fcntl$dupfd(fd fd, cmd flags[fcntl_dupfd], arg fd) fd
 fcntl$getflags(fd fd, cmd flags[fcntl_getflags])
@@ -211,24 +205,22 @@ fcntl$F_GET_FILE_RW_HINT(fd fd, cmd const[F_GET_FILE_RW_HINT], hint ptr[out, int
 fcntl$F_SET_RW_HINT(fd fd, cmd const[F_SET_RW_HINT], hint ptr[in, flags[fcntl_rw_hint, int64]])
 fcntl$F_SET_FILE_RW_HINT(fd fd, cmd const[F_SET_FILE_RW_HINT], hint ptr[in, flags[fcntl_rw_hint, int64]])
 
-# Only some commands break return values.
-# When/if we have stricter enforcement of arguments, we may remove some of breaks_returns attributes.
-ptrace(req flags[ptrace_req], pid pid) (breaks_returns)
-ptrace$peek(req flags[ptrace_req_peek], pid pid, addr ptr[out, intptr]) (breaks_returns)
-ptrace$poke(req flags[ptrace_req_poke], pid pid, addr ptr[out, intptr], data intptr) (breaks_returns)
-ptrace$peekuser(req const[PTRACE_PEEKUSR], pid pid, addr intptr) (breaks_returns)
-ptrace$pokeuser(req const[PTRACE_POKEUSR], pid pid, addr intptr, data intptr) (breaks_returns)
-ptrace$getregs(req flags[ptrace_req_getregs], pid pid, ignored intptr, data buffer[out]) (breaks_returns)
-ptrace$getregset(req const[PTRACE_GETREGSET], pid pid, what flags[pthread_regset], data ptr[in, iovec_out]) (breaks_returns)
-ptrace$setregs(req flags[ptrace_req_setregs], pid pid, ignored intptr, data buffer[in]) (breaks_returns)
-ptrace$setregset(req const[PTRACE_SETREGSET], pid pid, what flags[pthread_regset], data ptr[in, iovec_in]) (breaks_returns)
-ptrace$getsig(req const[PTRACE_GETSIGINFO], pid pid, ignored intptr, data ptr[out, siginfo]) (breaks_returns)
-ptrace$setsig(req const[PTRACE_SETSIGINFO], pid pid, ignored intptr, data ptr[in, siginfo]) (breaks_returns)
-ptrace$setopts(req flags[ptrace_req_setopts], pid pid, ignored intptr, flags flags[ptrace_options]) (breaks_returns)
-ptrace$getenv(req const[PTRACE_GETEVENTMSG], pid pid, ignored intptr, data ptr[out, intptr]) (breaks_returns)
-ptrace$cont(req flags[ptrace_req_cont], pid pid, ignored intptr, data intptr) (breaks_returns)
-ptrace$PTRACE_SECCOMP_GET_FILTER(req const[PTRACE_SECCOMP_GET_FILTER], pid pid, addr intptr, data ptr[out, array[int8]]) (breaks_returns)
-ptrace$PTRACE_SECCOMP_GET_METADATA(req const[PTRACE_SECCOMP_GET_METADATA], pid pid, addr len[data], data ptr[in, seccomp_metadata]) (breaks_returns)
+ptrace(req flags[ptrace_req], pid pid)
+ptrace$peek(req flags[ptrace_req_peek], pid pid, addr ptr[out, intptr])
+ptrace$poke(req flags[ptrace_req_poke], pid pid, addr ptr[out, intptr], data intptr)
+ptrace$peekuser(req const[PTRACE_PEEKUSR], pid pid, addr intptr)
+ptrace$pokeuser(req const[PTRACE_POKEUSR], pid pid, addr intptr, data intptr)
+ptrace$getregs(req flags[ptrace_req_getregs], pid pid, ignored intptr, data buffer[out])
+ptrace$getregset(req const[PTRACE_GETREGSET], pid pid, what flags[pthread_regset], data ptr[in, iovec_out])
+ptrace$setregs(req flags[ptrace_req_setregs], pid pid, ignored intptr, data buffer[in])
+ptrace$setregset(req const[PTRACE_SETREGSET], pid pid, what flags[pthread_regset], data ptr[in, iovec_in])
+ptrace$getsig(req const[PTRACE_GETSIGINFO], pid pid, ignored intptr, data ptr[out, siginfo])
+ptrace$setsig(req const[PTRACE_SETSIGINFO], pid pid, ignored intptr, data ptr[in, siginfo])
+ptrace$setopts(req flags[ptrace_req_setopts], pid pid, ignored intptr, flags flags[ptrace_options])
+ptrace$getenv(req const[PTRACE_GETEVENTMSG], pid pid, ignored intptr, data ptr[out, intptr])
+ptrace$cont(req flags[ptrace_req_cont], pid pid, ignored intptr, data intptr)
+ptrace$PTRACE_SECCOMP_GET_FILTER(req const[PTRACE_SECCOMP_GET_FILTER], pid pid, addr intptr, data ptr[out, array[int8]])
+ptrace$PTRACE_SECCOMP_GET_METADATA(req const[PTRACE_SECCOMP_GET_METADATA], pid pid, addr len[data], data ptr[in, seccomp_metadata])
 
 seccomp_metadata {
 	filter_off	int64
@@ -271,8 +263,8 @@ utimes(filename ptr[in, filename], times ptr[in, itimerval])
 futimesat(dir fd_dir, pathname ptr[in, filename], times ptr[in, itimerval])
 utimensat(dir fd_dir, pathname ptr[in, filename], times ptr[in, itimerval], flags flags[utimensat_flags])
 
-clone(flags flags[clone_flags], sp buffer[in], parentid ptr[out, int32], childtid ptr[out, int32], tls buffer[in]) (breaks_returns)
-clone3(args ptr[in, clone_args], size bytesize[args]) pid (breaks_returns)
+clone(flags flags[clone_flags], sp buffer[in], parentid ptr[out, int32], childtid ptr[out, int32], tls buffer[in])
+clone3(args ptr[in, clone_args], size bytesize[args]) pid
 
 clone_args {
 	flags		flags[clone_flags, int64]
@@ -454,7 +446,7 @@ rseq {
 	cpu_id		const[0, int32]
 	rseq_cs		ptr64[in, rseq_cs, opt]
 	flags		flags[rseq_cs_flags, int32]
-} [align[32]]
+} [align_32]
 
 rseq_cs {
 	version			const[0, int32]
@@ -462,7 +454,7 @@ rseq_cs {
 	start_ip		int64
 	post_commit_offset	int64
 	abort_ip		int64
-} [align[32]]
+} [align_32]
 
 rseq_cs_flags = RSEQ_CS_FLAG_NO_RESTART_ON_PREEMPT, RSEQ_CS_FLAG_NO_RESTART_ON_SIGNAL, RSEQ_CS_FLAG_NO_RESTART_ON_MIGRATE
 
@@ -540,9 +532,7 @@ openat$nvme_fabrics(fd const[AT_FDCWD], file ptr[in, string["/dev/nvme-fabrics"]
 openat$bsg(fd const[AT_FDCWD], file ptr[in, string["/dev/bsg"]], flags flags[open_flags], mode const[0]) fd
 
 openat$snapshot(fd const[AT_FDCWD], file ptr[in, string["/dev/snapshot"]], flags flags[open_flags], mode const[0]) fd
-
-# SNAPSHOT_FREEZE is disabled because it can easily kill the machine.
-ioctl$SNAPSHOT_FREEZE(fd fd, cmd const[SNAPSHOT_FREEZE]) (disabled)
+_ = SNAPSHOT_FREEZE, SNAPSHOT_UNFREEZE
 
 pipefd {
 	rfd	fd
@@ -965,6 +955,7 @@ flock_type = F_RDLCK, F_WRLCK, F_UNLCK
 f_owner_type = F_OWNER_TID, F_OWNER_PID, F_OWNER_PGRP
 fcntl_notify = DN_MULTISHOT, DN_ACCESS, DN_MODIFY, DN_CREATE, DN_DELETE, DN_RENAME, DN_ATTRIB
 seal_types = F_SEAL_SEAL, F_SEAL_SHRINK, F_SEAL_GROW, F_SEAL_WRITE
+ioctl_void = FIOCLEX, FIONCLEX, FITHAW
 ioctl_int_in = FIONBIO, FIOASYNC
 ioctl_int_out = FIOQSIZE, FIGETBSZ
 fcntl_rw_hint = RWF_WRITE_LIFE_NOT_SET, RWH_WRITE_LIFE_NONE, RWH_WRITE_LIFE_SHORT, RWH_WRITE_LIFE_MEDIUM, RWH_WRITE_LIFE_LONG, RWH_WRITE_LIFE_EXTREME
@@ -980,7 +971,7 @@ _ = STA_PLL, STA_PPSFREQ, STA_PPSTIME, STA_FLL, STA_INS, STA_DEL, STA_UNSYNC, ST
 _ = ADJ_OFFSET, ADJ_FREQUENCY, ADJ_MAXERROR, ADJ_ESTERROR, ADJ_STATUS, ADJ_TIMECONST, ADJ_TAI, ADJ_SETOFFSET, ADJ_MICRO, ADJ_NANO, ADJ_TICK, ADJ_OFFSET_SINGLESHOT
 
 # misc
-_ = KCOV_INIT_TRACE, KCOV_ENABLE, KCOV_DISABLE, KCOV_TRACE_PC, KCOV_TRACE_CMP, PTRACE_TRACEME, SYSLOG_ACTION_CONSOLE_ON, SYSLOG_ACTION_CONSOLE_OFF, SYSLOG_ACTION_CONSOLE_LEVEL, SYSLOG_ACTION_CLEAR, __NR_mmap2
+_ = KCOV_INIT_TRACE, KCOV_ENABLE, KCOV_DISABLE, KCOV_TRACE_PC, KCOV_TRACE_CMP, FIFREEZE, PTRACE_TRACEME, SYSLOG_ACTION_CONSOLE_ON, SYSLOG_ACTION_CONSOLE_OFF, SYSLOG_ACTION_CONSOLE_LEVEL, SYSLOG_ACTION_CLEAR, __NR_mmap2
 
 # Hardcode KCOV_REMOTE_ENABLE value for amd64 until new kcov patches reach mainline.
 define KCOV_REMOTE_ENABLE	1075340134

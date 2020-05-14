@@ -50,11 +50,11 @@ type HidDeviceID struct {
 	Product uint32
 }
 
-func (arch *arch) generateUsbDeviceDescriptor(g *prog.Gen, typ0 prog.Type, dir prog.Dir, old prog.Arg) (
+func (arch *arch) generateUsbDeviceDescriptor(g *prog.Gen, typ0 prog.Type, old prog.Arg) (
 	arg prog.Arg, calls []*prog.Call) {
 
 	if old == nil {
-		arg = g.GenerateSpecialArg(typ0, dir, &calls)
+		arg = g.GenerateSpecialArg(typ0, &calls)
 	} else {
 		arg = old
 		calls = g.MutateArg(arg)
@@ -140,11 +140,11 @@ func randUsbDeviceID(g *prog.Gen) UsbDeviceID {
 	return id
 }
 
-func (arch *arch) generateUsbHidDeviceDescriptor(g *prog.Gen, typ0 prog.Type, dir prog.Dir, old prog.Arg) (
+func (arch *arch) generateUsbHidDeviceDescriptor(g *prog.Gen, typ0 prog.Type, old prog.Arg) (
 	arg prog.Arg, calls []*prog.Call) {
 
 	if old == nil {
-		arg = g.GenerateSpecialArg(typ0, dir, &calls)
+		arg = g.GenerateSpecialArg(typ0, &calls)
 	} else {
 		arg = old
 		calls = g.MutateArg(arg)
@@ -171,10 +171,9 @@ func (arch *arch) generateUsbHidDeviceDescriptor(g *prog.Gen, typ0 prog.Type, di
 }
 
 func patchGroupArg(arg prog.Arg, index int, field string, value uint64) {
-	a := arg.(*prog.GroupArg)
-	typ := a.Type().(*prog.StructType)
-	if field != typ.Fields[index].Name {
-		panic(fmt.Sprintf("bad field, expected %v, found %v", field, typ.Fields[index].Name))
+	fieldArg := arg.(*prog.GroupArg).Inner[index].(*prog.ConstArg)
+	if fieldArg.Type().FieldName() != field {
+		panic(fmt.Sprintf("bad field, expected %v, found %v", field, fieldArg.Type().FieldName()))
 	}
-	a.Inner[index].(*prog.ConstArg).Val = value
+	fieldArg.Val = value
 }
