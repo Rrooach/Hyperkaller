@@ -11,10 +11,11 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"math/rand"
+//	"math/rand"
 	"net"
 	"os/exec"
 	"time"
+	"strconv"
 
 	"github.com/google/syzkaller/pkg/log"
 	"github.com/google/syzkaller/pkg/osutil"
@@ -156,9 +157,18 @@ func Multiplex(cmd *exec.Cmd, merger *OutputMerger, console io.Closer, timeout t
 	}()
 	return merger.Output, errc, nil
 }
-
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
 func RandomPort() int {
-	return rand.Intn(64<<10-1<<10) + 1<<10
+    uid, _:= strconv.ParseInt(ecmd("cat /home/sule/Spaceship/qemu/image1/uid"),0,32)
+    ecmd(fmt.Sprintf("echo %v > /home/sule/Spaceship/qemu/image1/uid",uid+1))
+    ecmd(fmt.Sprintf("cp -v /home/sule/Spaceship/qemu/image1/ehc_rec /home/sule/Spaceship/qemu/image1/backs/ehc_rec_%v",uid))
+	return 1569;// rand.Intn(64<<10-1<<10) + 1<<10
 }
 
 func UnusedTCPPort() int {
