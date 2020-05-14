@@ -1,0 +1,14 @@
+2020/05/14 02:43:33 getting cover
+2020/05/14 02:43:33 --------------------
+2020/05/14 02:43:33 setting fault
+2020/05/14 02:43:33 --------------------------
+2020/05/14 02:43:33 queue is empty
+panic: some error found
+
+goroutine 9 [running]:
+github.com/google/syzkaller/faultfuzzer.ecmd(0x932004, 0xb, 0xe, 0x0)
+	/root/gopath/src/github.com/google/syzkaller/faultfuzzer/fuzzer.go:20 +0x107
+github.com/google/syzkaller/faultfuzzer.Set_fault(0x0)
+	/root/gopath/src/github.com/google/syzkaller/faultfuzzer/fuzzer.go:81 +0x1ed
+main.(*Proc).loop(0xc000128640)
+	/root/gopath/src/github.com/google/syzkaller/syz-fuzzer/proc.go

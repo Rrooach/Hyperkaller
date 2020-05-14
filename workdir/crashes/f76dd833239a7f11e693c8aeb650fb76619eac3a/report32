@@ -1,0 +1,6 @@
+2020/05/14 02:08:18 USB emulation: /dev/raw-gadget does not exist
+2020/05/14 02:08:18 poll: candidates=0 inputs=0 signal=0
+2020/05/14 02:08:20 --------------------
+2020/05/14 02:08:20 getting cover
+2020/05/14 02:08:20 poll: candidates=0 inputs=0 signal=0
+panic: some error found

@@ -10,6 +10,7 @@ package prog
 
 import (
 	"fmt"
+	"github.com/google/syzkaller/pkg/log"
 )
 
 type state struct {
@@ -195,8 +196,10 @@ const (
 
 func (p *Prog) FallbackSignal(info []CallInfo) {
 	resources := make(map[*ResultArg]*Call)
+	log.Logf(0, "Rrooach: anayless198")
 	for i, c := range p.Calls {
 		inf := &info[i]
+		log.Logf(0, "Rrooach: anayless201")
 		if inf.Flags&CallExecuted == 0 {
 			continue
 		}
@@ -217,6 +220,7 @@ func (p *Prog) FallbackSignal(info []CallInfo) {
 		if inf.Errno != 0 {
 			continue
 		}
+		log.Logf(0, "Rrooach: anayless222")
 		ForeachArg(c, func(arg Arg, _ *ArgCtx) {
 			if a, ok := arg.(*ResultArg); ok {
 				resources[a] = c
@@ -228,10 +232,12 @@ func (p *Prog) FallbackSignal(info []CallInfo) {
 		for _, arg := range c.Args {
 			flags = extractArgSignal(arg, id, flags, inf, resources)
 		}
+		log.Logf(0, "Rrooach: anayless235")
 		if flags != 0 {
 			inf.Signal = append(inf.Signal,
 				encodeFallbackSignal(fallbackSignalFlags, id, flags))
 		}
+		log.Logf(0, "Rrooach: anayless239	")
 	}
 }
 

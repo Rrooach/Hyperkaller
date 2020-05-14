@@ -1,0 +1,1115 @@
+Extracting prog: 18m49.68966067s
+Minimizing prog: 0s
+Simplifying prog options: 0s
+Extracting C: 0s
+Simplifying C: 0s
+
+
+134 programs, 1 VMs, timeouts [15s 1m0s 6m0s]
+extracting reproducer from 134 programs
+single: executing 1 programs separately with timeout 15s
+testing program (duration=15s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): fsetxattr$trusted_overlay_upper
+detailed listing:
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 134 programs with base timeout 15s
+bisect: bisecting 134 programs
+bisect: executing all 134 programs
+testing program (duration=48s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1]
+detailed listing:
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+bisect: didn't crash
+single: executing 1 programs separately with timeout 1m0s
+testing program (duration=1m0s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): fsetxattr$trusted_overlay_upper
+detailed listing:
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 134 programs with base timeout 1m0s
+bisect: bisecting 134 programs
+bisect: executing all 134 programs
+testing program (duration=1m33s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1]
+detailed listing:
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+bisect: didn't crash
+single: executing 1 programs separately with timeout 6m0s
+testing program (duration=6m0s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): fsetxattr$trusted_overlay_upper
+detailed listing:
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+single: failed to extract reproducer
+bisect: bisecting 134 programs with base timeout 6m0s
+bisect: bisecting 134 programs
+bisect: executing all 134 programs
+testing program (duration=6m33s, {Threaded:true Collide:true Repeat:true RepeatTimes:0 Procs:8 Sandbox:none Fault:false FaultCall:-1 FaultNth:0 Leak:false NetInjection:true NetDevices:true NetReset:true Cgroups:true BinfmtMisc:true CloseFDs:true KCSAN:false DevlinkPCI:true USB:false UseTmpDir:true HandleSegv:true Repro:true Trace:false}): [1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1]
+detailed listing:
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+r1 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r1, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, &(0x7f0000000900))
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+r1 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r1, 0x305000, &(0x7f0000000900))
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, &(0x7f0000000a80)='trusted.overlay.upper\x00', 0x0, 0x0, 0x0)
+executing program 0:
+r0 = socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+fsetxattr$trusted_overlay_upper(r0, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+ioctl$EVIOCSMASK(0xffffffffffffffff, 0x40104593, 0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(r0, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(0x0)
+executing program 0:
+r0 = open$IOCTL_PRIVCMD_HYPERCALL18421_5(&(0x7f00000008c0)='/proc/xen/privcmd\x00')
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(r0, 0x305000, &(0x7f0000000900))
+executing program 0:
+ioctl$BLKFLSBUF(0xffffffffffffffff, 0x1261, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL3073(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+open$IOCTL_PRIVCMD_HYPERCALL3071(&(0x7f0000000940)='/proc/xen/privcmd\x00')
+executing program 0:
+socket$inet6_icmp_raw(0xa, 0x3, 0x3a)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+ioctl$IOCTL_PRIVCMD_HYPERCALL18421_51(0xffffffffffffffff, 0x305000, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+executing program 0:
+fsetxattr$trusted_overlay_upper(0xffffffffffffffff, 0x0, 0x0, 0x0, 0x0)
+
+program did not crash
+bisect: didn't crash
+failed to extract reproducer
+reproducing took 18m49.689662701s

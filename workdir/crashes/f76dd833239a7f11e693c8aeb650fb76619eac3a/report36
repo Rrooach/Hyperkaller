@@ -1,0 +1,9 @@
+2020/05/14 02:10:55 USB emulation: /dev/raw-gadget does not exist
+2020/05/14 02:10:55 poll: candidates=0 inputs=0 signal=0
+2020/05/14 02:10:57 --------------------
+2020/05/14 02:10:57 getting cover
+2020/05/14 02:10:57 poll: candidates=0 inputs=0 signal=0
+panic: some error found
+
+goroutine 8 [running]:
+github.com/google/syzkaller/faultfuzzer.ecmd(0x94b02f, 0x10, 0xc0000c6050, 0x2

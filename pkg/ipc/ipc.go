@@ -289,9 +289,9 @@ func (env *Env) Exec(opts *ExecOpts, p *prog.Prog) (output []byte, info *ProgInf
 	log.Logf(0, "Rrooach: 289")
 	info, err0 = env.parseOutput(p)
 	log.Logf(0, "env.config.Flags = %v,  FlagSignal = %v", env.config.Flags, FlagSignal)
-	// if info != nil && env.config.Flags&FlagSignal == 0 {
-	addFallbackSignal(p, info)
-	// }
+	if info != nil && env.config.Flags&FlagSignal == 0 {
+		addFallbackSignal(p, info)
+	}
 	if !env.config.UseForkServer {
 		env.cmd.close()
 		env.cmd = nil
@@ -316,10 +316,13 @@ func addFallbackSignal(p *prog.Prog, info *ProgInfo) {
 		}
 		callInfos[i].Errno = inf.Errno
 	}
+	log.Logf(0, "Rrooach: ipc319")
 	p.FallbackSignal(callInfos)
+	log.Logf(0, "Rrooach: ipc321")
 	for i, inf := range callInfos {
 		info.Calls[i].Signal = inf.Signal
 	}
+	log.Logf(0, "Rrooach: ipc325")
 }
 
 func (env *Env) parseOutput(p *prog.Prog) (*ProgInfo, error) {

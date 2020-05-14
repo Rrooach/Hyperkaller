@@ -1,0 +1,9 @@
+2020/05/14 02:31:19 poll: candidates=0 inputs=0 signal=0
+2020/05/14 02:31:19 --------------------
+2020/05/14 02:31:19 setting fault
+2020/05/14 02:31:19 --------------------------
+2020/05/14 02:31:19 queue is empty
+panic: some error found
+
+goroutine 12 [running]:
+github.com/google/syzkaller/faultfuzzer.ecmd(0x932004, 0xb, 0xe, 

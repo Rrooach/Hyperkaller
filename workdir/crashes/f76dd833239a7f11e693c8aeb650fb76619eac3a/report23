@@ -1,0 +1,9 @@
+2020/05/14 02:02:23 devlink PCI setup: PCI device 0000:00:10.0 is not available
+2020/05/14 02:02:23 USB emulation: /dev/raw-gadget does not exist
+2020/05/14 02:02:23 poll: candidates=0 inputs=0 signal=0
+2020/05/14 02:02:25 --------------------
+2020/05/14 02:02:25 getting cover
+panic: some error found
+
+goroutine 16 [running]:
+github.com/google/syzkaller/faultfuzzer.ecmd(0x94b02f, 0x10

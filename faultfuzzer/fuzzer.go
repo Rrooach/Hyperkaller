@@ -49,7 +49,7 @@ func Get_cover() {
 	ecmd("~/get_fault_site")
 
 	cov, _ := ioutil.ReadFile("/dev/fault")
-
+	log.Logf(0, "Rrooach: Covvvv");
 	exists := history.Has(string(cov))
 	if !exists && no_zero_cov(string(cov)) {
 		queue = append(queue, string(cov))
@@ -92,3 +92,4 @@ func Set_fault() int {
 	log.Logf(0, "set fault")
 	return 0
 }
+	

@@ -1,0 +1,9 @@
+2020/05/14 02:52:28 getting cover
+2020/05/14 02:52:28 --------------------
+2020/05/14 02:52:28 setting fault
+2020/05/14 02:52:28 --------------------------
+2020/05/14 02:52:28 queue is empty
+panic: some error found
+
+goroutine 30 [running]:
+github.com/google/syzkaller/faultfuzzer.ecmd(0x932004, 0xb
