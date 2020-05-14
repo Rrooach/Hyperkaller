@@ -15,26 +15,26 @@ ioctl$IOCTL_PRIVCMD_HYPERCALL224(fd fd2, ioctl_privcmd_hypecall0 const[0x305000]
 close$IOCTL_PRIVCMD_HYPERCALL25(fd fd2)
 
 my_hypercall220 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall221 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall222 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall223 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall224 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }

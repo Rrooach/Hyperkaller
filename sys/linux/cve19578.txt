@@ -23,11 +23,11 @@ my_hypercall195781_21 {
 }
 
 my_hypercall195781_20 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall195781_23 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }

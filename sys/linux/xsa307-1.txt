@@ -10,7 +10,7 @@ ioctl$IOCTL_PRIVCMD_HYPERCALL30732(fd fd30721, ioctl_privcmd_hypecall0 const[0x3
 close$IOCTL_PRIVCMD_HYPERCALL30712(fd fd30721)
 
 my_hypercall3071 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }
 
@@ -20,6 +20,6 @@ my_hypercall3072 {
 }
 
 my_hypercall3073 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }

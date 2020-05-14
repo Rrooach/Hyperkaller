@@ -128,10 +128,10 @@ func checkMachine(args *checkArgs) (*rpctype.CheckArgs, error) {
 	if err != nil {
 		return nil, err
 	}
-	if feat := features[host.FeatureCoverage]; !feat.Enabled &&
-		args.ipcConfig.Flags&ipc.FlagSignal != 0 {
-		return nil, fmt.Errorf("coverage is not supported (%v)", feat.Reason)
-	}
+	// if feat := features[host.FeatureCoverage]; !feat.Enabled &&
+	// 	args.ipcConfig.Flags&ipc.FlagSignal != 0 {
+	// 	return nil, fmt.Errorf("coverage is not supported (%v)", feat.Reason)
+	// }
 	if feat := features[host.FeatureSandboxSetuid]; !feat.Enabled &&
 		args.ipcConfig.Flags&ipc.FlagSandboxSetuid != 0 {
 		return nil, fmt.Errorf("sandbox=setuid is not supported (%v)", feat.Reason)
