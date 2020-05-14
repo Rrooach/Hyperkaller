@@ -337,7 +337,7 @@ func (inst *instance) Close() {
 }
 
 func (inst *instance) boot() error {
-	inst.port = 1569//vmimpl.UnusedTCPPort()
+	inst.port = 1569 //vmimpl.UnusedTCPPort()
 	args := []string{
 		"-m", strconv.Itoa(inst.cfg.Mem),
 		"-smp", strconv.Itoa(inst.cfg.CPU),

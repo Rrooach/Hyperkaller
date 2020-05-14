@@ -20,56 +20,56 @@ ioctl$IOCTL_PRIVCMD_HYPERCALL410(fd fd4, ioctl_privcmd_hypecall0 const[0x305000]
 close$IOCTL_PRIVCMD_HYPERCALL40(fd fd4)
 
 my_hypercall40 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall41 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall42 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall43 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall44 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall45 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall46 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall47 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall48 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall49 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }
 
 my_hypercall410 {
-	__HYPERVISOR_hypercall_type	int32[0:55]
+	__HYPERVISOR_hypercall_type	int32[0:41]
 	args				array[int64, 5]
 }

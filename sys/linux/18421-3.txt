@@ -17,7 +17,7 @@ my_hypercall18421_31 {
 }
 
 my_hypercall18421_32 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }
 
@@ -27,6 +27,6 @@ my_hypercall18421_33 {
 }
 
 my_hypercall18421_34 {
-	__HYPERVISOR_hypercall_type	int64[0:55]
+	__HYPERVISOR_hypercall_type	int64[0:41]
 	args				array[int64, 5]
 }

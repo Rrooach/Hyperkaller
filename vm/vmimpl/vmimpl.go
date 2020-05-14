@@ -11,11 +11,11 @@ import (
 	"errors"
 	"fmt"
 	"io"
-//	"math/rand"
+	//	"math/rand"
 	"net"
 	"os/exec"
-	"time"
 	"strconv"
+	"time"
 
 	"github.com/google/syzkaller/pkg/log"
 	"github.com/google/syzkaller/pkg/osutil"
@@ -165,10 +165,10 @@ func ecmd(cmd string) string {
 	return string(out)
 }
 func RandomPort() int {
-    uid, _:= strconv.ParseInt(ecmd("cat /home/sule/Spaceship/qemu/image1/uid"),0,32)
-    ecmd(fmt.Sprintf("echo %v > /home/sule/Spaceship/qemu/image1/uid",uid+1))
-    ecmd(fmt.Sprintf("cp -v /home/sule/Spaceship/qemu/image1/ehc_rec /home/sule/Spaceship/qemu/image1/backs/ehc_rec_%v",uid))
-	return 1569;// rand.Intn(64<<10-1<<10) + 1<<10
+	uid, _ := strconv.ParseInt(ecmd("cat /home/sule/Spaceship/qemu/image1/uid"), 0, 32)
+	ecmd(fmt.Sprintf("echo %v > /home/sule/Spaceship/qemu/image1/uid", uid+1))
+	ecmd(fmt.Sprintf("cp -v /home/sule/Spaceship/qemu/image1/ehc_rec /home/sule/Spaceship/qemu/image1/backs/ehc_rec_%v", uid))
+	return 1569 // rand.Intn(64<<10-1<<10) + 1<<10
 }
 
 func UnusedTCPPort() int {
