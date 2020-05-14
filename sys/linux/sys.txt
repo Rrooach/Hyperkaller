@@ -75,13 +75,13 @@ type signalnoptr intptr[0:65]
 
 syz_execute_func(text ptr[in, text[target]])
 
-open(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
+#open(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
 # Just so that we have something that creates fd_dir resources.
-open$dir(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
+#open$dir(file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
 openat$dir(fd const[AT_FDCWD], file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd_dir
 openat(fd fd_dir[opt], file ptr[in, filename], flags flags[open_flags], mode flags[open_mode]) fd
 creat(file ptr[in, filename], mode flags[open_mode]) fd
-close(fd fd)
+#close(fd fd)
 read(fd fd, buf buffer[out], count len[buf])
 pread64(fd fd, buf buffer[out], count len[buf], pos fileoff)
 readv(fd fd, vec ptr[in, array[iovec_out]], vlen len[vec])

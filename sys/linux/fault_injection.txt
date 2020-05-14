@@ -1,0 +1,15 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+define IOCTL_PRIVCMD_HYPERCALL11000	0x305000
+resource fdfs[int32]: -1
+
+open$IOCTL_PRIVCMD_HYPERCALL_fs(file ptr[in, string["/proc/xen/privcmd"]]) fdfs
+
+ioctl$IOCTL_PRIVCMD_HYPERCALL_fs(fd fdfs, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercall_fs1])
+
+close$IOCTL_PRIVCMD_HYPERCALL_fs(fd fdfs)
+
+my_hypercall_fs1 {
+	__HYPERVISOR_hypercall_type	const[42, int64]
+	args				array[const[-4, int64], 5]
+}

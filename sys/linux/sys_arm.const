@@ -557,7 +557,6 @@ __NR_clock_nanosleep = 265
 __NR_clock_settime = 262
 __NR_clone = 120
 __NR_clone3 = 435
-__NR_close = 6
 __NR_creat = 8
 __NR_delete_module = 129
 __NR_dup = 41
@@ -659,7 +658,6 @@ __NR_munmap = 91
 __NR_name_to_handle_at = 370
 __NR_nanosleep = 162
 # __NR_newfstatat is not set
-__NR_open = 5
 __NR_open_by_handle_at = 371
 __NR_openat = 322
 __NR_pause = 29
