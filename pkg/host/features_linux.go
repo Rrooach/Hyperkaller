@@ -5,13 +5,13 @@ package host
 
 import (
 	"fmt"
+	"github.com/google/syzkaller/pkg/osutil"
+	"github.com/google/syzkaller/prog"
+	"os"
 	"runtime"
 	"syscall"
 	"unsafe"
-
-	"github.com/google/syzkaller/pkg/osutil"
-	"github.com/google/syzkaller/prog"
-	"github.com/google/syzkaller/sys/linux"
+	// "github.com/google/syzkaller/sys/linux"
 )
 
 func init() {
@@ -34,10 +34,21 @@ func checkCoverage() string {
 	if reason := checkDebugFS(); reason != "" {
 		return reason
 	}
-	if !osutil.IsExist("/sys/kernel/debug/kcov") {
-		return "CONFIG_KCOV is not enabled"
+	// if !osutil.IsExist("/sys/kernel/debug/kcov") {
+	// 	return "CONFIG_KCOV is not enabled"
+	// }
+	if !osutil.IsExist("/dev/cov") {
+		f, err := os.Create("/dev/cov")
+		defer f.Close()
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 	}
-	if err := osutil.IsAccessible("/sys/kernel/debug/kcov"); err != nil {
+	if !osutil.IsExist("/dev/cov") {
+		return "COVERAGE is not enabled"
+	}
+	// if err := osutil.IsAccessible("/sys/kernel/debug/kcov"); err != nil {
+	if err := osutil.IsAccessible("/dev/cov"); err != nil {
 		return err.Error()
 	}
 	return ""
@@ -58,9 +69,10 @@ func checkCoverageFeature(feature int) (reason string) {
 	// TODO(dvyukov): this should run under target arch.
 	// E.g. KCOV ioctls were initially not supported on 386 (missing compat_ioctl),
 	// and a 386 executor won't be able to use them, but an amd64 fuzzer will be.
-	fd, err := syscall.Open("/sys/kernel/debug/kcov", syscall.O_RDWR, 0)
+	// fd, err := syscall.Open("/sys/kernel/debug/kcov", syscall.O_RDWR, 0)
+	fd, err := syscall.Open("/dev/cov", syscall.O_RDWR, 0)
 	if err != nil {
-		return "CONFIG_KCOV is not enabled"
+		return "COVERAGE  is not enabled"
 	}
 	defer syscall.Close(fd)
 	// Trigger host target lazy initialization, it will fill linux.KCOV_INIT_TRACE.
@@ -69,15 +81,15 @@ func checkCoverageFeature(feature int) (reason string) {
 		return fmt.Sprintf("failed to get target: %v", err)
 	}
 	coverSize := uintptr(64 << 10)
-	_, _, errno := syscall.Syscall(
-		syscall.SYS_IOCTL, uintptr(fd), linux.KCOV_INIT_TRACE, coverSize)
-	if errno != 0 {
-		return fmt.Sprintf("ioctl(KCOV_INIT_TRACE) failed: %v", errno)
-	}
+	// _, _, errno := syscall.Syscall(
+	// 	syscall.SYS_IOCTL, uintptr(fd), linux.KCOV_INIT_TRACE, coverSize)
+	// if errno != 0 {
+	// 	return fmt.Sprintf("ioctl(KCOV_INIT_TRACE) failed: %v", errno)
+	// }
 	mem, err := syscall.Mmap(fd, 0, int(coverSize*unsafe.Sizeof(uintptr(0))),
 		syscall.PROT_READ|syscall.PROT_WRITE, syscall.MAP_SHARED)
 	if err != nil {
-		return fmt.Sprintf("KCOV mmap failed: %v", err)
+		return fmt.Sprintf("COVERAGE  mmap failed: %v", err)
 	}
 	defer func() {
 		if err := syscall.Munmap(mem); err != nil {
@@ -86,37 +98,37 @@ func checkCoverageFeature(feature int) (reason string) {
 	}()
 	switch feature {
 	case FeatureComparisons:
-		_, _, errno = syscall.Syscall(syscall.SYS_IOCTL,
-			uintptr(fd), linux.KCOV_ENABLE, linux.KCOV_TRACE_CMP)
-		if errno != 0 {
-			if errno == 524 { // ENOTSUPP
-				return "CONFIG_KCOV_ENABLE_COMPARISONS is not enabled"
-			}
-			return fmt.Sprintf("ioctl(KCOV_TRACE_CMP) failed: %v", errno)
-		}
+		// _, _, errno = syscall.Syscall(syscall.SYS_IOCTL,
+		// 	uintptr(fd), linux.KCOV_ENABLE, linux.KCOV_TRACE_CMP)
+		// if errno != 0 {
+		// 	if errno == 524 { // ENOTSUPP
+		// 		return "CONFIG_KCOV_ENABLE_COMPARISONS is not enabled"
+		// 	}
+		// 	return fmt.Sprintf("ioctl(KCOV_TRACE_CMP) failed: %v", errno)
+		// }
 	case FeatureExtraCoverage:
-		arg := KcovRemoteArg{
-			TraceMode:    uint32(linux.KCOV_TRACE_PC),
-			AreaSize:     uint32(coverSize * unsafe.Sizeof(uintptr(0))),
-			NumHandles:   0,
-			CommonHandle: 0,
-		}
-		_, _, errno = syscall.Syscall(syscall.SYS_IOCTL,
-			uintptr(fd), linux.KCOV_REMOTE_ENABLE, uintptr(unsafe.Pointer(&arg)))
-		if errno != 0 {
-			if errno == 25 { // ENOTTY
-				return "extra coverage is not supported by the kernel"
-			}
-			return fmt.Sprintf("ioctl(KCOV_REMOTE_ENABLE) failed: %v", errno)
-		}
+		// arg := KcovRemoteArg{
+		// 	TraceMode:    uint32(linux.KCOV_TRACE_PC),
+		// 	AreaSize:     uint32(coverSize * unsafe.Sizeof(uintptr(0))),
+		// 	NumHandles:   0,
+		// 	CommonHandle: 0,
+		// }
+		// _, _, errno = syscall.Syscall(syscall.SYS_IOCTL,
+		// 	uintptr(fd), linux.KCOV_REMOTE_ENABLE, uintptr(unsafe.Pointer(&arg)))
+		// if errno != 0 {
+		// 	if errno == 25 { // ENOTTY
+		// 		return "extra coverage is not supported by the kernel"
+		// 	}
+		// 	return fmt.Sprintf("ioctl(KCOV_REMOTE_ENABLE) failed: %v", errno)
+		// }
 	default:
 		panic("unknown feature in checkCoverageFeature")
 	}
 	defer func() {
-		_, _, errno = syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), linux.KCOV_DISABLE, 0)
-		if errno != 0 {
-			reason = fmt.Sprintf("ioctl(KCOV_DISABLE) failed: %v", errno)
-		}
+		// _, _, errno = syscall.Syscall(syscall.SYS_IOCTL, uintptr(fd), linux.KCOV_DISABLE, 0)
+		// if errno != 0 {
+		// 	reason = fmt.Sprintf("ioctl(KCOV_DISABLE) failed: %v", errno)
+		// }
 	}()
 	return ""
 }
