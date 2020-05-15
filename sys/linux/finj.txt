@@ -11,5 +11,5 @@ close$IOCTL_PRIVCMD_HYPERCALL_fs12(fd fdfs1)
 
 my_hypercall_fs11 {
 	__HYPERVISOR_hypercall_type	const[42, int64]
-	args				array[const[-12, int64], 5]
+	args				array[const[-5, int64], 5]
 }

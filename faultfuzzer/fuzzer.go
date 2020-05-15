@@ -101,6 +101,6 @@ func Set_fault() int {
 	write_fault(fault)
 	ecmd("~/set_fault")
 	log.Logf(0, "--------------------------")
-	log.Logf(0, "set fault")
+	log.Logf(0, "set fault here")
 	return 0
 }
