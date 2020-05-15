@@ -2,13 +2,11 @@ package faultfuzzer
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/google/syzkaller/pkg/log"
 	"github.com/scylladb/go-set/strset"
 	"io/ioutil"
 	"os"
 	"os/exec"
-	//"strconv"
 )
 
 var queue = make([]string, 0)
@@ -59,38 +57,11 @@ func no_zero_cov(cov string) bool {
 	return false
 }
 
-func reduce_ehc(ecov int) {
-	num := ecov
-	if num > max_cov {
-		max_cov = num
-	}
-	f, err := os.OpenFile("/root/ehc_rec", os.O_APPEND|os.O_WRONLY, 0600)
-	if err != nil {
-		panic(err)
-	}
-
-	defer f.Close()
-
-	if _, err = f.WriteString(fmt.Sprintf("%d\n", max_cov)); err != nil {
-		panic(err)
-	}
-}
-
 func Get_cover() {
-
-	if flag == 0 {
-		flag = 1
-//		ecmd("~/reset_ehc_site")
-	}
-//	res := ecmd("~/get_ehc_fault_site")
-//	ecov, _ := strconv.Atoi(res)
-//	log.Logf(0, "ecov-----------%v\n", ecov)
-//	reduce_ehc(ecov)
 
 	ecmd("~/get_fault_site")
 
 	cov, _ := ioutil.ReadFile("/dev/fault")
-	log.Logf(0, "Rrooach: Covvvv")
 	exists := history.Has(string(cov))
 	if !exists && no_zero_cov(string(cov)) {
 		queue = append(queue, string(cov))
