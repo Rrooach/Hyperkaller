@@ -10,11 +10,12 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"strconv"
 	"runtime/debug"
 	"sync/atomic"
 	"syscall"
 	"time"
-
+	"strings"
 	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
@@ -28,7 +29,8 @@ import (
 const (
 	programLength = 30
 )
-
+var Cov int = 0
+var Sign int = 0
 // Proc represents a single fuzzing process (executor).
 type Proc struct {
 	fuzzer            *Fuzzer
@@ -220,6 +222,33 @@ func (proc *Proc) triageInput(item *WorkTriage) {
 	sig := hash.Hash(data)
 
 	log.Logf(2, "added new input for %v to corpus:\n%s", logCallName, data)
+
+	sign_len := len(inputSignal)
+	cov_len := len(inputCover)
+	
+	if (sign_len > Sign) {
+		Sign = sign_len
+		TmpS := strconv.Itoa(Sign)
+		fd,_:=os.OpenFile("/dev/Sig_data",os.O_RDWR|os.O_CREATE|os.O_APPEND,0644)
+		fd_time:=time.Now().Unix()  
+		TmpT := strconv.FormatInt(fd_time, 10) 
+		fd_content:=strings.Join([]string{TmpT,"\t",TmpS ,"\n"},"")
+		buf:=[]byte(fd_content)
+		fd.Write(buf)
+		fd.Close()
+	}
+	if (cov_len > Cov) {
+		Cov = cov_len
+		TmpS := strconv.Itoa(Cov)
+		fd,_:=os.OpenFile("/dev/Cov_data",os.O_RDWR|os.O_CREATE|os.O_APPEND,0644)
+		fd_time:=time.Now().Unix()  
+		TmpT := strconv.FormatInt(fd_time, 10) 
+		fd_content:=strings.Join([]string{TmpT,"\t",TmpS ,"\n"},"")
+		buf:=[]byte(fd_content)
+		fd.Write(buf)
+		fd.Close()
+	}
+
 	proc.fuzzer.sendInputToManager(rpctype.RPCInput{
 		Call:   callName,
 		Prog:   data,

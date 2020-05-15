@@ -65,7 +65,7 @@ const int kCoverFd = kOutPipeFd - kMaxThreads;
 const int kMaxArgs = 9;
 const int kCoverSize = 256 << 10;
 const int kFailStatus = 67;
-
+uint32 Cov = 0, Sig = 0;
 // Logical error (e.g. invalid input program), use as an assert() alternative.
 static NORETURN PRINTF(1, 2) void fail(const char *msg, ...);
 // Just exit (e.g. due to temporal ENOMEM error).
@@ -580,11 +580,9 @@ void reply_execute(int status) {
 // execute_one executes program stored in input_data.
 void execute_one() {
   if (system("/root/reset"))
-    exitf("reset coverage failed");
-  debug("Rrooach exe577reset\n");
+    exitf("reset coverage failed"); 
   if (system("/root/cov"))
-    exitf("set coverage failed");
-  debug("Rrooach exe580set\n");
+    exitf("set coverage failed"); 
   // Duplicate global collide variable on stack.
   // Fuzzer once come up with ioctl(fd, FIONREAD, 0x920000),
   // where 0x920000 was exactly collide address, so every iteration reset
@@ -743,22 +741,19 @@ retry:
     for (uint64 i = num_args; i < kMaxArgs; i++)
       args[i] = 0;
     thread_t *th = schedule_call(call_index++, call_num, colliding,
-                                 copyout_index, num_args, args, input_pos);
-    debug("747\n\n");
+                                 copyout_index, num_args, args, input_pos); 
     if (colliding && (call_index % 2) == 0) {
       // Don't wait for every other call.
       // We already have results from the previous execution.
     } else if (flag_threaded) {
       // Wait for call completion.
       // Note: sys knows about this 25ms timeout when it generates
-      // timespec/timeval values.
-      debug("755\n");
+      // timespec/timeval values. 
       uint64 timeout_ms = 45 + call_extra_timeout;
       if (flag_debug && timeout_ms < 1000)
         timeout_ms = 1000;
       if (event_timedwait(&th->done, timeout_ms))
-        handle_completion(th);
- debug("761\n");
+        handle_completion(th); 
       // Check if any of previous calls have completed.
       for (int i = 0; i < kMaxThreads; i++) {
         th = &threads[i];
@@ -849,8 +844,7 @@ thread_t *schedule_call(int call_index, int call_num, bool colliding,
   thread_t *th = &threads[i];
   if (event_isset(&th->ready) || !event_isset(&th->done) || th->executing)
     fail("bad thread state in schedule: ready=%d done=%d executing=%d",
-         event_isset(&th->ready), event_isset(&th->done), th->executing);
-  debug("861\n");
+         event_isset(&th->ready), event_isset(&th->done), th->executing); 
   last_scheduled = th;
   th->colliding = colliding;
   th->copyout_pos = pos;
@@ -892,12 +886,12 @@ void write_coverage_signal(cover_t *cov, uint32 *signal_count_pos,
     nsig++;
   }
   // Write out number of signals.
-  *signal_count_pos = nsig;
-
+  *signal_count_pos = nsig; 
+   
   if (!flag_collect_cover)
     return;
   // Write out real coverage (basic block PCs).
-  uint32 cover_size = cov->size;
+  uint32 cover_size = cov->size; 
   if (flag_dedup_cover) {
     int *end = cover_data + cover_size;
     cover_unprotect(cov);

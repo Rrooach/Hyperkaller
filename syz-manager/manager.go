@@ -15,8 +15,7 @@ import (
 	"path/filepath"
 	"sync"
 	"sync/atomic"
-	"time"
-
+	"time" 
 	"github.com/google/syzkaller/dashboard/dashapi"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/csource"
@@ -218,7 +217,17 @@ func RunManager(cfg *mgrconfig.Config, target *prog.Target, sysTarget *targets.T
 			mgr.mu.Unlock()
 			numReproducing := atomic.LoadUint32(&mgr.numReproducing)
 			numFuzzing := atomic.LoadUint32(&mgr.numFuzzing)
+			// cmdS := exec.Command("scp -P 1569 -i key -o ConnectTimeout=5 root@localhost:/dev/Sig_data ./")
+			// cmdC := exec.Command("scp -P 1569 -i key -o ConnectTimeout=5 root@localhost:/dev/Cov_data ./")
 
+			// if  _ , err = cmdS.Output(); err != nil {
+			// 	// fmt.Println(err)
+			// 	// os.Exit(1)
+			// }
+			// if  _ , err = cmdC.Output(); err != nil {
+			// 		// fmt.Println(err)
+			// 		// os.Exit(1)
+			// }
 			log.Logf(0, "VMs %v, executed %v, cover %v, crashes %v, repro %v",
 				numFuzzing, executed, signal, crashes, numReproducing)
 		}
