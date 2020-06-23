@@ -1,0 +1,32 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdecoop11[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLecoop2(file ptr[in, string["/proc/xen/privcmd"]]) fdecoop11
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLecoop0(fd fdecoop11, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecoop0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecoop1(fd fdecoop11, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecoop1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecoop2(fd fdecoop11, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecoop2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecoop3(fd fdecoop11, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecoop3])
+
+close$IOCTL_PRIVCMD_HYPERCALLecoop(fd fdecoop11)
+
+my_hypercallecoop0 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecoop1 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecoop2 {
+	__HYPERVISOR_hypercall_type	const[15, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecoop3 {
+	__HYPERVISOR_hypercall_type	const[16, int64]
+	args				array[int64, 5]
+}

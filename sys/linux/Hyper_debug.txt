@@ -1,0 +1,64 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fddebug[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLfddebug(file ptr[in, string["/proc/xen/privcmd"]]) fddebug
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug0(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug1(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug2(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug3(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug3])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug4(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug4])
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug5(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug5])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug6(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug6])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug7(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug7])
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddebug8(fd fddebug, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldebug8])
+
+close$IOCTL_PRIVCMD_HYPERCALLfddebug(fd fddebug)
+
+my_hypercalldebug0 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug1 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug2 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug3 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug4 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug5 {
+	__HYPERVISOR_hypercall_type	const[18, int64]
+	args				array[const[1, int64], 5]
+}
+
+my_hypercalldebug6 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug7 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldebug8 {
+	__HYPERVISOR_hypercall_type	const[18, int64]
+	args				array[const[0, int64], 5]
+}

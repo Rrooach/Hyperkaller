@@ -11,6 +11,7 @@ import (
 	"math/rand"
 	"net"
 	"os"
+	"strings"
 	"os/exec"
 	"path/filepath"
 	"sync"
@@ -320,12 +321,16 @@ func (mgr *Manager) vmLoop() {
 	reproDone := make(chan *ReproResult, 1)
 	stopPending := false
 	shutdown := vm.Shutdown
+	log.Logf(0, "Rrooach: manager:323\n")
 	for shutdown != nil || len(instances) != vmCount {
 		mgr.mu.Lock()
 		phase := mgr.phase
 		mgr.mu.Unlock()
+		log.Logf(0, "Rrooach: manager:328 \n pending = %v", pendingRepro)
 
 		for crash := range pendingRepro {
+
+			log.Logf(0, "Rrooach: manager:330\ncrash = %v", crash)
 			if reproducing[crash.Title] {
 				continue
 			}
@@ -337,19 +342,23 @@ func (mgr *Manager) vmLoop() {
 			reproducing[crash.Title] = true
 			reproQueue = append(reproQueue, crash)
 		}
-
+		log.Logf(0, "Rrooach: manager:343\n")
 		log.Logf(1, "loop: phase=%v shutdown=%v instances=%v/%v %+v repro: pending=%v reproducing=%v queued=%v",
 			phase, shutdown == nil, len(instances), vmCount, instances,
 			len(pendingRepro), len(reproducing), len(reproQueue))
 
 		canRepro := func() bool {
+			log.Logf(0, "phase = %d, phaseTri = %d, len(reproQ) = %d repr+ins = %d, vmCount = %d",phase, phaseTriagedHub, len(reproQueue),reproInstances+instancesPerRepro, vmCount)
 			return phase >= phaseTriagedHub &&
 				len(reproQueue) != 0 && reproInstances+instancesPerRepro <= vmCount
 		}
-
+		log.Logf(0, "Rrooach:manager349")
 		if shutdown != nil {
+			log.Logf(0, "Rrooach:manager351")
+			log.Logf(0, "canRepro  = %d,  len = %d,  instancesPerRepro = %d", canRepro(), len(instances), instancesPerRepro)
 			for canRepro() && len(instances) >= instancesPerRepro {
 				last := len(reproQueue) - 1
+				log.Logf(0, "Rrooach:manager353")
 				crash := reproQueue[last]
 				reproQueue[last] = nil
 				reproQueue = reproQueue[:last]
@@ -390,12 +399,16 @@ func (mgr *Manager) vmLoop() {
 	wait:
 		select {
 		case idx := <-bootInstance:
+			log.Logf(0, "401")
 			instances = append(instances, idx)
 		case stopRequest <- true:
+			log.Logf(0, "404")
 			log.Logf(1, "loop: issued stop request")
 			stopPending = true
 		case res := <-runDone:
+			log.Logf(0, "408")
 			log.Logf(1, "loop: instance %v finished, crash=%v", res.idx, res.crash != nil)
+			log.Logf(0, "res.err = %v,  res.crash = %v, shutdown =%v", res.err, res.crash, shutdown)
 			if res.err != nil && shutdown != nil {
 				log.Logf(0, "%v", res.err)
 			}
@@ -405,12 +418,15 @@ func (mgr *Manager) vmLoop() {
 			// which we detect as "lost connection". Don't save that as crash.
 			if shutdown != nil && res.crash != nil {
 				needRepro := mgr.saveCrash(res.crash)
+				log.Logf(0, "needRepro = %v", needRepro)
 				if needRepro {
+					log.Logf(0, "loop: add pending repro for '%v'", res.crash.Title)
 					log.Logf(1, "loop: add pending repro for '%v'", res.crash.Title)
 					pendingRepro[res.crash] = true
 				}
 			}
 		case res := <-reproDone:
+			log.Logf(0, "425")
 			atomic.AddUint32(&mgr.numReproducing, ^uint32(0))
 			crepro := false
 			title := ""
@@ -434,16 +450,20 @@ func (mgr *Manager) vmLoop() {
 				mgr.saveRepro(res.res, res.stats, res.hub)
 			}
 		case <-shutdown:
+			log.Logf(0, "449")
 			log.Logf(1, "loop: shutting down...")
 			shutdown = nil
 		case crash := <-mgr.hubReproQueue:
+			log.Logf(0, "453")
 			log.Logf(1, "loop: get repro from hub")
 			pendingRepro[crash] = true
 		case reply := <-mgr.needMoreRepros:
+			log.Logf(0, "457")
 			reply <- phase >= phaseTriagedHub &&
 				len(reproQueue)+len(pendingRepro)+len(reproducing) == 0
 			goto wait
 		case reply := <-mgr.reproRequest:
+			log.Logf(0, "462")
 			repros := make(map[string]bool)
 			for title := range reproducing {
 				repros[title] = true
@@ -614,17 +634,32 @@ func (mgr *Manager) emailCrash(crash *Crash) {
 }
 
 func (mgr *Manager) saveCrash(crash *Crash) bool {
+	log.Logf(0, "Rrooach: 636 crash = %v", crash)
+	log.Logf(0, "Rrooach: 637 crash.title = %v", crash.Title)
+
+	if  strings.ContainsAny(crash.Title, " XenSanitizer") {
+		crash.Type = report.XenError
+	}
+	if crash.Type == report.XenError {
+		log.Logf(0, "xenn " )
+		mgr.mu.Lock()
+		mgr.dataRaceFrames[crash.Frame] = true
+		mgr.mu.Unlock()
+	}
 	if crash.Type == report.MemoryLeak {
+		log.Logf(0, "638 " )
 		mgr.mu.Lock()
 		mgr.memoryLeakFrames[crash.Frame] = true
 		mgr.mu.Unlock()
 	}
 	if crash.Type == report.DataRace {
+		log.Logf(0, "644 " )
 		mgr.mu.Lock()
 		mgr.dataRaceFrames[crash.Frame] = true
 		mgr.mu.Unlock()
 	}
 	if crash.Suppressed {
+		log.Logf(0, "650 " )
 		log.Logf(0, "vm-%v: suppressed crash %v", crash.vmIndex, crash.Title)
 		mgr.stats.crashSuppressed.inc()
 		return false
@@ -637,16 +672,18 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 	if err := mgr.reporter.Symbolize(crash.Report); err != nil {
 		log.Logf(0, "failed to symbolize report: %v", err)
 	}
-
+	log.Logf(0, "663" )
 	mgr.stats.crashes.inc()
 	mgr.mu.Lock()
 	if !mgr.crashTypes[crash.Title] {
 		mgr.crashTypes[crash.Title] = true
+		log.Logf(0, "668 " )
 		mgr.stats.crashTypes.inc()
 	}
 	mgr.mu.Unlock()
-
+	log.Logf(0, "dash = %v", mgr.dash )
 	if mgr.dash != nil {
+		log.Logf(0, "674 " )
 		if crash.Type == report.MemoryLeak {
 			return true
 		}
@@ -667,11 +704,13 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 			return resp.NeedRepro
 		}
 	}
-
+	log.Logf(0, "695" )
+	
 	sig := hash.Hash([]byte(crash.Title))
 	id := sig.String()
 	dir := filepath.Join(mgr.crashdir, id)
 	osutil.MkdirAll(dir)
+	log.Logf(0, "700" )
 	if err := osutil.WriteFile(filepath.Join(dir, "description"), []byte(crash.Title+"\n")); err != nil {
 		log.Logf(0, "failed to write crash: %v", err)
 	}
@@ -709,23 +748,31 @@ const maxReproAttempts = 3
 
 func (mgr *Manager) needLocalRepro(crash *Crash) bool {
 	if !mgr.cfg.Reproduce || crash.Corrupted {
+		log.Logf(0, "751 " )
 		return false
-	}
+	} 
 	if mgr.checkResult == nil || (mgr.checkResult.Features[host.FeatureLeak].Enabled &&
 		crash.Type != report.MemoryLeak) {
+			log.Logf(0, "756 " )
 		// Leak checking is very slow, don't bother reproducing other crashes.
 		return false
 	}
 	sig := hash.Hash([]byte(crash.Title))
 	dir := filepath.Join(mgr.crashdir, sig.String())
+	log.Logf(0, "sig = %v, dir = %v", sig, dir)
 	if osutil.IsExist(filepath.Join(dir, "repro.prog")) {
+		log.Logf(0, "763" )
 		return false
 	}
+	log.Logf(0, "maxReproAttempts = %v", maxReproAttempts)
 	for i := 0; i < maxReproAttempts; i++ {
+		log.Logf(0, "osutil.IsExist = %v",  osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))))
+		log.Logf(0, "osutil.IsExist = %v",  filepath.Join(dir, fmt.Sprintf("repro%v", i)))
 		if !osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))) {
 			return true
 		}
 	}
+	log.Logf(0, "772" )
 	return false
 }
 
@@ -781,12 +828,13 @@ func (mgr *Manager) saveFailedRepro(rep *report.Report, stats *repro.Stats) {
 
 func (mgr *Manager) saveRepro(res *repro.Result, stats *repro.Stats, hub bool) {
 	rep := res.Report
+	log.Logf(0, "Rrooach manager:831")
 	if err := mgr.reporter.Symbolize(rep); err != nil {
 		log.Logf(0, "failed to symbolize repro: %v", err)
 	}
 	opts := fmt.Sprintf("# %+v\n", res.Opts)
 	prog := res.Prog.Serialize()
-
+	log.Logf(0, "Rrooach manager:837")
 	// Append this repro to repro list to send to hub if it didn't come from hub originally.
 	if !hub {
 		progForHub := []byte(fmt.Sprintf("# %+v\n# %v\n# %v\n%s",
@@ -795,7 +843,7 @@ func (mgr *Manager) saveRepro(res *repro.Result, stats *repro.Stats, hub bool) {
 		mgr.newRepros = append(mgr.newRepros, progForHub)
 		mgr.mu.Unlock()
 	}
-
+	log.Logf(0, "Rrooach manager:846")
 	var cprogText []byte
 	if res.CRepro {
 		cprog, err := csource.Write(res.Prog, res.Opts)
@@ -809,7 +857,7 @@ func (mgr *Manager) saveRepro(res *repro.Result, stats *repro.Stats, hub bool) {
 			log.Logf(0, "failed to write C source: %v", err)
 		}
 	}
-
+	log.Logf(0, "Rrooach manager:860")
 	if mgr.dash != nil {
 		// Note: we intentionally don't set Corrupted for reproducers:
 		// 1. This is reproducible so can be debugged even with corrupted report.
@@ -826,6 +874,7 @@ func (mgr *Manager) saveRepro(res *repro.Result, stats *repro.Stats, hub bool) {
 			ReproSyz:    res.Prog.Serialize(),
 			ReproC:      cprogText,
 		}
+		log.Logf(0, "Rrooach manager:877")
 		if _, err := mgr.dash.ReportCrash(dc); err != nil {
 			log.Logf(0, "failed to report repro to dashboard: %v", err)
 		} else {
@@ -834,37 +883,44 @@ func (mgr *Manager) saveRepro(res *repro.Result, stats *repro.Stats, hub bool) {
 			return
 		}
 	}
-
+	log.Logf(0, "Rrooach manager:886")
 	dir := filepath.Join(mgr.crashdir, hash.String([]byte(rep.Title)))
 	osutil.MkdirAll(dir)
-
+	log.Logf(0, "Rrooach manager:889")
 	if err := osutil.WriteFile(filepath.Join(dir, "description"), []byte(rep.Title+"\n")); err != nil {
 		log.Logf(0, "failed to write crash: %v", err)
 	}
+	log.Logf(0, "Rrooach manager:892")
 	osutil.WriteFile(filepath.Join(dir, "repro.prog"), append([]byte(opts), prog...))
 	if len(mgr.cfg.Tag) > 0 {
 		osutil.WriteFile(filepath.Join(dir, "repro.tag"), []byte(mgr.cfg.Tag))
 	}
+	log.Logf(0, "Rrooach manager:897")
 	if len(rep.Output) > 0 {
 		osutil.WriteFile(filepath.Join(dir, "repro.log"), rep.Output)
 	}
+	log.Logf(0, "Rrooach manager:902")
 	if len(rep.Report) > 0 {
 		osutil.WriteFile(filepath.Join(dir, "repro.report"), rep.Report)
 	}
+	log.Logf(0, "Rrooach manager:905")
 	if len(cprogText) > 0 {
 		osutil.WriteFile(filepath.Join(dir, "repro.cprog"), cprogText)
 	}
+	log.Logf(0, "Rrooach manager:909")
 	saveReproStats(filepath.Join(dir, "repro.stats"), stats)
 }
 
 func saveReproStats(filename string, stats *repro.Stats) {
 	text := ""
+	log.Logf(0, "Rrooach manager:916")
 	if stats != nil {
 		text = fmt.Sprintf("Extracting prog: %v\nMinimizing prog: %v\n"+
 			"Simplifying prog options: %v\nExtracting C: %v\nSimplifying C: %v\n\n\n%s",
 			stats.ExtractProgTime, stats.MinimizeProgTime,
 			stats.SimplifyProgTime, stats.ExtractCTime, stats.SimplifyCTime, stats.Log)
 	}
+	log.Logf(0, "Rrooach manager:923")
 	osutil.WriteFile(filename, []byte(text))
 }
 

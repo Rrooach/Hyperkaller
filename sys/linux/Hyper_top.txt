@@ -1,0 +1,44 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdtop[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLtop(file ptr[in, string["/proc/xen/privcmd"]]) fdtop
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop0(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop1(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop2(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop3(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop3])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop4(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop4])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtop5(fd fdtop, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltop5])
+
+close$IOCTL_PRIVCMD_HYPERCALLtop(fd fdtop)
+
+my_hypercalltop0 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltop1 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltop2 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltop3 {
+	__HYPERVISOR_hypercall_type	const[29, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltop4 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltop5 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}

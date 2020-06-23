@@ -1,0 +1,14 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fddom2[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLdom2(file ptr[in, string["/proc/xen/privcmd"]]) fddom2
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLdom20(fd fddom2, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldom20])
+
+close$IOCTL_PRIVCMD_HYPERCALLdom2(fd fddom2)
+
+my_hypercalldom20 {
+	__HYPERVISOR_hypercall_type	const[41, int64]
+	args				array[int64, 5]
+}

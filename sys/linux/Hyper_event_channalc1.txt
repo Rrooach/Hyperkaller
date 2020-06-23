@@ -1,0 +1,26 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdecopc1[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLecopc1(file ptr[in, string["/proc/xen/privcmd"]]) fdecopc1
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopc01(fd fdecopc1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopc10])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopc11(fd fdecopc1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopc11])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopc12(fd fdecopc1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopc12])
+
+close$IOCTL_PRIVCMD_HYPERCALLecopc1(fd fdecopc1)
+
+my_hypercallecopc10 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecopc11 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecopc12 {
+	__HYPERVISOR_hypercall_type	const[16, int64]
+	args				array[int64, 5]
+}

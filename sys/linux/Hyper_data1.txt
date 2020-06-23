@@ -1,0 +1,49 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fddata1[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLfddata1(file ptr[in, string["/proc/xen/privcmd"]]) fddata1
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata10(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata10])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata11(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata11])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata12(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata12])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata13(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata13])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata14(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata14])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata15(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata15])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfddata16(fd fddata1, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalldata16])
+close$IOCTL_PRIVCMD_HYPERCALLfddata1(fd fddata1)
+
+my_hypercalldata10 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata11 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata12 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata13 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata14 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata15 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalldata16 {
+	__HYPERVISOR_hypercall_type	const[10, int64]
+	args				array[int64, 5]
+}

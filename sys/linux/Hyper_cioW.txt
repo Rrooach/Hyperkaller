@@ -1,0 +1,26 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdcioW[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLcioW(file ptr[in, string["/proc/xen/privcmd"]]) fdcioW
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLcioW0(fd fdcioW, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcioW0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcioW1(fd fdcioW, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcioW1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcioW2(fd fdcioW, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcioW2])
+
+close$IOCTL_PRIVCMD_HYPERCALLcioW(fd fdcioW)
+
+my_hypercallcioW0 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcioW1 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcioW2 {
+	__HYPERVISOR_hypercall_type	const[18, int64]
+	args				array[const[1, int64], 5]
+}

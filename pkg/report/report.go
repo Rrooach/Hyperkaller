@@ -64,6 +64,7 @@ const (
 	MemoryLeak
 	DataRace
 	UnexpectedReboot
+	XenError
 )
 
 func (t Type) String() string {
@@ -78,6 +79,8 @@ func (t Type) String() string {
 		return "DATARACE"
 	case UnexpectedReboot:
 		return "REBOOT"
+	case XenError:
+		return "XenError"
 	default:
 		panic("unknown report type")
 	}

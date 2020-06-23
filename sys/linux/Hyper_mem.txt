@@ -1,0 +1,32 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdmem[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLmem(file ptr[in, string["/proc/xen/privcmd"]]) fdmem
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem0(fd fdmem, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem1(fd fdmem, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem2(fd fdmem, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem3(fd fdmem, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem3])
+
+close$IOCTL_PRIVCMD_HYPERCALLmem(fd fdmem)
+
+my_hypercallmem0 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem1 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem2 {
+	__HYPERVISOR_hypercall_type	const[2, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem3 {
+	__HYPERVISOR_hypercall_type	int64[0:41]
+	args				array[int64, 5]
+}

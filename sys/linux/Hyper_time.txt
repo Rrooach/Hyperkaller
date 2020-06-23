@@ -1,0 +1,26 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdtime[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLtime(file ptr[in, string["/proc/xen/privcmd"]]) fdtime
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLtime0(fd fdtime, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltime0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtime1(fd fdtime, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltime1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLtime2(fd fdtime, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercalltime2])
+
+close$IOCTL_PRIVCMD_HYPERCALLtime(fd fdtime)
+
+my_hypercalltime0 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltime1 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercalltime2 {
+	__HYPERVISOR_hypercall_type	const[15, int64]
+	args				array[int64, 5]
+}

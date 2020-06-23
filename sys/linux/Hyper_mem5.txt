@@ -1,0 +1,62 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdmem5[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLmem5(file ptr[in, string["/proc/xen/privcmd"]]) fdmem5
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem50(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem50])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem51(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem51])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem52(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem52])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem53(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem53])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem54(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem54])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem55(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem55])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem56(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem56])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem57(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem57])
+ioctl$IOCTL_PRIVCMD_HYPERCALLmem58(fd fdmem5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallmem58])
+
+close$IOCTL_PRIVCMD_HYPERCALLmem5(fd fdmem5)
+
+my_hypercallmem50 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem51 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem52 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[const[1, int64], 5]
+}
+
+my_hypercallmem53 {
+	__HYPERVISOR_hypercall_type	const[2, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem54 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[const[2, int64], 5]
+}
+
+my_hypercallmem55 {
+	__HYPERVISOR_hypercall_type	const[2, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem56 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[const[4, int64], 5]
+}
+
+my_hypercallmem57 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallmem58 {
+	__HYPERVISOR_hypercall_type	const[1, int64]
+	args				array[const[8, int64], 5]
+}

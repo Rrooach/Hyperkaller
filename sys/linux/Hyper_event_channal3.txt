@@ -1,0 +1,56 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdecopX31[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLecopX31(file ptr[in, string["/proc/xen/privcmd"]]) fdecopX31
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX310(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX310])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX311(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX311])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX312(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX312])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX313(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX313])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX314(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX314])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX315(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX315])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX316(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX316])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX317(fd fdecopX31, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX317])
+
+close$IOCTL_PRIVCMD_HYPERCALLecopX31(fd fdecopX31)
+
+my_hypercallecopX310 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecopX311 {
+	__HYPERVISOR_hypercall_type	const[2, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallecopX312 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[11, int64], 5]
+}
+
+my_hypercallecopX313 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[8, int64], 5]
+}
+
+my_hypercallecopX314 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[7, int64], 5]
+}
+
+my_hypercallecopX315 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[6, int64], 5]
+}
+
+my_hypercallecopX316 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[4, int64], 5]
+}
+
+my_hypercallecopX317 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[0, int64], 5]
+}

@@ -1,0 +1,38 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdfpu[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLfpu(file ptr[in, string["/proc/xen/privcmd"]]) fdfpu
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLfpu0(fd fdfpu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallfpu0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfpu1(fd fdfpu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallfpu1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfpu2(fd fdfpu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallfpu2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfpu3(fd fdfpu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallfpu3])
+ioctl$IOCTL_PRIVCMD_HYPERCALLfpu4(fd fdfpu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallfpu4])
+
+close$IOCTL_PRIVCMD_HYPERCALLfpu(fd fdfpu)
+
+my_hypercallfpu0 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallfpu1 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallfpu2 {
+	__HYPERVISOR_hypercall_type	const[15, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallfpu3 {
+	__HYPERVISOR_hypercall_type	const[3, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallfpu4 {
+	__HYPERVISOR_hypercall_type	const[5, int64]
+	args				array[int64, 5]
+}

@@ -1,0 +1,68 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdecopX5[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLecopX5(file ptr[in, string["/proc/xen/privcmd"]]) fdecopX5
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX52(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX52])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX53(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX53])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX54(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX54])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX55(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX55])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX56(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX56])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX57(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX57])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX58(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX58])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX59(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX59])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX510(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX510])
+ioctl$IOCTL_PRIVCMD_HYPERCALLecopX511(fd fdecopX5, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallecopX511])
+
+close$IOCTL_PRIVCMD_HYPERCALLecopX5(fd fdecopX5)
+
+my_hypercallecopX52 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[11, int64], 5]
+}
+
+my_hypercallecopX53 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX54 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX55 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX56 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX57 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX58 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX59 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX510 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}
+
+my_hypercallecopX511 {
+	__HYPERVISOR_hypercall_type	const[32, int64]
+	args				array[const[12, int64], 5]
+}

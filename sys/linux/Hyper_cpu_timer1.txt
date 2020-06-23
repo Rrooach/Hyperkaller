@@ -1,0 +1,38 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdcpuu[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLcpuu(file ptr[in, string["/proc/xen/privcmd"]]) fdcpuu
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLcpuu0(fd fdcpuu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcpuu0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcpuu1(fd fdcpuu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcpuu1])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcpuu13(fd fdcpuu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcpuu13])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcpuu2(fd fdcpuu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcpuu2])
+ioctl$IOCTL_PRIVCMD_HYPERCALLcpuu3(fd fdcpuu, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallcpuu3])
+
+close$IOCTL_PRIVCMD_HYPERCALLcpuu(fd fdcpuu)
+
+my_hypercallcpuu0 {
+	__HYPERVISOR_hypercall_type	const[4, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcpuu1 {
+	__HYPERVISOR_hypercall_type	const[0, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcpuu13 {
+	__HYPERVISOR_hypercall_type	const[6, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcpuu2 {
+	__HYPERVISOR_hypercall_type	const[15, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallcpuu3 {
+	__HYPERVISOR_hypercall_type	const[29, int64]
+	args				array[int64, 5]
+}

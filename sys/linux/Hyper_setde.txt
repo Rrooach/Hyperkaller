@@ -1,0 +1,20 @@
+include <linux/fcntl.h>
+include <linux/ioctl.h>
+
+resource fdsetde[int32]: -1
+open$IOCTL_PRIVCMD_HYPERCALLsetde(file ptr[in, string["/proc/xen/privcmd"]]) fdsetde
+
+ioctl$IOCTL_PRIVCMD_HYPERCALLsetde0(fd fdsetde, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallsetde0])
+ioctl$IOCTL_PRIVCMD_HYPERCALLsetde1(fd fdsetde, ioctl_privcmd_hypecall0 const[0x305000], hypercall ptr[in, my_hypercallsetde1])
+
+close$IOCTL_PRIVCMD_HYPERCALLsetde(fd fdsetde)
+
+my_hypercallsetde0 {
+	__HYPERVISOR_hypercall_type	const[8, int64]
+	args				array[int64, 5]
+}
+
+my_hypercallsetde1 {
+	__HYPERVISOR_hypercall_type	const[9, int64]
+	args				array[int64, 5]
+}
