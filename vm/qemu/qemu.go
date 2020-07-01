@@ -193,8 +193,7 @@ var linuxCmdline = []string{
 	"vsyscall=native",
 	"net.ifnames=0",
 	"biosdevname=0",
-}
-
+} 
 func ctor(env *vmimpl.Env) (vmimpl.Pool, error) {
 	archConfig := archConfigs[env.OS+"/"+env.Arch]
 	cfg := &Config{
@@ -483,8 +482,8 @@ func (inst *instance) Copy(hostSrc string) (string, error) {
 }
 
 func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command string) (
-	<-chan []byte, <-chan error, error) {
-	rpipe, wpipe, err := osutil.LongPipe()
+	<-chan []byte, <-chan error, error) { 
+		rpipe, wpipe, err := osutil.LongPipe()
 	if err != nil {
 		return nil, nil, err
 	}

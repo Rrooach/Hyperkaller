@@ -2,7 +2,8 @@
 // Use of this source code is governed by Apache 2 LICENSE that can be found in the LICENSE file.
 
 // Package signal provides types for working with feedback signal.
-package signal 
+package signal
+
 type (
 	elemType uint32
 	prioType int8
@@ -74,7 +75,7 @@ func (s Signal) Serialize() Serial {
 		res.Elems[i] = e
 		res.Prios[i] = p
 		i++
-	} 
+	}
 	return res
 }
 

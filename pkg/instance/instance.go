@@ -457,7 +457,7 @@ func ExecprogCmd(execprog, executor, OS, arch, sandbox string, repeat, threaded,
 	if targets.Get(OS, arch).HostFuzzer {
 		osArg = " -os=" + OS
 	}
-	return fmt.Sprintf("%v -executor=%v -arch=%v%v -sandbox=%v"+
+	return fmt.Sprintf("/root/trigger && %v -executor=%v -arch=%v%v -sandbox=%v"+
 		" -procs=%v -repeat=%v -threaded=%v -collide=%v -cover=0"+
 		" -fault_call=%v -fault_nth=%v %v",
 		execprog, executor, arch, osArg, sandbox,

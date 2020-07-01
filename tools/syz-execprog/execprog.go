@@ -14,7 +14,8 @@ import (
 	"runtime"
 	"sync"
 	"time"
-
+	"os/exec"
+	
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/csource"
 	"github.com/google/syzkaller/pkg/host"
@@ -39,6 +40,15 @@ var (
 	flagEnable    = flag.String("enable", "none", "enable only listed additional features")
 	flagDisable   = flag.String("disable", "none", "enable all additional features except listed")
 )
+
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
+ 
 
 func main() {
 	flag.Usage = func() {
@@ -159,6 +169,10 @@ func (ctx *Context) execute(pid int, env *ipc.Env, entry *prog.LogEntry) {
 		ctx.logProgram(pid, entry.P, callOpts)
 	}
 	output, info, hanged, err := env.Exec(callOpts, entry.P)
+	log.Logf(0, "===============")
+	log.Logf(0, "get report")
+	ErrInfo := ecmd("/root/error_report")
+	err = fmt.Errorf("%s", ErrInfo)
 	if ctx.config.Flags&ipc.FlagDebug != 0 || err != nil {
 		log.Logf(0, "result: hanged=%v err=%v\n\n%s", hanged, err, output)
 	}

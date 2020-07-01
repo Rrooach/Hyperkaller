@@ -7504,7 +7504,9 @@ static void loop(void)
 #else
 static void loop(void)
 {
-	execute_one();
+	if (system("/root/trigger"))
+		execute_one();
+	if (system("/root/error_report"))
 }
 #endif
 #endif

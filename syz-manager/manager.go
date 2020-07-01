@@ -8,15 +8,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"math/rand"
-	"net"
-	"os"
-	"strings"
-	"os/exec"
-	"path/filepath"
-	"sync"
-	"sync/atomic"
-	"time" 
 	"github.com/google/syzkaller/dashboard/dashapi"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/csource"
@@ -35,6 +26,15 @@ import (
 	"github.com/google/syzkaller/prog"
 	"github.com/google/syzkaller/sys/targets"
 	"github.com/google/syzkaller/vm"
+	"math/rand"
+	"net"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+	"sync"
+	"sync/atomic"
+	"time"
 )
 
 var (
@@ -348,7 +348,7 @@ func (mgr *Manager) vmLoop() {
 			len(pendingRepro), len(reproducing), len(reproQueue))
 
 		canRepro := func() bool {
-			log.Logf(0, "phase = %d, phaseTri = %d, len(reproQ) = %d repr+ins = %d, vmCount = %d",phase, phaseTriagedHub, len(reproQueue),reproInstances+instancesPerRepro, vmCount)
+			log.Logf(0, "phase = %d, phaseTri = %d, len(reproQ) = %d repr+ins = %d, vmCount = %d", phase, phaseTriagedHub, len(reproQueue), reproInstances+instancesPerRepro, vmCount)
 			return phase >= phaseTriagedHub &&
 				len(reproQueue) != 0 && reproInstances+instancesPerRepro <= vmCount
 		}
@@ -637,29 +637,29 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 	log.Logf(0, "Rrooach: 636 crash = %v", crash)
 	log.Logf(0, "Rrooach: 637 crash.title = %v", crash.Title)
 
-	if  strings.ContainsAny(crash.Title, " XenSanitizer") {
+	if strings.ContainsAny(crash.Title, " XenSanitizer") {
 		crash.Type = report.XenError
 	}
 	if crash.Type == report.XenError {
-		log.Logf(0, "xenn " )
+		log.Logf(0, "xenn ")
 		mgr.mu.Lock()
 		mgr.dataRaceFrames[crash.Frame] = true
 		mgr.mu.Unlock()
 	}
 	if crash.Type == report.MemoryLeak {
-		log.Logf(0, "638 " )
+		log.Logf(0, "638 ")
 		mgr.mu.Lock()
 		mgr.memoryLeakFrames[crash.Frame] = true
 		mgr.mu.Unlock()
 	}
 	if crash.Type == report.DataRace {
-		log.Logf(0, "644 " )
+		log.Logf(0, "644 ")
 		mgr.mu.Lock()
 		mgr.dataRaceFrames[crash.Frame] = true
 		mgr.mu.Unlock()
 	}
 	if crash.Suppressed {
-		log.Logf(0, "650 " )
+		log.Logf(0, "650 ")
 		log.Logf(0, "vm-%v: suppressed crash %v", crash.vmIndex, crash.Title)
 		mgr.stats.crashSuppressed.inc()
 		return false
@@ -672,18 +672,18 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 	if err := mgr.reporter.Symbolize(crash.Report); err != nil {
 		log.Logf(0, "failed to symbolize report: %v", err)
 	}
-	log.Logf(0, "663" )
+	log.Logf(0, "663")
 	mgr.stats.crashes.inc()
 	mgr.mu.Lock()
 	if !mgr.crashTypes[crash.Title] {
 		mgr.crashTypes[crash.Title] = true
-		log.Logf(0, "668 " )
+		log.Logf(0, "668 ")
 		mgr.stats.crashTypes.inc()
 	}
 	mgr.mu.Unlock()
-	log.Logf(0, "dash = %v", mgr.dash )
+	log.Logf(0, "dash = %v", mgr.dash)
 	if mgr.dash != nil {
-		log.Logf(0, "674 " )
+		log.Logf(0, "674 ")
 		if crash.Type == report.MemoryLeak {
 			return true
 		}
@@ -704,13 +704,13 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 			return resp.NeedRepro
 		}
 	}
-	log.Logf(0, "695" )
-	
+	log.Logf(0, "695")
+
 	sig := hash.Hash([]byte(crash.Title))
 	id := sig.String()
 	dir := filepath.Join(mgr.crashdir, id)
 	osutil.MkdirAll(dir)
-	log.Logf(0, "700" )
+	log.Logf(0, "700")
 	if err := osutil.WriteFile(filepath.Join(dir, "description"), []byte(crash.Title+"\n")); err != nil {
 		log.Logf(0, "failed to write crash: %v", err)
 	}
@@ -748,12 +748,12 @@ const maxReproAttempts = 3
 
 func (mgr *Manager) needLocalRepro(crash *Crash) bool {
 	if !mgr.cfg.Reproduce || crash.Corrupted {
-		log.Logf(0, "751 " )
+		log.Logf(0, "751 ")
 		return false
-	} 
+	}
 	if mgr.checkResult == nil || (mgr.checkResult.Features[host.FeatureLeak].Enabled &&
 		crash.Type != report.MemoryLeak) {
-			log.Logf(0, "756 " )
+		log.Logf(0, "756 ")
 		// Leak checking is very slow, don't bother reproducing other crashes.
 		return false
 	}
@@ -761,18 +761,18 @@ func (mgr *Manager) needLocalRepro(crash *Crash) bool {
 	dir := filepath.Join(mgr.crashdir, sig.String())
 	log.Logf(0, "sig = %v, dir = %v", sig, dir)
 	if osutil.IsExist(filepath.Join(dir, "repro.prog")) {
-		log.Logf(0, "763" )
+		log.Logf(0, "763")
 		return false
 	}
 	log.Logf(0, "maxReproAttempts = %v", maxReproAttempts)
 	for i := 0; i < maxReproAttempts; i++ {
-		log.Logf(0, "osutil.IsExist = %v",  osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))))
-		log.Logf(0, "osutil.IsExist = %v",  filepath.Join(dir, fmt.Sprintf("repro%v", i)))
+		log.Logf(0, "osutil.IsExist = %v", osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))))
+		log.Logf(0, "osutil.IsExist = %v", filepath.Join(dir, fmt.Sprintf("repro%v", i)))
 		if !osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))) {
 			return true
 		}
 	}
-	log.Logf(0, "772" )
+	log.Logf(0, "772")
 	return false
 }
 

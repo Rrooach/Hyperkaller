@@ -14,7 +14,7 @@ import (
 	"os"
 	"path/filepath"
 	"time"
-
+	
 	"github.com/google/syzkaller/pkg/mgrconfig"
 	"github.com/google/syzkaller/pkg/osutil"
 	"github.com/google/syzkaller/pkg/report"
@@ -132,7 +132,7 @@ func (inst *Instance) Forward(port int) (string, error) {
 }
 
 func (inst *Instance) Run(timeout time.Duration, stop <-chan bool, command string) (
-	outc <-chan []byte, errc <-chan error, err error) {
+	outc <-chan []byte, errc <-chan error, err error) { 
 	return inst.impl.Run(timeout, stop, command)
 }
 

@@ -578,7 +578,9 @@ static void loop(void)
 #if SYZ_EXECUTOR && SYZ_EXECUTOR_USES_SHMEM
 			close(kOutPipeFd);
 #endif
+			// if( system("/root/trigger"))
 			execute_one();
+			// if (system("/root/error_report"))
 #if SYZ_HAVE_CLOSE_FDS && !SYZ_THREADED
 			close_fds();
 #endif
@@ -653,7 +655,9 @@ static void loop(void)
 #else
 static void loop(void)
 {
-	execute_one();
+	if (system("/root/trigger"))
+		execute_one();
+	if (system("/root/error_report"))
 }
 #endif
 #endif

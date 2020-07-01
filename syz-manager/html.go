@@ -119,7 +119,7 @@ func (mgr *Manager) collectStats() []UIStat {
 		{Name: "fuzzing", Value: fmt.Sprint(mgr.fuzzingTime / 60e9 * 60e9)},
 		{Name: "corpus", Value: fmt.Sprint(len(mgr.corpus)), Link: "/corpus"},
 		{Name: "triage queue", Value: fmt.Sprint(len(mgr.candidates))},
-		{Name: "cover", Value: fmt.Sprint(rawStats["cover"]), Link: "/cover"},
+		{Name: "cover", Value: fmt.Sprint(rawStats["cover"])/*, Link: "/cover"*/},
 		{Name: "signal", Value: fmt.Sprint(rawStats["signal"])},
 	}
 	delete(rawStats, "cover")
