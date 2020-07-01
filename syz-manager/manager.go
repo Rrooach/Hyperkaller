@@ -84,7 +84,7 @@ type Manager struct {
 
 	// For checking that files that we are using are not changing under us.
 	// Maps file name to modification time.
-	usedFiles map[string]time.Time
+	usedFiles map[string]time.Time 
 }
 
 const (
@@ -638,7 +638,7 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 	log.Logf(0, "Rrooach: 637 crash.title = %v", crash.Title)
 
 	if strings.ContainsAny(crash.Title, " XenSanitizer") {
-		crash.Type = report.XenError
+		crash.Type = report.XenError 
 	}
 	if crash.Type == report.XenError {
 		log.Logf(0, "xenn ")
