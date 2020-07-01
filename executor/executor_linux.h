@@ -89,9 +89,9 @@ static intptr_t execute_syscall(const call_t* c, intptr_t a[kMaxArgs])
 
 static void cover_open(cover_t* cov, bool extra)
 {
-	debug("234\n");
+	// debug("234\n");
 	int fd = open("/dev/cov", O_RDWR);
-	debug("123\n");
+	// debug("123\n");
 	if (fd == -1) {
 		FILE* tmpfs = fopen("/dev/cov", "a+");
 		fclose(tmpfs);
@@ -101,11 +101,11 @@ static void cover_open(cover_t* cov, bool extra)
 	if (dup2(fd, cov->fd) < 0)
 		fail("filed to dup2(%d, %d) cover fd", fd, cov->fd);
 	close(fd);
-	debug("234\n");
+	// debug("234\n");
 	cover_size = 640000;
 	if (system("/root/cov"))
 		fail("cover init trace write failed");
-	debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
+	// debug("Rrooach executor_linux cov->fd = %d\n", cov->fd);
 	mmap_alloc_size = cover_size * (is_kernel_64_bit ? 8 : 4);
 	// FILE *fp;
 	// fp = fopen("/dev/cov", "w+");
@@ -117,12 +117,12 @@ static void cover_open(cover_t* cov, bool extra)
 
 	cov->data = (int*)mmap(NULL, (cover_size), PROT_READ | PROT_WRITE,
 			       MAP_SHARED, cov->fd, 0);
-	for (int i = 0; i < 1000; ++i)
-		debug("%d\t", cov->data[i]);
+	// for (int i = 0; i < 1000; ++i)
+	// 	debug("%d\t", cov->data[i]);
 	if (cov->data == MAP_FAILED)
 		fail("cover mmap failed");
 	cov->data_end = cov->data + cover_size;
-	debug("Rrooach: executor_linux 107 size = %d \n", cov->size);
+	// debug("Rrooach: executor_linux 107 size = %d \n", cov->size);
 }
 
 static void cover_protect(cover_t* cov)
@@ -194,7 +194,7 @@ static void cover_collect(cover_t* cov)
 	fseek(fp, 0, SEEK_END);
 	filesize = ftell(fp);
 	cov->size = filesize / 32;
-	debug("Rrooach executor_linux175 size = %d\n", cov->size);
+	// debug("Rrooach executor_linux175 size = %d\n", cov->size);
 }
 
 static bool cover_check(uint32 pc)
@@ -231,7 +231,7 @@ static bool detect_kernel_bitness()
 			wide = false;
 		close(fd);
 	}
-	debug("detected %d-bit kernel\n", wide ? 64 : 32);
+	// debug("detected %d-bit kernel\n", wide ? 64 : 32);
 	return wide;
 }
 

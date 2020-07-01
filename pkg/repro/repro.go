@@ -103,7 +103,7 @@ func Run(crashLog []byte, cfg *mgrconfig.Config, reporter report.Reporter, vmPoo
 		return nil, nil, fmt.Errorf("crash log does not contain any programs")
 	}
 	crashStart := len(crashLog)
-	log.Logf(0, "Rrooach:reprotest105")
+	//log.Logf(0, "Rrooach:reprotest105")
 	crashTitle, crashType := "", report.Unknown
 	if rep := reporter.Parse(crashLog); rep != nil {
 		crashStart = rep.StartPos
@@ -215,16 +215,16 @@ func (ctx *context) repro(entries []*prog.LogEntry, crashStart int) (*Result, er
 			break
 		}
 	}
-	log.Logf(0, "Rrooach: repro218")
+	//log.Logf(0, "Rrooach: repro218")
 	reproStart := time.Now()
-	log.Logf(0, "Rrooach: repro220")
+	//log.Logf(0, "Rrooach: repro220")
 	defer func() {
 		ctx.reproLog(3, "reproducing took %s", time.Since(reproStart))
 	}()
 	 
-	log.Logf(0, "Rrooach: repro223")
+	//log.Logf(0, "Rrooach: repro223")
 	res, err := ctx.extractProg(entries)
-	log.Logf(0, "Rrooach: repro225")
+	//log.Logf(0, "Rrooach: repro225")
 	if err != nil {
 		return nil, err
 	}
@@ -236,18 +236,18 @@ func (ctx *context) repro(entries []*prog.LogEntry, crashStart int) (*Result, er
 			res.Opts.Repro = false
 		}
 	}()
-	log.Logf(0, "Rrooach: repro237")
+	//log.Logf(0, "Rrooach: repro237")
 	res, err = ctx.minimizeProg(res)
 	if err != nil {
 		return nil, err
 	}
-	log.Logf(0, "Rrooach: repro242")
+	//log.Logf(0, "Rrooach: repro242")
 	// Try extracting C repro without simplifying options first.
 	res, err = ctx.extractC(res)
 	if err != nil {
 		return nil, err
 	}
-	log.Logf(0, "Rrooach: repro248")
+	//log.Logf(0, "Rrooach: repro248")
 	// Simplify options and try extracting C repro.
 	if !res.CRepro {
 		res, err = ctx.simplifyProg(res)
@@ -255,7 +255,7 @@ func (ctx *context) repro(entries []*prog.LogEntry, crashStart int) (*Result, er
 			return nil, err
 		}
 	}
-	log.Logf(0, "Rrooach: repro256")
+	//log.Logf(0, "Rrooach: repro256")
 	// Simplify C related options.
 	if res.CRepro {
 		res, err = ctx.simplifyC(res)
@@ -269,48 +269,48 @@ func (ctx *context) repro(entries []*prog.LogEntry, crashStart int) (*Result, er
 func (ctx *context) extractProg(entries []*prog.LogEntry) (*Result, error) {
 	ctx.reproLog(2, "extracting reproducer from %v programs", len(entries))
 	start := time.Now()
-	log.Logf(0, "Rrooach: repro271")
+	//log.Logf(0, "Rrooach: repro271")
 	defer func() {
 		ctx.stats.ExtractProgTime = time.Since(start)
 	}()
-	log.Logf(0, "Rrooach: repro276")
+	//log.Logf(0, "Rrooach: repro276")
 	// Extract last program on every proc.
 	procs := make(map[int]int)
 	for i, ent := range entries {
 		procs[ent.Proc] = i
 	}
-	log.Logf(0, "Rrooach: repro282")
+	//log.Logf(0, "Rrooach: repro282")
 	var indices []int
 	for _, idx := range procs {
 		indices = append(indices, idx)
 	}
-	log.Logf(0, "Rrooach: repro287")
+	//log.Logf(0, "Rrooach: repro287")
 	sort.Ints(indices)
 	var lastEntries []*prog.LogEntry
 	for i := len(indices) - 1; i >= 0; i-- {
 		lastEntries = append(lastEntries, entries[indices[i]])
 	}
-	log.Logf(0, "Rrooach: repro293")
+	//log.Logf(0, "Rrooach: repro293")
 	for _, timeout := range ctx.timeouts {
 		// Execute each program separately to detect simple crashes caused by a single program.
 		// Programs are executed in reverse order, usually the last program is the guilty one.
-		log.Logf(0, "Rrooach: repro297")
+		//log.Logf(0, "Rrooach: repro297")
 		res, err := ctx.extractProgSingle(lastEntries, timeout)
-		log.Logf(0, "Rrooach: repro299")
+		//log.Logf(0, "Rrooach: repro299")
 		if err != nil {
 			return nil, err
 		}
-		log.Logf(0, "Rrooach: repro303")
+		//log.Logf(0, "Rrooach: repro303")
 		if res != nil {
 			ctx.reproLog(3, "found reproducer with %d syscalls", len(res.Prog.Calls))
 			return res, nil
 		}
-		log.Logf(0, "Rrooach: repro308")
+		//log.Logf(0, "Rrooach: repro308")
 		// Don't try bisecting if there's only one entry.
 		if len(entries) == 1 {
 			continue
 		}
-		log.Logf(0, "Rrooach: repro313")
+		//log.Logf(0, "Rrooach: repro313")
 		// Execute all programs and bisect the log to find multiple guilty programs.
 		res, err = ctx.extractProgBisect(entries, timeout)
 		if err != nil {
@@ -321,20 +321,20 @@ func (ctx *context) extractProg(entries []*prog.LogEntry) (*Result, error) {
 			return res, nil
 		}
 	}
-	log.Logf(0, "Rrooach: repro321")
+	//log.Logf(0, "Rrooach: repro321")
 	ctx.reproLog(0, "failed to extract reproducer")
 	return nil, nil
 }
 
 func (ctx *context) extractProgSingle(entries []*prog.LogEntry, duration time.Duration) (*Result, error) {
 	ctx.reproLog(3, "single: executing %d programs separately with timeout %s", len(entries), duration)
-	log.Logf(0, "Rrooach:repro331")
+	//log.Logf(0, "Rrooach:repro331")
 	opts := csource.DefaultOpts(ctx.cfg)
 	if ctx.crashType == report.MemoryLeak {
 		opts.Leak = true
 	}
-	log.Logf(0, "Rrooach:repro336")
-	log.Logf(0, "Rrooach:enttries = %v", entries)
+	//log.Logf(0, "Rrooach:repro336")
+	//log.Logf(0, "Rrooach:enttries = %v", entries)
 	for _, ent := range entries {
 		opts.Fault = ent.Fault
 		opts.FaultCall = ent.FaultCall
@@ -342,26 +342,26 @@ func (ctx *context) extractProgSingle(entries []*prog.LogEntry, duration time.Du
 		if opts.FaultCall < 0 || opts.FaultCall >= len(ent.P.Calls) {
 			opts.FaultCall = len(ent.P.Calls) - 1
 		}
-		log.Logf(0, "Rrooach:repro344")
+		//log.Logf(0, "Rrooach:repro344")
 		crashed, err := ctx.testProg(ent.P, duration, opts)
 		if err != nil {
 			return nil, err
 		}
-		log.Logf(0, "Rrooach:repro348")
+		//log.Logf(0, "Rrooach:repro348")
 		if crashed {
 			res := &Result{
 				Prog:     ent.P,
 				Duration: duration * 3 / 2,
 				Opts:     opts,
 			}
-			log.Logf(0, "Rrooach:repro356")
+			//log.Logf(0, "Rrooach:repro356")
 			ctx.reproLog(0, "single: successfully extracted reproducer")
 			ctx.reproLog(3, "single: successfully extracted reproducer")
 			return res, nil
 		}
 	}
 
-	log.Logf(0, "Rrooach:repro358")
+	//log.Logf(0, "Rrooach:repro358")
 	ctx.reproLog(3, "single: failed to extract reproducer")
 	return nil, nil
 }
@@ -640,12 +640,12 @@ func (ctx *context) testImpl(inst *vm.Instance, command string, duration time.Du
 	rep := inst.MonitorExecution(outc, errc, ctx.reporter,
 		vm.ExitTimeout|vm.ExitNormal|vm.ExitError)
 	if rep == nil {
-		log.Logf(0, "Rrooach:repro652")
+		//log.Logf(0, "Rrooach:repro652")
 		ctx.reproLog(2, "program did not crash")
 		return false, nil
 	}
 	if rep.Suppressed {
-		log.Logf(0, "Rrooach:repro657")
+		//log.Logf(0, "Rrooach:repro657")
 		ctx.reproLog(2, "suppressed program crash: %v", rep.Title)
 		return false, nil
 	}

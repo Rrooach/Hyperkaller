@@ -257,9 +257,6 @@ func checkSimpleProgram(args *checkArgs, features *host.Features) error {
 	}
 
 	if args.ipcConfig.Flags&ipc.FlagSignal != 0 && len(info.Calls[0].Signal) < 2 {
-		log.Logf(0, "========================")
-		log.Logf(0, "Rrooach: args.ipcConfig.Flags = %v ipc.FlagSignal = %v len(info.Calls[0].Signal) = %v", args.ipcConfig.Flags, ipc.FlagSignal, len(info.Calls[0].Signal))
-		log.Logf(0, "=========================")
 		return fmt.Errorf("got nohhhh coverage:\n%s", output)
 
 	}
