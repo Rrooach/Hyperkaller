@@ -680,7 +680,7 @@ func (mgr *Manager) saveCrash(crash *Crash) bool {
 		mgr.stats.crashTypes.inc()
 	}
 	mgr.mu.Unlock()
-	log.Logf(0, "dash = %v", mgr.dash)
+	// log.Logf(0, "dash = %v", mgr.dash)
 	if mgr.dash != nil {
 		// log.Logf(0, "674 ")
 		if crash.Type == report.MemoryLeak {
@@ -758,15 +758,14 @@ func (mgr *Manager) needLocalRepro(crash *Crash) bool {
 	}
 	sig := hash.Hash([]byte(crash.Title))
 	dir := filepath.Join(mgr.crashdir, sig.String())
-	log.Logf(0, "sig = %v, dir = %v", sig, dir)
+	// log.Logf(0, "sig = %v, dir = %v", sig, dir)
 	if osutil.IsExist(filepath.Join(dir, "repro.prog")) {
 		// log.Logf(0, "763")
 		return false
 	}
-	log.Logf(0, "maxReproAttempts = %v", maxReproAttempts)
 	for i := 0; i < maxReproAttempts; i++ {
-		log.Logf(0, "osutil.IsExist = %v", osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))))
-		log.Logf(0, "osutil.IsExist = %v", filepath.Join(dir, fmt.Sprintf("repro%v", i)))
+		// log.Logf(0, "osutil.IsExist = %v", osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))))
+		// log.Logf(0, "osutil.IsExist = %v", filepath.Join(dir, fmt.Sprintf("repro%v", i)))
 		if !osutil.IsExist(filepath.Join(dir, fmt.Sprintf("repro%v", i))) {
 			return true
 		}

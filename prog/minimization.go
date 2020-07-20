@@ -5,6 +5,7 @@ package prog
 
 import (
 	"fmt"
+	"github.com/google/syzkaller/pkg/log"
 )
 
 // Minimize minimizes program p into an equivalent program using the equivalence
@@ -58,7 +59,9 @@ func Minimize(p0 *Prog, callIndex0 int, crash bool, pred0 func(*Prog, int) bool)
 }
 
 func removeCalls(p0 *Prog, callIndex0 int, crash bool, pred func(*Prog, int) bool) (*Prog, int) {
+	log.Logf(0, "\n\nRrooach: ----------%+v---------\n\n", p0)
 	for i := len(p0.Calls) - 1; i >= 0; i-- {
+
 		if i == callIndex0 {
 			continue
 		}

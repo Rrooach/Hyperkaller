@@ -6,7 +6,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/google/syzkaller/faultfuzzer"
+	// "github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
 	"github.com/google/syzkaller/pkg/ipc"
@@ -103,7 +103,7 @@ func (proc *Proc) loop() {
 		//modifyed by sule
 		log.Logf(0, "--------------------")
 		log.Logf(0, "getting cover")
-		faultfuzzer.Get_cover()
+		// faultfuzzer.Get_cover()
 		if report_flag == 1 {
 			log.Logf(0, "--------------------")
 			log.Logf(0, "get report")
@@ -116,8 +116,8 @@ func (proc *Proc) loop() {
 		ecmd("~/trigger")
 		log.Logf(0, "--------------------")
 		log.Logf(0, "setting fault")
-		fv := faultfuzzer.Set_fault()
-
+		// fv := faultfuzzer.Set_fault()
+		fv := 1
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
 			if fv == 0 {

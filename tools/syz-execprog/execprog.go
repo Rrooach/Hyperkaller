@@ -169,9 +169,6 @@ func (ctx *Context) execute(pid int, env *ipc.Env, entry *prog.LogEntry) {
 		ctx.logProgram(pid, entry.P, callOpts)
 	}
 	output, info, hanged, err := env.Exec(callOpts, entry.P)
-	
-	log.Logf(0, "===============")
-	log.Logf(0, "get report")
 	ErrInfo := ecmd("/root/error_report")
 	if ErrInfo != "" {
 		err = fmt.Errorf("%s", ErrInfo)

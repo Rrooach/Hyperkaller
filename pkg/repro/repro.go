@@ -355,7 +355,6 @@ func (ctx *context) extractProgSingle(entries []*prog.LogEntry, duration time.Du
 				Opts:     opts,
 			}
 			//log.Logf(0, "Rrooach:repro356")
-			ctx.reproLog(0, "single: successfully extracted reproducer")
 			ctx.reproLog(3, "single: successfully extracted reproducer")
 			return res, nil
 		}
