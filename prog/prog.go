@@ -378,9 +378,9 @@ func removeArg(arg0 Arg) {
 // removeCall removes call idx from p.
 func (p *Prog) removeCall(idx int) {
 	c := p.Calls[idx]
-	if c.Meta.CallName == "open" {
-		return 
-	}
+	// if c.Meta.CallName == "open" {
+	// 	return 
+	// }
 	for _, arg := range c.Args {
 		// log.Logf(0, "\n\n=========== remove args %v ======\n\n", arg)
 		removeArg(arg)

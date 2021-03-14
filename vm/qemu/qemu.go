@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"bufio" 
+	"io/ioutil"
 	"os/exec"
 	"path/filepath"
 	"strconv"
@@ -23,6 +25,15 @@ import (
 const (
 	hostAddr = "10.0.2.10"
 )
+
+func ecmd(cmd string) string {
+	out, err := exec.Command("bash", "-c", cmd).Output()
+	if err != nil {
+		panic("some error found")
+	}
+	return string(out)
+}
+
 
 func init() {
 	vmimpl.Register("qemu", ctor, true)
@@ -343,6 +354,7 @@ func (inst *instance) boot() error {
 		"-net", "nic" + inst.archConfig.NicModel,
 		"-net", fmt.Sprintf("user,host=%v,hostfwd=tcp::%v-:22", hostAddr, inst.port),
 		"-no-reboot",
+		"-nographic",
 	}
 	args = append(args, splitArgs(inst.cfg.QemuArgs, filepath.Join(inst.workdir, "template"))...)
 	if inst.image == "9p" {
@@ -481,6 +493,50 @@ func (inst *instance) Copy(hostSrc string) (string, error) {
 	return vmDst, nil
 }
 
+func File2lines(filePath string) ([]string, error) {
+	f, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	return LinesFromReader(f)
+}
+
+func LinesFromReader(r io.Reader) ([]string, error) {
+	var lines []string
+	scanner := bufio.NewScanner(r)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	return lines, nil
+}
+
+/**
+ * Insert sting to n-th line of file.
+ * If you want to insert a line, append newline '\n' to the end of the string.
+ */
+func InsertStringToFile(path, str string, index int) error {
+	lines, err := File2lines(path)
+	if err != nil {
+		return err
+	}
+
+	fileContent := ""
+	for i, line := range lines {
+		if i == index {
+			fileContent += str
+		}
+		fileContent += line
+		fileContent += "\n"
+	}
+
+	return ioutil.WriteFile(path, []byte(fileContent), 0644)
+}
+
 func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command string) (
 	<-chan []byte, <-chan error, error) { 
 		rpipe, wpipe, err := osutil.LongPipe()
@@ -503,7 +559,7 @@ func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command strin
 			}
 			if host := inst.files[arg]; host != "" {
 				args[i] = host
-			}
+			} 
 		}
 	} else {
 		args = []string{"ssh"}
@@ -522,10 +578,10 @@ func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command strin
 		return nil, nil, err
 	}
 	wpipe.Close()
-	errc := make(chan error, 1)
+	errc := make(chan error, 1)  
 	signal := func(err error) {
 		select {
-		case errc <- err:
+		case  errc <- err:
 		default:
 		}
 	}
@@ -534,10 +590,16 @@ func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command strin
 	retry:
 		select {
 		case <-time.After(timeout):
+			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
+			ecmd("cat trace.txt")   
 			signal(vmimpl.ErrTimeout)
 		case <-stop:
+			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
+			ecmd("cat trace.txt")   
 			signal(vmimpl.ErrTimeout)
 		case <-inst.diagnose:
+			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug",1)
+			ecmd("cat trace.txt")   
 			cmd.Process.Kill()
 			goto retry
 		case err := <-inst.merger.Err:

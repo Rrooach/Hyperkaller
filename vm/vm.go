@@ -191,7 +191,7 @@ func (inst *Instance) MonitorExecution(outc <-chan []byte, errc <-chan error,
 				}
 				return nil
 			default:
-				// Note: connection lost can race with a kernel oops message.
+				// Note: connection tlos can race with a kernel oops message.
 				// In such case we want to return the kernel oops.
 				crash := ""
 				if mon.exit&ExitError == 0 {
@@ -210,8 +210,8 @@ func (inst *Instance) MonitorExecution(outc <-chan []byte, errc <-chan error,
 				bytes.Contains(mon.output[lastPos:], executingProgram2) {
 				lastExecuteTime = time.Now()
 			}
+			return mon.extractError("unknown error")
 			if reporter.ContainsCrash(mon.output[mon.matchPos:]) {
-				return mon.extractError("unknown error")
 			}
 			if len(mon.output) > 2*beforeContext {
 				copy(mon.output, mon.output[len(mon.output)-beforeContext:])

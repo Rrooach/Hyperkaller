@@ -169,10 +169,7 @@ func (ctx *mutator) mutateArg() bool {
 	if idx < 0 {
 		return false
 	}
-	c := p.Calls[idx]
-	if c.Meta.CallName == "open" {
-		return false
-	}
+	c := p.Calls[idx] 
 	updateSizes := true
 	for stop, ok := false, false; !stop; stop = ok && r.oneOf(3) {
 		ok = true
@@ -195,16 +192,15 @@ func (ctx *mutator) mutateArg() bool {
 			idx--
 			p.removeCall(idx)
 		}
-		}
 		if idx < 0 || idx >= len(p.Calls) || p.Calls[idx] != c {
-			panic(fmt.Sprintf("wrong call index: mutationArg",
-			)/*fmt.Sprintf("wrong call index: idx=%v calls=%v p.Calls=%v ncalls=%v",idx, len(calls), len(p.Calls), ctx.ncalls)*/)
+			panic(fmt.Sprintf("wrong call index: idx=%v calls=%v p.Calls=%v ncalls=%v",
+			idx, len(calls), len(p.Calls), ctx.ncalls))
 		}
 		
 		if updateSizes {
 			p.Target.assignSizesCall(c)
-		}
-
+		} 
+	}
 	return true
 }
 

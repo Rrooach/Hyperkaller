@@ -320,17 +320,12 @@ func (mgr *Manager) vmLoop() {
 	var reproQueue []*Crash
 	reproDone := make(chan *ReproResult, 1)
 	stopPending := false
-	shutdown := vm.Shutdown
-	// //log.Logf(0, "Rrooach: manager:323\n")
+	shutdown := vm.Shutdown 
 	for shutdown != nil || len(instances) != vmCount {
 		mgr.mu.Lock()
 		phase := mgr.phase
-		mgr.mu.Unlock()
-		//log.Logf(0, "Rrooach: manager:328 \n pending = %v", pendingRepro)
-
-		for crash := range pendingRepro {
-
-			//log.Logf(0, "Rrooach: manager:330\ncrash = %v", crash)
+		mgr.mu.Unlock()  
+		for crash := range pendingRepro { 
 			if reproducing[crash.Title] {
 				continue
 			}
@@ -341,24 +336,18 @@ func (mgr *Manager) vmLoop() {
 			log.Logf(1, "loop: add to repro queue '%v'", crash.Title)
 			reproducing[crash.Title] = true
 			reproQueue = append(reproQueue, crash)
-		}
-		//log.Logf(0, "Rrooach: manager:343\n")
+		} 
 		log.Logf(1, "loop: phase=%v shutdown=%v instances=%v/%v %+v repro: pending=%v reproducing=%v queued=%v",
 			phase, shutdown == nil, len(instances), vmCount, instances,
 			len(pendingRepro), len(reproducing), len(reproQueue))
 
 		canRepro := func() bool {
-			log.Logf(0, "phase = %d, phaseTri = %d, len(reproQ) = %d repr+ins = %d, vmCount = %d", phase, phaseTriagedHub, len(reproQueue), reproInstances+instancesPerRepro, vmCount)
-			return phase >= phaseTriagedHub &&
+				return phase >= phaseTriagedHub &&
 				len(reproQueue) != 0 && reproInstances+instancesPerRepro <= vmCount
-		}
-		//log.Logf(0, "Rrooach:manager349")
-		if shutdown != nil {
-			//log.Logf(0, "Rrooach:manager351")
-			// log.Logf(0, "canRepro  = %d,  len = %d,  instancesPerRepro = %d", canRepro(), len(instances), instancesPerRepro)
+		} 
+		if shutdown != nil { 
 			for canRepro() && len(instances) >= instancesPerRepro {
-				last := len(reproQueue) - 1
-				//log.Logf(0, "Rrooach:manager353")
+				last := len(reproQueue) - 1 
 				crash := reproQueue[last]
 				reproQueue[last] = nil
 				reproQueue = reproQueue[:last]
@@ -398,17 +387,13 @@ func (mgr *Manager) vmLoop() {
 
 	wait:
 		select {
-		case idx := <-bootInstance:
-			// log.Logf(0, "401")
+		case idx := <-bootInstance: 
 			instances = append(instances, idx)
-		case stopRequest <- true:
-			// log.Logf(0, "404")
+		case stopRequest <- true: 
 			log.Logf(1, "loop: issued stop request")
 			stopPending = true
-		case res := <-runDone:
-			// log.Logf(0, "408")
-			log.Logf(1, "loop: instance %v finished, crash=%v", res.idx, res.crash != nil)
-			//log.Logf(0, "Res.err = %v,  res.crash = %v, shutdown =%v", res.err, res.crash, shutdown)
+		case res := <-runDone: 
+			log.Logf(1, "loop: instance %v finished, crash=%v", res.idx, res.crash != nil) 
 			if res.err != nil && shutdown != nil {
 				log.Logf(0, "%v", res.err)
 			}
@@ -417,15 +402,13 @@ func (mgr *Manager) vmLoop() {
 			// On shutdown qemu crashes with "qemu: terminating on signal 2",
 			// which we detect as "lost connection". Don't save that as crash.
 			if shutdown != nil && res.crash != nil {
-				needRepro := mgr.saveCrash(res.crash)
-				// log.Logf(0, "needRepro = %v", needRepro)
+				needRepro := mgr.saveCrash(res.crash) 
 				if needRepro {
 					log.Logf(1, "loop: add pending repro for '%v'", res.crash.Title)
 					pendingRepro[res.crash] = true
 				}
 			}
-		case res := <-reproDone:
-			// log.Logf(0, "425")
+		case res := <-reproDone: 
 			atomic.AddUint32(&mgr.numReproducing, ^uint32(0))
 			crepro := false
 			title := ""
@@ -436,7 +419,7 @@ func (mgr *Manager) vmLoop() {
 			log.Logf(1, "loop: repro on %+v finished '%v', repro=%v crepro=%v desc='%v'",
 				res.instances, res.report0.Title, res.res != nil, crepro, title)
 			if res.err != nil {
-				//log.Logf(0, "Repro failed: %v", res.err)
+				log.Logf(0, "Repro failed: %v", res.err)
 			}
 			delete(reproducing, res.report0.Title)
 			instances = append(instances, res.instances...)
@@ -448,21 +431,17 @@ func (mgr *Manager) vmLoop() {
 			} else {
 				mgr.saveRepro(res.res, res.stats, res.hub)
 			}
-		case <-shutdown:
-			// log.Logf(0, "449")
+		case <-shutdown: 
 			log.Logf(1, "loop: shutting down...")
 			shutdown = nil
-		case crash := <-mgr.hubReproQueue:
-			// log.Logf(0, "453")
+		case crash := <-mgr.hubReproQueue: 
 			log.Logf(1, "loop: get repro from hub")
 			pendingRepro[crash] = true
-		case reply := <-mgr.needMoreRepros:
-			// log.Logf(0, "457")
+		case reply := <-mgr.needMoreRepros: 
 			reply <- phase >= phaseTriagedHub &&
 				len(reproQueue)+len(pendingRepro)+len(reproducing) == 0
 			goto wait
-		case reply := <-mgr.reproRequest:
-			// log.Logf(0, "462")
+		case reply := <-mgr.reproRequest: 
 			repros := make(map[string]bool)
 			for title := range reproducing {
 				repros[title] = true
