@@ -27,11 +27,12 @@ const (
 )
 
 func ecmd(cmd string) string {
-	out, err := exec.Command("bash", "-c", cmd).Output()
-	if err != nil {
-		panic("some error found")
-	}
-	return string(out)
+	// out, err := exec.Command("bash", "-c", cmd).Output()
+	// if err != nil {
+	// 	panic("some error found")
+	// }
+	// return string(out)
+	return ""
 }
 
 
@@ -590,20 +591,24 @@ func (inst *instance) Run(timeout time.Duration, stop <-chan bool, command strin
 	retry:
 		select {
 		case <-time.After(timeout):
-			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
-			ecmd("cat trace.txt")   
+			// InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
+			// ecmd("cat trace.txt")   
+			log.Logf(0, "cat trace.txt")
 			signal(vmimpl.ErrTimeout)
 		case <-stop:
-			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
-			ecmd("cat trace.txt")   
+			// InsertStringToFile("/root/trace.raw", "====ERROR: XenBug", 1)
+			// ecmd("cat trace.txt")   
+			log.Logf(0, "cat trace.txt1")
 			signal(vmimpl.ErrTimeout)
 		case <-inst.diagnose:
-			InsertStringToFile("/root/trace.raw", "====ERROR: XenBug",1)
-			ecmd("cat trace.txt")   
+			// InsertStringToFile("/root/trace.raw", "====ERROR: XenBug",1)
+			// ecmd("cat trace.txt")   
+			log.Logf(0, "cat trace.txt2")
 			cmd.Process.Kill()
 			goto retry
 		case err := <-inst.merger.Err:
 			cmd.Process.Kill()
+			log.Logf(0, "cat trace.txt3")
 			if cmdErr := cmd.Wait(); cmdErr == nil {
 				// If the command exited successfully, we got EOF error from merger.
 				// But in this case no error has happened and the EOF is expected.

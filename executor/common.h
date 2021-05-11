@@ -655,11 +655,11 @@ static void loop(void)
 #else
 static void loop(void)
 {
-	if (system("/root/trigger") && system("xentrace -D -e all /root/trace.raw &"))
-		execute_one();
-	system("pkill xentrace");
-	system("cat /root/trace.raw |xentrace_format /root/xen-4.13/tools/xentrace/formats > /root/trace.txt");
-	if (system("/root/error_report"))
+	// if (system("/root/trigger") && system("xentrace -D -e all /root/trace.raw &"))
+	execute_one();
+	// system("pkill xentrace");
+	// system("cat /root/trace.raw |xentrace_format /root/xen-4.13/tools/xentrace/formats > /root/trace.txt");
+	// if (system("/root/error_report"))
 }
 #endif
 #endif

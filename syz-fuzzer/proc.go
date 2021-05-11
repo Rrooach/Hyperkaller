@@ -6,7 +6,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	// "github.com/google/syzkaller/faultfuzzer"
+	"github.com/google/syzkaller/faultfuzzer"
 	"github.com/google/syzkaller/pkg/cover"
 	"github.com/google/syzkaller/pkg/hash"
 	"github.com/google/syzkaller/pkg/ipc"
@@ -90,7 +90,7 @@ func ecmd(cmd string) string {
 }
 
 var report_flag = 0
-
+var inject_flag = 0
 func (proc *Proc) loop() {
 	generatePeriod := 100
 	if proc.fuzzer.config.Flags&ipc.FlagSignal == 0 {
@@ -100,10 +100,16 @@ func (proc *Proc) loop() {
 	}
 	for i := 0; ; i++ {
 		/*********************************************/
-		//modifyed by sule
-		log.Logf(0, "--------------------")
-		log.Logf(0, "getting cover")
-		// faultfuzzer.Get_cover()
+		
+		if inject_flag == 0 {
+			log.Logf(0, "-------------------\ngetting cover")
+			faultfuzzer.Init()
+			err := ecmd("~/set_fault")
+			if err != "" {
+				fmt.Printf("%v", err)
+			}
+			inject_flag = 1
+		}
 		if report_flag == 1 {
 			log.Logf(0, "--------------------")
 			log.Logf(0, "get report")
@@ -116,12 +122,19 @@ func (proc *Proc) loop() {
 		// ecmd("~/trigger")
 		// log.Logf(0, "--------------------")
 		// log.Logf(0, "setting fault")
-		// fv := faultfuzzer.Set_fault()
-		fv := 1
+
+		fv := faultfuzzer.Time_diff(proc.fuzzer.pre_time)
+		// fv := 1
 		fuzzerSnapshot := proc.fuzzer.snapshot()
 		if len(fuzzerSnapshot.corpus) != 0 {
 			if fv == 0 {
 				p := fuzzerSnapshot.chooseProgram(proc.rnd).Clone()
+				// set fault for hypervisor
+				faultfuzzer.Mutate_seq()
+				err := ecmd("~/set_fault")
+				if err != "" {
+					fmt.Printf("%v", err)
+				}
 				log.Logf(1, "#%v: keep for fault", proc.pid)
 				proc.execute(proc.execOpts, p, ProgNormal, StatCandidate)
 				continue
@@ -353,6 +366,7 @@ func (proc *Proc) enqueueCallTriage(p *prog.Prog, flags ProgTypes, callIndex int
 	// None of the caller use Cover, so just nil it instead of detaching.
 	// Note: triage input uses executeRaw to get coverage.
 	info.Cover = nil
+	proc.fuzzer.pre_time = time.Now().Unix()
 	proc.fuzzer.workQueue.enqueue(&WorkTriage{
 		p:     p.Clone(),
 		call:  callIndex,

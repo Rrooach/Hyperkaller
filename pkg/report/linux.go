@@ -864,12 +864,12 @@ var linuxOopses = append([]*oops{
 	{
 		[]byte("====ERROR:"),
 		[]oopsFormat{
-			{
-				title:        compile("====ERROR: XenBug:"),
-				report:       compile("====ERROR: Xentrace: XenBug: Bug On Xen Hypervisor"),
-				fmt:          "XenBug: Bug On Xen Hypervisor",
-				noStackTrace: true,
-			},
+			// {
+			// 	title:        compile("====ERROR: XenBug:"),
+			// 	report:       compile("====ERROR: Xentrace: XenBug: Bug On Xen Hypervisor"),
+			// 	fmt:          "XenBug: Bug On Xen Hypervisor",
+			// 	noStackTrace: true,
+			// },
 			{
 				title:        compile("====ERROR: XenSanitizer:"),
 				report:       compile("====ERROR: XenSanitizer: heap overflow on address (0x[0-9a-f]+)"),

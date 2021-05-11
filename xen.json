@@ -1,0 +1,17 @@
+{
+	"target": "linux/amd64",
+	"http": "127.0.0.1:56741",
+	"workdir": "/root/fuzz/exp/xen/workdir",
+	"kernel_obj": "/root/fuzz/kernel/linux-xen",
+	"image": "/root/fuzz/kernel/xen/fuxen.raw",
+	"sshkey": "/root/fuzz/kernel/xen/key",
+	"syzkaller": "./",
+	"procs": 4,
+	"type": "qemu",
+	"vm": {
+		"count": 1,
+		"cpu": 2, 
+		"mem": 4096
+	}
+}
+

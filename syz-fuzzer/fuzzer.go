@@ -53,6 +53,7 @@ type Fuzzer struct {
 	corpusHashes map[hash.Sig]struct{}
 	corpusPrios  []int64
 	sumPrios     int64
+	pre_time	 int64
 
 	signalMu     sync.RWMutex
 	corpusSignal signal.Signal // signal of inputs in corpus
@@ -158,7 +159,8 @@ func main() {
 	} else {
 		runtime.MemProfileRate = 0
 	}
-
+	log.Logf(1, "dialing manager at %v", *flagManager)
+	
 	log.Logf(0, "dialing manager at %v", *flagManager)
 	manager, err := rpctype.NewRPCClient(*flagManager)
 	if err != nil {

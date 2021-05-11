@@ -32,6 +32,7 @@ type checkArgs struct {
 }
 
 func testImage(hostAddr string, args *checkArgs) {
+	log.Logf(1, "connecting to host at %v", hostAddr)
 	log.Logf(0, "connecting to host at %v", hostAddr)
 	conn, err := rpctype.Dial(hostAddr)
 	if err != nil {
